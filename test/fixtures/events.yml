@@ -1,0 +1,19 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  date: 2025-03-16 19:41:09
+  style: MyString
+  description: MyString
+  tarif: MyString
+  verified: false
+  venue: one
+
+two:
+  name: MyString
+  date: 2025-03-16 19:41:09
+  style: MyString
+  description: MyString
+  tarif: MyString
+  verified: false
+  venue: two
