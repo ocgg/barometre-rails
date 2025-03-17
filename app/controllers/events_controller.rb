@@ -1,4 +1,6 @@
 class EventsController < ApplicationController
+  allow_unauthenticated_access except: :unverified
+
   def index
   end
 
