@@ -1,8 +1,8 @@
 class EventsController < ApplicationController
   allow_unauthenticated_access
+  before_action :set_events, only: %i[index map calendar]
 
   def index
-    @events = authorize policy_scope(Event)
   end
 
   def unverified
@@ -15,18 +15,24 @@ class EventsController < ApplicationController
   def calendar
   end
 
-  def new
-  end
+  # def new
+  # end
+  #
+  # def create
+  # end
+  #
+  # def edit
+  # end
+  #
+  # def update
+  # end
+  #
+  # def destroy
+  # end
 
-  def create
-  end
+  private
 
-  def edit
-  end
-
-  def update
-  end
-
-  def destroy
+  def set_events
+    @events = authorize policy_scope(Event)
   end
 end

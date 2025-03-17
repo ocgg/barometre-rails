@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
   include Pundit::Authorization
   rescue_from Pundit::NotAuthorizedError, with: :render_bad_request_error
 
-  after_action :verify_pundit_authorization, unless: :authorized_action?
+  after_action :verify_pundit_authorization, unless: :authorized_controller?
 
   private
 
@@ -18,8 +18,9 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def authorized_action?
-    params[:controller] == "sessions"
+  def authorized_controller?
+    authorized_controllers = %w[sessions pages]
+    authorized_controllers.include? params[:controller]
   end
 
   def render_bad_request_error

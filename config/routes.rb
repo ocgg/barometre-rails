@@ -24,5 +24,5 @@ Rails.application.routes.draw do
   end
 
   get :contact, to: "pages#contact"
-  get :apropos, to: "pages#about"
+  get :apropos, to: "pages#about", as: :about
 end

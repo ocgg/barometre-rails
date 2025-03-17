@@ -3,9 +3,11 @@ class EventPolicy < ApplicationPolicy
     true
   end
 
-  def unverified?
-    @user.admin?
-  end
+  def unverified? = @user.admin?
+
+  def map? = index?
+
+  def calendar? = index?
 
   class Scope < ApplicationPolicy::Scope
     def resolve

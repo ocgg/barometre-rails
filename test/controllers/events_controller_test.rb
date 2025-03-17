@@ -2,47 +2,47 @@ require "test_helper"
 
 class EventsControllerTest < ActionDispatch::IntegrationTest
   test "should get index" do
-    get events_index_url
+    get events_url
     assert_response :success
   end
 
-  test "should get unverified" do
-    get events_unverified_url
-    assert_response :success
+  test "unverified should not be authorized" do
+    get unverified_events_url
+    assert_response :unauthorized
   end
 
   test "should get map" do
-    get events_map_url
+    get map_events_url
     assert_response :success
   end
 
   test "should get calendar" do
-    get events_calendar_url
+    get calendar_events_url
     assert_response :success
   end
 
-  test "should get new" do
-    get events_new_url
-    assert_response :success
-  end
-
-  test "should get create" do
-    get events_create_url
-    assert_response :success
-  end
-
-  test "should get edit" do
-    get events_edit_url
-    assert_response :success
-  end
-
-  test "should get update" do
-    get events_update_url
-    assert_response :success
-  end
-
-  test "should get destroy" do
-    get events_destroy_url
-    assert_response :success
-  end
+  # test "should get new" do
+  #   get new_events_url
+  #   assert_response :success
+  # end
+  #
+  # test "should get create" do
+  #   get create_events_url
+  #   assert_response :success
+  # end
+  #
+  # test "should get edit" do
+  #   get edit_events_url
+  #   assert_response :success
+  # end
+  #
+  # test "should get update" do
+  #   get update_events_url
+  #   assert_response :success
+  # end
+  #
+  # test "should get destroy" do
+  #   get destroy_events_url
+  #   assert_response :success
+  # end
 end
