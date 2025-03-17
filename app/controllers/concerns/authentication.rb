@@ -13,6 +13,11 @@ module Authentication
   end
 
   private
+    # custom
+    def current_user
+      find_session_by_cookie.user
+    end
+
     def authenticated?
       resume_session
     end
