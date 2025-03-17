@@ -8,3 +8,5 @@
     </li>
   <% end %>
 </ul>
+
+<%= link_to 'Logout', session_path, method: :delete, data: {turbo_method: :delete} %>

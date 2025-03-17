@@ -8,9 +8,8 @@ class EventPolicy < ApplicationPolicy
   end
 
   class Scope < ApplicationPolicy::Scope
-    # NOTE: Be explicit about which records you allow access to!
-    # def resolve
-    #   scope.all
-    # end
+    def resolve
+      @user.admin? ? scope.all_upcoming : scope.verified_upcoming
+    end
   end
 end

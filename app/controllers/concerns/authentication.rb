@@ -15,7 +15,7 @@ module Authentication
   private
     # custom
     def current_user
-      find_session_by_cookie.user
+      find_session_by_cookie&.user || User.new(role: "visitor")
     end
 
     def authenticated?

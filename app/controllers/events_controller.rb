@@ -1,12 +1,12 @@
 class EventsController < ApplicationController
-  allow_unauthenticated_access except: :unverified
+  allow_unauthenticated_access
 
   def index
-    @events = authorize Event.where(verified: true)
+    @events = authorize policy_scope(Event)
   end
 
   def unverified
-    @events = authorize Event.where(verified: false)
+    @events = authorize Event.unverified_upcoming
   end
 
   def map

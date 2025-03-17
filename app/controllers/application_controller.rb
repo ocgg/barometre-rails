@@ -4,13 +4,25 @@ class ApplicationController < ActionController::Base
 
   include Authentication
   include Pundit::Authorization
-  after_action :verify_authorized
+  rescue_from Pundit::NotAuthorizedError, with: :render_bad_request_error
 
-  rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
+  after_action :verify_pundit_authorization, unless: :authorized_action?
 
   private
 
-  def user_not_authorized
+  def verify_pundit_authorization
+    if %i[index map calendar].include? action_name
+      verify_policy_scoped
+    else
+      verify_authorized
+    end
+  end
+
+  def authorized_action?
+    params[:controller] == "sessions"
+  end
+
+  def render_bad_request_error
     render file: "#{Rails.root}/public/400.html", layout: false, status: :unauthorized
   end
 end
