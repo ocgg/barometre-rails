@@ -1,23 +1,18 @@
 class Event < ApplicationRecord
   belongs_to :venue
 
+  validates :name, presence: true
+  validates :date, presence: true
+
   class << self
-    def verified_upcoming
-      upcoming_events.where(verified: true)
-    end
+    def all_upcoming = upcoming_events
 
-    def all_upcoming
-      upcoming_events
-    end
+    def verified_upcoming = upcoming_events.where(verified: true)
 
-    def unverified_upcoming
-      upcoming_events.where(verified: false)
-    end
+    def unverified_upcoming = upcoming_events.where(verified: false)
 
     private
 
-    def upcoming_events
-      where("events.date >= ?", Date.today).order(:date)
-    end
+    def upcoming_events = where("events.date >= ?", Date.today).order(:date)
   end
 end
