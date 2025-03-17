@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resource :session
+  resources :passwords, param: :token
   get "venues/new"
   get "venues/create"
   get "venues/edit"
