@@ -34,8 +34,6 @@ events#index:
   - new & edit turbo frames, gérer la création de venues
   - new: option pour supprimer le lieu de la DB après la date de l'event
 
-- events#map: couleurs/icônes pour visualiser les dates (différencier aujourd'hui/semaine/mois/plus d'un mois)
-
 - gestion des events récurrents
 - background jobs pour nettoyer les events passés
 
