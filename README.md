@@ -48,6 +48,7 @@ events#index:
 ## Vagues idées du futur
 
 - Dans le cas improbable où ça aurait du succès: distribuer une version papier
+- smartphone app
 
 ## Setup pour contribuer
 
