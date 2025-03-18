@@ -1,17 +1,41 @@
 .events-list-container {
+  max-width: 1200px;
+  margin: auto;
+}
+
+.events-day-container {
+  --radius: var(--space2);
+  --gap: var(--space1);
+
+  margin-bottom: var(--space5);
 
   ul {
-    list-style: none;
     display: flex;
     flex-direction: column;
-    gap: var(--space1);
+    gap: var(--gap);
 
-    li {
-      display: block;
+    li:nth-child(even) {
+      background-color: whitesmoke;
     }
 
-    li:nth-child(odd) {
-      background-color: whitesmoke;
+    li:last-of-type {
+      border-bottom-right-radius: var(--radius);
+      border-bottom-left-radius: var(--radius);
+
+      .event-card-left {
+        border-bottom-left-radius: var(--radius);
+      }
     }
   }
 }
+
+.events-day-header {
+  background-color: var(--purple);
+  color: white;
+  padding-left: 5.4em;
+  border-top-left-radius: var(--radius);
+  border-top-right-radius: var(--radius);
+  margin-bottom: var(--gap);
+}
+
+@media all and (min-width: 768px) {}

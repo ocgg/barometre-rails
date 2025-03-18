@@ -43,13 +43,13 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 0 var(--space3);
+    padding: 0 calc(1.5 * var(--space2));
   }
 
   .event-card-right {
     flex: 1 0;
     justify-content: space-between;
-    padding: var(--space5) var(--space1);
+    padding: var(--space4) var(--space1);
   }
 
   .event-card-name-desc { flex: 0 1 45% }

@@ -1,9 +1,16 @@
 <section class="events-list-container">
-  <ul>
-    <% @events.each do |event| %>
-      <li>
-        <%= render "events/event_card", event:, venue: event.venue %>
-      </li>
-    <% end %>
-  </ul>
+  <% @events_days.each do |date, events| %>
+    <section class="events-day-container py3">
+      <header class="events-day-header py3">
+        <h3><%= format_date(date) %></h3>
+      </header>
+      <ul>
+        <% events.each do |event| %>
+          <li>
+            <%= render "events/event_card", event:, venue: event.venue %>
+          </li>
+        <% end %>
+      </ul>
+    </section>
+  <% end %>
 </section>
