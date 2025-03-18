@@ -3,7 +3,6 @@
 one:
   name: MyString
   date: 2025-03-16 19:41:09
-  style: MyString
   description: MyString
   tarif: MyString
   verified: false
@@ -12,7 +11,6 @@ one:
 two:
   name: MyString
   date: 2025-03-16 19:41:09
-  style: MyString
   description: MyString
   tarif: MyString
   verified: false

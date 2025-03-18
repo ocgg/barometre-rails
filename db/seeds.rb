@@ -9,7 +9,6 @@ User.create!(email_address: "admin@admin.com", password: "123456", role: "admin"
 User.create!(email_address: "user@user.com", password: "123456", role: "user") unless test_user
 
 puts "Creating venues..."
-
 [
   {
     name: "Adresse dure pour GPS",
@@ -71,7 +70,6 @@ puts "Creating events..."
   Event.create!(
     **attrs,
     venue: Venue.first(5).sample,
-    style: %w[rock Electro-transe-tribale\ avec\ des\ noix théâtre rock\ folk\ chanson jam\ session\ irlandaise].sample,
     description: "TODO: description de longueur aléatoire"
   )
 end

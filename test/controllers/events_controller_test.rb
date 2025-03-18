@@ -1,23 +1,23 @@
 require "test_helper"
 
 class EventsControllerTest < ActionDispatch::IntegrationTest
-  test "should get index" do
-    get events_url
+  test "should get events index on root path" do
+    get root_url
     assert_response :success
   end
 
   test "unverified should not be authorized" do
-    get unverified_events_url
+    get unverified_url
     assert_response :unauthorized
   end
 
   test "should get map" do
-    get map_events_url
+    get map_url
     assert_response :success
   end
 
   test "should get calendar" do
-    get calendar_events_url
+    get calendar_url
     assert_response :success
   end
 
