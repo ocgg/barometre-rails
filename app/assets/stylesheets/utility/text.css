@@ -1,0 +1,28 @@
+:root {
+  --paragraph-font: "serif";
+  --main-font: "sans serif";
+
+  --large-font: 14pt;
+  --medium-font: 12pt;
+  --small-font: 11pt;
+}
+
+.bold { font-weight: bold }
+.italic { font-style: italic }
+.dotted {
+  text-decoration: underline;
+  text-decoration-style: dotted;
+}
+
+.large { font-size: var(--large-font) }
+.medium { font-size: var(--medium-font) }
+.small { font-size: var(--small-font) }
+
+.black { color: black }
+.gray { color: dimgray }
+
+.ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

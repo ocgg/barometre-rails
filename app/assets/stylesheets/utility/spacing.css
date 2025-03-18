@@ -1,0 +1,39 @@
+:root {
+  --space1: .25rem;
+  --space2: .5rem;
+  --space3: 1rem;
+  --space4: 1.5rem;
+  --space5: 2rem;
+}
+
+.mb1 { margin-bottom: var(--space1)}
+.mb2 { margin-bottom: var(--space2)}
+.mb3 { margin-bottom: var(--space3)}
+
+.ml1 { margin-left: var(--space1)}
+.ml2 { margin-left: var(--space2)}
+.ml3 { margin-left: var(--space3)}
+
+.my1 { margin-top: var(--space1); margin-bottom: var(--space1) }
+.my2 { margin-top: var(--space2); margin-bottom: var(--space2) }
+.my3 { margin-top: var(--space3); margin-bottom: var(--space3) }
+
+.p1 { padding: var(--space1)}
+.p2 { padding: var(--space2)}
+.p3 { padding: var(--space3)}
+
+.pb1 { padding-bottom: var(--space1)}
+.pb2 { padding-bottom: var(--space2)}
+.pb3 { padding-bottom: var(--space3)}
+
+.pl1 { padding-left: var(--space1)}
+.pl2 { padding-left: var(--space2)}
+.pl3 { padding-left: var(--space3)}
+
+.px1 { padding-left: var(--space1); padding-right: var(--space1) }
+.px2 { padding-left: var(--space2); padding-right: var(--space2) }
+.px3 { padding-left: var(--space3); padding-right: var(--space3) }
+
+.py1 { padding-top: var(--space1); padding-bottom: var(--space1) }
+.py2 { padding-top: var(--space2); padding-bottom: var(--space2) }
+.py3 { padding-top: var(--space3); padding-bottom: var(--space3) }

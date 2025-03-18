@@ -1,7 +1,9 @@
-<ul>
-  <% @events.each do |event| %>
-    <li>
-      <p><%= event.name %></p>
-    </li>
-  <% end %>
-</ul>
+<section class="events-list-container">
+  <ul>
+    <% @events.each do |event| %>
+      <li>
+        <%= render "events/event_card", event:, venue: event.venue %>
+      </li>
+    <% end %>
+  </ul>
+</section>

@@ -1,0 +1,23 @@
+<article class="event-card-container">
+  <div class="event-card-left">
+    <div class="hour">
+      <%= event.date.strftime("%Hh%M") %>
+    </div>
+  </div>
+  <div class="event-card-right gray overflow-hidden">
+    <div class="event-card-name-desc p1 overflow-hidden">
+      <p class="bold large black ellipsis"><%= event.name %></p>
+      <p class="italic small ellipsis"><%= event.description %></p>
+    </div>
+    <address class="event-card-address overflow-hidden">
+      <div class="event-card-venue p1 overflow-hidden">
+        <p class="bold medium ellipsis"><%= venue.name %></p>
+        <p class="italic dotted ellipsis"><%= venue.address %></p>
+      </div>
+      <p class="event-card-city p1 bold "><%= venue.city %></p>
+    </address>
+    <div class="event-card-tarif p1 overflow-hidden">
+      <p class="italic ellipsis"><%= event.tarif || "Gratuit" %></p>
+    </div>
+  </div>
+</article>

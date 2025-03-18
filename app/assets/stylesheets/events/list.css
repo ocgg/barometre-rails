@@ -1,0 +1,17 @@
+.events-list-container {
+
+  ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space1);
+
+    li {
+      display: block;
+    }
+
+    li:nth-child(odd) {
+      background-color: whitesmoke;
+    }
+  }
+}

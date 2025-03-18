@@ -1,0 +1,70 @@
+.event-card-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  font-family: var(--paragraph-font);
+}
+
+.event-card-left {
+  font-family: var(--main-font);
+  background-color: var(--purple);
+  color: white;
+  font-weight: bold;
+  padding: var(--space3) var(--space2);
+}
+
+.event-card-right {
+  display: flex;
+  flex-direction: column;
+  padding: var(--space3) var(--space2);
+  gap: var(--space2);
+}
+
+.event-card-address {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.event-card-venue { flex: 0 1 70% }
+.event-card-city {
+  flex: 0 1 30%;
+  text-align: center;
+}
+
+@media all and (min-width: 768px) {
+
+  .event-card-container,
+  .event-card-right {
+    flex-direction: row;
+  }
+
+  .event-card-left {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 var(--space3);
+  }
+
+  .event-card-right {
+    flex: 1 0;
+    justify-content: space-between;
+    padding: var(--space5) var(--space1);
+  }
+
+  .event-card-name-desc { flex: 0 1 45% }
+  .event-card-address { flex: 0 1 45% }
+
+  .event-card-venue { flex: 0 1 60% }
+  .event-card-city {
+    flex: 0 1 40%;
+    text-align: left;
+  }
+
+  .event-card-tarif {
+    flex: 0 1 10%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
