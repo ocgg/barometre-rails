@@ -57,15 +57,61 @@ end
 puts "Creating events..."
 
 [
-  { name: "Dans 2h !!", verified: true, date: Time.now + 2.hours },
-  { name: "X Ce soir aussi", verified: false, date: Time.now + 5.hours },
-  { name: "Quelque chose demain", verified: true, date: Time.now + 1.day },
-  { name: "X Demain", verified: false, date: Time.now + 1.day },
-  { name: "Ça se passe la semaine prochaine", verified: true, date: Time.now + 1.week },
-  { name: "X Semaine prochaine", verified: false, date: Time.now + 8.days },
-  { name: "Un événement dans un mois", verified: true, date: Time.now + 1.month },
-  { name: "Dans 3 mois bon sang de bonsoir de brique en bois", verified: true, date: Time.now + 3.months },
-  { name: "Ça c'était hier", verified: true, date: Time.now - 1.day }
+  {
+    name: "Dans 2h !!",
+    verified: true,
+    date: Time.now + 2.hours,
+    tarif: "Gratuit"
+  },
+  {
+    name: "X Ce soir aussi",
+    verified: false,
+    date: Time.now + 5.hours,
+    tarif: "-"
+
+  },
+  {
+    name: "Quelque chose demain",
+    verified: true,
+    date: Time.now + 1.day,
+    tarif: "PAF 5€"
+  },
+  {
+    name: "X Demain",
+    verified: false,
+    date: Time.now + 1.day,
+    tarif: "10€"
+  },
+  {
+    name: "Ça se passe la semaine prochaine",
+    verified: true,
+    date: Time.now + 1.week,
+    tarif: "Prix libre"
+  },
+  {
+    name: "X Semaine prochaine",
+    verified: false,
+    date: Time.now + 8.days,
+    tarif: "Prix"
+  },
+  {
+    name: "Un événement dans un mois",
+    verified: true,
+    date: Time.now + 1.month,
+    tarif: "Prix"
+  },
+  {
+    name: "Dans 3 mois bon sang de bonsoir de brique en bois",
+    verified: true,
+    date: Time.now + 3.months,
+    tarif: "Prix"
+  },
+  {
+    name: "Ça c'était hier",
+    verified: true,
+    date: Time.now - 1.day,
+    tarif: "Prix"
+  }
 ].each do |attrs|
   Event.create!(
     **attrs,
