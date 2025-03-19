@@ -10,5 +10,6 @@
  */
 
 html {
-  font-family: var(--main-font)
+  font-family: var(--main-font);
+  background-color: var(--white);
 }
