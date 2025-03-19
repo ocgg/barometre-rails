@@ -18,8 +18,11 @@
 .medium { font-size: var(--medium-font) }
 .small { font-size: var(--small-font) }
 
-.black { color: black }
-.gray { color: dimgray }
+.black { color: var(--black) }
+.purple { color: var(--purple) }
+.gray { color: var(--gray) }
+
+.faded { opacity: .64 }
 
 .ellipsis {
   overflow: hidden;

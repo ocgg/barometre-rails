@@ -4,10 +4,10 @@
       <%= event.date.strftime("%Hh%M") %>
     </div>
   </div>
-  <div class="event-card-right gray overflow-hidden">
+  <div class="event-card-right purple overflow-hidden">
     <div class="event-card-name-desc p1 overflow-hidden">
-      <p class="bold large black ellipsis"><%= event.name %></p>
-      <p class="italic small ellipsis"><%= event.description %></p>
+      <p class="bold large italic ellipsis"><%= event.name %></p>
+      <p class="italic small faded ellipsis"><%= event.description %></p>
     </div>
     <address class="event-card-address overflow-hidden">
       <div class="event-card-venue p1 overflow-hidden">
@@ -17,7 +17,7 @@
       <p class="event-card-city p1 bold "><%= venue.city %></p>
     </address>
     <div class="event-card-tarif p1 overflow-hidden">
-      <p class="italic ellipsis"><%= event.tarif || "Gratuit" %></p>
+      <p class="italic faded ellipsis"><%= event.tarif %></p>
     </div>
   </div>
 </article>

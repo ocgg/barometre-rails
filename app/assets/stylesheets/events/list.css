@@ -15,7 +15,7 @@
     gap: var(--gap);
 
     li:nth-child(even) {
-      background-color: whitesmoke;
+      background-color: var(--white-alt);
     }
 
     li:last-of-type {
@@ -31,7 +31,7 @@
 
 .events-day-header {
   background-color: var(--purple);
-  color: white;
+  color: var(--white);
   padding-left: 5.4em;
   border-top-left-radius: var(--radius);
   border-top-right-radius: var(--radius);

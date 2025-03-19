@@ -8,7 +8,7 @@
 .event-card-left {
   font-family: var(--main-font);
   background-color: var(--purple);
-  color: white;
+  color: var(--white);
   font-weight: bold;
   padding: var(--space3) var(--space2);
 }
