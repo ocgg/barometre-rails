@@ -1,0 +1,24 @@
+article.event-card-container
+  div.event-card-left
+    div.hour
+      = event.date.strftime("%Hh%M")
+
+  div.event-card-right.purple.paragraph.overflow-hidden
+    div.event-card-name-desc.p1.overflow-hidden
+      h3.bold.title.large.ellipsis
+        = event.name
+      p.italic.small.faded.ellipsis
+        = event.description
+
+    address.event-card-address.overflow-hidden
+      div.event-card-venue.p1.overflow-hidden
+        p.bold.medium.ellipsis
+          = venue.name
+        p.italic.dotted.ellipsis
+          = venue.address
+      p.event-card-city.p1.bold
+        = venue.city
+
+    div.event-card-tarif.p1.overflow-hidden
+      p.italic.faded.ellipsis
+        = event.tarif

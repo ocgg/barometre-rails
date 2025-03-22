@@ -1,3 +1,10 @@
+GIT
+  remote: https://github.com/slim-template/html2slim.git
+  revision: e92e6bb80570dce0c413a6ff01b858754845df24
+  specs:
+    html2slim (0.2.0)
+      nokogiri
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -302,6 +309,9 @@ GEM
       rexml (~> 3.2, >= 3.2.5)
       rubyzip (>= 1.2.2, < 3.0)
       websocket (~> 1.0)
+    slim (5.2.1)
+      temple (~> 0.10.0)
+      tilt (>= 2.1.0)
     solid_cable (3.0.7)
       actioncable (>= 7.2)
       activejob (>= 7.2)
@@ -334,10 +344,12 @@ GEM
     stimulus-rails (1.3.4)
       railties (>= 6.0.0)
     stringio (3.1.5)
+    temple (0.10.3)
     thor (1.3.2)
     thruster (0.1.12)
     thruster (0.1.12-aarch64-linux)
     thruster (0.1.12-x86_64-linux)
+    tilt (2.6.0)
     timeout (0.4.3)
     turbo-rails (2.0.13)
       actionpack (>= 7.1.0)
@@ -380,6 +392,7 @@ DEPENDENCIES
   capybara
   debug
   hotwire-livereload (~> 2.0)
+  html2slim!
   importmap-rails
   jbuilder
   kamal
@@ -389,6 +402,7 @@ DEPENDENCIES
   rails (~> 8.0.2)
   rubocop-rails-omakase
   selenium-webdriver
+  slim
   solid_cable
   solid_cache
   solid_queue

@@ -1,0 +1,10 @@
+h1
+  | Events#index
+p
+  | Logged in as: 
+  = current_user.email_address
+  |  (
+  = current_user.role
+  | )
+= render "events/events_list"
+= link_to 'Logout', session_path, method: :delete, data: {turbo_method: :delete}

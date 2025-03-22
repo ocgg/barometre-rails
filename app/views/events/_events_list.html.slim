@@ -1,0 +1,11 @@
+section class="events-list-container"
+
+  - @events_days.each do |date, events|
+
+    section class="events-day-container py3"
+      header class="events-day-header py3"
+        h3 = format_date(date)
+      ul
+        - events.each do |event|
+          li
+            = render "events/event_card", event:, venue: event.venue

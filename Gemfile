@@ -65,3 +65,6 @@ group :test do
 end
 
 gem "pundit"
+
+gem "slim"
+gem "html2slim", git: "https://github.com/slim-template/html2slim.git"
