@@ -68,3 +68,7 @@ gem "pundit"
 
 gem "slim"
 gem "html2slim", git: "https://github.com/slim-template/html2slim.git"
+
+gem "tailwindcss-ruby", "~> 4.0"
+
+gem "tailwindcss-rails", "~> 4.2"
