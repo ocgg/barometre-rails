@@ -1,15 +1,76 @@
 @import "tailwindcss";
 
-:root {
-  --purple: #640d5f;
-  --orange: #EB5B00;
-  --yellow: #ffb200;
-
-  --black: black;
-  --gray: dimgray;
-  --white: #fff7f0;
-  --white-alt: #fcedde;
+@font-face {
+  font-family: Quicksand;
+  src: url("/Quicksand-Bold.ttf") format("truetype");
+  font-weight: bold;
+}
+@font-face {
+  font-family: Lato;
+  src: url("/Lato-BlackItalic.ttf") format("truetype");
+  font-weight: 900;
+}
+@font-face {
+  font-family: "Source Sans 3";
+  src: url("/SourceSans3-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-stretch: normal;
+}
+@font-face {
+  font-family: "Source Sans 3";
+  src: url("/SourceSans3-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-stretch: normal;
 }
 
-/*.dark {*/
-/*}*/
+:root {
+  /* Light theme */
+  --light-bg: #eae3d2;
+  --light-fg: #130330;
+  --light-faded: rgba(19, 3, 48, .5);
+  --light-card-bg-odd: rgba(255, 255, 255, .5);
+  --light-card-bg-even: rgba(255, 255, 255, .3);
+
+  /* Dark theme */
+  --dark-bg: #181221;
+  --dark-fg: #d4c8a9;
+  --dark-faded: rgba(212, 200, 169, .6);
+  --dark-card-bg-odd: rgba(255, 255, 255, .08);
+  --dark-card-bg-even: rgba(255, 255, 255, .05);
+}
+
+@theme {
+  --font-quicksand: Quicksand;
+  --font-lato: Lato;
+  --font-source: "Source Sans 3";
+
+  --color-baro-purple: #640d5f;
+  --color-baro-orange: #EB5B00;
+  --color-baro-yellow: #ffb200;
+
+  /* These can change according to dark/light theme */
+  /* see html.light & html.dark rules below */
+  --color-fgcolor: var(--fgcolor);
+  --color-bgcolor: var(--bgcolor);
+  --color-fgcolor-faded: var(--fgcolor-faded);
+  --color-card-bg-even: var(--cardcolor-even);
+  --color-card-bg-odd: var(--cardcolor-odd);
+}
+
+html.light {
+  --fgcolor: var(--light-fg);
+  --fgcolor-faded: var(--light-faded);
+  --bgcolor: var(--light-bg);
+  --cardcolor-odd: var(--light-card-bg-odd);
+  --cardcolor-even: var(--light-card-bg-even);
+}
+
+html.dark {
+  --fgcolor: var(--dark-fg);
+  --fgcolor-faded: var(--dark-faded);
+  --bgcolor: var(--dark-bg);
+  --cardcolor-odd: var(--dark-card-bg-odd);
+  --cardcolor-even: var(--dark-card-bg-even);
+}

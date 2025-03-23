@@ -1,6 +1,5 @@
 doctype html
-html
-
+html class="light"
   head
     title = content_for(:title) || "Barometre Rails"
     meta[name="viewport" content="width=device-width,initial-scale=1"]
@@ -19,5 +18,7 @@ html
     = stylesheet_link_tag :app, "data-turbo-track": "reload"
     = javascript_importmap_tags
 
-  body
+  body class="font-quicksand text-fgcolor bg-bgcolor"
+    button.bg-neutral-400 onClick="document.querySelector('html').classList.toggle('dark')"
+      | DARK/LIGHT
     = yield

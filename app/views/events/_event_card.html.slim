@@ -1,27 +1,27 @@
 / card container
-article class="flex flex-col text-(--purple) font-(family-name:--paragraph-font) md:flex-row"
+article class="flex flex-col text-fgcolor font-source md:flex-row"
 
-  div class="items-center justify-center font-(family-name:--main-font) font-bold bg-(--purple) text-(--white) p-1 hidden md:flex"
+  div class="items-center justify-center font-quicksand font-bold bg-fgcolor text-bgcolor p-1 hidden md:flex"
     div
       = event.date.strftime("%Hh%M")
 
   div class="flex flex-col gap-2 px-2 py-3 overflow-hidden md:flex-row md:flex-[1_0] md:justify-between md:px-1 md:py-2"
     div class="flex-[0_1_45%] p-1 overflow-hidden"
-      h3 class="font-(family-name:--title-font) text-xl overflow-ellipsis whitespace-nowrap"
+      h3 class="font-lato text-xl overflow-ellipsis whitespace-nowrap"
         = event.name
-      p class="italic text-sm opacity-65 text-ellipsis overflow-hidden whitespace-nowrap"
+      p class="italic text-sm text-faded text-ellipsis overflow-hidden whitespace-nowrap"
         = event.description
 
     address class="flex justify-between items-center overflow-hidden md:flex-[0_1_45%]"
       div class="flex-[0_1_70%] p-1 overflow-hidden md:flex-[0_1_60%]"
         p class="font-bold not-italic text-lg text-ellipsis overflow-hidden whitespace-nowrap"
           = venue.name
-        p class="underline decoration-dotted text-ellipsis overflow-hidden whitespace-nowrap"
+        p class="text-faded underline decoration-dotted text-ellipsis overflow-hidden whitespace-nowrap"
           = venue.address
 
-      p class="flex-[0_1_30%] font-bold text-right md:flex-[0_1_40%] md:text-left"
+      p class="flex-[0_1_30%] not-italic font-bold text-right md:flex-[0_1_40%] md:text-left"
         = venue.city
 
     div class="p-1 overflow-hidden md:flex-[0_1_10%] md:flex md:justify-center md:items-center"
-      p class="italic opacity-65 text-ellipsis overflow-hidden whitespace-nowrap"
+      p class="italic text-faded text-ellipsis overflow-hidden whitespace-nowrap"
         = event.tarif
