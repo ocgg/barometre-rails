@@ -1,11 +1,12 @@
-section class="events-list-container"
+section class="max-w-5xl m-auto"
 
   - @events_days.each do |date, events|
 
-    section class="events-day-container py3"
-      header class="events-day-header py3"
+    section class="mb-20 rounded-lg overflow-hidden"
+      header class="bg-(--purple) text-(--white) text-lg font-bold pl-16 py-2 mb-1"
         h3 = format_date(date)
-      ul
+
+      ul class="flex flex-col gap-1"
         - events.each do |event|
-          li
+          li class="even:bg-(--white-alt)"
             = render "events/event_card", event:, venue: event.venue
