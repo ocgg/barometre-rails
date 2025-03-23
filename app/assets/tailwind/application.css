@@ -74,3 +74,10 @@ html.dark {
   --cardcolor-odd: var(--dark-card-bg-odd);
   --cardcolor-even: var(--dark-card-bg-even);
 }
+
+input[type=search] {
+  @apply p-2 py-1.5
+  border-3 border-fgcolor rounded-xl
+  italic text-fgcolor-faded font-normal
+  focus:not-italic focus:border-baro-yellow focus-visible:outline-hidden
+}
