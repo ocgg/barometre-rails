@@ -3,20 +3,19 @@ search class="m-4"
 
     /Filter buttons
     div class="flex justify-evenly md:gap-5 md:items-center"
-      button class="px-3 border-3 rounded-md border-fgcolor text-lg bg-fgcolor text-baro-yellow"
+      a href="#" class="px-3 border-spacing-x-64 border-3 rounded-md border-fgcolor text-lg bg-fgcolor text-baro-yellow hover:cursor-pointer"
         | Aujourd'hui
-      button class="px-3 border-3 rounded-md border-fgcolor text-lg"
+      button class="px-3 border-3 rounded-md border-fgcolor text-lg hover:cursor-pointer"
         | Autour de moi
       button class=""
-        svg viewBox="0 0 512 512" class="h-9 fill-fgcolor"
+        svg viewBox="0 0 512 512" class="h-9 fill-fgcolor hover:cursor-pointer"
           path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM232 344l0-64-64 0c-13.3 0-24-10.7-24-24s10.7-24 24-24l64 0 0-64c0-13.3 10.7-24 24-24s24 10.7 24 24l0 64 64 0c13.3 0 24 10.7 24 24s-10.7 24-24 24l-64 0 0 64c0 13.3-10.7 24-24 24s-24-10.7-24-24z"
 
     /Search bar
     div class="group flex justify-between border-3 border-fgcolor rounded-xl overflow-hidden transition focus-within:border-3 focus-within:border-baro-yellow"
 
       input[
-        type="search"
-        placeholder="date, ville, mot-clef..."
+        type="search" placeholder="date, ville, mot-clef..."
         class="w-[100%] pl-3 pr-0.5 py-1 placeholder:italic placeholder:text-sm"
       ]
 
