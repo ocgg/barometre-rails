@@ -1,0 +1,30 @@
+:root {
+  /* Light theme */
+  --light-bg: #eae3d2;
+  --light-fg: #130330;
+  --light-faded: rgba(19, 3, 48, .5);
+  --light-card-bg-odd: rgba(255, 255, 255, .5);
+  --light-card-bg-even: rgba(255, 255, 255, .3);
+
+  /* Dark theme */
+  --dark-bg: #181221;
+  --dark-fg: #d4c8a9;
+  --dark-faded: rgba(212, 200, 169, .6);
+  --dark-card-bg-odd: rgba(255, 255, 255, .08);
+  --dark-card-bg-even: rgba(255, 255, 255, .05);
+}
+
+@theme {
+  --color-*: initial; /* overrides default colors */
+  --color-baro-purple: #640d5f;
+  --color-baro-orange: #EB5B00;
+  --color-baro-yellow: #ffb200;
+
+  /* These can change according to dark/light theme */
+  /* see html.light & html.dark rules below */
+  --color-fgcolor: var(--fgcolor);
+  --color-bgcolor: var(--bgcolor);
+  --color-fgcolor-faded: var(--fgcolor-faded);
+  --color-card-bg-even: var(--cardcolor-even);
+  --color-card-bg-odd: var(--cardcolor-odd);
+}
