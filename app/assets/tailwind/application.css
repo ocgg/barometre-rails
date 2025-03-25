@@ -1,6 +1,7 @@
 @import "tailwindcss";
 @import "./theme/colors.css";
 @import "./theme/fonts.css";
+@import "./components/search_bar";
 
 html.light {
   --fgcolor: var(--light-fg);
