@@ -15,13 +15,13 @@
 }
 
 @theme {
-  --color-*: initial; /* overrides default colors */
+  --color-*: initial;
+  /* overrides default colors */
   --color-baro-purple: #640d5f;
   --color-baro-orange: #EB5B00;
   --color-baro-yellow: #ffb200;
 
-  /* These can change according to dark/light theme */
-  /* see html.light & html.dark rules below */
+  /* These can change according to chosen theme */
   --color-fgcolor: var(--fgcolor);
   --color-bgcolor: var(--bgcolor);
   --color-fgcolor-faded: var(--fgcolor-faded);

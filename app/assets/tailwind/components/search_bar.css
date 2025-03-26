@@ -1,7 +1,7 @@
 @layer components {
   .search-bar {
+    height: fit-content;
     display: flex;
-    justify-content: space-between;
     border: 3px solid var(--color-fgcolor);
     border-radius: var(--radius-xl);
     overflow: hidden;
@@ -15,30 +15,21 @@
       }
     }
 
-    input[type=search] {
-      width: 100%;
+    input {
+      border: none;
+      flex-grow: 1;
+      min-width: calc(var(--spacing) * 10);
       padding-inline: calc(var(--spacing) * 3) calc(var(--spacing) * .5);
       padding-block: var(--spacing);
-    }
-
-    input[type=search]::placeholder {
-      font-style: italic;
-      font-size: var(--text-sm);
-      line-height: var(--tw-leading, var(--text-sm--line-height));
+      font-family: var(--font-quicksand);
     }
 
     button {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100%;
-      padding-inline: calc(var(--spacing) * 2.5);
+      border: none;
+      border-radius: unset;
+      padding-inline: calc(var(--spacing) * 3) calc(var(--spacing) * 2.5);
       background-color: var(--color-fgcolor);
       transition: background-color cubic-bezier(0.4, 0, 0.2, 1) 150ms;
-
-      &:hover {
-        cursor: pointer;
-      }
     }
 
     svg {

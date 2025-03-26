@@ -1,0 +1,19 @@
+@layer components {
+  .btn {
+    border: 3px solid var(--color-fgcolor);
+    border-radius: var(--radius-lg);
+    line-height: var(--tw-leading), var(--text-lg--line-height);
+    padding-inline: calc(var(--spacing) * 3);
+    cursor: pointer;
+
+    input[type=checkbox],
+    input[type=radio] {
+      display: none;
+    }
+
+    /*has input:checked {*/
+    /*  color: var(--color-bgcolor);*/
+    /*  background-color: var(--color-fgcolor);*/
+    /*}*/
+  }
+}

@@ -1,0 +1,60 @@
+@layer base {
+  html {
+    color-scheme: light;
+    --fgcolor: var(--light-fg);
+    --fgcolor-faded: var(--light-faded);
+    --bgcolor: var(--light-bg);
+    --cardcolor-odd: var(--light-card-bg-odd);
+    --cardcolor-even: var(--light-card-bg-even);
+  }
+
+  html.dark {
+    color-scheme: dark;
+    --fgcolor: var(--dark-fg);
+    --fgcolor-faded: var(--dark-faded);
+    --bgcolor: var(--dark-bg);
+    --cardcolor-odd: var(--dark-card-bg-odd);
+    --cardcolor-even: var(--dark-card-bg-even);
+  }
+
+  body {
+    font-family: var(--font-quicksand);
+    color: var(--color-fgcolor);
+    background-color: var(--color-bgcolor);
+    min-height: 100vh;
+  }
+
+  label[for] {
+    cursor: pointer;
+  }
+
+  input {
+    border: 2px solid var(--color-fgcolor-faded);
+    border-radius: var(--radius-sm);
+    padding-inline: calc(var(--spacing) * 1.5);
+    padding-block: calc(var(--spacing) * 0.5);
+    font-family: var(--font-source);
+
+    &:focus {
+      border-color: var(--color-baro-yellow);
+      outline: none;
+    }
+
+    &::placeholder {
+      font-style: italic;
+      /*font-size: var(--text-sm);*/
+      line-height: var(--tw-leading, var(--text-sm--line-height));
+      color: var(--color-fgcolor-faded);
+    }
+  }
+
+  a,
+  button,
+  input[type=button] {
+    cursor: pointer;
+    border: 3px solid var(--color-fgcolor);
+    border-radius: var(--radius-lg);
+    font-family: var(--font-quicksand);
+    padding-inline: calc(var(--spacing) * 3);
+  }
+}

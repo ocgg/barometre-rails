@@ -1,5 +1,5 @@
 doctype html
-html class="light"
+html
   head
     title = content_for(:title) || "Barometre Rails"
     meta[name="viewport" content="width=device-width,initial-scale=1"]
@@ -14,12 +14,10 @@ html class="light"
     = tag.link rel: "icon", href: "/icon.svg", type: "image/svg+xml"
     = tag.link rel: "apple-touch-icon", href: "/icon.png"
     = stylesheet_link_tag "tailwind", "data-turbo-track": "reload"
-    /Includes all stylesheet files in app/assets/stylesheets
-    = stylesheet_link_tag :app, "data-turbo-track": "reload"
     = javascript_importmap_tags
 
-  body class="font-quicksand text-fgcolor bg-bgcolor"
-    button.bg-neutral-400 onClick="document.querySelector('html').classList.toggle('dark')"
+  body
+    button.btn onClick="document.querySelector('html').classList.toggle('dark')"
       | DARK/LIGHT
 
     = render "events/search_bar"
