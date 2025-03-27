@@ -3,19 +3,15 @@ search
 
     /Filter buttons
     div class="flex justify-evenly md:gap-5 md:items-center"
-      a href="#" class="px-3 border-spacing-x-64 border-3 rounded-md border-fgcolor text-lg bg-fgcolor text-baro-yellow"
-        | Aujourd'hui
-      button class="btn text-lg"
-        | Autour de moi
-      button.border-none.p-0
-        svg viewBox="0 0 512 512" class="h-9 fill-fgcolor"
-          path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM232 344l0-64-64 0c-13.3 0-24-10.7-24-24s10.7-24 24-24l64 0 0-64c0-13.3 10.7-24 24-24s24 10.7 24 24l0 64 64 0c13.3 0 24 10.7 24 24s-10.7 24-24 24l-64 0 0 64c0 13.3-10.7 24-24 24s-24-10.7-24-24z"
-      div.btn
-        label for="oui" Lala
-        input.block id="oui" type="checkbox"
-      label.btn
-        | Checke
+      div.btn.text-lg
+        label for="oui" Aujourd'hui
+        input id="oui" type="checkbox"
+      label.btn.text-lg
         input type="checkbox"
+        | Autour de moi
+      a.border-none.p-0 href="#"
+        svg viewBox="0 0 512 512" class="h-9 fill-fgcolor rounded-full hover:outline-3 hover:outline-baro-yellow"
+          path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM232 344l0-64-64 0c-13.3 0-24-10.7-24-24s10.7-24 24-24l64 0 0-64c0-13.3 10.7-24 24-24s24 10.7 24 24l0 64 64 0c13.3 0 24 10.7 24 24s-10.7 24-24 24l-64 0 0 64c0 13.3-10.7 24-24 24s-24-10.7-24-24z"
 
     /Search bar
     form.search-bar
@@ -23,25 +19,3 @@ search
       button type="submit"
         svg viewBox="0 0 512 512"
           path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z"
-
-br
-br
-input type="text" 
-br
-br
-input type="email" placeholder="coucou lala"
-br
-br
-input type="search" 
-br
-br
-input type="button" value="Bonjour"
-br
-br
-input type="checkbox"
-br
-br
-input type="radio"
-br
-br
-label Label

@@ -5,7 +5,7 @@
     border: 3px solid var(--color-fgcolor);
     border-radius: var(--radius-xl);
     overflow: hidden;
-    transition: border-color cubic-bezier(0.4, 0, 0.2, 1) 150ms;
+    transition: border-color ease-in-out 80ms;
 
     &:focus-within {
       border-color: var(--color-baro-yellow);
@@ -17,6 +17,7 @@
 
     input {
       border: none;
+      outline: none;
       flex-grow: 1;
       min-width: calc(var(--spacing) * 10);
       padding-inline: calc(var(--spacing) * 3) calc(var(--spacing) * .5);
@@ -29,7 +30,7 @@
       border-radius: unset;
       padding-inline: calc(var(--spacing) * 3) calc(var(--spacing) * 2.5);
       background-color: var(--color-fgcolor);
-      transition: background-color cubic-bezier(0.4, 0, 0.2, 1) 150ms;
+      transition: background-color ease-in-out 80ms;
     }
 
     svg {
