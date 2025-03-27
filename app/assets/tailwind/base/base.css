@@ -25,6 +25,9 @@
     min-height: 100vh;
   }
 
+  a,
+  button,
+  input[type=button],
   label[for] {
     cursor: pointer;
   }
@@ -43,20 +46,8 @@
 
     &::placeholder {
       font-style: italic;
-      /*font-size: var(--text-sm);*/
       line-height: var(--tw-leading, var(--text-sm--line-height));
       color: var(--color-fgcolor-faded);
     }
-  }
-
-  a,
-  button,
-  input[type=button] {
-    /*height: fit-content;*/
-    cursor: pointer;
-    border: 3px solid var(--color-fgcolor);
-    border-radius: var(--radius-lg);
-    font-family: var(--font-quicksand);
-    padding-inline: calc(var(--spacing) * 3);
   }
 }
