@@ -1,5 +1,6 @@
 @layer base {
   html {
+    accent-color: var(--color-baro-yellow);
     color-scheme: light;
     --fgcolor: var(--light-fg);
     --fgcolor-faded: var(--light-faded);
@@ -36,8 +37,8 @@
     font-family: var(--font-source);
 
     &:focus {
-      border-color: var(--color-baro-yellow);
       outline: none;
+      border-color: var(--color-baro-yellow);
     }
 
     &::placeholder {
@@ -51,6 +52,7 @@
   a,
   button,
   input[type=button] {
+    /*height: fit-content;*/
     cursor: pointer;
     border: 3px solid var(--color-fgcolor);
     border-radius: var(--radius-lg);
