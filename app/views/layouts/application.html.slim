@@ -17,9 +17,11 @@ html
     = javascript_importmap_tags
 
   body
+    = render "shared/navbar"
+
     button.btn onClick="document.querySelector('html').classList.toggle('dark')"
       | DARK/LIGHT
 
-    = render "events/search_bar"
+    = render "shared/search_bar"
 
     = yield
