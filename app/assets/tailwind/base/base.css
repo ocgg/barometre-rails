@@ -22,6 +22,8 @@
     font-family: var(--font-quicksand);
     color: var(--color-fgcolor);
     background-color: var(--color-bgcolor);
+    max-width: 100vw;
+    overflow-x: hidden;
     min-height: 100vh;
   }
 
