@@ -17,11 +17,27 @@ html
     = javascript_importmap_tags
 
   body
-    = render "shared/navbar"
+    /Banner
+    div.bg-baro-purple
+      header class="main-container flex justify-between items-center bg-baro-purple"
+        h1 class="py-4 text-baro-orange text-4xl w-full text-center md:w-fit md:text-left"
+          | BAROMÈTRE
+        div.hidden.md:block
+          = render "shared/navbar"
 
-    button.btn onClick="document.querySelector('html').classList.toggle('dark')"
-      | DARK/LIGHT
+    main.main-container.flex.flex-col.gap-27.mb-96.md:mb-64.md:gap-20
 
-    = render "shared/search_bar"
+      /Dev helper
+      div.flex.justify-between.items-center
+        button.btn onClick="document.querySelector('html').classList.toggle('dark')"
+          | DARK/LIGHT
+        h2 Events#index
+        p Logged in as:  #{current_user.email_address} (#{current_user.role})
+        = link_to 'Logout', session_path, class: "btn", method: :delete, data: {turbo_method: :delete}
 
-    = yield
+      = render "shared/search_bar"
+
+      = yield
+
+    div.md:hidden
+      = render "shared/navbar"
