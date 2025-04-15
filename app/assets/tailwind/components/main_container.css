@@ -2,7 +2,7 @@
   .main-container {
     @apply
     m-auto
-    md:max-w-[80vw]
-    xl:max-w-5xl
+    max-w-5xl
+    md:w-[95vw]
   }
 }
