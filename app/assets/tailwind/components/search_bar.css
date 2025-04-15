@@ -5,7 +5,6 @@
     border: 3px solid var(--color-fgcolor);
     border-radius: var(--radius-xl);
     overflow: hidden;
-    transition: border-color ease-in-out 80ms;
 
     &:focus-within {
       border-color: var(--color-baro-yellow);
@@ -30,7 +29,6 @@
       border-radius: unset;
       padding-inline: calc(var(--spacing) * 3) calc(var(--spacing) * 2.5);
       background-color: var(--color-fgcolor);
-      transition: background-color ease-in-out 80ms;
     }
 
     svg {

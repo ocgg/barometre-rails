@@ -8,9 +8,6 @@
     line-height: var(--tw-leading), var(--text-lg--line-height);
     padding-inline: var(--btn-padding-x);
     cursor: pointer;
-    transition-property: background-color, color;
-    transition-duration: 80ms;
-    transition-timing-function: ease-in-out;
 
     input[type=checkbox],
     input[type=radio] {
