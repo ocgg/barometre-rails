@@ -29,8 +29,6 @@ html
 
       /Dev helper
       div.flex.justify-between.items-center
-        button.btn onClick="document.querySelector('html').classList.toggle('dark')"
-          | DARK/LIGHT
         h2 Events#index
         p Logged in as:  #{current_user.email_address} (#{current_user.role})
         = link_to 'Logout', session_path, class: "btn", method: :delete, data: {turbo_method: :delete}

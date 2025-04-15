@@ -7,11 +7,11 @@
   --light-card-bg-even: rgba(255, 255, 255, .3);
 
   /* Dark theme */
-  --dark-bg: #181221;
-  --dark-fg: #d4c8a9;
-  --dark-faded: rgba(212, 200, 169, .6);
-  --dark-card-bg-odd: rgba(255, 255, 255, .08);
-  --dark-card-bg-even: rgba(255, 255, 255, .05);
+  /* --dark-bg: #181221; */
+  /* --dark-fg: #d4c8a9; */
+  /* --dark-faded: rgba(212, 200, 169, .6); */
+  /* --dark-card-bg-odd: rgba(255, 255, 255, .08); */
+  /* --dark-card-bg-even: rgba(255, 255, 255, .05); */
 }
 
 @theme {
