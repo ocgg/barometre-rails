@@ -28,8 +28,6 @@
     &:hover,
     &:has(input:checked):hover {
       border-color: var(--color-baro-yellow);
-      /*background-color: var(--color-fgcolor-faded);*/
-      /*color: var(--color-bgcolor);*/
     }
 
     &:has(input:checked) {

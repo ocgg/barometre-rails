@@ -9,14 +9,14 @@
     --cardcolor-even: var(--light-card-bg-even);
   }
 
-  html.dark {
-    color-scheme: dark;
-    --fgcolor: var(--dark-fg);
-    --fgcolor-faded: var(--dark-faded);
-    --bgcolor: var(--dark-bg);
-    --cardcolor-odd: var(--dark-card-bg-odd);
-    --cardcolor-even: var(--dark-card-bg-even);
-  }
+  /* html.dark { */
+  /*   color-scheme: dark; */
+  /*   --fgcolor: var(--dark-fg); */
+  /*   --fgcolor-faded: var(--dark-faded); */
+  /*   --bgcolor: var(--dark-bg); */
+  /*   --cardcolor-odd: var(--dark-card-bg-odd); */
+  /*   --cardcolor-even: var(--dark-card-bg-even); */
+  /* } */
 
   body {
     font-family: var(--font-quicksand);
