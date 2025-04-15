@@ -1,0 +1,8 @@
+@layer components {
+  .main-container {
+    @apply
+    m-auto
+    max-w-5xl
+    md:w-[95vw]
+  }
+}
