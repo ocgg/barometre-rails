@@ -1,8 +1,8 @@
 :root {
   /* Light theme */
   --light-bg: rgba(234, 227, 210, 1);
-  --light-fg: rgba(19, 3, 48, 1);
-  --light-faded: rgba(19, 3, 48, .5);
+  --light-fg: rgba(2, 0, 100, 1);
+  --light-faded: rgba(2, 0, 100, .5);
   --light-card-bg-odd: rgba(255, 255, 255, .5);
   --light-card-bg-even: rgba(255, 255, 255, .3);
 
@@ -17,7 +17,6 @@
 @theme {
   --color-*: initial;
   /* overrides default colors */
-  --color-baro-purple: #640d5f;
   --color-baro-orange: #EB5B00;
   --color-baro-yellow: #ffb200;
 
