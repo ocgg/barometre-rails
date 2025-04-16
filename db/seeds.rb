@@ -1,57 +1,63 @@
-puts "Destroy all records..."
+puts "Destroying all events..."
 
-Venue.destroy_all
-# Event.destroy_all # not needed (dependent destroy on Venue)
+Event.destroy_all
 
 test_admin = User.find_by(email_address: "admin@admin.com")
-test_user = User.find_by(email_address: "user@user.com")
 User.create!(email_address: "admin@admin.com", password: "123456", role: "admin") unless test_admin
-User.create!(email_address: "user@user.com", password: "123456", role: "user") unless test_user
 
 puts "Creating venues..."
+venues_count = 0
 [
   {
-    name: "Adresse dure pour GPS",
-    city: "Nantes",
-    address: "10 passage de la poule noire"
+    name: "Café de la Loire",
+    address: "4 quai Boulay Paty",
+    city: "Paimboeuf"
   },
   {
-    name: "Babar la Poupoule au très très long nom à rallonge pour en tester l'affichage",
-    city: "Nantes",
-    address: "32 rue Georges Laffont"
+    name: "Café du cinema",
+    address: "8 Rue des Carmélites",
+    city: "Nantes"
   },
   {
-    name: "Fausse adresse",
-    city: "Mouchny",
-    address: "342 rue du foutrequeue à clous"
+    name: "Le Chat Noir",
+    address: "13 Allée Duguay-Trouin",
+    city: "Nantes"
   },
   {
-    name: "Les Cordeliers",
-    city: "Clisson",
-    address: "5 rue de la Vallée"
+    name: "Delirium cafe",
+    address: "19 allée Baco",
+    city: "Nantes"
   },
   {
-    name: "Maison du Bonheur",
-    city: "Saint-Fiacre-sur-Maine",
-    address: "11 rue Saint-Vincent"
+    name: "Live Bar",
+    address: "6, rue de Strasbourg",
+    city: "Nantes"
   },
   {
-    name: "Doublon du Bonheur",
-    city: "Saint-Fiacre-sur-Maine",
-    address: "11 rue Saint-Vincent"
+    name: "Le Melting Potes",
+    address: "26 Bd de la Prairie au Duc",
+    city: "Nantes"
   },
   {
-    name: "Approximation du Bonheur",
-    city: "st fiacre",
-    address: "11 st vincent"
+    name: "Le Ferrailleur",
+    address: "21 quai des antilles",
+    city: "Nantes"
   },
   {
-    name: "Autre Version du Bonheur",
-    city: "st fiacre sur maine",
-    address: "11 rue st vincent"
+    name: "Le Petit Café de Rezé",
+    address: "7 rue Maurice Lagathu",
+    city: "Rezé"
+  },
+  {
+    name: "Café de l'Océan",
+    address: "2 Quai Saint Pierre",
+    city: "La Turballe"
   }
 ].each do |attrs|
+  next if Venue.exists?(attrs)
+
   Venue.create!(attrs)
+  venues_count += 1
 end
 
 puts "Creating events..."
@@ -120,4 +126,4 @@ puts "Creating events..."
   )
 end
 
-puts "Created #{Venue.count} venues & #{Event.count} events."
+puts "Created #{venues_count} new venues & #{Event.count} events."
