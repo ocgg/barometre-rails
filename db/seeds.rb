@@ -40,7 +40,7 @@ venues_count = 0
   },
   {
     name: "Le Ferrailleur",
-    address: "21 quai des antilles - hangar à bananes",
+    address: "21 quai des antilles",
     city: "Nantes"
   },
   {
