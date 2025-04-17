@@ -1,41 +1,27 @@
-/ card container
-article class="flex flex-col px-[2%] text-fgcolor font-source md:flex-row md:px-0"
+article.event-card-sm.md:event-card-md
 
-  /Left: hour, large screen only
-  div class="hidden md:flex items-center justify-center w-14 p-1 font-quicksand font-bold bg-fgcolor text-bgcolor"
-    div
-      = format_hour(event.date)
+  div.md-hour
+    div = format_hour(event.date)
 
-  /right, or entire card for narrow screen
-  div class="flex flex-col gap-1 pt-3 pb-6 overflow-hidden md:flex-row md:flex-[2_0] md:justify-between md:px-1 md:py-3"
-    /Narrow screen only
-    div class="md:hidden flex justify-between text-fgcolor-faded flex-row-reverse"
-      p class="italic"
-        = event.tarif
-      p class=""
-        = format_hour(event.date)
+  div.event-card-main
+    div.sm-hour
+      p.text-lg = format_hour(event.date)
+      p.italic = event.tarif
 
-    div class="flex-[0_1_45%] p-1 overflow-hidden"
-      h3 class="font-lato text-xl overflow-ellipsis whitespace-nowrap"
-        = event.name
-      p class="italic text-sm text-fgcolor-faded text-ellipsis overflow-hidden whitespace-nowrap"
-        = event.description
+    div.name-desc-ctn
+      h3.name = event.name
+      p.description = event.description
 
-    address class="flex justify-between items-center overflow-hidden md:flex-[0_1_45%]"
-      div class="flex just items-center gap-1 overflow-hidden md:block"
-        /Location label
-        div class="md:hidden"
-          svg viewBox="0 0 384 512" class="h-4 fill-fgcolor"
+    address
+      div.venue-name-address-ctn
+        div.md:hidden
+          /Location label
+          svg.h-4.fill-fgcolor viewBox="0 0 384 512"
             path d="M215.7 499.2C267 435 384 279.4 384 192C384 86 298 0 192 0S0 86 0 192c0 87.4 117 243 168.3 307.2c12.3 15.3 35.1 15.3 47.4 0zM192 128a64 64 0 1 1 0 128 64 64 0 1 1 0-128z"
-        p class="font-bold not-italic text-lg text-ellipsis overflow-hidden whitespace-nowrap max-md:underline max-md:decoration-dotted"
-          = venue.name
-        p class="hidden md:block text-fgcolor-faded underline decoration-dotted text-ellipsis overflow-hidden whitespace-nowrap"
-          = venue.address
+        p.venue-name = venue.name
+        p.md-venue-address = venue.address
 
-      p class="flex-[0_1_30%] not-italic font-bold text-right md:flex-[0_1_40%] md:text-left"
-        = venue.city
+      p.venue-city = venue.city
 
-    /large screen only
-    div class="hidden p-1 overflow-hidden md:flex-[0_1_10%] md:flex md:justify-center md:items-center"
-      p class="italic text-fgcolor-faded text-ellipsis overflow-hidden whitespace-nowrap"
-        = event.tarif
+    div.md-tarif
+      p = event.tarif

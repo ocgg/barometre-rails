@@ -1,0 +1,117 @@
+@layer components {
+  .event-card-sm {
+    @apply flex flex-col
+    text-fgcolor font-source;
+
+    .md-hour {
+      display: none;
+    }
+
+    .event-card-main {
+      @apply flex flex-col gap-1
+      px-2 pt-3 pb-6
+      overflow-hidden;
+    }
+
+    .sm-hour {
+      @apply flex items-center justify-between
+      text-fgcolor-faded;
+    }
+
+    .name-desc-ctn {
+      @apply flex-[0_1_45%] p-1 overflow-hidden;
+
+      .name {
+        @apply font-lato text-xl
+        text-ellipsis overflow-hidden whitespace-nowrap;
+      }
+      .description {
+        @apply text-sm italic text-fgcolor-faded
+        text-ellipsis overflow-hidden whitespace-nowrap;
+      }
+    }
+
+    address {
+      @apply flex justify-between items-center overflow-hidden;
+    }
+
+    .venue-name-address-ctn {
+      @apply flex items-center gap-1 overflow-hidden;
+    }
+
+    .venue-name {
+      @apply font-bold not-italic text-lg
+      text-ellipsis overflow-hidden whitespace-nowrap;
+    }
+
+    .md-venue-address {
+      display: none;
+    }
+
+    .venue-city {
+      @apply flex-[0_1_30%]
+      not-italic font-bold text-right;
+    }
+
+    .md-tarif {
+      display: none;
+    }
+  }
+}
+
+@utility event-card-md {
+  @layer components {
+    @apply flex-row;
+
+    .md-hour {
+      @apply flex items-center justify-center
+      w-14 p-1
+      font-quicksand font-bold
+      bg-fgcolor text-bgcolor;
+    }
+
+    .event-card-main {
+      @apply flex-row flex-[2_0] justify-between
+      px-1 py-3;
+    }
+
+    .sm-hour {
+      display: none;
+    }
+
+    address {
+      @apply flex-[0_1_45%];
+    }
+
+    .venue-name-address-ctn {
+      display: block;
+    }
+
+    .venue-name {
+      @apply no-underline;
+    }
+
+    .md-venue-address {
+      @apply block
+      text-fgcolor-faded underline decoration-dotted
+      text-ellipsis overflow-hidden whitespace-nowrap;
+    }
+
+    .venue-city {
+      @apply flex-[0_1_40%]
+      text-left;
+    }
+
+    .md-tarif {
+      @apply flex-[0_1_10%]
+      flex justify-center items-center
+      overflow-hidden
+      p-1;
+
+      p {
+        @apply italic text-fgcolor-faded
+        text-ellipsis overflow-hidden whitespace-nowrap;
+      }
+    }
+  }
+}
