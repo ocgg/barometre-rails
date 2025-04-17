@@ -15,16 +15,13 @@
         = link_to calendar_path, class: "block"
           svg class="#{navbar_btn_color('calendar')} h-[10vw] md:h-10" viewBox="0 0 448 512"
             path d="M128 0c17.7 0 32 14.3 32 32l0 32 128 0 0-32c0-17.7 14.3-32 32-32s32 14.3 32 32l0 32 48 0c26.5 0 48 21.5 48 48l0 48L0 160l0-48C0 85.5 21.5 64 48 64l48 0 0-32c0-17.7 14.3-32 32-32zM0 192l448 0 0 272c0 26.5-21.5 48-48 48L48 512c-26.5 0-48-21.5-48-48L0 192zm64 80l0 32c0 8.8 7.2 16 16 16l32 0c8.8 0 16-7.2 16-16l0-32c0-8.8-7.2-16-16-16l-32 0c-8.8 0-16 7.2-16 16zm128 0l0 32c0 8.8 7.2 16 16 16l32 0c8.8 0 16-7.2 16-16l0-32c0-8.8-7.2-16-16-16l-32 0c-8.8 0-16 7.2-16 16zm144-16c-8.8 0-16 7.2-16 16l0 32c0 8.8 7.2 16 16 16l32 0c8.8 0 16-7.2 16-16l0-32c0-8.8-7.2-16-16-16l-32 0zM64 400l0 32c0 8.8 7.2 16 16 16l32 0c8.8 0 16-7.2 16-16l0-32c0-8.8-7.2-16-16-16l-32 0c-8.8 0-16 7.2-16 16zm144-16c-8.8 0-16 7.2-16 16l0 32c0 8.8 7.2 16 16 16l32 0c8.8 0 16-7.2 16-16l0-32c0-8.8-7.2-16-16-16l-32 0zm112 16l0 32c0 8.8 7.2 16 16 16l32 0c8.8 0 16-7.2 16-16l0-32c0-8.8-7.2-16-16-16l-32 0c-8.8 0-16 7.2-16 16z"
-      /About icon: dropdown
-      li[
-        tabindex="0"
-        class="relative"
-        data-controller="navbar-dropdown"
-        data-action="blur->navbar-dropdown#hide"
-      ]
+
+      li class="relative" data-navbar-target="main"
+        /"about" icon
         svg[
-          data-action="click->navbar-dropdown#toggle keydown.enter->navbar-dropdown#toggle"
-          data-navbar-dropdown-target="icon"
+          tabindex="0"
+          data-action="click->navbar#toggle keydown.enter->navbar#toggle"
+          data-navbar-target="icon"
           class="#{navbar_btn_color('menu')} cursor-pointer fill-(--light-bg) h-[10vw] md:h-10"
           viewBox="0 0 512 512"
         ]
@@ -32,14 +29,14 @@
 
         /dropdown menu
         ul[
-          data-navbar-dropdown-target="menu"
-          class="hidden absolute flex-col gap-2 items-end min-w-3xs p-2 bg-card-bg text-xl md:rounded-b-xl md:right-0 md:top-14"
+          data-navbar-target="dropdown"
+          class="content hidden absolute flex-col gap-2 items-end min-w-3xs p-2 bg-card-bg text-xl md:rounded-b-xl md:right-0 md:top-14"
         ]
-          li class="hover:text-baro-yellow"
+          li.hover:text-baro-yellow
             = link_to "Proposer un concert", "#"
-          li class="hover:text-baro-yellow"
+          li.hover:text-baro-yellow
             = link_to "À propos", about_path
-          li class="hover:text-baro-yellow"
+          li.hover:text-baro-yellow
             = link_to "Contact", contact_path
-          li class="hover:text-baro-yellow"
-            = link_to "Mode nuit", "#"
+          li.hover:text-baro-yellow
+            p.cursor-pointer Mode nuit
