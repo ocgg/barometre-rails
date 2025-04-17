@@ -22,5 +22,5 @@ div.flex.flex-col.gap-27.md:gap-20
 
       ul class="flex flex-col gap-4 md:gap-1"
         - events.each do |event|
-          li class="odd:bg-card-bg-odd even:bg-card-bg-even"
+          li class=(event.verified ? "odd:bg-card-bg-odd even:bg-card-bg-even" : "bg-baro-yellow-faded cursor-pointer")
             = render "events/event_card", event:, venue: event.venue

@@ -18,7 +18,8 @@
   --color-*: initial;
   /* overrides default colors */
   --color-baro-orange: #EB5B00;
-  --color-baro-yellow: #ffb200;
+  --color-baro-yellow: rgba(255, 178, 0, 1);
+  --color-baro-yellow-faded: rgba(255, 178, 0, .25);
 
   /* These can change according to chosen theme */
   --color-fgcolor: var(--fgcolor);
