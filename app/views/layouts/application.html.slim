@@ -16,14 +16,13 @@ html
     = stylesheet_link_tag "tailwind", "data-turbo-track": "reload"
     = javascript_importmap_tags
 
-  body
+  body data-controller="navbar" data-action="click->navbar#handleFocusOut"
     /Banner
     div.bg-fgcolor
       header class="main-container flex justify-between items-center"
-        h1 class="py-4 text-baro-orange text-4xl w-full text-center md:w-fit md:text-left"
+        h1 class="py-4 text-baro-yellow text-4xl w-full text-center md:w-fit md:text-left"
           | BAROMÈTRE
-        div.hidden.md:block
-          = render "shared/navbar"
+        = render "shared/navbar"
 
     main.main-container.flex.flex-col.gap-27.mb-96.md:mb-64.md:gap-20
 
@@ -36,6 +35,3 @@ html
       = render "shared/search_bar"
 
       = yield
-
-    div.md:hidden
-      = render "shared/navbar"
