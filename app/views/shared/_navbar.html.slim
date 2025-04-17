@@ -1,4 +1,4 @@
-  nav class="fixed bottom-0 w-screen px-[10vw] py-4 bg-fgcolor md:w-fit md:px-0 md:static"
+nav class="fixed bottom-0 w-screen px-[10vw] py-[3vw] bg-fgcolor md:w-fit md:px-0 md:py-4 md:static"
     ul class="flex justify-between md:gap-12"
       /List icon
       li
@@ -30,7 +30,7 @@
         /dropdown menu
         ul[
           data-navbar-target="dropdown"
-          class="content hidden absolute flex-col gap-2 items-end min-w-3xs p-2 bg-card-bg text-xl md:rounded-b-xl md:right-0 md:top-14"
+          class="hidden fixed bottom-[16vw] right-0 w-full flex-col-reverse gap-2 items-center p-2 bg-card-bg text-xl md:flex-col md:items-end md:absolute md:min-w-3xs md:rounded-b-xl md:top-14 md:bottom-auto"
         ]
           li.hover:text-baro-yellow
             = link_to "Proposer un concert", "#"
