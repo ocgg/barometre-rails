@@ -65,7 +65,7 @@
 
     .md-hour {
       @apply flex items-center justify-center
-      w-14 p-1
+      w-12
       font-quicksand font-bold
       bg-fgcolor text-bgcolor;
     }
