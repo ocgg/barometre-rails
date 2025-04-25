@@ -13,8 +13,21 @@ export default class extends Controller {
 
   connect() {
     this.today = new Date();
+    this.year = this.today.getFullYear();
+    this.month = this.today.getMonth();
+
     this.startDate = null;
     this.endDate = null;
+
+    const dayEltClasses = "flex h-[46px] w-[46px] items-center justify-center rounded-full hover:bg-baro-yellow mb-2 cursor-pointer"
+
+    this.cssClasses = {
+      currentMonthDay: dayEltClasses,
+      prevMonthDay: dayEltClasses + " text-fgcolor-faded",
+      selectedDay: dayEltClasses + " bg-fgcolor-faded text-bgcolor rounded-none",
+      selectedStartDay: dayEltClasses + " bg-fgcolor text-bgcolor rounded-r-none",
+      selectedEndDay: dayEltClasses + " bg-fgcolor text-bgcolor rounded-l-none",
+    }
 
     // Close datepicker when clicking outside
     //document.addEventListener('click', function (event) {
@@ -25,74 +38,64 @@ export default class extends Controller {
   }
 
   renderCalendar() {
-    const year = this.today.getFullYear();
-    const month = this.today.getMonth();
-    const baseClasses = "flex h-[46px] w-[46px] items-center justify-center rounded-full hover:bg-baro-yellow mb-2 cursor-pointer";
-
     this.daysContainerTarget.innerHTML = '';
-
     this.displayMonthName();
-    this.renderPrevMonthDays(year, month, baseClasses);
-    this.renderCurrentMonthDays(year, month, baseClasses);
+    this.renderPrevMonthDays();
+    this.renderCurrentMonthDays();
   }
 
   displayMonthName() {
-    let monthAndYear = this.today.toLocaleDateString('fr-FR', { month: 'long', year: 'numeric' });
+    const opts = { month: 'long', year: 'numeric' };
+    let monthAndYear = this.today.toLocaleDateString('fr-FR', opts);
     this.currentMonthTarget.textContent = this.capitalize(monthAndYear);
   }
 
-  capitalize(string) {
-    return string.charAt(0).toUpperCase() + string.slice(1);
-  }
+  capitalize(string) { return string.charAt(0).toUpperCase() + string.slice(1); }
 
-  renderPrevMonthDays(year, month, baseClasses) {
-    const firstWeekDayOfMonth = new Date(year, month, 0).getDay();
+  renderPrevMonthDays() {
+    const firstWeekDayOfMonth = new Date(this.year, this.month, 0).getDay();
 
     for (let i = firstWeekDayOfMonth; i > 0; i--) {
-      baseClasses += " text-fgcolor-faded"
-
-      const firstCurrentMonthDay = new Date(year, month, 1);
+      const firstCurrentMonthDay = new Date(this.year, this.month, 1);
       const dayBefore = new Date(firstCurrentMonthDay);
       dayBefore.setDate(firstCurrentMonthDay.getDate() - i);
-      const parsableDate = `${month}-${dayBefore.getDate()}-${year}`;
+      const parsableDate = `${this.month}-${dayBefore.getDate()}-${this.year}`;
+      const dayNumber = dayBefore.getDate();
+      const day = new Date(this.year, this.month - 1, dayNumber);
 
-      this.daysContainerTarget.innerHTML += this.dayDivString(baseClasses, parsableDate, dayBefore.getDate());
+
+      this.daysContainerTarget.innerHTML += this.makeDayElement(day, parsableDate, dayNumber);
     }
   }
 
-  renderCurrentMonthDays(year, month, baseClasses) {
-    const daysInMonth = new Date(year, month + 1, 0).getDate();
+  renderCurrentMonthDays() {
+    const daysInMonth = new Date(this.year, this.month + 1, 0).getDate();
 
     for (let i = 1; i <= daysInMonth; i++) {
-      const day = new Date(year, month, i);
-      const parsableDate = `${month + 1}-${i}-${year}`
+      const day = new Date(this.year, this.month, i);
+      const parsableDate = `${this.month + 1}-${i}-${this.year}`
 
-      // Highlight start and end dates
-      if (this.startDate && day.getTime() === this.startDate.getTime()) {
-        baseClasses += " bg-fgcolor text-bgcolor rounded-r-none";
-      }
-      if (this.endDate && day.getTime() === this.endDate.getTime()) {
-        baseClasses += " bg-fgcolor text-bgcolor rounded-l-none";
-      }
-      // Highlight dates between start and end
-      if (this.startDate && this.endDate && day > this.startDate && day < this.endDate) {
-        baseClasses += " bg-fgcolor-faded text-bgcolor rounded-none";
-      }
-      this.daysContainerTarget.innerHTML += this.dayDivString(baseClasses, parsableDate, i);
+      this.daysContainerTarget.innerHTML += this.makeDayElement(day, parsableDate, i);
     }
   }
 
-  dayDivString(classes, parsableDate, dayNumber) {
+  makeDayElement(day, parsableDate, dayNumber) {
+    const classes = this.cssClassesFor(day)
     return `<div class="${classes}" data-action="click->datefilter#selectDate" data-date="${parsableDate}">${dayNumber}</div>`
   }
 
-  readableDateFrom(date) {
-    return date.toLocaleDateString("fr-FR", {
-      weekday: "short",
-      day: "numeric",
-      month: "long"
-    })
+  cssClassesFor(day) {
+    if (this.isStartDate(day)) { return this.cssClasses.selectedStartDay; }
+    else if (this.isEndDate(day)) { return this.cssClasses.selectedEndDay; }
+    else if (this.isBetweenStartAndEnd(day)) { return this.cssClasses.selectedDay; }
+    else if (this.isPreviousMonth(day)) { return this.cssClasses.prevMonthDay; }
+    else { return this.cssClasses.currentMonthDay; }
   }
+
+  isStartDate(day) { return this.startDate && day.getTime() === this.startDate.getTime(); }
+  isEndDate(day) { return this.endDate && day.getTime() === this.endDate.getTime(); }
+  isBetweenStartAndEnd(day) { return this.startDate && this.endDate && day > this.startDate && day < this.endDate; }
+  isPreviousMonth(day) { return day.getMonth() < this.month; }
 
   selectDate(event) {
     event.stopPropagation();
@@ -115,18 +118,17 @@ export default class extends Controller {
   }
 
   updateInput() {
-    if (this.startDate && this.endDate && this.startDate.getTime() === this.endDate.getTime()) {
-      this.inputTarget.value = this.readableDateFrom(this.startDate);
-    }
-    else if (this.startDate && this.endDate) {
-      this.inputTarget.value = `${this.readableDateFrom(this.startDate)} -> ${this.readableDateFrom(this.endDate)}`;
-    }
-    else if (this.startDate) {
-      this.inputTarget.value = `${this.readableDateFrom(this.startDate)} ->`;
-    }
-    else {
-      this.inputTarget.value = '';
-    }
+    if (this.startDateEqualsEndDate()) { this.inputTarget.value = this.readableDateFrom(this.startDate); }
+    else if (this.startDate && this.endDate) { this.inputTarget.value = `${this.readableDateFrom(this.startDate)} -> ${this.readableDateFrom(this.endDate)}`; }
+    else if (this.startDate) { this.inputTarget.value = `${this.readableDateFrom(this.startDate)} ->`; }
+    else { this.inputTarget.value = ''; }
+  }
+
+  startDateEqualsEndDate() { return this.startDate && this.endDate && this.startDate.getTime() === this.endDate.getTime() }
+
+  readableDateFrom(date) {
+    const opts = { weekday: "short", day: "numeric", month: "long" }
+    return date.toLocaleDateString("fr-FR", opts)
   }
 
   setPrevMonth() {
