@@ -24,16 +24,16 @@ export default class extends Controller {
       secondary: "bgcolor",
       faded: "fgcolor-faded",
       highlight: "baro-yellow",
-    }
-    const dayEltClasses = `flex h-[46px] w-[46px] items-center justify-center rounded-full hover:bg-${colors.highlight} mb-1 cursor-pointer`
+    };
+    const dayEltClasses = `hover:bg-${colors.highlight} flex h-[46px] w-[46px] items-center justify-center rounded-full mb-1 cursor-pointer`;
 
     this.cssClasses = {
       currentMonthDay: dayEltClasses,
       otherMonthDay: `${dayEltClasses} text-${colors.faded}`,
-      selectedDay: `${dayEltClasses} bg-${colors.primary} text-${colors.secondary} rounded-none`,
-      selectedStartDay: `${dayEltClasses} bg-${colors.primary} text-${colors.secondary} rounded-r-none`,
-      selectedEndDay: `${dayEltClasses} bg-${colors.primary} text-${colors.secondary} rounded-l-none`,
-      onlySelectedDay: `${dayEltClasses} bg-${colors.primary} text-${colors.secondary} rounded-full`
+      selectedDay: `${dayEltClasses} bg-${colors.highlight} rounded-none`,
+      selectedStartDay: `${dayEltClasses} bg-${colors.highlight} rounded-r-none`,
+      selectedEndDay: `${dayEltClasses} bg-${colors.highlight} rounded-l-none`,
+      onlySelectedDay: `${dayEltClasses} bg-${colors.highlight} rounded-full`
     }
 
     // Close datepicker when clicking outside
