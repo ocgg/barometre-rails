@@ -56,6 +56,8 @@ group :development do
   gem "web-console"
 
   gem "hotwire-livereload", "~> 2.0"
+
+  gem "html2slim", git: "https://github.com/slim-template/html2slim.git"
 end
 
 group :test do
@@ -67,10 +69,8 @@ end
 gem "pundit"
 
 gem "slim"
-gem "html2slim", git: "https://github.com/slim-template/html2slim.git"
 
 gem "tailwindcss-ruby", "~> 4.1"
-
 gem "tailwindcss-rails", "~> 4.2"
 
 gem "geocoder"
