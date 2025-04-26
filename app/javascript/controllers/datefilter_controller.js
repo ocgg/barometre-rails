@@ -3,8 +3,9 @@ import { Controller } from "@hotwired/stimulus"
 // Connects to data-controller="datefilter"
 export default class extends Controller {
   static targets = [
-    "inputContainer",
+    "mainContainer",
     "input",
+    "button",
     "datepickerContainer",
     "daysContainer",
     "currentMonth", "prevMonth", "nextMonth",
@@ -20,6 +21,7 @@ export default class extends Controller {
     this.endDate = null;
 
     const colors = {
+      bgcolor: "bg-card-bg-even",
       primary: "fgcolor",
       secondary: "bgcolor",
       faded: "fgcolor-faded",
@@ -28,6 +30,7 @@ export default class extends Controller {
     const dayEltClasses = `hover:bg-${colors.highlight} flex h-[46px] w-[46px] items-center justify-center rounded-full mb-1 cursor-pointer`;
 
     this.cssClasses = {
+      bgcolor: colors.bgcolor,
       currentMonthDay: dayEltClasses,
       otherMonthDay: `${dayEltClasses} text-${colors.faded}`,
       selectedDay: `${dayEltClasses} bg-${colors.highlight} rounded-none`,
@@ -66,34 +69,38 @@ export default class extends Controller {
     day.setDate(1 - firstWeekDayOfMonth)
 
     for (let i = 1; i <= (7 * 6); i++) {
-      this.daysContainerTarget.innerHTML += this.makeDayElement(day);
+      this.daysContainerTarget.innerHTML += this.makeDayElementFrom(day);
       day.setDate(day.getDate() + 1)
     }
   }
 
-  makeDayElement(day) {
-    const classes = this.cssClassesFor(day);
-    const month = day.getMonth() + 1;
-    const dayNumber = day.getDate();
-    const year = day.getFullYear();
-    const parsableDate = `${month}-${dayNumber}-${year}`;
-    return `<div class="${classes}" data-action="click->datefilter#selectDate" data-date="${parsableDate}">${dayNumber}</div>`;
+  makeDayElementFrom(date) {
+    const classes = this.cssClassesFor(date);
+    const parsableDate = this.parsableDateFrom(date);
+    return `<div class="${classes}" data-action="click->datefilter#selectDate" data-date="${parsableDate}">${date.getDate()}</div>`;
   }
 
-  cssClassesFor(day) {
-    if (this.isStartAndEnd(day)) return this.cssClasses.onlySelectedDay;
-    else if (this.isStartDate(day)) return this.cssClasses.selectedStartDay; 
-    else if (this.isEndDate(day)) return this.cssClasses.selectedEndDay; 
-    else if (this.isBetween(day)) return this.cssClasses.selectedDay; 
-    else if (this.isCurrentMonth(day)) return this.cssClasses.currentMonthDay; 
-    else return this.cssClasses.otherMonthDay; 
+  parsableDateFrom(date) {
+    const month = date.getMonth() + 1;
+    const dayNumber = date.getDate();
+    const year = date.getFullYear();
+    return `${month}-${dayNumber}-${year}`;
   }
 
-  isStartAndEnd(day) { return this.startDateEqualsEndDate() && day.getTime() === this.startDate.getTime(); }
-  isStartDate(day) { return this.startDate && day.getTime() === this.startDate.getTime(); }
-  isEndDate(day) { return this.endDate && day.getTime() === this.endDate.getTime(); }
-  isBetween(day) { return this.startDate && this.endDate && day > this.startDate && day < this.endDate; }
-  isCurrentMonth(day) { return day.getMonth() === this.currentDate.getMonth(); }
+  cssClassesFor(date) {
+    if (this.isStartAndEnd(date)) return this.cssClasses.onlySelectedDay;
+    else if (this.isStartDate(date)) return this.cssClasses.selectedStartDay;
+    else if (this.isEndDate(date)) return this.cssClasses.selectedEndDay;
+    else if (this.isBetween(date)) return this.cssClasses.selectedDay;
+    else if (this.isCurrentMonth(date)) return this.cssClasses.currentMonthDay;
+    else return this.cssClasses.otherMonthDay;
+  }
+
+  isStartAndEnd(date) { return this.startDateEqualsEndDate() && date.getTime() === this.startDate.getTime(); }
+  isStartDate(date) { return this.startDate && date.getTime() === this.startDate.getTime(); }
+  isEndDate(date) { return this.endDate && date.getTime() === this.endDate.getTime(); }
+  isBetween(date) { return this.startDate && this.endDate && date > this.startDate && date < this.endDate; }
+  isCurrentMonth(date) { return date.getMonth() === this.currentDate.getMonth(); }
 
   selectDate(event) {
     event.stopPropagation();
@@ -111,18 +118,44 @@ export default class extends Controller {
         this.endDate = selectedDate;
       }
     }
-    this.updateInput();
+    this.updateInputValueAndButtonText();
     this.renderCalendar();
   }
 
-  updateInput() {
-    if (this.startDateEqualsEndDate()) this.inputTarget.value = this.readableDateFrom(this.startDate); 
-    else if (this.startDate && this.endDate) this.inputTarget.value = `${this.readableDateFrom(this.startDate)} -> ${this.readableDateFrom(this.endDate)}`; 
-    else if (this.startDate) this.inputTarget.value = `${this.readableDateFrom(this.startDate)} ->`; 
-    else this.inputTarget.value = ''; 
+  updateInputValueAndButtonText() {
+    let inputValue;
+    let buttonText;
+
+    if (this.startDateEqualsEndDate()) {
+      inputValue = this.parsableDateFrom(this.startDate);
+      buttonText = this.readableDateFrom(this.startDate);
+    }
+    else if (this.startDate && this.endDate) {
+      const parsableStart = this.parsableDateFrom(this.startDate);
+      const parsableEnd = this.parsableDateFrom(this.endDate);
+      const readableStart = this.readableDateFrom(this.startDate);
+      const readbleEnd = this.readableDateFrom(this.endDate);
+      inputValue = `${parsableStart}; ${parsableEnd}`;
+      buttonText = `${readableStart} ➞ ${readbleEnd}`;
+    }
+    else if (this.startDate) {
+      inputValue = `${this.parsableDateFrom(this.startDate)}`;
+      buttonText = `${this.readableDateFrom(this.startDate)} ➞`;
+    }
+    else {
+      inputValue = '';
+      buttonText = '';
+    }
+    this.inputTarget.value = inputValue;
+    this.buttonTarget.textContent = buttonText;
   }
 
-  startDateEqualsEndDate() { return this.startDate && this.endDate && this.startDate.getTime() === this.endDate.getTime() }
+  startDateEqualsEndDate() {
+    return (
+      this.startDate && this.endDate
+      && this.startDate.getTime() === this.endDate.getTime()
+    );
+  }
 
   readableDateFrom(date) {
     const opts = { weekday: "short", day: "numeric", month: "short" }
@@ -140,6 +173,7 @@ export default class extends Controller {
   }
 
   toggleHidden() {
+    this.mainContainerTarget.classList.toggle(this.cssClasses.bgcolor)
     this.datepickerContainerTarget.classList.toggle('hidden');
     this.renderCalendar();
   }
