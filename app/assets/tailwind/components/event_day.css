@@ -1,31 +1,49 @@
-@layer components {
-  .event-day {
-    @apply overflow-hidden
-    @max-3xl:rounded-none
-    @3xl:rounded-lg;
+@utility event-day-sm {
+  @layer components {
+    @apply !rounded-none;
 
     .day-separator {
-      @apply py-1.5 mb-1 bg-fgcolor
-      @3xl:flex pl-14;
+      @apply !block !pl-0;
 
       h3 {
-        @apply text-bgcolor text-lg font-bold
-        @max-3xl:text-center
-        @3xl:flex-[1_0_44.5%];
+        @apply text-center;
       }
     }
 
     .md-icons-container {
-      @apply @max-3xl:hidden
-      @3xl:flex @3xl:items-center @3xl:flex-[0_1_55.5%];
+      @apply !hidden;
+    }
+  }
+}
+
+@layer components {
+  .event-day {
+    @apply overflow-hidden
+    max-md:event-day-sm
+    @max-3xl:event-day-sm
+    rounded-lg;
+
+    .day-separator {
+      @apply flex
+      mb-1 pl-14 py-1.5
+      bg-fgcolor;
+
+      h3 {
+        @apply flex-[1_0_44.5%]
+        text-bgcolor text-lg font-bold;
+      }
+    }
+
+    .md-icons-container {
+      @apply flex items-center flex-[0_1_55.5%];
+
       svg {
         @apply h-5 fill-bgcolor;
       }
     }
 
     .events-list {
-      @apply flex flex-col gap-4
-      @3xl:gap-1;
+      @apply flex flex-col gap-4;
     }
   }
 }
