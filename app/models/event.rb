@@ -4,6 +4,10 @@ class Event < ApplicationRecord
   validates :name, presence: true
   validates :date, presence: true
 
+  def verified? = verified
+
+  def unverified? = !verified
+
   class << self
     def all_upcoming = upcoming_events
 

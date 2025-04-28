@@ -16,7 +16,7 @@
 
       ul.events-list
         - events.each do |event|
-          li class=(event.verified ? "odd:bg-card-bg-odd even:bg-card-bg-even" : "bg-baro-yellow-faded cursor-pointer")
+          li
             = render event
 
 - if @next_week_page
