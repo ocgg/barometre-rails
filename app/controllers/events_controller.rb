@@ -36,7 +36,8 @@ class EventsController < ApplicationController
   private
 
   def set_events
-    @events = authorize policy_scope(Event)
+    @pagy, @events = pagy(policy_scope(Event), limit: 5)
+    authorize @events
     set_events_days
   end
 
@@ -45,6 +46,5 @@ class EventsController < ApplicationController
       date = event.date
       Date.new(date.year, date.month, date.day)
     end
-    @pagy = pagy(@events_days)
   end
 end
