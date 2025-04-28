@@ -1,21 +1,11 @@
 @layer components {
-  .event-card-sm {
-    @apply flex flex-col
+  .event-card {
+    @apply flex
     text-fgcolor font-source;
 
-    .md-hour {
-      display: none;
-    }
-
     .event-card-main {
-      @apply flex flex-col gap-1
-      px-2 pt-3 pb-6
+      @apply flex gap-1
       overflow-hidden;
-    }
-
-    .sm-hour {
-      @apply flex items-center justify-between
-      text-fgcolor-faded;
     }
 
     .name-desc-ctn {
@@ -36,7 +26,7 @@
     }
 
     .venue-name-address-ctn {
-      @apply flex items-center gap-1 overflow-hidden;
+      @apply overflow-hidden;
     }
 
     .venue-name {
@@ -44,73 +34,95 @@
       text-ellipsis overflow-hidden whitespace-nowrap;
     }
 
-    .md-venue-address {
-      display: none;
-    }
-
     .venue-city {
-      @apply flex-[0_1_30%]
-      not-italic font-bold text-right;
+      @apply not-italic font-bold;
     }
 
-    .md-tarif {
-      display: none;
-    }
-  }
-}
+    @container (width < 48rem) {
+      @apply flex-col;
 
-@utility event-card-md {
-  @layer components {
-    @apply flex-row;
+      .md-hour {
+        display: none;
+      }
 
-    .md-hour {
-      @apply flex items-center justify-center
-      w-12
-      font-quicksand font-bold
-      bg-fgcolor text-bgcolor;
-    }
+      .event-card-main {
+        @apply flex-col
+      px-2 pt-3 pb-6;
+      }
 
-    .event-card-main {
-      @apply flex-row flex-[2_0] justify-between
-      px-1 py-3;
-    }
+      .sm-hour {
+        @apply flex items-center justify-between
+        text-fgcolor-faded;
+      }
 
-    .sm-hour {
-      display: none;
-    }
+      .venue-name-address-ctn {
+        @apply flex items-center gap-1;
+      }
 
-    address {
-      @apply flex-[0_1_45%];
-    }
+      .md-venue-address {
+        display: none;
+      }
 
-    .venue-name-address-ctn {
-      display: block;
-    }
+      .venue-city {
+        @apply flex-[0_1_30%] text-right;
+      }
 
-    .venue-name {
-      @apply no-underline;
+      .md-tarif {
+        display: none;
+      }
     }
 
-    .md-venue-address {
-      @apply block
-      text-fgcolor-faded underline decoration-dotted
-      text-ellipsis overflow-hidden whitespace-nowrap;
-    }
+    @container (width >= 48rem) {
+      @apply flex-row;
 
-    .venue-city {
-      @apply flex-[0_1_40%]
-      text-left;
-    }
+      .md-hour {
+        @apply flex items-center justify-center
+        w-12
+        font-quicksand font-bold
+        bg-fgcolor text-bgcolor;
+      }
 
-    .md-tarif {
-      @apply flex-[0_1_10%]
-      flex justify-center items-center
-      overflow-hidden
-      p-1;
+      .event-card-main {
+        @apply flex-row flex-[2_0] justify-between
+        px-1 py-3;
+      }
 
-      p {
-        @apply italic text-fgcolor-faded
+      .sm-hour {
+        display: none;
+      }
+
+      address {
+        @apply flex-[0_1_45%];
+      }
+
+      .venue-name-address-ctn {
+        display: block;
+      }
+
+      .venue-name {
+        @apply no-underline;
+      }
+
+      .md-venue-address {
+        @apply text-fgcolor-faded underline decoration-dotted
         text-ellipsis overflow-hidden whitespace-nowrap;
+      }
+
+      .venue-city {
+        @apply flex-[0_1_40%]
+      text-left;
+      }
+
+      .md-tarif {
+        @apply flex-[0_1_10%]
+        flex justify-center items-center
+        overflow-hidden
+        p-1;
+
+        p {
+          @apply italic text-fgcolor-faded
+          text-ellipsis overflow-hidden whitespace-nowrap;
+        }
       }
     }
   }
