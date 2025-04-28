@@ -116,6 +116,8 @@ GEM
     erubi (1.13.1)
     et-orbi (1.2.11)
       tzinfo
+    faker (3.5.1)
+      i18n (>= 1.8.11, < 2)
     ffi (1.17.1-aarch64-linux-gnu)
     ffi (1.17.1-aarch64-linux-musl)
     ffi (1.17.1-arm-linux-gnu)
@@ -404,6 +406,7 @@ DEPENDENCIES
   brakeman
   capybara
   debug
+  faker
   geocoder
   hotwire-livereload (~> 2.0)
   html2slim!

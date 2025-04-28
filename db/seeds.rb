@@ -1,3 +1,5 @@
+require "faker"
+
 puts "Destroying all events..."
 
 Event.destroy_all
@@ -62,67 +64,22 @@ end
 
 puts "Creating events..."
 
-[
-  {
-    name: "Dans 2h !!",
-    verified: true,
-    date: Time.now + 2.hours,
-    tarif: "Gratuit"
-  },
-  {
-    name: "X Ce soir aussi",
-    verified: false,
-    date: Time.now + 5.hours,
-    tarif: "-"
+Faker::Config.locale = "fr"
 
-  },
-  {
-    name: "Quelque chose demain",
-    verified: true,
-    date: Time.now + 1.day,
-    tarif: "PAF 5€"
-  },
-  {
-    name: "X Demain",
-    verified: false,
-    date: Time.now + 1.day,
-    tarif: "10€"
-  },
-  {
-    name: "Ça se passe la semaine prochaine",
-    verified: true,
-    date: Time.now + 1.week,
-    tarif: "Prix libre"
-  },
-  {
-    name: "X Semaine prochaine",
-    verified: false,
-    date: Time.now + 8.days,
-    tarif: "Prix"
-  },
-  {
-    name: "Un événement dans un mois",
-    verified: true,
-    date: Time.now + 1.month,
-    tarif: "Prix"
-  },
-  {
-    name: "Dans 3 mois bon sang de bonsoir de brique en bois",
-    verified: true,
-    date: Time.now + 3.months,
-    tarif: "Prix"
-  },
-  {
-    name: "Ça c'était hier",
-    verified: true,
-    date: Time.now - 1.day,
-    tarif: "Prix"
+tarifs = ["Gratuit", "Prix libre", "5€", "10€", "chapeau", nil]
+
+100.times do
+  attrs = {
+    name: Faker::Music::RockBand.name,
+    verified: rand > 0.2,
+    date: Time.now + rand(0..2000).hours,
+    tarif: tarifs.sample
   }
-].each do |attrs|
+
   Event.create!(
     **attrs,
-    venue: Venue.first(5).sample,
-    description: "TODO: description de longueur aléatoire"
+    venue: Venue.all.sample,
+    description: Faker::Lorem.sentence(word_count: rand(3..10))
   )
 end
 

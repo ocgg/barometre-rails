@@ -58,6 +58,8 @@ group :development do
   gem "hotwire-livereload", "~> 2.0"
 
   gem "html2slim", git: "https://github.com/slim-template/html2slim.git"
+
+  gem "faker"
 end
 
 group :test do
