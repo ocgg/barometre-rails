@@ -19,6 +19,6 @@
           li class=(event.verified ? "odd:bg-card-bg-odd even:bg-card-bg-even" : "bg-baro-yellow-faded cursor-pointer")
             = render event
 
-- if @pagy.next.present?
+- if @next_week_page
   = turbo_stream.replace :more_results do
-    = turbo_frame_tag :more_results, src: events_path(page: @pagy.next, format: :turbo_stream), loading: :lazy
+    = turbo_frame_tag :more_results, src: events_path(week_page: @next_week_page, format: :turbo_stream), loading: :lazy
