@@ -13,6 +13,8 @@ class Event < ApplicationRecord
 
     private
 
-    def upcoming_events = where("events.date >= ?", Date.today).order(:date)
+    def upcoming_events
+      includes(:venue).where("events.date >= ?", Date.today).order(:date)
+    end
   end
 end
