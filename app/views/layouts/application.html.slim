@@ -19,7 +19,7 @@ html
   body data-controller="navbar" data-action="click->navbar#handleFocusOut"
     /Banner
     div.bg-fgcolor
-      header class="main-container flex justify-between items-center"
+      header.flex.justify-between.items-center.max-w-5xl.m-auto
         h1 class="py-4 text-baro-yellow text-4xl w-full text-center md:w-fit md:text-left"
           | BAROMÈTRE
         = render "shared/navbar"
