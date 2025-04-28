@@ -1,6 +1,7 @@
 class EventsController < ApplicationController
   allow_unauthenticated_access
   before_action :set_events, only: %i[index map calendar]
+  before_action :set_event, only: %i[verify destroy]
 
   include Pagy::Backend
   include PagyCalendar
@@ -30,15 +31,24 @@ class EventsController < ApplicationController
   #
   # def update
   # end
-  #
-  # def destroy
-  # end
+
+  def verify
+    @event.update(verified: true)
+    render @event
+  end
+
+  def destroy
+    message = "Supprimé: #{@event.name} (#{@event.venue.name}, #{@event.venue.city})"
+    replacing_frame = "<p class=\"text-fgcolor-faded text-center text-sm\">#{message}</p>"
+    @event.destroy
+    render turbo_stream: [turbo_stream.replace(@event, replacing_frame)]
+  end
 
   private
 
   def set_events
     events = authorize policy_scope(Event)
-    @calendar, @pagy, @events = pagy_calendar(events, week: {}, pagy: {limit: false})
+    @calendar, @pagy, @events = pagy_calendar(events, week: {}, pagy: {limit: 100})
     @next_week_page = @calendar[:week].next
     set_events_days
   end
@@ -48,5 +58,9 @@ class EventsController < ApplicationController
       date = event.date
       Date.new(date.year, date.month, date.day)
     end
+  end
+
+  def set_event
+    @event = authorize Event.find(params[:id])
   end
 end

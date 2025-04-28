@@ -1,27 +1,35 @@
-article class="event-card"
+= turbo_frame_tag event
+  article class="event-card" class=(event.verified ? "odd:bg-card-bg" : "bg-baro-yellow-faded !text-fgcolor-faded")
 
-  div.md-hour
-    div = format_hour(event.date)
+    div.md-hour
+      div = format_hour(event.date)
 
-  div.event-card-main
-    div.sm-hour
-      p.text-lg = format_hour(event.date)
-      p.italic = event.tarif
+    div.event-card-main
+      div.sm-hour
+        p.text-lg = format_hour(event.date)
+        p.italic = event.tarif
 
-    div.name-desc-ctn
-      h3.name = event.name
-      p.description = event.description
+      div.name-desc-ctn
+        div.flex.justify-between
+          h3.name = event.name
+          - if policy(event).edit?
+            div.flex.items-center.justify-between.gap-2
+              - if event.unverified?
+                = link_to verify_event_path(event), title: "✅ Valider l'événement", data: {turbo_method: :patch}
+                  svg.h-5.fill-fgcolor-faded.hover:fill-baro-yellow viewBox="0 0 448 512": path d="M64 32C28.7 32 0 60.7 0 96L0 416c0 35.3 28.7 64 64 64l320 0c35.3 0 64-28.7 64-64l0-320c0-35.3-28.7-64-64-64L64 32zM337 209L209 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L303 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"
+              = link_to event_path(event), title: "❌ Supprimer l'événement", data: {turbo_method: :delete, turbo_confirm: "Supprimer cet événement ?"}
+                svg.h-4.fill-fgcolor-faded.hover:fill-baro-yellow viewBox="0 0 448 512": path d="M135.2 17.7L128 32 32 32C14.3 32 0 46.3 0 64S14.3 96 32 96l384 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-96 0-7.2-14.3C307.4 6.8 296.3 0 284.2 0L163.8 0c-12.1 0-23.2 6.8-28.6 17.7zM416 128L32 128 53.2 467c1.6 25.3 22.6 45 47.9 45l245.8 0c25.3 0 46.3-19.7 47.9-45L416 128z"
+        p.description = event.description
 
-    address
-      div.venue-name-address-ctn
-        div.md:hidden
-          /Location label
-          svg.h-4.fill-fgcolor viewBox="0 0 384 512"
-            path d="M215.7 499.2C267 435 384 279.4 384 192C384 86 298 0 192 0S0 86 0 192c0 87.4 117 243 168.3 307.2c12.3 15.3 35.1 15.3 47.4 0zM192 128a64 64 0 1 1 0 128 64 64 0 1 1 0-128z"
-        p.venue-name = event.venue.name
-        p.md-venue-address = event.venue.address
+      address
+        div.venue-name-address-ctn
+          div.md:hidden
+            /Location label
+            svg.h-4.fill-fgcolor viewBox="0 0 384 512": path d="M215.7 499.2C267 435 384 279.4 384 192C384 86 298 0 192 0S0 86 0 192c0 87.4 117 243 168.3 307.2c12.3 15.3 35.1 15.3 47.4 0zM192 128a64 64 0 1 1 0 128 64 64 0 1 1 0-128z"
+          p.venue-name = event.venue.name
+          p.md-venue-address = event.venue.address
 
-      p.venue-city = event.venue.city
+        p.venue-city = event.venue.city
 
-    div.md-tarif
-      p = event.tarif
+      div.md-tarif
+        p = event.tarif
