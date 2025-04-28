@@ -2,6 +2,8 @@ class EventsController < ApplicationController
   allow_unauthenticated_access
   before_action :set_events, only: %i[index map calendar]
 
+  include Pagy::Backend
+
   def index
   end
 
@@ -43,5 +45,6 @@ class EventsController < ApplicationController
       date = event.date
       Date.new(date.year, date.month, date.day)
     end
+    @pagy = pagy(@events_days)
   end
 end
