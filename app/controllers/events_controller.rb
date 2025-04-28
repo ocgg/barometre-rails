@@ -2,6 +2,9 @@ class EventsController < ApplicationController
   allow_unauthenticated_access
   before_action :set_events, only: %i[index map calendar]
 
+  include Pagy::Backend
+  include PagyCalendar
+
   def index
   end
 
@@ -34,7 +37,9 @@ class EventsController < ApplicationController
   private
 
   def set_events
-    @events = authorize policy_scope(Event)
+    events = authorize policy_scope(Event)
+    @calendar, @pagy, @events = pagy_calendar(events, week: {}, pagy: {limit: false})
+    @next_week_page = @calendar[:week].next
     set_events_days
   end
 

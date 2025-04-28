@@ -18,10 +18,10 @@ article class="event-card"
           /Location label
           svg.h-4.fill-fgcolor viewBox="0 0 384 512"
             path d="M215.7 499.2C267 435 384 279.4 384 192C384 86 298 0 192 0S0 86 0 192c0 87.4 117 243 168.3 307.2c12.3 15.3 35.1 15.3 47.4 0zM192 128a64 64 0 1 1 0 128 64 64 0 1 1 0-128z"
-        p.venue-name = venue.name
-        p.md-venue-address = venue.address
+        p.venue-name = event.venue.name
+        p.md-venue-address = event.venue.address
 
-      p.venue-city = venue.city
+      p.venue-city = event.venue.city
 
     div.md-tarif
       p = event.tarif

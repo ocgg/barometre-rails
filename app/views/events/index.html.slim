@@ -1,6 +1,8 @@
+
 = turbo_frame_tag "events"
 
-  section class="flex flex-col gap-27 md:gap-20"
+  section#events_days_container class="flex flex-col gap-27 md:gap-20"
+
     - @events_days.each do |date, events|
 
       section.event-day
@@ -18,4 +20,7 @@
         ul.events-list
           - events.each do |event|
             li class=(event.verified ? "odd:bg-card-bg-odd even:bg-card-bg-even" : "bg-baro-yellow-faded cursor-pointer")
-              = render "events/event_card", event:, venue: event.venue
+              = render event
+
+- if @next_week_page
+  = turbo_frame_tag :more_results, src: events_path(week_page: @next_week_page, format: :turbo_stream), loading: :lazy
