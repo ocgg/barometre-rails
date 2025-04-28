@@ -23,26 +23,18 @@ export default class extends Controller {
 
     this.isVisible = false;
 
-    const colors = {
-      bgcolor: "card-bg",
-      primary: "fgcolor",
-      secondary: "bgcolor",
-      faded: "fgcolor-faded",
-      highlight: "baro-yellow",
-    };
-    const dayEltClasses = `hover:bg-${colors.highlight} flex h-[46px] w-[46px] items-center justify-center rounded-full mb-1 cursor-pointer`;
-
+    const dayElementCssClasses = `hover:bg-baro-yellow flex h-[46px] w-[46px] items-center justify-center rounded-full mb-1 cursor-pointer`;
     this.cssClasses = {
-      bgcolor: `bg-${colors.bgcolor}`,
-      currentMonthDay: dayEltClasses,
-      otherMonthDay: `${dayEltClasses} text-${colors.faded}`,
-      selectedDay: `${dayEltClasses} bg-${colors.highlight} rounded-none`,
-      selectedStartDay: `${dayEltClasses} bg-${colors.highlight} rounded-r-none`,
-      selectedEndDay: `${dayEltClasses} bg-${colors.highlight} rounded-l-none`,
-      onlySelectedDay: `${dayEltClasses} bg-${colors.highlight} rounded-full`
+      bgColor: `bg-card-bg`,
+      currentMonthDay: dayElementCssClasses,
+      otherMonthDay: `${dayElementCssClasses} text-fgcolor-faded`,
+      selectedDay: `${dayElementCssClasses} bg-baro-yellow rounded-none`,
+      selectedStartDay: `${dayElementCssClasses} bg-baro-yellow rounded-r-none`,
+      selectedEndDay: `${dayElementCssClasses} bg-baro-yellow rounded-l-none`,
+      onlySelectedDay: `${dayElementCssClasses} bg-baro-yellow rounded-full`
     }
 
-    this.updateShadowSize();
+    this.updateShadowElementSize();
 
     // Close datepicker when clicking outside
     //document.addEventListener('click', function (event) {
@@ -52,7 +44,7 @@ export default class extends Controller {
     //});
   }
 
-  updateShadowSize() {
+  updateShadowElementSize() {
     const size = this.mainContainerTarget.getBoundingClientRect();
     this.shadowEltTarget.style.width = `${Math.floor(size.width)}px`
     this.shadowEltTarget.style.height = `${Math.floor(size.height)}px`
@@ -185,10 +177,10 @@ export default class extends Controller {
 
   toggleHidden() {
     this.isVisible = !this.isVisible;
-    this.mainContainerTarget.classList.toggle(this.cssClasses.bgcolor);
+    this.mainContainerTarget.classList.toggle(this.cssClasses.bgColor);
     this.datepickerContainerTarget.classList.toggle('hidden');
 
-    if (!this.isVisible) this.updateShadowSize();
+    if (!this.isVisible) this.updateShadowElementSize();
 
     this.renderCalendar();
   }
