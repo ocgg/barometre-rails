@@ -29,8 +29,8 @@ export default class extends Controller {
     this.currentDate = new Date();
     this.currentDate.setHours(0, 0, 0, 0);
 
-    this.startDate = this.dateFromInputValue(this.startDateInputTarget);
-    this.endDate = this.dateFromInputValue(this.endDateInputTarget);
+    this.startDate = this.startDateInputTarget.value ? this.dateFromInputValue(this.startDateInputTarget) : null;
+    this.endDate = this.endDateInputTarget.value ? this.dateFromInputValue(this.endDateInputTarget) : null;
 
     this.updateInputValueAndButtonText();
     this.updateShadowElementSize();
@@ -164,7 +164,7 @@ export default class extends Controller {
     }
     this.startDateInputTarget.value = startDateInputValue;
     this.endDateInputTarget.value = endDateInputValue;
-    this.buttonTarget.textContent = buttonText;
+    if (buttonText) this.buttonTarget.textContent = buttonText;
   }
 
   startDateEqualsEndDate() {

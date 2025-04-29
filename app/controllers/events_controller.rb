@@ -1,5 +1,6 @@
 class EventsController < ApplicationController
   allow_unauthenticated_access
+  before_action :set_params, only: %i[index map calendar]
   before_action :set_events, only: %i[index map calendar]
   before_action :set_event, only: %i[verify destroy]
 
@@ -7,9 +8,6 @@ class EventsController < ApplicationController
   include PagyCalendar
 
   def index
-    @start = Time.strptime(params[:start], "%m-%d-%Y") if params[:start].present?
-    @end = Time.strptime(params[:end], "%m-%d-%Y") if params[:end].present?
-    @q = params[:q] if params[:q].present?
   end
 
   def unverified
@@ -48,10 +46,29 @@ class EventsController < ApplicationController
 
   private
 
+  def set_params
+    if params[:start].present?
+      @start = Date.strptime(params[:start], "%m-%d-%Y")
+      @end = params[:end].present? ? Date.strptime(params[:end], "%m-%d-%Y") : @start
+      @end += 1.day
+    end
+    if params[:q].present?
+      @q = params[:q]
+    end
+  end
+
   def set_events
-    events = authorize policy_scope(Event)
-    @calendar, @pagy, @events = pagy_calendar(events, month: {}, pagy: {limit: 100})
-    @next_month_page = @calendar[:month].next
+    events = @start ? Event.between(@start, @end) : Event
+    events = events.search(@q) if @q
+
+    if events.any?
+      @calendar, @pagy, @events = pagy_calendar(policy_scope(events), month: {}, pagy: {limit: 100})
+      pp @calendar
+      @next_month_page = @calendar[:month].next
+      authorize @events
+    else
+      @events = events
+    end
     set_events_days
   end
 
