@@ -40,7 +40,7 @@ class EventsController < ApplicationController
     message = "Supprimé: #{@event.name} (#{@event.venue.name}, #{@event.venue.city})"
     replacing_frame = "<p class=\"text-fgcolor-faded text-center text-sm\">#{message}</p>"
     @event.destroy
-    render turbo_stream: [turbo_stream.replace(@event, replacing_frame)]
+    render turbo_stream: [ turbo_stream.replace(@event, replacing_frame) ]
   end
 
   private
@@ -52,9 +52,7 @@ class EventsController < ApplicationController
       @end = params[:end].present? ? Date.strptime(params[:end], "%m-%d-%Y") : @start
       @end += 1.day
     end
-    if params[:q].present?
-      @q = params[:q]
-    end
+    @q = params[:q] if params[:q].present?
   end
 
   def set_events
@@ -62,8 +60,7 @@ class EventsController < ApplicationController
     events = events.search(@q) if @q
     events = authorize policy_scope(events)
 
-    @pagy, @events = pagy(events, limit: 20, count: events.count)
-    pp @pagy
+    @pagy, @events = pagy(events, limit: 50, count: events.count)
     set_events_days
   end
 
