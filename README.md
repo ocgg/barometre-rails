@@ -11,39 +11,50 @@
 
 ## TODO
 
-- tests
-- seeds
+- **tests**
 
 - maquette:
   - sous-titre / description
 
 - frontend global:
   - thème sombre
-  - stimulus handle_focus_out pour le dropdown et les éléments de recherche gérés en JS
-  - searchbar / localisation
-  - gérer l'affichage de la searchbar façon v-cloak
-  - gérer les classes tailwind seulement générées en JS
+  - modale flashes
 
 - backend global:
-  - requêtes n+1
-  - search
   - job pour nettoyer les events passés
   - revoir gestion user
 
 - events#index:
-  - validation par admin
-  - pagination des events
   - event#edit: turbo frame
+  - afficher l'année si > à l'année en cours
+  - gérer les containers de jours dupliqués lors du scroll
+  - gérer les permissions utilisateur
 
 - events#new:
-  - turbo / gérer la création de venues
+  - gérer la création de venues
   - option pour supprimer le lieu de la DB après la date de l'événement (par ex. en cas de concert chez l'habitant)
   - gestion des events récurrents
 
-- Map: leaflet / geocoding
-  - checker comment se comportent les turbo frames par rapport aux media queries et la taille du container
+- Map: leaflet
 
 - API venues & events
+
+**En cours:**
+
+- searchbar:
+  - glitch: gérer l'affichage de la searchbar façon v-cloak
+  - insensible à la casse & accents (e = é = è...)
+  - envoyer le formulaire au focus out (dates & location)
+  - boutons pour clear input, lien pour enlever tous les filtres
+  - le contenu des champs doit se conserver d'une page à l'autre (cookie ?)
+
+- datefilter (flatpickr from scratch):
+  - refacto façon librairie externe
+  - désactiver les dates passées (options pour "n'importe quelles dates")
+  - prévisualiser la range au hover
+  - couleurs bouton actif/inactif (côté baro)
+  - couleurs highlight (côté lib)
+  - texte du btn quand une seule date est choisie
 
 - beaucoup d'autres choses...
 
