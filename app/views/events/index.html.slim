@@ -22,5 +22,5 @@
             li
               = render event
 
-- if @next_week_page
-  = turbo_frame_tag :more_results, src: events_path(week_page: @next_week_page, format: :turbo_stream), loading: :lazy
+- if @next_month_page
+  = turbo_frame_tag :more_results, src: events_path(month_page: @next_month_page, format: :turbo_stream), loading: :lazy
