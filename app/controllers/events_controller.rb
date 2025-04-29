@@ -5,7 +5,6 @@ class EventsController < ApplicationController
   before_action :set_event, only: %i[verify destroy]
 
   include Pagy::Backend
-  include PagyCalendar
 
   def index
   end
@@ -60,15 +59,9 @@ class EventsController < ApplicationController
   def set_events
     events = @start ? Event.between(@start, @end) : Event
     events = events.search(@q) if @q
+    events = authorize policy_scope(events)
 
-    if events.any?
-      @calendar, @pagy, @events = pagy_calendar(policy_scope(events), month: {}, pagy: {limit: 100})
-      pp @calendar
-      @next_month_page = @calendar[:month].next
-      authorize @events
-    else
-      @events = events
-    end
+    @pagy, @events = pagy(events, limit: 20)
     set_events_days
   end
 
