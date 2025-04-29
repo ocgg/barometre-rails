@@ -5,7 +5,8 @@ export default class extends Controller {
   static targets = [
     "shadowElt",
     "mainContainer",
-    "input",
+    "startDateInput",
+    "endDateInput",
     "button",
     "datepickerContainer",
     "daysContainer",
@@ -14,13 +15,6 @@ export default class extends Controller {
   ]
 
   connect() {
-    this.inputTarget.value = '';
-    this.currentDate = new Date();
-    this.currentDate.setHours(0, 0, 0, 0);
-
-    this.startDate = null;
-    this.endDate = null;
-
     const dayElementCssClasses = `hover:bg-baro-yellow flex h-[46px] w-[46px] items-center justify-center rounded-full mb-1 cursor-pointer`;
     this.cssClasses = {
       bgColor: `bg-card-bg`,
@@ -32,7 +26,18 @@ export default class extends Controller {
       onlySelectedDay: `${dayElementCssClasses} bg-baro-yellow rounded-full`
     }
 
+    this.currentDate = new Date();
+    this.currentDate.setHours(0, 0, 0, 0);
+
+    this.startDate = this.dateFromInputValue(this.startDateInputTarget);
+    this.endDate = this.dateFromInputValue(this.endDateInputTarget);
+
+    this.updateInputValueAndButtonText();
     this.updateShadowElementSize();
+  }
+  
+  dateFromInputValue(input) {
+    return !input.value ? null : new Date(input.value)
   }
 
   get isVisible() {
@@ -131,30 +136,34 @@ export default class extends Controller {
   }
 
   updateInputValueAndButtonText() {
-    let inputValue;
+    let startDateInputValue;
+    let endDateInputValue;
     let buttonText;
 
     if (this.startDateEqualsEndDate()) {
-      inputValue = this.parsableDateFrom(this.startDate);
+      startDateInputValue = this.parsableDateFrom(this.startDate);
+      endDateInputValue = "";
       buttonText = this.readableDateFrom(this.startDate);
     }
     else if (this.startDate && this.endDate) {
-      const parsableStart = this.parsableDateFrom(this.startDate);
-      const parsableEnd = this.parsableDateFrom(this.endDate);
       const readableStart = this.readableDateFrom(this.startDate);
       const readbleEnd = this.readableDateFrom(this.endDate);
-      inputValue = `${parsableStart}; ${parsableEnd}`;
+      startDateInputValue = this.parsableDateFrom(this.startDate);
+      endDateInputValue = this.parsableDateFrom(this.endDate);
       buttonText = `${readableStart} ➞ ${readbleEnd}`;
     }
     else if (this.startDate) {
-      inputValue = this.parsableDateFrom(this.startDate);
+      startDateInputValue = this.parsableDateFrom(this.startDate);
+      endDateInputValue = "";
       buttonText = `${this.readableDateFrom(this.startDate)} ➞`;
     }
     else {
-      inputValue = '';
+      startDateInputValue = '';
+      endDateInputValue = '';
       buttonText = '';
     }
-    this.inputTarget.value = inputValue;
+    this.startDateInputTarget.value = startDateInputValue;
+    this.endDateInputTarget.value = endDateInputValue;
     this.buttonTarget.textContent = buttonText;
   }
 

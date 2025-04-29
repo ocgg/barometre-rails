@@ -7,6 +7,9 @@ class EventsController < ApplicationController
   include PagyCalendar
 
   def index
+    @start = Time.strptime(params[:start], "%m-%d-%Y") if params[:start].present?
+    @end = Time.strptime(params[:end], "%m-%d-%Y") if params[:end].present?
+    @q = params[:q] if params[:q].present?
   end
 
   def unverified
@@ -28,7 +31,6 @@ class EventsController < ApplicationController
   #
   # def edit
   # end
-  #
   # def update
   # end
 
