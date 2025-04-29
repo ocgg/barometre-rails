@@ -23,7 +23,7 @@ section data-controller="datefilter"
 
     /CALENDAR CONTAINER
     div[
-      class="size-max min-w-fit hidden flex-col p-2"
+      class="size-max min-w-fit hidden flex-col p-2 cursor-default"
       data-datefilter-target="datepickerContainer"
     ]
       div class="flex items-center justify-between"
@@ -33,8 +33,9 @@ section data-controller="datefilter"
           svg class="fill-current h-6 hover:fill-baro-yellow" viewBox="0 0 16 16": path d="M10.825 14.325C10.675 14.325 10.525 14.275 10.425 14.15L4.77501 8.40002C4.55001 8.17502 4.55001 7.82502 4.77501 7.60002L10.425 1.85002C10.65 1.62502 11 1.62502 11.225 1.85002C11.45 2.07502 11.45 2.42502 11.225 2.65002L5.97501 8.00003L11.25 13.35C11.475 13.575 11.475 13.925 11.25 14.15C11.1 14.25 10.975 14.325 10.825 14.325Z"
 
         p[
-          class="text-base font-medium text-dark"
+          class="text-base font-medium text-dark hover:text-baro-yellow cursor-pointer"
           data-datefilter-target="currentMonth"
+          data-action="click->datefilter#selectMonth"
         ]
 
         span[
