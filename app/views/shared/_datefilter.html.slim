@@ -12,6 +12,8 @@ section data-controller="datefilter"
       data-datefilter-target="toggleBtn"
     ]
       input.hidden data-datefilter-target="input"
+      = form.hidden_field :start, data: {datefilter_target: "startDateInput"}, value: params[:start]
+      = form.hidden_field :end, data: {datefilter_target: "endDateInput"}, value: params[:end]
       svg class="fill-fgcolor h-5" viewBox="0 0 448 512": path d="M128 0c17.7 0 32 14.3 32 32l0 32 128 0 0-32c0-17.7 14.3-32 32-32s32 14.3 32 32l0 32 48 0c26.5 0 48 21.5 48 48l0 48L0 160l0-48C0 85.5 21.5 64 48 64l48 0 0-32c0-17.7 14.3-32 32-32zM0 192l448 0 0 272c0 26.5-21.5 48-48 48L48 512c-26.5 0-48-21.5-48-48L0 192zm64 80l0 32c0 8.8 7.2 16 16 16l32 0c8.8 0 16-7.2 16-16l0-32c0-8.8-7.2-16-16-16l-32 0c-8.8 0-16 7.2-16 16zm128 0l0 32c0 8.8 7.2 16 16 16l32 0c8.8 0 16-7.2 16-16l0-32c0-8.8-7.2-16-16-16l-32 0c-8.8 0-16 7.2-16 16zm144-16c-8.8 0-16 7.2-16 16l0 32c0 8.8 7.2 16 16 16l32 0c8.8 0 16-7.2 16-16l0-32c0-8.8-7.2-16-16-16l-32 0zM64 400l0 32c0 8.8 7.2 16 16 16l32 0c8.8 0 16-7.2 16-16l0-32c0-8.8-7.2-16-16-16l-32 0c-8.8 0-16 7.2-16 16zm144-16c-8.8 0-16 7.2-16 16l0 32c0 8.8 7.2 16 16 16l32 0c8.8 0 16-7.2 16-16l0-32c0-8.8-7.2-16-16-16l-32 0zm112 16l0 32c0 8.8 7.2 16 16 16l32 0c8.8 0 16-7.2 16-16l0-32c0-8.8-7.2-16-16-16l-32 0c-8.8 0-16 7.2-16 16z"
       span[
         class="grow-1 hover:cursor-pointer text-lg"
@@ -21,7 +23,7 @@ section data-controller="datefilter"
 
     /CALENDAR CONTAINER
     div[
-      class="size-max min-w-fit hidden flex-col p-2"
+      class="size-max min-w-fit hidden flex-col p-2 cursor-default"
       data-datefilter-target="datepickerContainer"
     ]
       div class="flex items-center justify-between"
@@ -31,8 +33,9 @@ section data-controller="datefilter"
           svg class="fill-current h-6 hover:fill-baro-yellow" viewBox="0 0 16 16": path d="M10.825 14.325C10.675 14.325 10.525 14.275 10.425 14.15L4.77501 8.40002C4.55001 8.17502 4.55001 7.82502 4.77501 7.60002L10.425 1.85002C10.65 1.62502 11 1.62502 11.225 1.85002C11.45 2.07502 11.45 2.42502 11.225 2.65002L5.97501 8.00003L11.25 13.35C11.475 13.575 11.475 13.925 11.25 14.15C11.1 14.25 10.975 14.325 10.825 14.325Z"
 
         p[
-          class="text-base font-medium text-dark"
+          class="text-base font-medium text-dark hover:text-baro-yellow cursor-pointer"
           data-datefilter-target="currentMonth"
+          data-action="click->datefilter#selectMonth"
         ]
 
         span[

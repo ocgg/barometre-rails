@@ -1,10 +1,10 @@
 class EventsController < ApplicationController
   allow_unauthenticated_access
+  before_action :set_params, only: %i[index map calendar]
   before_action :set_events, only: %i[index map calendar]
   before_action :set_event, only: %i[verify destroy]
 
   include Pagy::Backend
-  include PagyCalendar
 
   def index
   end
@@ -28,7 +28,6 @@ class EventsController < ApplicationController
   #
   # def edit
   # end
-  #
   # def update
   # end
 
@@ -41,15 +40,27 @@ class EventsController < ApplicationController
     message = "Supprimé: #{@event.name} (#{@event.venue.name}, #{@event.venue.city})"
     replacing_frame = "<p class=\"text-fgcolor-faded text-center text-sm\">#{message}</p>"
     @event.destroy
-    render turbo_stream: [turbo_stream.replace(@event, replacing_frame)]
+    render turbo_stream: [ turbo_stream.replace(@event, replacing_frame) ]
   end
 
   private
 
+  def set_params
+    @params = request.query_parameters
+    if params[:start].present?
+      @start = Date.strptime(params[:start], "%m-%d-%Y")
+      @end = params[:end].present? ? Date.strptime(params[:end], "%m-%d-%Y") : @start
+      @end += 1.day
+    end
+    @q = params[:q] if params[:q].present?
+  end
+
   def set_events
-    events = authorize policy_scope(Event)
-    @calendar, @pagy, @events = pagy_calendar(events, month: {}, pagy: {limit: 100})
-    @next_month_page = @calendar[:month].next
+    events = @start ? Event.between(@start, @end) : Event
+    events = events.search(@q) if @q
+    events = authorize policy_scope(events)
+
+    @pagy, @events = pagy(events, limit: 50, count: events.count)
     set_events_days
   end
 

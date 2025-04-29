@@ -5,7 +5,8 @@ export default class extends Controller {
   static targets = [
     "shadowElt",
     "mainContainer",
-    "input",
+    "startDateInput",
+    "endDateInput",
     "button",
     "datepickerContainer",
     "daysContainer",
@@ -14,13 +15,6 @@ export default class extends Controller {
   ]
 
   connect() {
-    this.inputTarget.value = '';
-    this.currentDate = new Date();
-    this.currentDate.setHours(0, 0, 0, 0);
-
-    this.startDate = null;
-    this.endDate = null;
-
     const dayElementCssClasses = `hover:bg-baro-yellow flex h-[46px] w-[46px] items-center justify-center rounded-full mb-1 cursor-pointer`;
     this.cssClasses = {
       bgColor: `bg-card-bg`,
@@ -32,7 +26,18 @@ export default class extends Controller {
       onlySelectedDay: `${dayElementCssClasses} bg-baro-yellow rounded-full`
     }
 
+    this.currentDate = new Date();
+    this.currentDate.setHours(0, 0, 0, 0);
+
+    this.startDate = this.startDateInputTarget.value ? this.dateFromInputValue(this.startDateInputTarget) : null;
+    this.endDate = this.endDateInputTarget.value ? this.dateFromInputValue(this.endDateInputTarget) : null;
+
+    this.updateInputValueAndButtonText();
     this.updateShadowElementSize();
+  }
+
+  dateFromInputValue(input) {
+    return !input.value ? null : new Date(input.value)
   }
 
   get isVisible() {
@@ -70,16 +75,21 @@ export default class extends Controller {
   capitalize(string) { return string.charAt(0).toUpperCase() + string.slice(1); }
 
   renderDays() {
-    const firstMonthDate = new Date(this.currentDate)
-    firstMonthDate.setDate(0)
-    const firstWeekDayOfMonth = firstMonthDate.getDay()
-    const day = new Date(this.currentDate)
-    day.setDate(1 - firstWeekDayOfMonth)
+    const firstMonthDate = this.firstDayDateOfCurrentMonth();
+    const firstWeekDayOfMonth = firstMonthDate.getDay();
+    const day = new Date(this.currentDate);
+    day.setDate(1 - firstWeekDayOfMonth);
 
     for (let i = 1; i <= (7 * 6); i++) {
       this.daysContainerTarget.innerHTML += this.makeDayElementFrom(day);
-      day.setDate(day.getDate() + 1)
+      day.setDate(day.getDate() + 1);
     }
+  }
+
+  firstDayDateOfCurrentMonth() {
+    const first_day_date = new Date(this.currentDate)
+    first_day_date.setDate(0)
+    return first_day_date
   }
 
   makeDayElementFrom(date) {
@@ -116,46 +126,54 @@ export default class extends Controller {
     const selectedDate = new Date(event.currentTarget.dataset.date);
 
     if (!this.startDate || (this.startDate && this.endDate)) {
-      this.startDate = selectedDate;
-      this.endDate = null;
+      this.updateCalendarWithDates(selectedDate, null)
     } else {
       if (selectedDate < this.startDate) {
-        this.endDate = this.startDate;
-        this.startDate = selectedDate;
+        this.updateCalendarWithDates(selectedDate, this.startDate)
       } else {
-        this.endDate = selectedDate;
+        this.updateCalendarWithDates(this.startDate, selectedDate)
       }
     }
+  }
+
+  updateCalendarWithDates(start, end) {
+    this.startDate = start;
+    this.endDate = end;
+
     this.updateInputValueAndButtonText();
     this.renderCalendar();
   }
 
   updateInputValueAndButtonText() {
-    let inputValue;
+    let startDateInputValue;
+    let endDateInputValue;
     let buttonText;
 
     if (this.startDateEqualsEndDate()) {
-      inputValue = this.parsableDateFrom(this.startDate);
+      startDateInputValue = this.parsableDateFrom(this.startDate);
+      endDateInputValue = "";
       buttonText = this.readableDateFrom(this.startDate);
     }
     else if (this.startDate && this.endDate) {
-      const parsableStart = this.parsableDateFrom(this.startDate);
-      const parsableEnd = this.parsableDateFrom(this.endDate);
       const readableStart = this.readableDateFrom(this.startDate);
       const readbleEnd = this.readableDateFrom(this.endDate);
-      inputValue = `${parsableStart}; ${parsableEnd}`;
+      startDateInputValue = this.parsableDateFrom(this.startDate);
+      endDateInputValue = this.parsableDateFrom(this.endDate);
       buttonText = `${readableStart} ➞ ${readbleEnd}`;
     }
     else if (this.startDate) {
-      inputValue = this.parsableDateFrom(this.startDate);
+      startDateInputValue = this.parsableDateFrom(this.startDate);
+      endDateInputValue = "";
       buttonText = `${this.readableDateFrom(this.startDate)} ➞`;
     }
     else {
-      inputValue = '';
+      startDateInputValue = '';
+      endDateInputValue = '';
       buttonText = '';
     }
-    this.inputTarget.value = inputValue;
-    this.buttonTarget.textContent = buttonText;
+    this.startDateInputTarget.value = startDateInputValue;
+    this.endDateInputTarget.value = endDateInputValue;
+    if (buttonText) this.buttonTarget.textContent = buttonText;
   }
 
   startDateEqualsEndDate() {
@@ -190,5 +208,15 @@ export default class extends Controller {
     if (this.mainContainerTarget.contains(event.target)) return;
 
     this.isVisible = false;
+  }
+
+  selectMonth(event) {
+    const first_day = new Date(this.currentDate);
+    const last_day = new Date(first_day);
+    last_day.setMonth(last_day.getMonth() + 1);
+    last_day.setDate(0);
+    first_day.setDate(1);
+
+    this.updateCalendarWithDates(first_day, last_day);
   }
 }

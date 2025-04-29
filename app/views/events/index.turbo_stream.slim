@@ -2,6 +2,6 @@
   
     = render "events/events_list"
 
-- if @next_month_page
+- if @pagy.next.present?
   = turbo_stream.replace :more_results do
-    = turbo_frame_tag :more_results, src: events_path(month_page: @next_month_page, format: :turbo_stream), loading: :lazy
+    = turbo_frame_tag :more_results, src: events_path(**@params, page: @pagy.next, format: :turbo_stream), loading: :lazy

@@ -9,6 +9,22 @@ class Event < ApplicationRecord
   def unverified? = !verified
 
   class << self
+    def between(start_date, end_date)
+      where(date: start_date..end_date)
+    end
+
+    def search(string)
+      sql_subquery = <<~SQL
+        events.name LIKE :string
+        OR events.tarif LIKE :string
+        OR events.description LIKE :string
+        OR venues.name LIKE :string
+        OR venues.address LIKE :string
+        OR venues.city LIKE :string
+      SQL
+      upcoming_events.joins(:venue).where(sql_subquery, string: "%#{string}%")
+    end
+
     def all_upcoming = upcoming_events
 
     def verified_upcoming = upcoming_events.where(verified: true)
