@@ -71,8 +71,8 @@ tarifs = ["Gratuit", "Prix libre", "5€", "10€", "chapeau", nil]
 100.times do
   attrs = {
     name: Faker::Music::RockBand.name,
-    verified: rand > 0.2,
-    date: Time.now + rand(0..2000).hours,
+    verified: rand > 0.5,
+    date: Time.now + (24 * 365 * Math.exp(Math.log(rand) * 3)).hours,
     tarif: tarifs.sample
   }
 
