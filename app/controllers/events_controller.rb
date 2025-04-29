@@ -46,6 +46,7 @@ class EventsController < ApplicationController
   private
 
   def set_params
+    @params = request.query_parameters
     if params[:start].present?
       @start = Date.strptime(params[:start], "%m-%d-%Y")
       @end = params[:end].present? ? Date.strptime(params[:end], "%m-%d-%Y") : @start
@@ -61,7 +62,8 @@ class EventsController < ApplicationController
     events = events.search(@q) if @q
     events = authorize policy_scope(events)
 
-    @pagy, @events = pagy(events, limit: 20)
+    @pagy, @events = pagy(events, limit: 20, count: events.count)
+    pp @pagy
     set_events_days
   end
 
