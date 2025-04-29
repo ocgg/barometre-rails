@@ -48,8 +48,8 @@ class EventsController < ApplicationController
 
   def set_events
     events = authorize policy_scope(Event)
-    @calendar, @pagy, @events = pagy_calendar(events, week: {}, pagy: {limit: 100})
-    @next_week_page = @calendar[:week].next
+    @calendar, @pagy, @events = pagy_calendar(events, month: {}, pagy: {limit: 100})
+    @next_month_page = @calendar[:month].next
     set_events_days
   end
 

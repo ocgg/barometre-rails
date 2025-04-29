@@ -10,7 +10,7 @@ export default class extends Controller {
     "datepickerContainer",
     "daysContainer",
     "currentMonth", "prevMonth", "nextMonth",
-    "toggleDatepicker"
+    "toggleBtn"
   ]
 
   connect() {
@@ -20,8 +20,6 @@ export default class extends Controller {
 
     this.startDate = null;
     this.endDate = null;
-
-    this.isVisible = false;
 
     const dayElementCssClasses = `hover:bg-baro-yellow flex h-[46px] w-[46px] items-center justify-center rounded-full mb-1 cursor-pointer`;
     this.cssClasses = {
@@ -35,13 +33,20 @@ export default class extends Controller {
     }
 
     this.updateShadowElementSize();
+  }
 
-    // Close datepicker when clicking outside
-    //document.addEventListener('click', function (event) {
-    //  if (!this.inputTarget.contains(event.target) && !this.this.inputContainer.contains(event.target)) {
-    //    this.inputContainer.classList.add('hidden');
-    //  }
-    //});
+  get isVisible() {
+    return !this.datepickerContainerTarget.classList.contains("hidden");
+  }
+
+  set isVisible(bool) {
+    this.datepickerContainerTarget.classList.toggle("hidden", !bool);
+    this.mainContainerTarget.classList.toggle(this.cssClasses.bgColor, bool);
+    if (!bool) this.close();
+  }
+
+  close() {
+    this.updateShadowElementSize();
   }
 
   updateShadowElementSize() {
@@ -142,7 +147,7 @@ export default class extends Controller {
       buttonText = `${readableStart} ➞ ${readbleEnd}`;
     }
     else if (this.startDate) {
-      inputValue = `${this.parsableDateFrom(this.startDate)}`;
+      inputValue = this.parsableDateFrom(this.startDate);
       buttonText = `${this.readableDateFrom(this.startDate)} ➞`;
     }
     else {
@@ -175,13 +180,15 @@ export default class extends Controller {
     this.renderCalendar();
   }
 
-  toggleHidden() {
+  toggle() {
     this.isVisible = !this.isVisible;
-    this.mainContainerTarget.classList.toggle(this.cssClasses.bgColor);
-    this.datepickerContainerTarget.classList.toggle('hidden');
-
-    if (!this.isVisible) this.updateShadowElementSize();
-
     this.renderCalendar();
+  }
+
+  handleFocusOut(event) {
+    if (!this.isVisible) return;
+    if (this.mainContainerTarget.contains(event.target)) return;
+
+    this.isVisible = false;
   }
 }
