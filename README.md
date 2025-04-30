@@ -49,7 +49,6 @@
   - le contenu des champs doit se conserver d'une page à l'autre (cookie ?)
 
 - datefilter (flatpickr from scratch):
-  - refacto façon librairie externe
   - désactiver les dates passées (options pour "n'importe quelles dates")
   - prévisualiser la range au hover
   - couleurs bouton actif/inactif (côté baro)
