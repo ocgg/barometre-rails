@@ -17,7 +17,7 @@ export default class extends Controller {
   connect() {
     const dayElementCssClasses = `hover:bg-baro-yellow flex h-[46px] w-[46px] items-center justify-center rounded-full mb-1 cursor-pointer`;
     this.cssClasses = {
-      bgColor: `bg-card-bg`,
+      calendarContainer: `bg-card-bg`,
       currentMonthDay: dayElementCssClasses,
       otherMonthDay: `${dayElementCssClasses} text-fgcolor-faded`,
       selectedDay: `${dayElementCssClasses} bg-baro-yellow rounded-none`,
@@ -46,7 +46,7 @@ export default class extends Controller {
 
   set isVisible(bool) {
     this.datepickerContainerTarget.classList.toggle("hidden", !bool);
-    this.mainContainerTarget.classList.toggle(this.cssClasses.bgColor, bool);
+    this.mainContainerTarget.classList.toggle(this.cssClasses.calendarContainer, bool);
     if (!bool) this.close();
   }
 
