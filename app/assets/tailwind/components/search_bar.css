@@ -1,39 +1,54 @@
 @layer components {
   .search-bar {
-    height: fit-content;
-    display: flex;
-    border: 3px solid var(--color-fgcolor);
-    border-radius: var(--radius-xl);
-    overflow: hidden;
+    @apply h-fit flex
+    overflow-hidden
+    border-3 rounded-xl border-fgcolor;
 
     &:focus-within {
-      border-color: var(--color-baro-yellow);
+      @apply bg-card-bg;
+    }
+
+    &:focus-within,
+    &:hover {
+      @apply border-baro-yellow;
+
+      .clear-input svg {
+        @apply visible cursor-pointer;
+      }
 
       button {
-        background-color: var(--color-baro-yellow);
+        @apply bg-baro-yellow;
       }
     }
 
     input {
-      border: none;
-      outline: none;
-      flex-grow: 1;
-      min-width: calc(var(--spacing) * 10);
-      padding-inline: calc(var(--spacing) * 3) calc(var(--spacing) * .5);
-      padding-block: var(--spacing);
-      font-family: var(--font-quicksand);
+      @apply min-w-10 grow 
+      pl-3 pr-0 py-1
+      border-none
+      font-quicksand;
+    }
+
+    .clear-input {
+      @apply flex flex-col justify-center px-1;
+
+      svg {
+        @apply invisible
+        h-5 fill-fgcolor-faded;
+
+        &:hover {
+          @apply fill-baro-yellow;
+        }
+      }
     }
 
     button {
-      border: none;
-      border-radius: unset;
-      padding-inline: calc(var(--spacing) * 3) calc(var(--spacing) * 2.5);
-      background-color: var(--color-fgcolor);
-    }
+      @apply pl-3 pr-2.5
+      border-none rounded-none
+      bg-fgcolor;
 
-    svg {
-      height: calc(var(--spacing) * 5);
-      fill: var(--color-bgcolor);
+      svg {
+        @apply h-5 fill-bgcolor;
+      }
     }
   }
 }
