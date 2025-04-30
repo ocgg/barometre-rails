@@ -1,7 +1,6 @@
 @layer components {
   .search-bar {
     @apply h-fit flex
-    overflow-hidden
     border-3 rounded-xl border-fgcolor;
 
     &:focus-within {
@@ -11,10 +10,6 @@
     &:focus-within,
     &:hover {
       @apply border-baro-yellow;
-
-      .clear-input svg {
-        @apply visible cursor-pointer;
-      }
 
       button {
         @apply bg-baro-yellow;
@@ -26,13 +21,17 @@
       pl-3 pr-0 py-1
       border-none
       font-quicksand;
+
+      &:not(:placeholder-shown) + .clear-input svg {
+        @apply visible;
+      }
     }
 
     .clear-input {
       @apply flex flex-col justify-center px-1;
 
       svg {
-        @apply invisible
+        @apply invisible cursor-pointer
         h-5 fill-fgcolor-faded;
 
         &:hover {
