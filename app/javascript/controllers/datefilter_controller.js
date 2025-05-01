@@ -12,7 +12,8 @@ export default class extends Controller {
     "datepickerContainer",
     "daysContainer",
     "currentMonth", "prevMonth", "nextMonth",
-    "toggleBtn"
+    "toggleBtn",
+    "clearInputBtn"
   ]
 
   connect() {
@@ -28,6 +29,8 @@ export default class extends Controller {
       selectedEndDay: `${dayElementCssClasses} bg-baro-yellow rounded-l-none`,
       onlySelectedDay: `${dayElementCssClasses} bg-baro-yellow rounded-full`
     }
+    this.baseButtonText = "Filtrer par date";
+    this.buttonTarget.innerText = this.baseButtonText;
 
     this.dates.start = this.startDateInputTarget.value ? this.dateFromInputValue(this.startDateInputTarget) : null;
     this.dates.end = this.endDateInputTarget.value ? this.dateFromInputValue(this.endDateInputTarget) : null;
@@ -134,7 +137,7 @@ export default class extends Controller {
 
     if (this.dates.startEqualsEnd) {
       startDateInputValue = this.dates.parsableStart
-      endDateInputValue = "";
+      endDateInputValue = null;
       buttonText = this.dates.readableStart;
     }
     else if (this.dates.start && this.dates.end) {
@@ -144,17 +147,24 @@ export default class extends Controller {
     }
     else if (this.dates.start) {
       startDateInputValue = this.dates.parsableStart;
-      endDateInputValue = "";
+      endDateInputValue = null;
       buttonText = `${this.dates.readableStart} ➞`;
     }
     else {
-      startDateInputValue = '';
-      endDateInputValue = '';
-      buttonText = '';
+      startDateInputValue = null;
+      endDateInputValue = null;
+      buttonText = null;
     }
     this.startDateInputTarget.value = startDateInputValue;
     this.endDateInputTarget.value = endDateInputValue;
-    if (buttonText) this.buttonTarget.textContent = buttonText;
+    if (buttonText) {
+      this.buttonTarget.textContent = buttonText;
+      this.clearInputBtnTarget.classList.toggle("hidden", false)
+    }
+    else {
+      this.buttonTarget.textContent = this.baseButtonText;
+      this.clearInputBtnTarget.classList.toggle("hidden", true)
+    }
   }
 
   setPrevMonth() {
@@ -183,5 +193,10 @@ export default class extends Controller {
     const start = this.dates.firstDateOfMonth;
     const end = this.dates.lastDateOfMonth;
     this.updateCalendarWithDates(start, end);
+  }
+
+  clearInput(event) {
+    event.stopPropagation();
+    this.updateCalendarWithDates(null, null);
   }
 }
