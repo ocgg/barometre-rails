@@ -12,7 +12,6 @@ export default class extends Controller {
     "datepickerContainer",
     "daysContainer",
     "currentMonth", "prevMonth", "nextMonth",
-    "toggleBtn",
     "clearInputBtn"
   ]
 
@@ -36,7 +35,6 @@ export default class extends Controller {
     this.dates.end = this.endDateInputTarget.value ? this.dateFromInputValue(this.endDateInputTarget) : null;
 
     this.updateInputValueAndButtonText();
-    this.updateShadowElementSize();
   }
 
   dateFromInputValue(input) {
@@ -49,6 +47,7 @@ export default class extends Controller {
 
   set isVisible(bool) {
     this.datepickerContainerTarget.classList.toggle("hidden", !bool);
+    this.mainContainerTarget.classList.toggle("max-md:translate-x-[-25%]", bool);
     this.mainContainerTarget.classList.toggle(this.cssClasses.calendarContainer, bool);
     if (!bool) this.close();
   }
@@ -148,7 +147,7 @@ export default class extends Controller {
     else if (this.dates.start) {
       startDateInputValue = this.dates.parsableStart;
       endDateInputValue = null;
-      buttonText = `${this.dates.readableStart} ➞`;
+      buttonText = `${this.dates.readableStart}`;
     }
     else {
       startDateInputValue = null;
@@ -165,6 +164,7 @@ export default class extends Controller {
       this.buttonTarget.textContent = this.baseButtonText;
       this.clearInputBtnTarget.classList.toggle("hidden", true)
     }
+    if (!this.isVisible) this.updateShadowElementSize();
   }
 
   setPrevMonth() {
