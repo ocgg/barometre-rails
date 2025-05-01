@@ -5,7 +5,6 @@
 
 @import "./base/base";
 
-@import "./components/search_bar";
 @import "./components/event_day";
 @import "./components/event_card";
 @import "./components/button";
