@@ -39,6 +39,8 @@
 
 - API venues & events
 
+- license
+
 **En cours:**
 
 - searchbar:
@@ -47,6 +49,7 @@
   - envoyer le formulaire au focus out (dates & location)
   - boutons pour clear input, lien pour enlever tous les filtres
   - le contenu des champs doit se conserver d'une page à l'autre (cookie ?)
+  - virer les params vides de la query string (ok pour locfilter)
 
 - datefilter (flatpickr from scratch):
   - désactiver les dates passées (options pour "n'importe quelles dates")
