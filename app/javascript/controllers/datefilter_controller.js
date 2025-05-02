@@ -4,7 +4,6 @@ import DatesManager from "lib/ocgg-datepicker/dates_manager"
 // Connects to data-controller="datefilter"
 export default class extends Controller {
   static targets = [
-    "shadowElt",
     "mainContainer",
     "startDateInput",
     "endDateInput",
@@ -53,13 +52,13 @@ export default class extends Controller {
   }
 
   close() {
-    this.updateShadowElementSize();
+    this.updateElementSize();
   }
 
-  updateShadowElementSize() {
+  updateElementSize() {
     const size = this.mainContainerTarget.getBoundingClientRect();
-    this.shadowEltTarget.style.width = `${Math.floor(size.width)}px`
-    this.shadowEltTarget.style.height = `${Math.floor(size.height)}px`
+    this.element.style.width = `${Math.floor(size.width)}px`
+    this.element.style.height = `${Math.floor(size.height)}px`
   }
 
   renderCalendar() {
@@ -164,7 +163,7 @@ export default class extends Controller {
       this.buttonTarget.textContent = this.baseButtonText;
       this.clearInputBtnTarget.classList.toggle("hidden", true)
     }
-    if (!this.isVisible) this.updateShadowElementSize();
+    if (!this.isVisible) this.updateElementSize();
   }
 
   setPrevMonth() {
