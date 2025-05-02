@@ -4,7 +4,6 @@ import DatesManager from "lib/ocgg-datepicker/dates_manager"
 // Connects to data-controller="datefilter"
 export default class extends Controller {
   static targets = [
-    "shadowElt",
     "mainContainer",
     "startDateInput",
     "endDateInput",
@@ -20,7 +19,7 @@ export default class extends Controller {
 
     const dayElementCssClasses = `hover:bg-baro-yellow flex h-[46px] w-[46px] items-center justify-center rounded-full mb-1 cursor-pointer`;
     this.cssClasses = {
-      calendarContainer: `bg-card-bg`,
+      calendarContainer: "bg-card-bg",
       currentMonthDay: dayElementCssClasses,
       otherMonthDay: `${dayElementCssClasses} text-fgcolor-faded`,
       selectedDay: `${dayElementCssClasses} bg-baro-yellow rounded-none`,
@@ -31,14 +30,14 @@ export default class extends Controller {
     this.baseButtonText = "Filtrer par date";
     this.buttonTarget.innerText = this.baseButtonText;
 
-    this.dates.start = this.startDateInputTarget.value ? this.dateFromInputValue(this.startDateInputTarget) : null;
-    this.dates.end = this.endDateInputTarget.value ? this.dateFromInputValue(this.endDateInputTarget) : null;
+    this.dates.start = this.dateFromString(this.startDateInputTarget.value);
+    this.dates.end =this.dateFromString(this.endDateInputTarget.value);
 
     this.updateInputValueAndButtonText();
   }
 
-  dateFromInputValue(input) {
-    return input.value ? new Date(input.value) : null
+  dateFromString(string) {
+    return string ? new Date(string) : null
   }
 
   get isVisible() {
@@ -53,13 +52,13 @@ export default class extends Controller {
   }
 
   close() {
-    this.updateShadowElementSize();
+    this.updateElementSize();
   }
 
-  updateShadowElementSize() {
+  updateElementSize() {
     const size = this.mainContainerTarget.getBoundingClientRect();
-    this.shadowEltTarget.style.width = `${Math.floor(size.width)}px`
-    this.shadowEltTarget.style.height = `${Math.floor(size.height)}px`
+    this.element.style.width = `${Math.floor(size.width)}px`
+    this.element.style.height = `${Math.floor(size.height)}px`
   }
 
   renderCalendar() {
@@ -164,7 +163,7 @@ export default class extends Controller {
       this.buttonTarget.textContent = this.baseButtonText;
       this.clearInputBtnTarget.classList.toggle("hidden", true)
     }
-    if (!this.isVisible) this.updateShadowElementSize();
+    if (!this.isVisible) this.updateElementSize();
   }
 
   setPrevMonth() {

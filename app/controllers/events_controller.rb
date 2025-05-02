@@ -40,19 +40,20 @@ class EventsController < ApplicationController
     message = "Supprimé: #{@event.name} (#{@event.venue.name}, #{@event.venue.city})"
     replacing_frame = "<p class=\"text-fgcolor-faded text-center text-sm\">#{message}</p>"
     @event.destroy
-    render turbo_stream: [ turbo_stream.replace(@event, replacing_frame) ]
+    render turbo_stream: [turbo_stream.replace(@event, replacing_frame)]
   end
 
   private
 
   def set_params
     @params = request.query_parameters
-    if params[:start].present?
-      @start = Date.strptime(params[:start], "%m-%d-%Y")
-      @end = params[:end].present? ? Date.strptime(params[:end], "%m-%d-%Y") : @start
+    if @params[:start].present?
+      @start = Date.strptime(@params[:start], "%m-%d-%Y")
+      @end = @params[:end].present? ? Date.strptime(@params[:end], "%m-%d-%Y") : @start
       @end += 1.day
     end
-    @q = params[:q] if params[:q].present?
+    @q = @params[:q]
+    @radius = @params[:radius]
   end
 
   def set_events
