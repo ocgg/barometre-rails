@@ -30,14 +30,14 @@ export default class extends Controller {
     this.baseButtonText = "Filtrer par date";
     this.buttonTarget.innerText = this.baseButtonText;
 
-    this.dates.start = this.startDateInputTarget.value ? this.dateFromInputValue(this.startDateInputTarget) : null;
-    this.dates.end = this.endDateInputTarget.value ? this.dateFromInputValue(this.endDateInputTarget) : null;
+    this.dates.start = this.dateFromString(this.startDateInputTarget.value);
+    this.dates.end =this.dateFromString(this.endDateInputTarget.value);
 
     this.updateInputValueAndButtonText();
   }
 
-  dateFromInputValue(input) {
-    return input.value ? new Date(input.value) : null
+  dateFromString(string) {
+    return string ? new Date(string) : null
   }
 
   get isVisible() {
