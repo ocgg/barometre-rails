@@ -19,7 +19,7 @@ export default class extends Controller {
 
     const dayElementCssClasses = `hover:bg-baro-yellow flex h-[46px] w-[46px] items-center justify-center rounded-full mb-1 cursor-pointer`;
     this.cssClasses = {
-      calendarContainer: `bg-card-bg`,
+      calendarContainer: "bg-card-bg",
       currentMonthDay: dayElementCssClasses,
       otherMonthDay: `${dayElementCssClasses} text-fgcolor-faded`,
       selectedDay: `${dayElementCssClasses} bg-baro-yellow rounded-none`,
