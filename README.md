@@ -47,9 +47,9 @@
   - glitch: gérer l'affichage de la searchbar façon v-cloak
   - insensible à la casse & accents (e = é = è...)
   - envoyer le formulaire au focus out (dates & location)
-  - boutons pour clear input, lien pour enlever tous les filtres
+  - lien pour enlever tous les filtres
   - le contenu des champs doit se conserver d'une page à l'autre (cookie ?)
-  - virer les params vides de la query string (ok pour locfilter)
+  - virer les params vides de la query string (ok pour locationfilter)
 
 - datefilter (flatpickr from scratch):
   - désactiver les dates passées (options pour "n'importe quelles dates")
