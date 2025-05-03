@@ -14,32 +14,11 @@ export default class extends Controller {
   ]
 
   connect() {
-    this.active = !this.radiusInputTarget.disabled;
-    this.localized = this.active;
-
-    if (this.active) {
-      this.lat = this.latInput.value;
-      this.long = this.longInput.value;
-    }
-
     this.updateRadiusInput();
   }
 
   get active() {
     return !this.radiusInputTarget.disabled;
-  }
-
-  set active(bool) {
-    if (bool) {
-      this.radiusInputTarget.disabled = false;
-      this.radius = this.radiusInputTarget.value;
-      this.updateRadiusInput();
-    }
-    else {
-      this.radiusInputTarget.disabled = true;
-      this.radius = null;
-      this.isVisible = false;
-    }
   }
 
   get visible() {
@@ -51,6 +30,33 @@ export default class extends Controller {
     this.mainContainerTarget.classList.toggle("max-md:translate-x-[-25%]", bool);
     this.mainContainerTarget.classList.toggle("bg-card-bg", bool);
     if (!bool) this.updateElementSize();
+  }
+
+  activate() {
+    this.activateInputs();
+    this.updateRadiusInput();
+  }
+
+  activateInputs() {
+    this.radiusInputTarget.disabled = false;
+    this.latInputTarget.disabled = false;
+    this.longInputTarget.disabled = false;
+  }
+
+  desactivate() {
+    this.desactivateInputs();
+    this.hide();
+    this.updateRadiusInput();
+  }
+
+  desactivateInputs() {
+    this.radiusInputTarget.disabled = true;
+    this.latInputTarget.disabled = true;
+    this.longInputTarget.disabled = true;
+  }
+
+  hide() {
+    this.visible = false;
   }
 
   updateRadiusInput() {
@@ -72,24 +78,20 @@ export default class extends Controller {
   }
 
   toggle() {
-    if (this.localized) {
-      this.show();
-    }
-    else if (navigator.geolocation) {
-      this.spinnerTarget.classList.remove("hidden");
-      this.localize();
-    }
+    if (this.active) this.show();
+    else if (navigator.geolocation) this.requestLocation();
     else {
       alert("Il semble que votre navigateur ne soit pas compatible avec la géolocalisation.");
     }
   }
 
   show() {
-    this.visible = !this.visible;
-    if (this.visible) this.active = true;
+    this.visible = true
   }
 
-  localize() {
+  requestLocation() {
+    this.spinnerTarget.classList.remove("hidden");
+
     navigator.geolocation.getCurrentPosition(
       this.onLocalizationSuccess.bind(this),
       this.onLocalizationError.bind(this)
@@ -98,11 +100,9 @@ export default class extends Controller {
 
   onLocalizationSuccess(position) {
     this.spinnerTarget.classList.add("hidden");
-    const lat = position.coords.latitude;
-    const long = position.coords.longitude;
-    this.latInputTarget.value = lat;
-    this.longInputTarget.value = long;
-    this.localized = true;
+    this.latInputTarget.value = position.coords.latitude;
+    this.longInputTarget.value = position.coords.longitud;
+    this.activate();
     this.show();
   }
 
@@ -114,14 +114,11 @@ export default class extends Controller {
     if (!this.visible) return;
     if (this.mainContainerTarget.contains(event.target)) return;
 
-    this.visible = false;
+    this.hide();
   }
 
   clearInput(event) {
     event.stopPropagation();
-
-    this.radiusInputTarget.disabled = true;
-    this.visible = false;
-    this.updateRadiusInput();
+    this.desactivate();
   }
 }
