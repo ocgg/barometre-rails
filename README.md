@@ -18,7 +18,6 @@
 
 - frontend global:
   - thème sombre
-  - modale flashes
 
 - backend global:
   - job pour nettoyer les events passés
@@ -43,6 +42,8 @@
 
 **En cours:**
 
+- remplacer les alert() par des jolies modales
+
 - searchbar:
   - glitch: gérer l'affichage de la searchbar façon v-cloak
   - insensible à la casse & accents (e = é = è...)
@@ -50,6 +51,8 @@
   - lien pour enlever tous les filtres
   - le contenu des champs doit se conserver d'une page à l'autre (cookie ?)
   - virer les params vides de la query string (ok pour locationfilter)
+  - l'envoi du formulaire ne doit que mettre à jour la liste d'events (turbo)
+    - du coup, pas besoin de récupérer les valeurs d'input des params. La searchbar bouge pas
 
 - datefilter (flatpickr from scratch):
   - désactiver les dates passées (options pour "n'importe quelles dates")
@@ -57,6 +60,10 @@
   - couleurs bouton actif/inactif (côté baro)
   - couleurs highlight (côté lib)
   - texte du btn quand une seule date est choisie
+
+- locationfilter:
+  - informer le user au cas où il n'est pas localisé en Loire-Atlantique & de la précision de l'API
+  - input steps: 1,3,5,10,15,20,30
 
 - beaucoup d'autres choses...
 

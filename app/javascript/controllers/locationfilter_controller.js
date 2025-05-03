@@ -6,30 +6,19 @@ export default class extends Controller {
     "mainContainer",
     "button",
     "rangeContainer",
-    "input",
-    "clearInputBtn"
+    "radiusInput",
+    "latInput",
+    "longInput",
+    "clearInputBtn",
+    "spinner"
   ]
 
   connect() {
-    this.active = !this.inputTarget.disabled;
-    this.updateButtonText();
+    this.updateRadiusInput();
   }
 
   get active() {
-    return !this.inputTarget.disabled;
-  }
-
-  set active(bool) {
-    if (bool) {
-      this.inputTarget.disabled = false;
-      this.radius = this.inputTarget.value;
-      this.updateButtonText();
-    }
-    else {
-      this.inputTarget.disabled = true;
-      this.radius = null;
-      this.isVisible = false;
-    }
+    return !this.radiusInputTarget.disabled;
   }
 
   get visible() {
@@ -43,9 +32,36 @@ export default class extends Controller {
     if (!bool) this.updateElementSize();
   }
 
-  updateButtonText() {
+  activate() {
+    this.activateInputs();
+    this.updateRadiusInput();
+  }
+
+  activateInputs() {
+    this.radiusInputTarget.disabled = false;
+    this.latInputTarget.disabled = false;
+    this.longInputTarget.disabled = false;
+  }
+
+  desactivate() {
+    this.desactivateInputs();
+    this.hide();
+    this.updateRadiusInput();
+  }
+
+  desactivateInputs() {
+    this.radiusInputTarget.disabled = true;
+    this.latInputTarget.disabled = true;
+    this.longInputTarget.disabled = true;
+  }
+
+  hide() {
+    this.visible = false;
+  }
+
+  updateRadiusInput() {
     if (this.active) {
-      this.buttonTarget.innerText = `Rayon: ${this.inputTarget.value} km`;
+      this.buttonTarget.innerText = `Rayon: ${this.radiusInputTarget.value} km`;
       this.clearInputBtnTarget.classList.toggle("hidden", false);
     }
     else {
@@ -62,22 +78,47 @@ export default class extends Controller {
   }
 
   toggle() {
-    this.visible = !this.visible;
-    if (this.visible) this.active = true;
+    if (this.active) this.show();
+    else if (navigator.geolocation) this.requestLocation();
+    else {
+      alert("Il semble que votre navigateur ne soit pas compatible avec la géolocalisation.");
+    }
+  }
+
+  show() {
+    this.visible = true
+  }
+
+  requestLocation() {
+    this.spinnerTarget.classList.remove("hidden");
+
+    navigator.geolocation.getCurrentPosition(
+      this.onLocalizationSuccess.bind(this),
+      this.onLocalizationError.bind(this)
+    );
+  }
+
+  onLocalizationSuccess(position) {
+    this.spinnerTarget.classList.add("hidden");
+    this.latInputTarget.value = position.coords.latitude;
+    this.longInputTarget.value = position.coords.longitud;
+    this.activate();
+    this.show();
+  }
+
+  onLocalizationError() {
+    alert("La localisation a échoué. Essayez d'activer la géolocalisation sur votre appareil")
   }
 
   handleFocusOut(event) {
     if (!this.visible) return;
     if (this.mainContainerTarget.contains(event.target)) return;
 
-    this.visible = false;
+    this.hide();
   }
 
   clearInput(event) {
     event.stopPropagation();
-
-    this.inputTarget.disabled = true;
-    this.visible = false;
-    this.updateButtonText();
+    this.desactivate();
   }
 }

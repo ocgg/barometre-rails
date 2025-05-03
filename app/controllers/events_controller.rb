@@ -53,11 +53,17 @@ class EventsController < ApplicationController
       @end += 1.day
     end
     @q = @params[:q]
+    @lat = @params[:lat]
+    @long = @params[:long]
     @radius = @params[:radius]
   end
 
   def set_events
     events = @start ? Event.between(@start, @end) : Event
+    if @radius
+      venues = Venue.near([@lat, @long], @radius, units: :km)
+      events = events.where(venue: venues.to_a)
+    end
     events = events.search(@q) if @q
     events = authorize policy_scope(events)
 
