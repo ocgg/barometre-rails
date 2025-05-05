@@ -27,7 +27,7 @@
   - event#edit: turbo frame
   - gérer les containers de jours dupliqués lors du scroll
   - gérer les permissions utilisateur
-  - mobile: z-index de la navbar (le day header passe par dessus)
+  - bouton pour revenir en haut de page
 
 - events#new:
   - gérer la création de venues
