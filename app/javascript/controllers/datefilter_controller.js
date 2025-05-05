@@ -1,5 +1,5 @@
 import { Controller } from "@hotwired/stimulus"
-import DatesManager from "lib/ocgg-datepicker/dates_manager"
+import DatesManager from "datepicker/dates_manager"
 
 // Connects to data-controller="datefilter"
 export default class extends Controller {
@@ -48,11 +48,7 @@ export default class extends Controller {
     this.datepickerContainerTarget.classList.toggle("hidden", !bool);
     this.mainContainerTarget.classList.toggle("max-md:translate-x-[-25%]", bool);
     this.mainContainerTarget.classList.toggle(this.cssClasses.calendarContainer, bool);
-    if (!bool) this.close();
-  }
-
-  close() {
-    this.updateElementSize();
+    if (!bool) this.updateElementSize();
   }
 
   updateElementSize() {
