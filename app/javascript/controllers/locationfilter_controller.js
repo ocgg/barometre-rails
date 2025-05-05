@@ -14,16 +14,15 @@ export default class extends Controller {
   ]
 
   connect() {
-    this.updateRadiusInput();
+    this.active ? this.updateButtonText() : this.resetButtonText();
+    this.updateElementSize();
   }
 
-  get active() {
-    return !this.radiusInputTarget.disabled;
-  }
+  get active() { return !this.radiusInputTarget.disabled; }
 
-  get visible() {
-    return !this.rangeContainerTarget.classList.contains("hidden");
-  }
+  get isLocalized() { return !!this.latInputTarget.value; }
+
+  get visible() { return !this.rangeContainerTarget.classList.contains("hidden"); }
 
   set visible(bool) {
     this.rangeContainerTarget.classList.toggle("hidden", !bool);
@@ -33,23 +32,23 @@ export default class extends Controller {
   }
 
   activate() {
-    this.activateInputs();
-    this.updateRadiusInput();
+    this.enableInputs();
+    this.updateButtonText();
   }
 
-  activateInputs() {
+  enableInputs() {
     this.radiusInputTarget.disabled = false;
     this.latInputTarget.disabled = false;
     this.longInputTarget.disabled = false;
   }
 
   desactivate() {
-    this.desactivateInputs();
+    this.disableInputs();
+    this.resetButtonText();
     this.hide();
-    this.updateRadiusInput();
   }
 
-  desactivateInputs() {
+  disableInputs() {
     this.radiusInputTarget.disabled = true;
     this.latInputTarget.disabled = true;
     this.longInputTarget.disabled = true;
@@ -57,18 +56,21 @@ export default class extends Controller {
 
   hide() {
     this.visible = false;
+    this.updateElementSize();
   }
 
-  updateRadiusInput() {
-    if (this.active) {
-      this.buttonTarget.innerText = `Rayon: ${this.radiusInputTarget.value} km`;
-      this.clearInputBtnTarget.classList.toggle("hidden", false);
-    }
-    else {
-      this.buttonTarget.innerText = "Autour de moi";
-      this.clearInputBtnTarget.classList.toggle("hidden", true);
-    }
-    if (!this.visible) this.updateElementSize();
+  onRadiusInput() {
+    this.updateButtonText();
+  }
+
+  updateButtonText() {
+    this.buttonTarget.innerText = `Rayon: ${this.radiusInputTarget.value} km`;
+    this.clearInputBtnTarget.classList.toggle("hidden", false);
+  }
+
+  resetButtonText() {
+    this.buttonTarget.innerText = "Autour de moi";
+    this.clearInputBtnTarget.classList.toggle("hidden", true);
   }
 
   updateElementSize() {
@@ -77,21 +79,27 @@ export default class extends Controller {
     this.element.style.height = `${Math.floor(size.height)}px`;
   }
 
-  toggle() {
+  onButtonClick() {
     if (this.active) this.show();
-    else if (navigator.geolocation) this.requestLocation();
-    else {
-      alert("Il semble que votre navigateur ne soit pas compatible avec la géolocalisation.");
-    }
+    else if (this.isLocalized) { this.activate(); this.show(); }
+    else this.checkGeolocation();
   }
 
   show() {
     this.visible = true
   }
 
-  requestLocation() {
-    this.spinnerTarget.classList.remove("hidden");
+  checkGeolocation() {
+    if (navigator.geolocation) this.requestLocation();
+    else this.showNotCompatibleMessage();
+  }
 
+  showNotCompatibleMessage() {
+    alert("Il semble que votre navigateur ne soit pas compatible avec la géolocalisation.");
+  }
+
+  requestLocation() {
+    this.showSpinner();
     navigator.geolocation.getCurrentPosition(
       this.onLocalizationSuccess.bind(this),
       this.onLocalizationError.bind(this)
@@ -99,16 +107,21 @@ export default class extends Controller {
   }
 
   onLocalizationSuccess(position) {
-    this.spinnerTarget.classList.add("hidden");
+    this.hideSpinner();
     this.latInputTarget.value = position.coords.latitude;
-    this.longInputTarget.value = position.coords.longitud;
+    this.longInputTarget.value = position.coords.longitude;
     this.activate();
     this.show();
   }
 
   onLocalizationError() {
+    this.hideSpinner();
     alert("La localisation a échoué. Essayez d'activer la géolocalisation sur votre appareil")
   }
+
+  showSpinner() { this.spinnerTarget.classList.remove("hidden"); }
+
+  hideSpinner() { this.spinnerTarget.classList.add("hidden"); }
 
   handleFocusOut(event) {
     if (!this.visible) return;
