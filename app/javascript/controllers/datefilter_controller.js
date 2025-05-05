@@ -1,5 +1,6 @@
 import { Controller } from "@hotwired/stimulus"
 import DatesManager from "datepicker/dates_manager"
+import CssManager from "datepicker/css_manager"
 
 // Connects to data-controller="datefilter"
 export default class extends Controller {
@@ -16,17 +17,10 @@ export default class extends Controller {
 
   connect() {
     this.dates = new DatesManager;
+    this.css = new CssManager;
 
-    const dayElementCssClasses = `hover:bg-baro-yellow flex h-[46px] w-[46px] items-center justify-center rounded-full mb-1 cursor-pointer`;
-    this.cssClasses = {
-      calendarContainer: "bg-card-bg",
-      currentMonthDay: dayElementCssClasses,
-      otherMonthDay: `${dayElementCssClasses} text-fgcolor-faded`,
-      selectedDay: `${dayElementCssClasses} bg-baro-yellow rounded-none`,
-      selectedStartDay: `${dayElementCssClasses} bg-baro-yellow rounded-r-none`,
-      selectedEndDay: `${dayElementCssClasses} bg-baro-yellow rounded-l-none`,
-      onlySelectedDay: `${dayElementCssClasses} bg-baro-yellow rounded-full`
-    }
+    /////////////////////////////
+
     this.baseButtonText = "Filtrer par date";
     this.buttonTarget.innerText = this.baseButtonText;
 
@@ -35,6 +29,8 @@ export default class extends Controller {
 
     this.updateInputValueAndButtonText();
   }
+
+  /////////////////////////////////////////////////////////////////////////////
 
   dateFromString(string) {
     return string ? new Date(string) : null
@@ -47,7 +43,7 @@ export default class extends Controller {
   set isVisible(bool) {
     this.datepickerContainerTarget.classList.toggle("hidden", !bool);
     this.mainContainerTarget.classList.toggle("max-md:translate-x-[-25%]", bool);
-    this.mainContainerTarget.classList.toggle(this.cssClasses.calendarContainer, bool);
+    this.mainContainerTarget.classList.toggle(this.css.calendarContainer, bool);
     if (!bool) this.updateElementSize();
   }
 
@@ -92,12 +88,12 @@ export default class extends Controller {
   }
 
   cssClassesFor(date) {
-    if (this.dates.isStartAndEnd(date)) return this.cssClasses.onlySelectedDay;
-    else if (this.dates.isStart(date)) return this.cssClasses.selectedStartDay;
-    else if (this.dates.isEnd(date)) return this.cssClasses.selectedEndDay;
-    else if (this.dates.isBetween(date)) return this.cssClasses.selectedDay;
-    else if (this.dates.isInCurrentMonth(date)) return this.cssClasses.currentMonthDay;
-    else return this.cssClasses.otherMonthDay;
+    if (this.dates.isStartAndEnd(date)) return this.css.onlySelectedDay;
+    else if (this.dates.isStart(date)) return this.css.selectedStartDay;
+    else if (this.dates.isEnd(date)) return this.css.selectedEndDay;
+    else if (this.dates.isBetween(date)) return this.css.selectedDay;
+    else if (this.dates.isInCurrentMonth(date)) return this.css.currentMonthDay;
+    else return this.css.otherMonthDay;
   }
 
   selectDate(event) {
