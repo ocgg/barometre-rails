@@ -3,7 +3,9 @@ module EventsHelper
     return "Aujourd'hui" if date == Date.today
     return "Demain" if date == Date.tomorrow
 
-    l(date, format: "%A %d %B").split.map(&:capitalize).join(" ")
+    format = (date.year == Date.today.year) ? "%A %d %B" : "%A %d %B %Y"
+
+    l(date, format:).split.map(&:capitalize).join(" ")
   end
 
   def format_hour(date)

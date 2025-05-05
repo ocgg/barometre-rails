@@ -28,6 +28,7 @@
   - afficher l'année si > à l'année en cours
   - gérer les containers de jours dupliqués lors du scroll
   - gérer les permissions utilisateur
+  - message quand aucun event à afficher
 
 - events#new:
   - gérer la création de venues
