@@ -1,3 +1,8 @@
+- if @pagy.count.zero?
+  p.text-center.text-xl Aucun résultat
+- elsif request.query_parameters.compact_blank.any?
+  p.-mt-13.-mb-13.text-center #{@pagy.count} résultats
+
 - @events_days.each do |date, events|
 
   section.event-day
@@ -14,5 +19,4 @@
 
     ul.events-list
       - events.each do |event|
-        li
-          = render event
+        li = render event
