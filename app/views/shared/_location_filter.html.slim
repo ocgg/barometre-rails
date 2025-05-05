@@ -2,9 +2,15 @@ div.relative.whitespace-nowrap  data-controller="locationfilter" data-action="cl
 
   div.btn.px-2.absolute.z-10  data-locationfilter-target="mainContainer"
 
-    div.flex.gap-2.items-center data-action="click->locationfilter#toggle"
-      = form.hidden_field :lat, data: {locationfilter_target: "latInput"}, value: @lat
-      = form.hidden_field :long, data: {locationfilter_target: "longInput"}, value: @long
+    div.flex.gap-2.items-center data-action="click->locationfilter#onButtonClick"
+      = form.hidden_field :lat,
+        disabled: !@radius,
+        data: {locationfilter_target: "latInput"},
+        value: @lat
+      = form.hidden_field :long,
+        disabled: !@radius,
+        data: {locationfilter_target: "longInput"},
+        value: @long
 
       /location icon
       svg class="fill-fgcolor h-5" viewBox="0 0 512 512": path d="M256 0c17.7 0 32 14.3 32 32l0 34.7C368.4 80.1 431.9 143.6 445.3 224l34.7 0c17.7 0 32 14.3 32 32s-14.3 32-32 32l-34.7 0C431.9 368.4 368.4 431.9 288 445.3l0 34.7c0 17.7-14.3 32-32 32s-32-14.3-32-32l0-34.7C143.6 431.9 80.1 368.4 66.7 288L32 288c-17.7 0-32-14.3-32-32s14.3-32 32-32l34.7 0C80.1 143.6 143.6 80.1 224 66.7L224 32c0-17.7 14.3-32 32-32zM128 256a128 128 0 1 0 256 0 128 128 0 1 0 -256 0zm128-80a80 80 0 1 1 0 160 80 80 0 1 1 0-160z"
@@ -37,7 +43,7 @@ div.relative.whitespace-nowrap  data-controller="locationfilter" data-action="cl
         value: @radius,
         disabled: !@radius,
         data: { locationfilter_target: "radiusInput",
-          action: "input->locationfilter#updateRadiusInput" },
+          action: "input->locationfilter#onRadiusInput" },
         in: 2..30, step: 2
       a.text-center.text-fgcolor-faded.text-sm.hover:text-baro-yellow data-action="click->locationfilter#requestLocation"
         | Mettre à jour ma position
