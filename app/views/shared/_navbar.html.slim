@@ -1,9 +1,9 @@
 nav[
   data-controller="navbar"
   data-action="click@window->navbar#handleFocusOut"
-  class="fixed bottom-0 w-screen px-[10vw] py-[3vw] bg-fgcolor md:w-fit md:px-0 md:py-4 md:static"
+  class="fixed z-50 bottom-0 w-screen px-[10vw] py-[3vw] bg-fgcolor md:w-fit md:px-0 md:py-4 md:static"
 ]
-  ul class="flex justify-between md:gap-12"
+  ul.flex.justify-between.md:gap-12
     /List icon
     li
       = link_to root_path, class: "block"
@@ -20,7 +20,7 @@ nav[
         svg class="#{navbar_btn_color('calendar')} h-[10vw] md:h-10" viewBox="0 0 448 512"
           path d="M128 0c17.7 0 32 14.3 32 32l0 32 128 0 0-32c0-17.7 14.3-32 32-32s32 14.3 32 32l0 32 48 0c26.5 0 48 21.5 48 48l0 48L0 160l0-48C0 85.5 21.5 64 48 64l48 0 0-32c0-17.7 14.3-32 32-32zM0 192l448 0 0 272c0 26.5-21.5 48-48 48L48 512c-26.5 0-48-21.5-48-48L0 192zm64 80l0 32c0 8.8 7.2 16 16 16l32 0c8.8 0 16-7.2 16-16l0-32c0-8.8-7.2-16-16-16l-32 0c-8.8 0-16 7.2-16 16zm128 0l0 32c0 8.8 7.2 16 16 16l32 0c8.8 0 16-7.2 16-16l0-32c0-8.8-7.2-16-16-16l-32 0c-8.8 0-16 7.2-16 16zm144-16c-8.8 0-16 7.2-16 16l0 32c0 8.8 7.2 16 16 16l32 0c8.8 0 16-7.2 16-16l0-32c0-8.8-7.2-16-16-16l-32 0zM64 400l0 32c0 8.8 7.2 16 16 16l32 0c8.8 0 16-7.2 16-16l0-32c0-8.8-7.2-16-16-16l-32 0c-8.8 0-16 7.2-16 16zm144-16c-8.8 0-16 7.2-16 16l0 32c0 8.8 7.2 16 16 16l32 0c8.8 0 16-7.2 16-16l0-32c0-8.8-7.2-16-16-16l-32 0zm112 16l0 32c0 8.8 7.2 16 16 16l32 0c8.8 0 16-7.2 16-16l0-32c0-8.8-7.2-16-16-16l-32 0c-8.8 0-16 7.2-16 16z"
 
-    li class="relative" data-navbar-target="main"
+    li.relative data-navbar-target="main"
       /"about" icon
       svg[
         tabindex="0"
@@ -34,7 +34,7 @@ nav[
       /dropdown menu
       ul[
         data-navbar-target="dropdown"
-      class="hidden z-50 fixed bottom-[16vw] right-0 w-full flex-col-reverse gap-2 items-center p-2 bg-card-bg text-xl md:flex-col md:items-end md:absolute md:min-w-3xs md:rounded-b-xl md:top-14 md:bottom-auto"
+        class="hidden fixed bottom-[16vw] right-0 w-full flex-col-reverse gap-2 items-center p-2 bg-card-bg text-xl md:flex-col md:items-end md:absolute md:min-w-3xs md:rounded-b-xl md:top-14 md:bottom-auto"
       ]
         li.hover:text-baro-yellow
           = link_to "Proposer un concert", "#"

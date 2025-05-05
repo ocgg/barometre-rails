@@ -20,14 +20,14 @@
   - thème sombre
 
 - backend global:
-  - job pour nettoyer les events passés
+  - job pour nettoyer les events passés (vider une table des events passés/supprimés)
   - revoir gestion user
 
 - events#index:
   - event#edit: turbo frame
-  - afficher l'année si > à l'année en cours
   - gérer les containers de jours dupliqués lors du scroll
   - gérer les permissions utilisateur
+  - bouton pour revenir en haut de page
 
 - events#new:
   - gérer la création de venues
@@ -48,10 +48,10 @@
   - glitch: gérer l'affichage de la searchbar façon v-cloak
   - insensible à la casse & accents (e = é = è...)
   - envoyer le formulaire au focus out (dates & location)
-  - lien pour enlever tous les filtres
-  - le contenu des champs doit se conserver d'une page à l'autre (cookie ?)
+  - lien pour enlever tous les filtres (au niveau de "... résultats")
   - virer les params vides de la query string (ok pour locationfilter)
-  - l'envoi du formulaire ne doit que mettre à jour la liste d'events (turbo)
+  - le contenu des champs doit se conserver d'une page à l'autre (cookie ?), ou bien:
+    - l'envoi du formulaire ne doit que mettre à jour la liste d'events (turbo)
     - du coup, pas besoin de récupérer les valeurs d'input des params. La searchbar bouge pas
 
 - datefilter (flatpickr from scratch):
