@@ -55,10 +55,7 @@
     - du coup, pas besoin de récupérer les valeurs d'input des params. La searchbar bouge pas
 
 - datefilter (flatpickr from scratch):
-  - désactiver les dates passées (options pour "n'importe quelles dates")
   - prévisualiser la range au hover
-  - couleurs bouton actif/inactif (côté baro)
-  - couleurs highlight (côté lib)
 
 - locationfilter:
   - informer le user au cas où il n'est pas localisé en Loire-Atlantique & de la précision de l'API
