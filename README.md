@@ -44,12 +44,12 @@
 
 - remplacer les alert() par des jolies modales
 
-- searchbar:
+- searchbar (général):
   - glitch: gérer l'affichage de la searchbar façon v-cloak
   - insensible à la casse & accents (e = é = è...)
   - envoyer le formulaire au focus out (dates & location)
   - lien pour enlever tous les filtres (au niveau de "... résultats")
-  - virer les params vides de la query string (ok pour locationfilter)
+  - virer le "?q=" de l'url si y'a rien dans l'input text
   - le contenu des champs doit se conserver d'une page à l'autre (cookie ?), ou bien:
     - l'envoi du formulaire ne doit que mettre à jour la liste d'events (turbo)
     - du coup, pas besoin de récupérer les valeurs d'input des params. La searchbar bouge pas
@@ -59,7 +59,6 @@
   - prévisualiser la range au hover
   - couleurs bouton actif/inactif (côté baro)
   - couleurs highlight (côté lib)
-  - texte du btn quand une seule date est choisie
 
 - locationfilter:
   - informer le user au cas où il n'est pas localisé en Loire-Atlantique & de la précision de l'API
