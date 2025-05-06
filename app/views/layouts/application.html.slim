@@ -32,10 +32,12 @@ html
         p Logged in as:  #{current_user.email_address} (#{current_user.role})
         = link_to 'Logout', session_path, class: "btn", method: :delete, data: {turbo_method: :delete}
 
-      search.relative.w-full.max-md:h-43.md:h-10
-        = form_with(method: :get, class: "absolute w-full flex items-center flex-col max-md:gap-8 md:w-full md:flex-row md:justify-between") do |form|
-          = render "shared/date_filter", form:
-          = render "shared/location_filter", form:
-          = render "shared/search_bar", form:
+      = turbo_frame_tag :searchform, target: :events
+        search.relative.w-full.max-md:h-43.md:h-10
+          = form_with(class: "absolute w-full flex items-center flex-col max-md:gap-8 md:w-full md:flex-row md:justify-between",
+            method: :get) do |form|
+            = render "shared/date_filter", form:
+            = render "shared/location_filter", form:
+            = render "shared/search_bar", form:
 
       = yield
