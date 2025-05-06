@@ -23,8 +23,8 @@ export default class extends Controller {
     );
     this.render = new Renderer(this.dates);
 
+    this.mainContainerTarget.classList.toggle(this.render.css.calendarContainer, this.active);
     this.updateValuesAndText()
-
     this.renderCalendar();
     this.updateElementSize();
   }
@@ -46,11 +46,13 @@ export default class extends Controller {
   activate() {
     this.startDateInputTarget.disabled = false;
     this.endDateInputTarget.disabled = false;
+    this.mainContainerTarget.classList.toggle(this.render.css.calendarContainer, true);
   }
 
   desactivate() {
     this.startDateInputTarget.disabled = true;
     this.endDateInputTarget.disabled = true;
+    this.mainContainerTarget.classList.toggle(this.render.css.calendarContainer, this.visible);
   }
 
   updateElementSize() {
@@ -62,7 +64,7 @@ export default class extends Controller {
   setVisible(bool) {
     this.calendarContainerTarget.classList.toggle("hidden", !bool);
     this.mainContainerTarget.classList.toggle("max-md:translate-x-[-25%]", bool);
-    this.mainContainerTarget.classList.toggle(this.render.css.calendarContainer, bool);
+    this.mainContainerTarget.classList.toggle(this.render.css.calendarContainer, bool || this.active);
     if (!bool) this.updateElementSize();
   }
 
@@ -109,8 +111,8 @@ export default class extends Controller {
   selectDate(event) {
     event.stopPropagation();
     if (!this.active) this.activate();
-    const selectedDate = new Date(event.currentTarget.dataset.date);
 
+    const selectedDate = new Date(event.currentTarget.dataset.date);
     if (!this.dates.start || this.dates.startAndEnd) {
       this.updateDates(selectedDate, null);
     }
