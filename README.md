@@ -29,6 +29,10 @@
   - gérer les permissions utilisateur
   - bouton pour revenir en haut de page
 
+- events#unverified:
+  - faire comme events#index
+  - lien sur la navbar si admin connecté
+
 - events#new:
   - gérer la création de venues
   - option pour supprimer le lieu de la DB après la date de l'événement (par ex. en cas de concert chez l'habitant)
@@ -49,10 +53,7 @@
   - insensible à la casse & accents (e = é = è...)
   - envoyer le formulaire au focus out (dates & location)
   - lien pour enlever tous les filtres (au niveau de "... résultats")
-  - virer le "?q=" de l'url si y'a rien dans l'input text
-  - le contenu des champs doit se conserver d'une page à l'autre (cookie ?), ou bien:
-    - l'envoi du formulaire ne doit que mettre à jour la liste d'events (turbo)
-    - du coup, pas besoin de récupérer les valeurs d'input des params. La searchbar bouge pas
+  - le contenu des champs doit se conserver d'une page à l'autre
 
 - datefilter (flatpickr from scratch):
   - prévisualiser la range au hover
