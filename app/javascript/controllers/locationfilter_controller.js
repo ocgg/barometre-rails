@@ -115,9 +115,9 @@ export default class extends Controller {
     this.show();
   }
 
-  onLocalizationError() {
+  onLocalizationError(err) {
     this.hideSpinner();
-    alert("La localisation a échoué. Essayez d'activer la géolocalisation sur votre appareil")
+    alert(`La localisation a échoué avec l'erreur suivante: \n\n ${err.message}`)
   }
 
   showSpinner() { this.spinnerTarget.classList.remove("hidden"); }
