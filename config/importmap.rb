@@ -5,6 +5,6 @@ pin "@hotwired/turbo-rails", to: "turbo.min.js"
 pin "@hotwired/stimulus", to: "stimulus.min.js"
 pin "@hotwired/stimulus-loading", to: "stimulus-loading.js"
 
-pin "lib/ocgg-datepicker/dates_manager"
+pin_all_from "app/javascript/ocgg-datepicker", under: "datepicker", to: "ocgg-datepicker"
 
 pin_all_from "app/javascript/controllers", under: "controllers"
