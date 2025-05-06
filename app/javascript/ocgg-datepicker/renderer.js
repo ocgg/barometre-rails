@@ -2,18 +2,18 @@ export default class Renderer {
   constructor(dates) {
     this.dates = dates;
 
-    const baseDayClassList = "flex h-[46px] w-[46px] items-center justify-center rounded-full mb-1";
-    const activeDayClassList = `${baseDayClassList} hover:bg-baro-yellow cursor-pointer`;
+    const base = "flex h-[46px] w-[46px] items-center justify-center rounded-full mb-1";
+    const active = `${base} hover:bg-baro-yellow cursor-pointer`;
 
     this.css = {
       calendarContainer: "bg-card-bg",
-      currentMonthDay: activeDayClassList,
-      otherMonthDay: `${activeDayClassList} text-fgcolor-faded`,
-      selectedDay: `${activeDayClassList} bg-baro-yellow rounded-none`,
-      selectedStartDay: `${activeDayClassList} bg-baro-yellow rounded-r-none`,
-      selectedEndDay: `${activeDayClassList} bg-baro-yellow rounded-l-none`,
-      onlySelectedDay: `${activeDayClassList} bg-baro-yellow rounded-full`,
-      nonSelectableDay: `${baseDayClassList} text-baro-yellow opacity-50 rounded-none`,
+      currentMonthDay: active,
+      otherMonthDay: `${active} text-fgcolor-faded`,
+      selectedDay: `${active} bg-fgcolor text-bgcolor rounded-none`,
+      selectedStartDay: `${active} bg-fgcolor text-bgcolor rounded-r-none`,
+      selectedEndDay: `${active} bg-fgcolor text-bgcolor rounded-l-none`,
+      onlySelectedDay: `${active} bg-fgcolor text-bgcolor rounded-full`,
+      nonSelectableDay: `${base} opacity-15 rounded-none`,
     };
   }
 
