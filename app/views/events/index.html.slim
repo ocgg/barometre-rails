@@ -5,7 +5,7 @@
     - if @pagy.count.zero?
       p.text-center.text-xl Aucun résultat
     - elsif request.query_parameters.compact_blank.any?
-      p.-mt-13.-mb-13.text-center #{@pagy.count} résultats
+      p.-mt-13.-mb-13.text-center #{@pagy.count} résultat#{"s" if @pagy.count > 1}
 
     = render "events/events_list"
 
