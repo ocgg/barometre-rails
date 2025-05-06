@@ -1,7 +1,7 @@
 = turbo_stream.append "events_days_container" do
   
-    = render "events/events_list"
+  = render "events/events_list"
 
-- if @pagy.next.present?
-  = turbo_stream.replace :more_results do
-    = turbo_frame_tag :more_results, src: events_path(**@params, page: @pagy.next, format: :turbo_stream), loading: :lazy
+  - if @pagy.next.present?
+    = turbo_stream.replace :next_page do
+      = turbo_frame_tag :next_page, src: events_path(**@params, page: @pagy.next, format: :turbo_stream), loading: :lazy
