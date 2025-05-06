@@ -5,6 +5,9 @@ export default class DatesManager {
 
     this.current = this.start || new Date();
     this.current.setHours(0, 0, 0, 0);
+
+    this.today = new Date();
+    this.today.setHours(0, 0, 0, 0);
   }
 
   get firstDateOfMonth() {
@@ -48,6 +51,8 @@ export default class DatesManager {
   isBetween(date) { return this.startAndEnd && date > this.start && date < this.end }
 
   isInCurrentMonth(date) { return date.getMonth() === this.current.getMonth() }
+
+  isBeforeToday(date) { return date < this.today }
 
   toPrevMonth() { this.current.setMonth(this.current.getMonth() - 1) }
 

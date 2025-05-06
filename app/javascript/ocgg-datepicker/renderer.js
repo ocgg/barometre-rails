@@ -2,15 +2,18 @@ export default class Renderer {
   constructor(dates) {
     this.dates = dates;
 
-    const baseDayClassList = "hover:bg-baro-yellow flex h-[46px] w-[46px] items-center justify-center rounded-full mb-1 cursor-pointer";
+    const baseDayClassList = "flex h-[46px] w-[46px] items-center justify-center rounded-full mb-1";
+    const activeDayClassList = `${baseDayClassList} hover:bg-baro-yellow cursor-pointer`;
+
     this.css = {
       calendarContainer: "bg-card-bg",
-      currentMonthDay: baseDayClassList,
-      otherMonthDay: `${baseDayClassList} text-fgcolor-faded`,
-      selectedDay: `${baseDayClassList} bg-baro-yellow rounded-none`,
-      selectedStartDay: `${baseDayClassList} bg-baro-yellow rounded-r-none`,
-      selectedEndDay: `${baseDayClassList} bg-baro-yellow rounded-l-none`,
-      onlySelectedDay: `${baseDayClassList} bg-baro-yellow rounded-full`,
+      currentMonthDay: activeDayClassList,
+      otherMonthDay: `${activeDayClassList} text-fgcolor-faded`,
+      selectedDay: `${activeDayClassList} bg-baro-yellow rounded-none`,
+      selectedStartDay: `${activeDayClassList} bg-baro-yellow rounded-r-none`,
+      selectedEndDay: `${activeDayClassList} bg-baro-yellow rounded-l-none`,
+      onlySelectedDay: `${activeDayClassList} bg-baro-yellow rounded-full`,
+      nonSelectableDay: `${baseDayClassList} text-baro-yellow opacity-50 rounded-none`,
     };
   }
 
@@ -60,11 +63,16 @@ export default class Renderer {
   dayElementFrom(date) {
     const classList = this.classListFor(date);
     const parsableDate = this.parsableStringFrom(date);
-    return `<div class="${classList}" data-action="click->datefilter#selectDate" data-date="${parsableDate}">${date.getDate()}</div>`;
+    const isBeforeToday = this.dates.isBeforeToday(date);
+
+    const dataset = isBeforeToday ? "" : `data-action="click->datefilter#selectDate" data-date="${parsableDate}"`
+
+    return `<div class="${classList}" ${dataset}>${date.getDate()}</div>`;
   }
 
   classListFor(date) {
-    if (this.dates.isStartAndEnd(date)) return this.css.onlySelectedDay;
+    if (this.dates.isBeforeToday(date)) return this.css.nonSelectableDay;
+    else if (this.dates.isStartAndEnd(date)) return this.css.onlySelectedDay;
     else if (this.dates.isStart(date)) return this.css.selectedStartDay;
     else if (this.dates.isEnd(date)) return this.css.selectedEndDay;
     else if (this.dates.isBetween(date)) return this.css.selectedDay;
