@@ -1,28 +1,23 @@
 export default class DatesManager {
-  constructor() {
-    this.current = new Date();
+  constructor(start_str, end_str) {
+    this.start = start_str ? new Date(start_str) : null;
+    this.end = end_str ? new Date(end_str) : null;
+
+    this.current = this.start || new Date();
     this.current.setHours(0, 0, 0, 0);
-
-    this.start = null;
-    this.end = null;
-  }
-
-  get monthAndYear() {
-    const opts = { month: 'long', year: 'numeric' };
-    return this.current.toLocaleDateString('fr-FR', opts);
   }
 
   get firstDateOfMonth() {
-    const date = new Date(this.current)
-    date.setDate(1)
-    return date
+    const date = new Date(this.current);
+    date.setDate(1);
+    return date;
   }
 
   get lastDateOfMonth() {
     const date = new Date(this.current);
     date.setMonth(date.getMonth() + 1);
     date.setDate(0);
-    return date
+    return date;
   }
 
   get firstMondayBeforeMonth() {
@@ -31,60 +26,30 @@ export default class DatesManager {
 
     const firstMonday = new Date(this.current);
     firstMonday.setDate(1 - (firstWeekDayNumber - 1));
-    return firstMonday
+    return firstMonday;
   }
 
   get startAndEnd() { return !!(this.start && this.end) }
 
-  get parsableStart() { return this.parsableStringFrom(this.start) }
-
-  get parsableEnd() { return this.parsableStringFrom(this.end) }
-
-  get readableStart() { return this.readableStringFrom(this.start) }
-
-  get readableEnd() { return this.readableStringFrom(this.end) }
+  get startWithoutEnd() { return !!(this.start && !this.end) }
 
   get startEqualsEnd() {
-    return (this.startAndEnd && this.start.getTime() === this.end.getTime());
-  }
-
-  parsableStringFrom(date) {
-    const month = date.getMonth() + 1;
-    const dayNumber = date.getDate();
-    const year = date.getFullYear();
-    return `${month}-${dayNumber}-${year}`;
-  }
-
-  readableStringFrom(date) {
-    const opts = { day: "numeric", month: "long" }
-    return date.toLocaleDateString("fr-FR", opts)
+    return this.startAndEnd && this.start.getTime() === this.end.getTime();
   }
 
   isStartAndEnd(date) {
     return this.startEqualsEnd && date.getTime() === this.start.getTime();
   }
 
-  isStart(date) {
-    return this.start && date.getTime() === this.start.getTime();
-  }
+  isStart(date) { return this.start && date.getTime() === this.start.getTime() }
 
-  isEnd(date) {
-    return this.end && date.getTime() === this.end.getTime();
-  }
+  isEnd(date) { return this.end && date.getTime() === this.end.getTime() }
 
-  isBetween(date) {
-    return this.startAndEnd && date > this.start && date < this.end;
-  }
+  isBetween(date) { return this.startAndEnd && date > this.start && date < this.end }
 
-  isInCurrentMonth(date) {
-    return date.getMonth() === this.current.getMonth();
-  }
+  isInCurrentMonth(date) { return date.getMonth() === this.current.getMonth() }
 
-  toPrevMonth() {
-    this.current.setMonth(this.current.getMonth() - 1);
-  }
+  toPrevMonth() { this.current.setMonth(this.current.getMonth() - 1) }
 
-  toNextMonth() {
-    this.current.setMonth(this.current.getMonth() + 1);
-  }
+  toNextMonth() { this.current.setMonth(this.current.getMonth() + 1) }
 }
