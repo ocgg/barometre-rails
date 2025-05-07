@@ -10,7 +10,8 @@ export default class extends Controller {
     "latInput",
     "longInput",
     "clearInputBtn",
-    "spinner"
+    "spinner",
+    "submit"
   ]
 
   connect() {
@@ -124,15 +125,19 @@ export default class extends Controller {
 
   hideSpinner() { this.spinnerTarget.classList.add("hidden"); }
 
-  handleFocusOut(event) {
-    if (!this.visible) return;
-    if (this.mainContainerTarget.contains(event.target)) return;
-
-    this.hide();
-  }
+  submit() { this.submitTarget.click() }
 
   clearInput(event) {
     event.stopPropagation();
     this.desactivate();
+    this.submit();
+  }
+
+  handleFocusOut(event) {
+    if (!this.visible) return;
+    if (this.mainContainerTarget.contains(event.target)) return;
+
+    if (this.active) this.submit();
+    this.hide();
   }
 }
