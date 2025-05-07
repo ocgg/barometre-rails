@@ -38,31 +38,34 @@
   - option pour supprimer le lieu de la DB après la date de l'événement (par ex. en cas de concert chez l'habitant)
   - gestion des events récurrents
 
+- locationfilter:
+  - informer le user au cas où il n'est pas localisé en Loire-Atlantique & de la précision de l'API
+  - input steps: 1,3,5,10,15,20,30
+
 - Map: leaflet
 
 - API venues & events
 
 - license
 
+- beaucoup d'autres choses...
+
 **En cours:**
 
 - remplacer les alert() par des jolies modales
 
+- refacto events_controller
+
 - searchbar (général):
   - glitch: gérer l'affichage de la searchbar façon v-cloak
   - insensible à la casse & accents (e = é = è...)
-  - envoyer le formulaire au focus out (dates & location)
   - lien pour enlever tous les filtres (au niveau de "... résultats")
-  - le contenu des champs doit se conserver d'une page à l'autre
+  - conserver la recherche d'une page à l'autre
 
 - datefilter (flatpickr from scratch):
   - prévisualiser la range au hover
-
-- locationfilter:
-  - informer le user au cas où il n'est pas localisé en Loire-Atlantique & de la précision de l'API
-  - input steps: 1,3,5,10,15,20,30
-
-- beaucoup d'autres choses...
+  - ne pas pouvoir sélectionner les mois passés
+  - +: css sur le premier jour sélectionné sur sélection du mois en cours
 
 ## Vagues idées du futur
 

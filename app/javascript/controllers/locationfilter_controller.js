@@ -114,6 +114,7 @@ export default class extends Controller {
     this.longInputTarget.value = position.coords.longitude;
     this.activate();
     this.show();
+    this.submit();
   }
 
   onLocalizationError(err) {
@@ -137,7 +138,8 @@ export default class extends Controller {
     if (!this.visible) return;
     if (this.mainContainerTarget.contains(event.target)) return;
 
-    if (this.active) this.submit();
     this.hide();
   }
+
+  onPointerUp() { this.submit() }
 }
