@@ -78,7 +78,7 @@ export default class extends Controller {
 
   updateValuesAndText() {
     if (this.dates.startEqualsEnd) this.setStartEqualsEndValuesAndText();
-    else if (this.dates.startWithoutEnd) this.setStartWithoutAndValuesAndText();
+    else if (this.dates.startWithoutEnd) this.setStartWithoutEndValuesAndText();
     else if (this.dates.startAndEnd) this.setStartAndEndValuesAndText();
     else this.setNoStartNoEndValuesAndText();
   }
@@ -90,10 +90,10 @@ export default class extends Controller {
     this.clearInputBtnTarget.classList.toggle("hidden", false);
   }
 
-  setStartWithoutAndValuesAndText() {
+  setStartWithoutEndValuesAndText() {
     this.startDateInputTarget.value = this.render.parsableStart;
     this.endDateInputTarget.value = this.render.parsableStart;
-    this.buttonTarget.textContent = this.render.readableStart;
+    this.buttonTarget.textContent = `${this.render.readableStart} ➞ ...`;
     this.clearInputBtnTarget.classList.toggle("hidden", false);
   }
 
@@ -115,18 +115,20 @@ export default class extends Controller {
 
   selectDate(event) {
     event.stopPropagation();
-    if (!this.active) this.activate();
 
     const selectedDate = new Date(event.currentTarget.dataset.date);
     if (!this.dates.start || this.dates.startAndEnd) {
       this.updateDates(selectedDate, null);
+      if (this.active) this.desactivate();
     }
     else if (selectedDate < this.dates.start) {
       this.updateDates(selectedDate, this.dates.start);
+      if (!this.active) this.activate();
       this.submit();
     }
     else {
       this.updateDates(this.dates.start, selectedDate);
+      if (!this.active) this.activate();
       this.submit();
     }
   }
@@ -163,10 +165,6 @@ export default class extends Controller {
     if (!this.visible) return;
     if (this.mainContainerTarget.contains(event.target)) return;
 
-    if (this.dates.startWithoutEnd) {
-      this.updateDates(this.dates.start, this.dates.start);
-      this.submit();
-    }
     this.setVisible(false);
   }
 }
