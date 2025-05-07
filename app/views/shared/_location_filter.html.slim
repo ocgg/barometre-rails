@@ -44,7 +44,7 @@ div.relative.whitespace-nowrap  data-controller="locationfilter" data-action="cl
         value: @radius,
         disabled: !@radius,
         data: { locationfilter_target: "radiusInput",
-          action: "input->locationfilter#onRadiusInput" },
+          action: "input->locationfilter#onRadiusInput pointerup->locationfilter#onPointerUp" },
         in: 2..30, step: 2
       a.text-center.text-fgcolor-faded.text-sm.hover:text-baro-yellow data-action="click->locationfilter#requestLocation"
         | Mettre à jour ma position
