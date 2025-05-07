@@ -13,7 +13,8 @@ export default class extends Controller {
     "daysContainer",
     "monthName", "prevMonth", "nextMonth",
     "clearInputBtn",
-    "dayTemplate"
+    "dayTemplate",
+    "submit"
   ]
 
   connect() {
@@ -37,6 +38,13 @@ export default class extends Controller {
 
   get endDate() { return this.endDateInputTarget.value }
 
+  setVisible(bool) {
+    this.calendarContainerTarget.classList.toggle("hidden", !bool);
+    this.mainContainerTarget.classList.toggle("max-md:translate-x-[-25%]", bool);
+    this.mainContainerTarget.classList.toggle(this.render.css.calendarContainer, bool || this.active);
+    if (!bool) this.updateElementSize();
+  }
+
   renderCalendar() {
     this.daysContainerTarget.innerHTML = '';
     this.monthNameTarget.textContent = this.render.monthName;
@@ -57,20 +65,8 @@ export default class extends Controller {
 
   updateElementSize() {
     const size = this.mainContainerTarget.getBoundingClientRect();
-    this.element.style.width = `${Math.floor(size.width)}px`
-    this.element.style.height = `${Math.floor(size.height)}px`
-  }
-
-  setVisible(bool) {
-    this.calendarContainerTarget.classList.toggle("hidden", !bool);
-    this.mainContainerTarget.classList.toggle("max-md:translate-x-[-25%]", bool);
-    this.mainContainerTarget.classList.toggle(this.render.css.calendarContainer, bool || this.active);
-    if (!bool) this.updateElementSize();
-  }
-
-  resetButtonText() {
-    this.buttonTarget.textContent = "Filtrer par date";
-    this.clearInputBtnTarget.classList.toggle("hidden", true);
+    this.element.style.width = `${Math.floor(size.width)}px`;
+    this.element.style.height = `${Math.floor(size.height)}px`;
   }
 
   updateDates(start, end) {
@@ -81,29 +77,38 @@ export default class extends Controller {
   }
 
   updateValuesAndText() {
-    if (this.dates.startEqualsEnd) {
-      this.startDateInputTarget.value = this.render.parsableStart;
-      this.endDateInputTarget.value = this.render.parsableEnd;
-      this.buttonTarget.textContent = this.render.readableStart;
-      this.clearInputBtnTarget.classList.toggle("hidden", false);
-    }
-    else if (this.dates.startWithoutEnd) {
-      this.startDateInputTarget.value = this.render.parsableStart;
-      this.endDateInputTarget.value = this.render.parsableStart;
-      this.buttonTarget.textContent = this.render.readableStart;
-      this.clearInputBtnTarget.classList.toggle("hidden", false);
-    }
-    else if (this.dates.startAndEnd) {
-      this.startDateInputTarget.value = this.render.parsableStart;
-      this.endDateInputTarget.value = this.render.parsableEnd;
-      this.buttonTarget.textContent = `${this.render.readableStart} ➞ ${this.render.readableEnd}`;
-      this.clearInputBtnTarget.classList.toggle("hidden", false);
-    }
-    else {
-      this.startDateInputTarget.value = null;
-      this.endDateInputTarget.value = null;
-      this.resetButtonText();
-    }
+    if (this.dates.startEqualsEnd) this.setStartEqualsEndValuesAndText();
+    else if (this.dates.startWithoutEnd) this.setStartWithoutAndValuesAndText();
+    else if (this.dates.startAndEnd) this.setStartAndEndValuesAndText();
+    else this.setNoStartNoEndValuesAndText();
+  }
+
+  setStartEqualsEndValuesAndText() {
+    this.startDateInputTarget.value = this.render.parsableStart;
+    this.endDateInputTarget.value = this.render.parsableEnd;
+    this.buttonTarget.textContent = this.render.readableStart;
+    this.clearInputBtnTarget.classList.toggle("hidden", false);
+  }
+
+  setStartWithoutAndValuesAndText() {
+    this.startDateInputTarget.value = this.render.parsableStart;
+    this.endDateInputTarget.value = this.render.parsableStart;
+    this.buttonTarget.textContent = this.render.readableStart;
+    this.clearInputBtnTarget.classList.toggle("hidden", false);
+  }
+
+  setStartAndEndValuesAndText() {
+    this.startDateInputTarget.value = this.render.parsableStart;
+    this.endDateInputTarget.value = this.render.parsableEnd;
+    this.buttonTarget.textContent = `${this.render.readableStart} ➞ ${this.render.readableEnd}`;
+    this.clearInputBtnTarget.classList.toggle("hidden", false);
+  }
+
+  setNoStartNoEndValuesAndText() {
+    this.startDateInputTarget.value = null;
+    this.endDateInputTarget.value = null;
+    this.buttonTarget.textContent = "Filtrer par date";
+    this.clearInputBtnTarget.classList.toggle("hidden", true);
   }
 
   onButtonClick(_) { this.setVisible(!this.visible) }
@@ -118,11 +123,15 @@ export default class extends Controller {
     }
     else if (selectedDate < this.dates.start) {
       this.updateDates(selectedDate, this.dates.start);
+      this.submit();
     }
     else {
       this.updateDates(this.dates.start, selectedDate);
+      this.submit();
     }
   }
+
+  submit() { this.submitTarget.click() }
 
   setPrevMonth(_) {
     this.dates.toPrevMonth();
@@ -139,19 +148,25 @@ export default class extends Controller {
     const start = this.dates.firstDateOfMonth;
     const end = this.dates.lastDateOfMonth;
     this.updateDates(start, end);
+    this.submit();
   }
 
   clearInput(event) {
     event.stopPropagation();
     this.updateDates(null, null);
     this.desactivate();
-    if (!this.visible) this.updateElementSize();
+    this.setVisible(false);
+    this.submit();
   }
 
   handleFocusOut(event) {
     if (!this.visible) return;
     if (this.mainContainerTarget.contains(event.target)) return;
 
+    if (this.dates.startWithoutEnd) {
+      this.updateDates(this.dates.start, this.dates.start);
+      this.submit();
+    }
     this.setVisible(false);
   }
 }

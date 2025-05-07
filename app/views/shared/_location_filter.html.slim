@@ -1,6 +1,7 @@
 div.relative.whitespace-nowrap  data-controller="locationfilter" data-action="click@window->locationfilter#handleFocusOut"
 
   div.btn.px-2.absolute.z-10  data-locationfilter-target="mainContainer"
+    = form.submit "", class: "hidden", data: {locationfilter_target: "submit"}
 
     div.flex.gap-2.items-center data-action="click->locationfilter#onButtonClick"
       = form.hidden_field :lat,
@@ -20,7 +21,7 @@ div.relative.whitespace-nowrap  data-controller="locationfilter" data-action="cl
       div.hidden data-locationfilter-target="spinner" role="status"
         svg[
           aria-hidden="true"
-          class="w-5 h-5 text-fgcolor-faded animate-spin fill-fgcolor"
+          class="w-4 h-4 text-fgcolor-faded animate-spin fill-fgcolor"
           viewBox="0 0 100 101"
           fill="none"
         ]
