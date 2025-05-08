@@ -11,6 +11,8 @@ class EventPolicy < ApplicationPolicy
 
   def new? = index?
 
+  def create? = new?
+
   def edit? = @user.admin?
 
   def verify? = edit?

@@ -20,11 +20,11 @@ class EventsController < ApplicationController
   end
 
   def new
-    @event = authorize Event.new
+    authorize Event
   end
 
-  # def create
-  # end
+  def create
+  end
 
   # def edit
   # end
