@@ -9,6 +9,10 @@ class EventPolicy < ApplicationPolicy
 
   def calendar? = index?
 
+  def new? = index?
+
+  def create? = new?
+
   def edit? = @user.admin?
 
   def verify? = edit?

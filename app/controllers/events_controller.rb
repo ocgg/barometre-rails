@@ -19,14 +19,21 @@ class EventsController < ApplicationController
   def calendar
   end
 
-  # def new
-  # end
-  #
-  # def create
-  # end
-  #
+  def new
+    authorize Event
+  end
+
+  def create
+    # for each submitted event:
+    # get strong params
+    # check if venue exists
+    # if not, create it
+    # then create event
+  end
+
   # def edit
   # end
+
   # def update
   # end
 
@@ -58,5 +65,9 @@ class EventsController < ApplicationController
 
   def set_event
     @event = authorize Event.find(params[:id])
+  end
+
+  def event_params
+    params.expect(event: [:name, :description, :tarif, venue: [:name]])
   end
 end

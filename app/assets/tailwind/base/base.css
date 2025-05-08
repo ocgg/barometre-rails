@@ -34,6 +34,15 @@
   label[for] {
     cursor: pointer;
   }
+  
+  p a {
+    text-decoration: underline;
+    text-decoration-style: dotted;
+    
+    &:hover {
+      @apply text-baro-yellow;
+    }
+  }
 
   input {
     border: 2px solid var(--color-fgcolor-faded);
