@@ -19,14 +19,16 @@ class EventsController < ApplicationController
   def calendar
   end
 
-  # def new
-  # end
-  #
+  def new
+    @event = authorize Event.new
+  end
+
   # def create
   # end
-  #
+
   # def edit
   # end
+
   # def update
   # end
 
