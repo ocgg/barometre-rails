@@ -8,7 +8,7 @@ section.event-day
       div class="flex-[0_1_30%] flex justify-center"
         svg viewBox="0 0 320 512": path d="M48.1 240c-.1 2.7-.1 5.3-.1 8l0 16c0 2.7 0 5.3 .1 8L32 272c-17.7 0-32 14.3-32 32s14.3 32 32 32l28.3 0C89.9 419.9 170 480 264 480l24 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-24 0c-57.9 0-108.2-32.4-133.9-80L256 336c17.7 0 32-14.3 32-32s-14.3-32-32-32l-143.8 0c-.1-2.6-.2-5.3-.2-8l0-16c0-2.7 .1-5.4 .2-8L256 240c17.7 0 32-14.3 32-32s-14.3-32-32-32l-125.9 0c25.7-47.6 76-80 133.9-80l24 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-24 0C170 32 89.9 92.1 60.3 176L32 176c-17.7 0-32 14.3-32 32s14.3 32 32 32l16.1 0z"
 
-  = form_with url: events_path, method: :post do |f|
+  = form_with model: Event.new, url: events_path, method: :post do |f|
     ul.events-list
       li
         article.event-card.bg-card-bg.p-2.items-center
@@ -36,11 +36,12 @@ section.event-day
                 /Location label
                 svg.h-4.fill-fgcolor viewBox="0 0 384 512": path d="M215.7 499.2C267 435 384 279.4 384 192C384 86 298 0 192 0S0 86 0 192c0 87.4 117 243 168.3 307.2c12.3 15.3 35.1 15.3 47.4 0zM192 128a64 64 0 1 1 0 128 64 64 0 1 1 0-128z"
 
-              = f.text_field :venue_name,
-                class: "venue-name w-full",
-                placeholder: "Chercher un lieu..."
-              p.md-venue-address Adresse si lieu trouvé
-              p.venue-city Ville si lieu trouvé
+              = f.fields_for :venue do |venue_form|
+                = venue_form.text_field :name,
+                  class: "venue-name w-full",
+                  placeholder: "Chercher un lieu..."
+                p.md-venue-address Adresse si lieu trouvé
+                p.venue-city Ville si lieu trouvé
 
             div.md-tarif
               = f.text_field :tarif,
