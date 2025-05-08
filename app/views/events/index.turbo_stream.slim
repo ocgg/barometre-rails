@@ -4,4 +4,6 @@
 
   - if @pagy.next.present?
     = turbo_stream.replace :next_page do
-      = turbo_frame_tag :next_page, src: events_path(**@params, page: @pagy.next, format: :turbo_stream), loading: :lazy
+      = turbo_frame_tag :next_page,
+        src: events_path(**@query_params, page: @pagy.next, format: :turbo_stream),
+        loading: :lazy
