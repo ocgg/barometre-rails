@@ -36,10 +36,7 @@ class EventsController < ApplicationController
   end
 
   def destroy
-    message = "Supprimé: #{@event.name} (#{@event.venue.name}, #{@event.venue.city})"
-    replacing_frame = "<p class=\"text-fgcolor-faded text-center text-sm\">#{message}</p>"
     @event.destroy
-    render turbo_stream: [turbo_stream.replace(@event, replacing_frame)]
   end
 
   private
