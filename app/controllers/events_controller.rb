@@ -1,6 +1,5 @@
 class EventsController < ApplicationController
   allow_unauthenticated_access
-  before_action :set_params, only: %i[index map calendar]
   before_action :set_events, only: %i[index map calendar]
   before_action :set_event, only: %i[verify destroy]
 
@@ -45,29 +44,11 @@ class EventsController < ApplicationController
 
   private
 
-  def set_params
-    @params = request.query_parameters
-    if @params[:start].present?
-      @start = Date.strptime(@params[:start], "%m-%d-%Y")
-      @end = @params[:end].present? ? Date.strptime(@params[:end], "%m-%d-%Y") : @start
-      @end += 1.day
-    end
-    @q = @params[:q]
-    @lat = @params[:lat]
-    @long = @params[:long]
-    @radius = @params[:radius]
-  end
-
   def set_events
-    events = @start ? Event.between(@start, @end) : Event
-    if @radius
-      venues = Venue.near([@lat, @long], @radius, units: :km)
-      events = events.where(venue: venues.to_a)
-    end
-    events = events.search(@q) if @q
-    events = authorize policy_scope(events)
-
-    @pagy, @events = pagy(events, limit: 50, count: events.count)
+    @query_params = request.query_parameters.compact_blank
+    @events = Event.filter_with_params(@query_params)
+    @events = authorize policy_scope(@events)
+    @pagy, @events = pagy(@events, limit: 50, count: @events.count)
     set_events_days
   end
 
