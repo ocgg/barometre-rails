@@ -12,38 +12,49 @@ section.event-day
     ul.events-list
       - @events.each do |event|
         li
-          = fields_for "events[]", event do |f|
+          = fields_for "events[]", event do |event_form|
             article.event-card.bg-card-bg.p-2.items-center
               div.btn.w-fit.p-2.font-quicksand.rounded-lg.bg-fgcolor.text-bgcolor
-                = f.hidden_field :date
+                /= event_form.hidden_field :date
                 div.flex.gap-2.items-center
                   svg.w-4.fill-bgcolor viewBox="0 0 448 512": path d="M128 0c17.7 0 32 14.3 32 32l0 32 128 0 0-32c0-17.7 14.3-32 32-32s32 14.3 32 32l0 32 48 0c26.5 0 48 21.5 48 48l0 48L0 160l0-48C0 85.5 21.5 64 48 64l48 0 0-32c0-17.7 14.3-32 32-32zM0 192l448 0 0 272c0 26.5-21.5 48-48 48L48 512c-26.5 0-48-21.5-48-48L0 192zm64 80l0 32c0 8.8 7.2 16 16 16l32 0c8.8 0 16-7.2 16-16l0-32c0-8.8-7.2-16-16-16l-32 0c-8.8 0-16 7.2-16 16zm128 0l0 32c0 8.8 7.2 16 16 16l32 0c8.8 0 16-7.2 16-16l0-32c0-8.8-7.2-16-16-16l-32 0c-8.8 0-16 7.2-16 16zm144-16c-8.8 0-16 7.2-16 16l0 32c0 8.8 7.2 16 16 16l32 0c8.8 0 16-7.2 16-16l0-32c0-8.8-7.2-16-16-16l-32 0zM64 400l0 32c0 8.8 7.2 16 16 16l32 0c8.8 0 16-7.2 16-16l0-32c0-8.8-7.2-16-16-16l-32 0c-8.8 0-16 7.2-16 16zm144-16c-8.8 0-16 7.2-16 16l0 32c0 8.8 7.2 16 16 16l32 0c8.8 0 16-7.2 16-16l0-32c0-8.8-7.2-16-16-16l-32 0zm112 16l0 32c0 8.8 7.2 16 16 16l32 0c8.8 0 16-7.2 16-16l0-32c0-8.8-7.2-16-16-16l-32 0c-8.8 0-16 7.2-16 16z"
                   span.text-lg Date
                 div.flex.gap-2.items-center
                   svg.w-4.fill-bgcolor viewBox="0 0 512 512": path d="M464 256A208 208 0 1 1 48 256a208 208 0 1 1 416 0zM0 256a256 256 0 1 0 512 0A256 256 0 1 0 0 256zM232 120l0 136c0 8 4 15.5 10.7 20l96 64c11 7.4 25.9 4.4 33.3-6.7s4.4-25.9-6.7-33.3L280 243.2 280 120c0-13.3-10.7-24-24-24s-24 10.7-24 24z"
                   span.text-lg Heure
+                = event_form.datetime_field :date
 
               div.event-card-main
                 div.name-desc-ctn.flex.flex-col.gap-2
-                  = f.text_field :name,
+                  = event_form.text_field :name,
                     class: "name w-full",
                     placeholder: "Nom de l'artiste ou de l'événement"
-                  = f.text_field :description,
+                  = event_form.text_field :description,
                     class: "description w-full",
                     placeholder: "(Optionnel) Courte description, infos complémentaires..."
                 div.venue-name-address-ctn
                   div.md:hidden
                     /Location label
                     svg.h-4.fill-fgcolor viewBox="0 0 384 512": path d="M215.7 499.2C267 435 384 279.4 384 192C384 86 298 0 192 0S0 86 0 192c0 87.4 117 243 168.3 307.2c12.3 15.3 35.1 15.3 47.4 0zM192 128a64 64 0 1 1 0 128 64 64 0 1 1 0-128z"
-                  = f.text_field :venue,
-                    class: "venue-name w-full",
-                    placeholder: "Chercher un lieu..."
-                  p.md-venue-address Adresse si lieu trouvé
-                  p.venue-city Ville si lieu trouvé
+
+                  = fields_for "events[][venue]" do |venue_form|
+                    /= venue_form.text_field :name,
+                      class: "venue-name w-full",
+                      placeholder: "Chercher un lieu..."
+                    = venue_form.collection_select :id, Venue.all, :id, :name
+                    p.md-venue-address Adresse si lieu trouvé
+                    p.venue-city Ville si lieu trouvé
                 div.md-tarif
-                  = f.text_field :tarif,
+                  = event_form.text_field :tarif,
                     class: "w-full",
                     placeholder: "Tarif (optionnel)"
+          div.pl-4
+            - event.errors&.each do |error|
+              p.flex.gap-2.justify-center
+                svg.h-5.fill-fgcolor viewBox="0 0 512 512": path d="M256 32c14.2 0 27.3 7.5 34.5 19.8l216 368c7.3 12.4 7.3 27.7 .2 40.1S486.3 480 472 480L40 480c-14.3 0-27.6-7.7-34.7-20.1s-7-27.8 .2-40.1l216-368C228.7 39.5 241.8 32 256 32zm0 128c-13.3 0-24 10.7-24 24l0 112c0 13.3 10.7 24 24 24s24-10.7 24-24l0-112c0-13.3-10.7-24-24-24zm32 224a32 32 0 1 0 -64 0 32 32 0 1 0 64 0z"
+                = error.full_message
+
+      
 
     div.flex.justify-center
       svg.h-10.fill-fgcolor.my-5 viewBox="0 0 512 512": path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM232 344l0-64-64 0c-13.3 0-24-10.7-24-24s10.7-24 24-24l64 0 0-64c0-13.3 10.7-24 24-24s24 10.7 24 24l0 64 64 0c13.3 0 24 10.7 24 24s-10.7 24-24 24l-64 0 0 64c0 13.3-10.7 24-24 24s-24-10.7-24-24z"
@@ -56,4 +67,5 @@ section.event-day
           p.font-source.italic
             |> Si vous avez fait une erreur ou si votre événement est annulé, merci de
             = link_to "nous contacter", contact_path
-      = form.submit "Envoyer", class: "btn py-1 px-16 md:px-8 bg-fgcolor text-baro-yellow font-quicksand"
+      = form.submit "Envoyer", data: {turbo: false},
+        class: "btn py-1 px-16 md:px-8 bg-fgcolor text-baro-yellow font-quicksand"
