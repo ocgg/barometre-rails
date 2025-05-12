@@ -5,6 +5,6 @@
   br
   = form.password_field :password, required: true, autocomplete: "current-password", placeholder: "Enter your password", maxlength: 72
   br
-  = form.submit "Sign in"
+  = form.submit "Sign in", data: {turbo: false}
 br
 = link_to "Forgot password?", new_password_path

@@ -4,6 +4,12 @@ nav[
   class="fixed z-50 bottom-0 w-screen px-[10vw] py-[3vw] bg-fgcolor md:w-fit md:px-0 md:py-4 md:static"
 ]
   ul.flex.justify-between.md:gap-12
+    - if current_user.admin?
+      /Unverified icon
+      li
+        = link_to unverified_path, class: "block"
+          svg class="#{navbar_btn_color('unverified')} h-[10vw] md:h-10" viewBox="0 0 512 512"
+            path d="M256 48a208 208 0 1 1 0 416 208 208 0 1 1 0-416zm0 464A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM175 175c-9.4 9.4-9.4 24.6 0 33.9l47 47-47 47c-9.4 9.4-9.4 24.6 0 33.9s24.6 9.4 33.9 0l47-47 47 47c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-47-47 47-47c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-47 47-47-47c-9.4-9.4-24.6-9.4-33.9 0z"
     /List icon
     li
       = link_to root_path, class: "block"
@@ -42,5 +48,8 @@ nav[
           = link_to "À propos", about_path
         li.hover:text-baro-yellow
           = link_to "Contact", contact_path
+        - if current_user.admin?
+          li.hover:text-baro-yellow
+            = button_to "Déconnexion admin", session_path, method: :delete, data: {turbo: false}
         li.hover:text-baro-yellow
           p.cursor-pointer Mode nuit
