@@ -19,10 +19,15 @@ html
   body
     /Banner
     div.bg-fgcolor
-      header.flex.justify-between.items-center.max-w-5xl.m-auto
-        h1 class="py-4 text-baro-yellow text-4xl w-full text-center md:w-fit md:text-left"
-          | BAROMÈTRE
-        = render "shared/navbar"
+      - if params[:action] == "map"
+        / header.flex.justify-between.items-center.w-5xl.m-auto
+        = render "shared/map_navbar"
+      - else
+        header.flex.justify-between.items-center.w-5xl.m-auto
+          h1 class="py-4 text-baro-yellow text-4xl w-full text-center md:w-fit md:text-left"
+            | BAROMÈTRE
+          = render "shared/map_navbar"
+
 
     main.flex.flex-col.gap-27.max-w-5xl.m-auto.mb-96.mt-27.md:mt-20.md:mb-64.md:gap-20 class="@container"
       - if %w[index map calendar unverified].include?(params[:action])
