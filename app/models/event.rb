@@ -1,8 +1,8 @@
 class Event < ApplicationRecord
   belongs_to :venue
 
-  validates :name, presence: true
-  validates :date, presence: true
+  validates :name, presence: {message: "Le nom est obligatoire."}
+  validates :date, presence: {message: "La date et l'heure sont obligatoires."}
 
   def verified? = verified
 
