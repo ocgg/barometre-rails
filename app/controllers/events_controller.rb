@@ -20,15 +20,30 @@ class EventsController < ApplicationController
   end
 
   def new
+    @events = [Event.new]
     authorize Event
   end
 
   def create
-    # for each submitted event:
-    # get strong params
-    # check if venue exists
-    # if not, create it
-    # then create event
+    authorize Event
+
+    @events = events_params.map do |attr|
+      venue_attr = attr.delete(:venue)
+      venue = Venue.find(venue_attr[:id])
+      # if venue don't exist, create it
+      # then create event
+      date = attr[:date].present? && Time.new("#{attr[:date]}:00")
+      Event.new(venue:, date:, **attr)
+    end
+
+    valid = @events.map(&:valid?)
+
+    if valid.all?
+      @events.each(&:save)
+      redirect_to root_path
+    else
+      render :new, status: :unprocessable_entity
+    end
   end
 
   # def edit
@@ -67,7 +82,7 @@ class EventsController < ApplicationController
     @event = authorize Event.find(params[:id])
   end
 
-  def event_params
-    params.expect(event: [:name, :description, :tarif, venue: [:name]])
+  def events_params
+    params.expect(events: [[:date, :name, :description, :tarif, {venue: [:name, :id]}]])
   end
 end
