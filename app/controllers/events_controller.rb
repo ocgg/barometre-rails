@@ -36,7 +36,9 @@ class EventsController < ApplicationController
       Event.new(venue:, date:, **attr)
     end
 
-    if @events.all?(&:valid?)
+    valid = @events.map(&:valid?)
+
+    if valid.all?
       @events.each(&:save)
       redirect_to root_path
     else
