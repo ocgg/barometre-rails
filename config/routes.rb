@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   # get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
 
   resource :session
-  resources :passwords, param: :token
+  resources :passwords, param: :token, only: %i[new create]
 
   # Defines the root path route ("/")
   root "events#index"
@@ -20,6 +20,8 @@ Rails.application.routes.draw do
       patch :verify
     end
   end
+
+  get :team, to: "sessions#new"
 
   get :unverified, to: "events#unverified"
   get :map, to: "events#map"
