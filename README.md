@@ -31,7 +31,6 @@
 
 - events#unverified:
   - faire comme events#index
-  - lien sur la navbar si admin connecté
 
 - events#new:
   - gérer la création de venues
@@ -53,8 +52,6 @@
 **En cours:**
 
 - remplacer les alert() par des jolies modales
-
-- refacto events_controller
 
 - searchbar (général):
   - glitch: gérer l'affichage de la searchbar façon v-cloak
