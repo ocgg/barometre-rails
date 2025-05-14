@@ -32,36 +32,9 @@ section.event-day.overflow-visible
                   = event_form.text_field :description,
                     class: "description w-full",
                     placeholder: "(Optionnel) Courte description, infos complémentaires..."
-                div
-                  div.md:hidden
-                    /Location label
-                    svg.h-4.fill-fgcolor viewBox="0 0 384 512": path d="M215.7 499.2C267 435 384 279.4 384 192C384 86 298 0 192 0S0 86 0 192c0 87.4 117 243 168.3 307.2c12.3 15.3 35.1 15.3 47.4 0zM192 128a64 64 0 1 1 0 128 64 64 0 1 1 0-128z"
 
-                  div.relative.flex.flex-col.min-w-full
-                    = fields_for "events[][venue]" do |venue_form|
-                      = venue_form.text_field :venue_search,
-                        class: "venue-name font-normal peer",
-                        placeholder: "Chercher un lieu...",
-                        data: {action: "input->new-event-form#onVenueInput", new_event_form_target: "venueInput"}
-                      /= venue_form.collection_select :id, Venue.all, :id, :name
-                      div.hidden.absolute.top-10.rounded-md.bg-card-bg.border-2.border-baro-yellow[
-                        class="min-w-[inherit] peer-not-placeholder-shown:block"
-                        data-new-event-form-target="venueResults"
-                      ]
-                        div data-new-event-form-target="resultsContainer"
-                        div.hidden.p-2.italic.text-center data-new-event-form-target="noResult"
-                          | Aucun lieu trouvé
-                        div.p-2.font-bold.text-center.hover:bg-baro-yellow.hover:cursor-pointer[
-                          data-new-event-form-target="noResult"
-                        ]
-                          | Ajouter manuellement
-
-                      template data-new-event-form-target="venueTemplate"
-                        div.p-2.hover:bg-baro-yellow.hover:cursor-pointer data-action="click->new-event-form#onVenueSelect"
-                          p.venue-name
-                          p.venue-address class="whitespace-nowrap"
-                      p.venue-address Adresse si lieu trouvé
-                      p.venue-city Ville si lieu trouvé
+                div.relative.flex.flex-col
+                  = turbo_frame_tag :venue_fields, src: new_venue_path
 
                 div.md-tarif.flex-col.justify-between
                   svg.trash-btn.h-4.fill-fgcolor-faded.self-end.hover:fill-fgcolor.hover:cursor-pointer[
