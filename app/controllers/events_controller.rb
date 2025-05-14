@@ -25,6 +25,7 @@ class EventsController < ApplicationController
   end
 
   def create
+    raise
     authorize Event
 
     @events = events_params.map do |attr|

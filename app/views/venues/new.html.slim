@@ -1,26 +1,27 @@
 = turbo_frame_tag :venue_fields
-  = fields_for "events[][venue]" do |venue_form|
-    = venue_form.text_field :venue_search,
-      class: "venue-name font-normal peer",
-      placeholder: "Chercher un lieu...",
-      data: {action: "input->new-event-form#onVenueInput", new_event_form_target: "venueInput"}
-    /= venue_form.collection_select :id, Venue.all, :id, :name
-    div.hidden.absolute.top-10.rounded-md.bg-card-bg.border-2.border-baro-yellow[
-      class="peer-not-placeholder-shown:block"
-      data-new-event-form-target="venueResults"
-    ]
-      div data-new-event-form-target="resultsContainer"
-      div.hidden.p-2.italic.text-center data-new-event-form-target="noResult"
-        | Aucun lieu trouvé
-      div.p-2.font-bold.text-center.hover:bg-baro-yellow.hover:cursor-pointer[
-        data-new-event-form-target="noResult"
+  div data-controller="venue-fields"
+    = fields_for "events[][venue]" do |venue_fields|
+      = venue_fields.text_field :venue_search,
+        class: "venue-name font-normal peer",
+        placeholder: "Chercher un lieu...",
+        data: {action: "input->venue-fields#onVenueInput", venue_fields_target: "searchInput"}
+      /= venue_fields.collection_select :id, Venue.all, :id, :name
+      div.hidden.absolute.top-10.rounded-md.bg-card-bg.border-2.border-baro-yellow[
+        class="peer-not-placeholder-shown:block"
+        data-venue-fields-target="venueResults"
       ]
-        | Ajouter manuellement
+        ul data-venue-fields-target="resultsList"
+        div.hidden.p-2.italic.text-center data-venue-fields-target="noResult"
+          | Aucun lieu trouvé
+        div.p-2.font-bold.text-center.hover:bg-baro-yellow.hover:cursor-pointer[
+          data-venue-fields-target="noResult"
+        ]
+          | Ajouter manuellement
 
-    template data-new-event-form-target="venueTemplate"
-      div.p-2.hover:bg-baro-yellow.hover:cursor-pointer data-action="click->new-event-form#onVenueSelect"
-        p.venue-name
-        p.venue-address class="whitespace-nowrap"
-    p.venue-address Adresse si lieu trouvé
-    p.venue-city Ville si lieu trouvé
+      template data-venue-fields-target="template"
+        li.p-2.hover:bg-baro-yellow.hover:cursor-pointer data-action="click->venue-fields#onVenueSelect"
+          p.venue-name
+          p.venue-address class="whitespace-nowrap"
+      p.venue-address Adresse si lieu trouvé
+      p.venue-city Ville si lieu trouvé
 
