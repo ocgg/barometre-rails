@@ -1,28 +1,32 @@
 = turbo_frame_tag :venue_fields
+
   div data-controller="venue-fields"
+
     = fields_for "events[][venue]" do |venue_fields|
-      = venue_fields.hidden_field :venue_id, disabled: true, data: {venue_fields_target: "venueIdInput"}
+
+      = venue_fields.hidden_field :id, disabled: true, data: {venue_fields_target: "venueIdInput"}
+
       = venue_fields.text_field :venue_search,
-        class: "venue-name font-normal peer",
+        class: "venue-name font-normal",
         placeholder: "Chercher un lieu...",
         data: {action: "input->venue-fields#onVenueInput", venue_fields_target: "searchInput"}
-      /= venue_fields.collection_select :id, Venue.all, :id, :name
+
       div.hidden.absolute.top-10.rounded-md.bg-card-bg.border-2.border-baro-yellow[
-        class="peer-not-placeholder-shown:block"
-        data-venue-fields-target="venueResults"
+        data-venue-fields-target="dropdown"
       ]
         ul data-venue-fields-target="resultsList"
-        div.hidden.p-2.italic.text-center data-venue-fields-target="noResult"
+        div.p-2.italic.text-center data-venue-fields-target="noResult"
           | Aucun lieu trouvé
         div.p-2.font-bold.text-center.hover:bg-baro-yellow.hover:cursor-pointer[
           data-venue-fields-target="noResult"
         ]
           | Ajouter manuellement
 
-      template data-venue-fields-target="template"
-        li.p-2.hover:bg-baro-yellow.hover:cursor-pointer data-action="click->venue-fields#onVenueSelect"
-          p.venue-name
-          p.venue-address class="whitespace-nowrap"
-      p.venue-address Adresse si lieu trouvé
-      p.venue-city Ville si lieu trouvé
+        template data-venue-fields-target="template"
+          li.p-2.hover:bg-baro-yellow.hover:cursor-pointer data-action="click->venue-fields#onVenueSelect"
+            p.venue-name
+            p.venue-address class="whitespace-nowrap"
+
+      p.venue-address.italic data-venue-fields-target="address" Adresse si lieu trouvé
+      p.venue-city data-venue-fields-target="city" Ville si lieu trouvé
 
