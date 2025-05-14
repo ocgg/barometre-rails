@@ -1,6 +1,7 @@
 = turbo_frame_tag :venue_fields
   div data-controller="venue-fields"
     = fields_for "events[][venue]" do |venue_fields|
+      = venue_fields.hidden_field :venue_id, disabled: true, data: {venue_fields_target: "venueIdInput"}
       = venue_fields.text_field :venue_search,
         class: "venue-name font-normal peer",
         placeholder: "Chercher un lieu...",
