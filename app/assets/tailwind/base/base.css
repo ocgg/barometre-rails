@@ -56,6 +56,10 @@
       border-color: var(--color-baro-yellow);
     }
 
+    &:disabled {
+      @apply bg-baro-yellow-faded;
+    }
+
     &::placeholder {
       font-style: italic;
       line-height: var(--tw-leading, var(--text-sm--line-height));
