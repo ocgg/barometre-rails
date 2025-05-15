@@ -10,11 +10,12 @@ export default class extends Controller {
     "template",
     "dropdown",
     "address",
-    "city"
+    "city",
+    "clearInputBtn",
   ]
 
   onVenueInput(_) {
-    this.showDropdown();
+    this.show(this.dropdownTarget);
     this.fetchVenues();
   }
 
@@ -23,11 +24,13 @@ export default class extends Controller {
     const opts = { headers: { "Accept": "application/json" } };
     fetch(url, opts)
       .then(response => response.json())
-      .then(venues => {
-        this.venues = venues;
-        this.noResultTarget.classList.toggle("hidden", !(this.venues.length === 0));
-        this.renderVenues();
-      });
+      .then(venues => this.setAndRenderVenues(venues));
+  }
+
+  setAndRenderVenues(venues) {
+    this.venues = venues;
+    this.noResultTarget.classList.toggle("hidden", !(this.venues.length === 0));
+    this.renderVenues();
   }
 
   renderVenues() {
@@ -48,15 +51,15 @@ export default class extends Controller {
   onVenueSelect(event) {
     const venue_data = event.currentTarget.dataset;
     this.setSelectedVenue(venue_data.id);
-    this.dropdownTarget.classList.add("hidden");
+    this.hide(this.dropdownTarget);
   }
 
   setSelectedVenue(venueId) {
-    const venue = this.venues.find(venue => venue.id == venueId)
+    const venue = this.venues.find(venue => venue.id == venueId);
     this.setIdInput(venue);
-    this.setSearchInput(venue);
-    this.displaySelectedVenueInfos(venue);
-    this.hideDropdown();
+    this.unsetSearchInput(venue);
+    this.displayAddressAndCity(venue);
+    this.hide(this.dropdownTarget);
   }
 
   setIdInput(venue) {
@@ -64,28 +67,42 @@ export default class extends Controller {
     this.venueIdInputTarget.value = venue.id;
   }
 
-  setSearchInput(venue) {
-    this.searchInputTarget.value = venue.name;
-    this.searchInputTarget.disabled = true;
+  unsetIdInput() {
+    this.venueIdInputTarget.disabled = true;
+    this.venueIdInputTarget.value = "";
   }
 
-  displaySelectedVenueInfos(venue) {
+  setSearchInput() {
+    this.hideAddressAndCity();
+    this.searchInputTarget.disabled = false;
+    this.searchInputTarget.value = "";
+    this.hide(this.clearInputBtnTarget);
+    this.searchInputTarget.focus();
+  }
+
+  unsetSearchInput(venue) {
+    this.searchInputTarget.disabled = true;
+    this.searchInputTarget.value = venue.name;
+    this.show(this.clearInputBtnTarget);
+  }
+
+  displayAddressAndCity(venue) {
     this.addressTarget.innerText = venue.address;
     this.cityTarget.innerText = `${venue.city}`;
+    this.show(this.addressTarget);
+    this.show(this.cityTarget);
   }
 
-  showDropdown() {
-    this.dropdownTarget.style.display = "block"
+  hideAddressAndCity() {
+    this.hide(this.addressTarget);
+    this.hide(this.cityTarget);
   }
 
-  hideDropdown() {
-    this.dropdownTarget.style.display = "none"
-  }
+  hide(element) { element.classList.add("hidden") }
 
-  onFocusOut(event) {
-    console.log(event)
-    if (this.dropdownTarget.contains(event.target)) return;
+  show(element) { element.classList.remove("hidden") }
 
-    this.hideDropdown();
+  onClearBtnClick() {
+    this.setSearchInput();
   }
 }

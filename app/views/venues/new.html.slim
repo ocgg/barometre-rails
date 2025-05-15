@@ -6,15 +6,27 @@
 
       = venue_fields.hidden_field :id, disabled: true, data: {venue_fields_target: "venueIdInput"}
 
-      = venue_fields.text_field :venue_search,
-        class: "venue-name font-normal",
-        placeholder: "Chercher un lieu...",
-        data: {action: "input->venue-fields#onVenueInput", venue_fields_target: "searchInput"}
+      div.flex
+        = venue_fields.text_field :venue_search,
+          class: "relative venue-name font-normal w-full",
+          placeholder: "Chercher un lieu...",
+          data: {action: "input->venue-fields#onVenueInput", venue_fields_target: "searchInput"}
+        /clear input icon
+        svg.hidden.absolute.top-2.right-1.h-5.fill-fgcolor-faded.hover:fill-baro-yellow.hover:cursor-pointer[
+          data-venue-fields-target="clearInputBtn"
+          data-action="click->venue-fields#onClearBtnClick"
+          viewBox="0 0 512 512"
+        ]
+          path d="M256 48a208 208 0 1 1 0 416 208 208 0 1 1 0-416zm0 464A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM175 175c-9.4 9.4-9.4 24.6 0 33.9l47 47-47 47c-9.4 9.4-9.4 24.6 0 33.9s24.6 9.4 33.9 0l47-47 47 47c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-47-47 47-47c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-47 47-47-47c-9.4-9.4-24.6-9.4-33.9 0z"
 
       div.hidden.absolute.top-10.rounded-md.bg-card-bg.border-2.border-baro-yellow[
         data-venue-fields-target="dropdown"
       ]
         ul data-venue-fields-target="resultsList"
+        template data-venue-fields-target="template"
+          li.p-2.hover:bg-baro-yellow.hover:cursor-pointer data-action="click->venue-fields#onVenueSelect"
+            p.venue-name
+            p.venue-address class="whitespace-nowrap"
         div.p-2.italic.text-center data-venue-fields-target="noResult"
           | Aucun lieu trouvé
         div.p-2.font-bold.text-center.hover:bg-baro-yellow.hover:cursor-pointer[
@@ -22,11 +34,6 @@
         ]
           | Ajouter manuellement
 
-        template data-venue-fields-target="template"
-          li.p-2.hover:bg-baro-yellow.hover:cursor-pointer data-action="click->venue-fields#onVenueSelect"
-            p.venue-name
-            p.venue-address class="whitespace-nowrap"
-
-      p.venue-address.italic data-venue-fields-target="address" Adresse si lieu trouvé
-      p.venue-city data-venue-fields-target="city" Ville si lieu trouvé
+      p.hidden.venue-address.italic data-venue-fields-target="address"
+      p.hidden.venue-city data-venue-fields-target="city"
 
