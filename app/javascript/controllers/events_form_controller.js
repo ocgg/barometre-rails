@@ -16,7 +16,7 @@ export default class extends Controller {
   onPlusBtnClick(_) {
     const clone = this.lastEventClone();
     this.eventsListTarget.appendChild(clone);
-    this.hideAllVenueDropdowns();
+    this.hideVenueFieldsDropdowns();
   }
 
   lastEventClone() {
@@ -26,18 +26,18 @@ export default class extends Controller {
     return clone
   }
 
-  hideAllVenueDropdowns() {
-    this.venueDropdownTargets.forEach(dropdown => {
-      dropdown.classList.toggle("hidden", true);
-    });
-  }
-
   handleVenueDropdownFocusOut(event) {
-    if (this.eventTargetIsInsideVenueDropdown(event.target))
-    this.hideAllVenueDropdowns();
+    if (this.eventTargetIsInsideVenueDropdown(event.target)) return;
+    this.hideVenueFieldsDropdowns();
   }
 
   eventTargetIsInsideVenueDropdown(target) {
-    this.venueDropdownTargets.every(dropdown => dropdown.contains)
+    return this.venueDropdownTargets.some(dropdown => dropdown.contains(target));
+  }
+
+  hideVenueFieldsDropdowns() {
+    this.venueDropdownTargets.forEach(dropdown => {
+      dropdown.classList.toggle("hidden", true);
+    });
   }
 }
