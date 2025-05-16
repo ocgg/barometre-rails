@@ -25,12 +25,11 @@ class EventsController < ApplicationController
   end
 
   def create
-    raise
     authorize Event
 
     @events = events_params.map do |attr|
       venue_attr = attr.delete(:venue)
-      venue = Venue.find(venue_attr[:id])
+      venue = Venue.find(venue_attr[:id]) if venue_attr[:id]
       # if venue don't exist, create it
       # then create event
       date = attr[:date].present? && Time.new("#{attr[:date]}:00")

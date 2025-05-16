@@ -8,10 +8,10 @@ section.event-day.overflow-visible
       div class="flex-[0_1_30%] flex justify-center"
         svg viewBox="0 0 320 512": path d="M48.1 240c-.1 2.7-.1 5.3-.1 8l0 16c0 2.7 0 5.3 .1 8L32 272c-17.7 0-32 14.3-32 32s14.3 32 32 32l28.3 0C89.9 419.9 170 480 264 480l24 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-24 0c-57.9 0-108.2-32.4-133.9-80L256 336c17.7 0 32-14.3 32-32s-14.3-32-32-32l-143.8 0c-.1-2.6-.2-5.3-.2-8l0-16c0-2.7 .1-5.4 .2-8L256 240c17.7 0 32-14.3 32-32s-14.3-32-32-32l-125.9 0c25.7-47.6 76-80 133.9-80l24 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-24 0C170 32 89.9 92.1 60.3 176L32 176c-17.7 0-32 14.3-32 32s14.3 32 32 32l16.1 0z"
 
-  = form_for @events, url: events_path, data: {controller: "event-fields"} do |form|
-    ul.events-list data-event-fields-target="eventsList"
+  = form_for @events, url: events_path, data: {controller: "events-form", action: "click@window->events-form#handleVenueDropdownFocusOut"} do |form|
+    ul.events-list data-events-form-target="eventsList"
       - @events.each_with_index do |event, index|
-        li data-event-fields-target="eventFields" data-controller="events-form"
+        li data-events-form-target="eventFields" data-controller="event-fields"
           = fields_for "events[]", event do |event_fields|
             article.event-card.bg-card-bg.p-2.items-center
               div.btn.w-fit.p-2.font-quicksand.rounded-lg.bg-fgcolor.text-bgcolor
@@ -39,7 +39,7 @@ section.event-day.overflow-visible
                 div.md-tarif.flex-col.justify-between
                   svg.trash-btn.h-4.fill-fgcolor-faded.self-end.hover:fill-fgcolor.hover:cursor-pointer[
                     class="#{"hidden" if index.zero?}"
-                    data-action="click->events-form#onTrashClick"
+                    data-action="click->event-fields#onTrashClick"
                     viewBox="0 0 448 512"
                   ]
                     path d="M135.2 17.7L128 32 32 32C14.3 32 0 46.3 0 64S14.3 96 32 96l384 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-96 0-7.2-14.3C307.4 6.8 296.3 0 284.2 0L163.8 0c-12.1 0-23.2 6.8-28.6 17.7zM416 128L32 128 53.2 467c1.6 25.3 22.6 45 47.9 45l245.8 0c25.3 0 46.3-19.7 47.9-45L416 128z"
@@ -55,7 +55,7 @@ section.event-day.overflow-visible
     /"plus" button
     div.flex.justify-center
       svg.h-10.fill-fgcolor.my-5.btn.p-0.rounded-full[
-        data-action="click->event-fields#onPlusBtnClick"
+        data-action="click->events-form#onPlusBtnClick"
         viewBox="0 0 512 512"
       ]
         path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM232 344l0-64-64 0c-13.3 0-24-10.7-24-24s10.7-24 24-24l64 0 0-64c0-13.3 10.7-24 24-24s24 10.7 24 24l0 64 64 0c13.3 0 24 10.7 24 24s-10.7 24-24 24l-64 0 0 64c0 13.3-10.7 24-24 24s-24-10.7-24-24z"
