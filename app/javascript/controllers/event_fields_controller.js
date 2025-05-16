@@ -6,6 +6,7 @@ export default class extends Controller {
     "eventFields",
     "eventsList",
     "addEventBtn",
+    "venueDropdown",
   ]
 
   connect() {
@@ -15,6 +16,7 @@ export default class extends Controller {
   onPlusBtnClick(_) {
     const clone = this.lastEventClone();
     this.eventsListTarget.appendChild(clone);
+    this.hideAllVenueDropdowns();
   }
 
   lastEventClone() {
@@ -23,5 +25,11 @@ export default class extends Controller {
     clone.querySelector(".errors")?.remove();
     clone.querySelector(".trash-btn").classList.remove("hidden")
     return clone
+  }
+
+  hideAllVenueDropdowns() {
+    this.venueDropdownTargets.forEach(dropdown => {
+      dropdown.classList.toggle("hidden", true);
+    });
   }
 }

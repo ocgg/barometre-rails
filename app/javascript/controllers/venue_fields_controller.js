@@ -15,6 +15,7 @@ export default class extends Controller {
   ]
 
   onVenueInput(_) {
+    this.clearInputBtnTarget.classList.toggle("hidden", !this.searchInputTarget.value.length);
     this.show(this.dropdownTarget);
     this.fetchVenues();
   }
@@ -56,31 +57,32 @@ export default class extends Controller {
 
   setSelectedVenue(venueId) {
     const venue = this.venues.find(venue => venue.id == venueId);
-    this.setIdInput(venue);
-    this.unsetSearchInput(venue);
+    this.enableIdInput(venue);
+    this.disableSearchInput(venue);
     this.displayAddressAndCity(venue);
     this.hide(this.dropdownTarget);
   }
 
-  setIdInput(venue) {
+  enableIdInput(venue) {
     this.venueIdInputTarget.disabled = false;
     this.venueIdInputTarget.value = venue.id;
   }
 
-  unsetIdInput() {
+  disableIdInput() {
     this.venueIdInputTarget.disabled = true;
     this.venueIdInputTarget.value = "";
   }
 
-  setSearchInput() {
+  resetSearchInput() {
     this.hideAddressAndCity();
     this.searchInputTarget.disabled = false;
     this.searchInputTarget.value = "";
     this.hide(this.clearInputBtnTarget);
+    this.hide(this.dropdownTarget);
     this.searchInputTarget.focus();
   }
 
-  unsetSearchInput(venue) {
+  disableSearchInput(venue) {
     this.searchInputTarget.disabled = true;
     this.searchInputTarget.value = venue.name;
     this.show(this.clearInputBtnTarget);
@@ -103,6 +105,6 @@ export default class extends Controller {
   show(element) { element.classList.remove("hidden") }
 
   onClearBtnClick() {
-    this.setSearchInput();
+    this.resetSearchInput();
   }
 }
