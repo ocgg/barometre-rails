@@ -5,8 +5,8 @@ export default class extends Controller {
   static targets = [
     "eventFields",
     "eventsList",
-    "addEventBtn",
     "venueDropdown",
+    "trashIcon",
   ]
 
   connect() {
@@ -14,16 +14,15 @@ export default class extends Controller {
   }
 
   onPlusBtnClick(_) {
-    const clone = this.lastEventClone();
-    this.eventsListTarget.appendChild(clone);
-    this.hideVenueFieldsDropdowns();
+    this.cloneLastEvent();
+    this.eventsNumber++;
+    this.showTrashIcons();
   }
 
-  lastEventClone() {
+  cloneLastEvent() {
     const clone = this.eventFieldsTargets[this.eventsNumber - 1].cloneNode(true);
     clone.querySelector(".errors")?.remove();
-    clone.querySelector(".trash-btn").classList.remove("hidden")
-    return clone
+    this.eventsListTarget.appendChild(clone);
   }
 
   handleVenueDropdownFocusOut(event) {
@@ -36,8 +35,20 @@ export default class extends Controller {
   }
 
   hideVenueFieldsDropdowns() {
-    this.venueDropdownTargets.forEach(dropdown => {
-      dropdown.classList.toggle("hidden", true);
-    });
+    this.venueDropdownTargets.forEach(dropdown => dropdown.classList.toggle("hidden", true));
+  }
+
+  onEventFieldsTrash({detail: {toRemove: eventFields}}) {
+    eventFields.remove();
+    this.eventsNumber--;
+    if (this.eventsNumber === 1) this.hideTrashIcon();
+  }
+
+  hideTrashIcon() {
+    this.trashIconTarget.classList.add("hidden");
+  }
+
+  showTrashIcons() {
+    this.trashIconTargets.forEach(icon => icon.classList.toggle("hidden", false))
   }
 }

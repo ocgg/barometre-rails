@@ -10,10 +10,14 @@ section.event-day.overflow-visible
 
   = form_for @events, url: events_path, data: {controller: "events-form", action: "click@window->events-form#handleVenueDropdownFocusOut"} do |form|
     ul.events-list data-events-form-target="eventsList"
-      - @events.each_with_index do |event, index|
-        li data-events-form-target="eventFields" data-controller="event-fields"
+      - @events.each do |event|
+        li[
+          data-events-form-target="eventFields"
+          data-controller="event-fields"
+          data-action="event-fields:onTrashClick->events-form#onEventFieldsTrash"
+        ]
           = fields_for "events[]", event do |event_fields|
-            article.event-card.bg-card-bg.p-2.items-center
+            article.relative.event-card.bg-card-bg.p-2.items-center
               div.btn.w-fit.p-2.font-quicksand.rounded-lg.bg-fgcolor.text-bgcolor
                 /= event_fields.hidden_field :date
                 div.flex.gap-2.items-center
@@ -36,16 +40,19 @@ section.event-day.overflow-visible
                 div.relative.flex.flex-col
                   = turbo_frame_tag :venue_fields, src: new_venue_path
 
-                div.md-tarif.flex-col.justify-between
-                  svg.trash-btn.h-4.fill-fgcolor-faded.self-end.hover:fill-fgcolor.hover:cursor-pointer[
-                    class="#{"hidden" if index.zero?}"
-                    data-action="click->event-fields#onTrashClick"
-                    viewBox="0 0 448 512"
-                  ]
-                    path d="M135.2 17.7L128 32 32 32C14.3 32 0 46.3 0 64S14.3 96 32 96l384 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-96 0-7.2-14.3C307.4 6.8 296.3 0 284.2 0L163.8 0c-12.1 0-23.2 6.8-28.6 17.7zM416 128L32 128 53.2 467c1.6 25.3 22.6 45 47.9 45l245.8 0c25.3 0 46.3-19.7 47.9-45L416 128z"
+                div.self-center
                   = event_fields.text_field :tarif,
                     class: "w-full",
                     placeholder: "Tarif (optionnel)"
+
+              /Trash icon
+              svg.hidden.absolute.top-2.right-2.h-4.fill-fgcolor-faded.self-end.hover:fill-fgcolor.hover:cursor-pointer[
+                data-action="click->event-fields#onTrashClick"
+                data-events-form-target="trashIcon"
+                viewBox="0 0 448 512"
+              ]
+                path d="M135.2 17.7L128 32 32 32C14.3 32 0 46.3 0 64S14.3 96 32 96l384 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-96 0-7.2-14.3C307.4 6.8 296.3 0 284.2 0L163.8 0c-12.1 0-23.2 6.8-28.6 17.7zM416 128L32 128 53.2 467c1.6 25.3 22.6 45 47.9 45l245.8 0c25.3 0 46.3-19.7 47.9-45L416 128z"
+
           div.errors
             - event.errors.each do |error|
               p.flex.gap-2.justify-center
