@@ -11,6 +11,7 @@ class VenuesController < ApplicationController
   end
 
   def new
+    @venue = params[:id] ? Venue.find(params[:id]) : Venue.new
   end
 
   def create

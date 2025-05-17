@@ -2,17 +2,18 @@
 
   div data-controller="venue-fields"
 
-    = fields_for "events[][venue]" do |venue_fields|
+    = fields_for "events[][venue]", @venue do |venue_fields|
 
-      = venue_fields.hidden_field :id, disabled: true, data: {venue_fields_target: "venueIdInput"}
+      = venue_fields.hidden_field :id, data: {venue_fields_target: "venueIdInput"}
 
       div.flex.relative
-        = venue_fields.text_field :venue_search,
-          class: "venue-name font-normal w-full",
+        = text_field_tag :venue_search, @venue.name,
+          disabled: @venue.persisted?,
+          class: "venue-name font-normal w-full peer",
           placeholder: "Chercher un lieu...",
           data: {action: "keyup->venue-fields#onVenueInput", venue_fields_target: "searchInput"}
         /clear input icon
-        svg.hidden.absolute.top-2.right-1.h-5.fill-fgcolor-faded.hover:fill-baro-yellow.hover:cursor-pointer[
+        svg.peer-not-disabled:hidden.absolute.top-2.right-1.h-5.fill-fgcolor-faded.hover:fill-baro-yellow.hover:cursor-pointer[
           data-venue-fields-target="clearInputBtn"
           data-action="click->venue-fields#onClearBtnClick"
           viewBox="0 0 512 512"
@@ -35,6 +36,14 @@
           ]
             | Ajouter manuellement
 
-      p.hidden.venue-address.italic data-venue-fields-target="address"
-      p.hidden.venue-city data-venue-fields-target="city"
-
+      div.flex.justify-between.md:block
+        p.venue-address.italic[
+          class="#{hidden unless @venue}"
+          data-venue-fields-target="address"
+        ]
+          = @venue.address
+        p.venue-city[
+          class="#{hidden unless @venue}"
+          data-venue-fields-target="city"
+        ]
+          = @venue.city

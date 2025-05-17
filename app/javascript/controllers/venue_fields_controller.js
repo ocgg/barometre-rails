@@ -68,8 +68,7 @@ export default class extends Controller {
     this.venueIdInputTarget.value = venue.id;
   }
 
-  disableIdInput() {
-    this.venueIdInputTarget.disabled = true;
+  resetIdInput() {
     this.venueIdInputTarget.value = "";
   }
 
@@ -106,5 +105,6 @@ export default class extends Controller {
 
   onClearBtnClick() {
     this.resetSearchInput();
+    this.resetIdInput();
   }
 }
