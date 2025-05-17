@@ -9,11 +9,12 @@
       div.flex.relative
         = text_field_tag :venue_search, @venue.name,
           disabled: @venue.persisted?,
-          class: "venue-name font-normal w-full peer",
+          class: "venue-name font-normal w-full",
           placeholder: "Chercher un lieu...",
           data: {action: "keyup->venue-fields#onVenueInput", venue_fields_target: "searchInput"}
         /clear input icon
-        svg.peer-not-disabled:hidden.absolute.top-2.right-1.h-5.fill-fgcolor-faded.hover:fill-baro-yellow.hover:cursor-pointer[
+        svg.absolute.top-2.right-1.h-5.fill-fgcolor-faded.hover:fill-baro-yellow.hover:cursor-pointer[
+          class="#{'hidden' unless @venue.persisted?}"
           data-venue-fields-target="clearInputBtn"
           data-action="click->venue-fields#onClearBtnClick"
           viewBox="0 0 512 512"
@@ -38,12 +39,12 @@
 
       div.flex.justify-between.md:block
         p.venue-address.italic[
-          class="#{hidden unless @venue}"
+          class="#{'hidden' unless @venue}"
           data-venue-fields-target="address"
         ]
           = @venue.address
         p.venue-city[
-          class="#{hidden unless @venue}"
+          class="#{'hidden' unless @venue}"
           data-venue-fields-target="city"
         ]
           = @venue.city
