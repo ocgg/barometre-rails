@@ -28,7 +28,7 @@ section.event-day.overflow-visible
                   span.text-lg Heure
                 /= event_fields.datetime_field :date
 
-              div class="flex flex-col w-full gap-8 md:gap-1 md:flex-row md:flex-[2_0] md:justify-between md:px-1 md:py-3"
+              div.flex.flex-col.w-full.gap-8 class="md:gap-1 md:flex-row md:flex-[2_0] md:items-center md:justify-between md:px-1 md:py-3"
                 div.name-desc-ctn.flex.flex-col.gap-4.md:gap-2.p-0
                   = event_fields.text_field :name,
                     class: "name w-full",
@@ -46,7 +46,7 @@ section.event-day.overflow-visible
                     placeholder: "Tarif (optionnel)"
 
               /Trash icon
-              svg.hidden.absolute.top-2.right-2.h-4.fill-fgcolor-faded.self-end.hover:fill-fgcolor.hover:cursor-pointer[
+              svg.hidden.absolute.max-md:bottom-6.right-6.md:top-2.md:right-2.h-4.fill-fgcolor-faded.self-end.hover:fill-fgcolor.hover:cursor-pointer[
                 data-action="click->event-fields#onTrashClick"
                 data-events-form-target="trashIcon"
                 viewBox="0 0 448 512"
