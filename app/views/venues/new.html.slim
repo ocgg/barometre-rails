@@ -6,6 +6,14 @@
 
       = venue_fields.hidden_field :id, data: {venue_fields_target: "venueIdInput"}
 
+      div.flex.flex-col.gap-2[
+        class="#{'hidden' unless (!@venue.persisted? && !!(@venue.name || @venue.city || @venue.address))}"
+        data-venue-fields-target="createVenueFields"
+      ]
+        = venue_fields.text_field :name, placeholder: "Nom du lieu..."
+        = venue_fields.text_field :city, placeholder: "Ville"
+        = venue_fields.text_field :address, placeholder: "Adresse"
+
       div.flex.relative
         = text_field_tag :venue_search, @venue.name,
           disabled: @venue.persisted?,
@@ -34,17 +42,10 @@
             | Aucun lieu trouvé
           div.p-2.font-bold.text-center.hover:bg-baro-yellow.hover:cursor-pointer[
             data-venue-fields-target="noResult"
+            data-action="click->venue-fields#onCreateManually"
           ]
             | Ajouter manuellement
 
       div.flex.justify-between.md:block
-        p.venue-address.italic[
-          class="#{'hidden' unless @venue}"
-          data-venue-fields-target="address"
-        ]
-          = @venue.address
-        p.venue-city[
-          class="#{'hidden' unless @venue}"
-          data-venue-fields-target="city"
-        ]
-          = @venue.city
+        p.venue-address.italic data-venue-fields-target="address" = @venue.address
+        p.venue-city data-venue-fields-target="city" = @venue.city
