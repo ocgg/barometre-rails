@@ -28,12 +28,10 @@ class EventsController < ApplicationController
     authorize Event
 
     @events = events_params.map do |attr|
-      venue_attr = attr.delete(:venue).compact_blank
-      venue = if venue_attr[:id]
-        Venue.find(venue_attr[:id])
-      else
-        Venue.new(venue_attr)
-      end
+      venue_attr = attr.delete(:venue)
+      venue = Venue.find(venue_attr[:id]) if venue_attr[:id].present?
+      # if venue don't exist, create it
+      # then create event
       date = attr[:date].present? && Time.new("#{attr[:date]}:00")
       Event.new(venue:, date:, **attr)
     end
@@ -85,6 +83,6 @@ class EventsController < ApplicationController
   end
 
   def events_params
-    params.expect(events: [[:date, :name, :description, :tarif, {venue: [:id, :name, :city, :address]}]])
+    params.expect(events: [[:date, :name, :description, :tarif, {venue: [:name, :id]}]])
   end
 end
