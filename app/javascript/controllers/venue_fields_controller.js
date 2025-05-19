@@ -12,6 +12,7 @@ export default class extends Controller {
     "address",
     "city",
     "clearInputBtn",
+    "createVenueFields",
   ]
 
   onVenueInput(_) {
@@ -106,5 +107,12 @@ export default class extends Controller {
   onClearBtnClick() {
     this.resetSearchInput();
     this.resetIdInput();
+  }
+
+  onCreateManually(_) {
+    this.show(this.createVenueFieldsTarget);
+    this.hide(this.searchInputTarget);
+    this.hide(this.clearInputBtnTarget);
+    this.hide(this.dropdownTarget);
   }
 }

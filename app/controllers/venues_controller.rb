@@ -1,9 +1,5 @@
 class VenuesController < ApplicationController
   allow_unauthenticated_access
-  def select
-    @venue = params[:id] ? Venue.find(params[:id]) : Venue.new
-  end
-
   def index
     sql = <<~SQL
       name LIKE :string
@@ -15,7 +11,7 @@ class VenuesController < ApplicationController
   end
 
   def new
-    # @venue = params[:id] ? Venue.find(params[:id]) : Venue.new
+    @venue = params[:id] ? Venue.find(params[:id]) : Venue.new
   end
 
   def create
