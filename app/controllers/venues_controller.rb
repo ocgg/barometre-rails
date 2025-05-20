@@ -1,5 +1,6 @@
 class VenuesController < ApplicationController
   allow_unauthenticated_access
+
   def index
     sql = <<~SQL
       name LIKE :string
@@ -10,19 +11,23 @@ class VenuesController < ApplicationController
     render json: @venues.to_json
   end
 
-  def new
-    @venue = params[:id] ? Venue.find(params[:id]) : Venue.new
+  def show
+    @venue = Venue.find(params[:id])
+    render json: @venue.to_json
   end
 
-  def create
-  end
+  # def new
+  # end
 
-  def edit
-  end
+  # def create
+  # end
 
-  def update
-  end
+  # def edit
+  # end
 
-  def destroy
-  end
+  # def update
+  # end
+
+  # def destroy
+  # end
 end
