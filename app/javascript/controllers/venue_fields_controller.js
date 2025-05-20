@@ -17,37 +17,35 @@ export default class extends Controller {
 
   static values = {
     mode: String, // in: "search", "manual", "found"
-    venueId: Number
   }
 
-  venueIdValueChanged(id) {
-    if (!id) {this.idTarget.value = ""; return}
-
-    this.idTarget.value = id;
-    this.venue = this.venues.find(venue => venue.id === id);
-    this.modeValue = "found";
+  connect() {
+    if (this.idTarget.value) this.setVenue(this.idTarget.value)
   }
 
-  modeValueChanged(mode) {
-    if (mode === "search") {
-      this.venueIdValue = 0;
-      this.toSearchMode();
-    }
-    else if (mode === "found") this.toFoundMode();
-    else if (mode === "manual") this.toManualMode();
+  setVenue(id) {
+    const url = `/venues/${id}`;
+    const opts = { headers: { "Accept": "application/json" } };
+    fetch(url, opts)
+      .then(response => response.json())
+      .then(venue => this.toFoundMode(venue));
   }
 
   toSearchMode() {
+    this.idTarget.value = "";
     this.setInputsForSearch();
     this.onVenueInput();
   }
 
-  toFoundMode() {
+  toFoundMode(venue) {
+    this.venue = venue;
+    this.idTarget.value = venue.id;
     this.hide(this.dropdownTarget);
     this.setInputsForFound();
   }
 
   toManualMode() {
+    this.idTarget.value = "";
     this.hide(this.dropdownTarget);
     this.resultsListTarget.innerHTML = '';
     this.setInputsForManual();
@@ -59,6 +57,7 @@ export default class extends Controller {
 
   setInputsForFound() {
     this.show(this.clearInputBtnTarget);
+    this.hide(this.searchBtnTarget);
     this.nameTarget.disabled = true;
     this.nameTarget.value = this.venue.name;
     this.addressTarget.value = this.venue.address;
@@ -98,15 +97,14 @@ export default class extends Controller {
   }
 
   setAndRenderVenues(venues) {
-    this.venues = venues;
-    this.renderVenues();
-    this.toggleHidden(this.noResultTarget, !(this.venues.length === 0))
+    this.renderVenues(venues);
+    this.toggleHidden(this.noResultTarget, !(venues.length === 0))
     this.toggleHidden(this.dropdownTarget, !this.nameTarget.value.length);
   }
 
-  renderVenues() {
+  renderVenues(venues) {
     this.resultsListTarget.innerHTML = '';
-    this.venues.forEach(venue => this.renderVenue(venue));
+    venues.forEach(venue => this.renderVenue(venue));
   }
 
   renderVenue(venue) {
@@ -121,24 +119,24 @@ export default class extends Controller {
 
   onClearBtnClick(_) {
     this.clearInputs();
-    this.modeValue = "search";
+    this.toSearchMode();
     this.nameTarget.focus();
   }
 
   onSearchBtnClick(event) {
     event.stopPropagation();
-    this.modeValue = "search";
+    this.toSearchMode();
     this.nameTarget.focus();
   }
 
   onAddManually(event) {
     event.stopPropagation();
-    this.modeValue = "manual";
+    this.toManualMode();
     this.nameTarget.focus();
   }
 
   onVenueSelect(event) {
-    this.venueIdValue = event.currentTarget.dataset.id;
+    this.setVenue(event.currentTarget.dataset.id);
   }
 
   onVenueInput(_) {
