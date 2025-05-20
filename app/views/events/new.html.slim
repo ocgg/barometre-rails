@@ -38,7 +38,7 @@ section.event-day.overflow-visible
                     placeholder: "(Optionnel) Courte description, infos complémentaires..."
 
                 div.relative.flex.flex-col.justify-center
-                  = turbo_frame_tag :venue_fields, src: new_venue_path(id: event.venue)
+                  = render "venues/form", venue: event.venue
 
                 div.self-center
                   = event_fields.text_field :tarif,
