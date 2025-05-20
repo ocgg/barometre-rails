@@ -21,9 +21,9 @@ export default class extends Controller {
   }
 
   venueIdValueChanged(id) {
-    this.idTarget.value = id;
-    if (!id) return;
+    if (!id) {this.idTarget.value = ""; return}
 
+    this.idTarget.value = id;
     this.venue = this.venues.find(venue => venue.id === id);
     this.modeValue = "found";
   }
