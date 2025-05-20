@@ -21,4 +21,10 @@ module EventsHelper
       "fill-(--light-bg)"
     end
   end
+
+  def venue_fields_mode(venue)
+    return "search" unless venue
+
+    venue.persisted? ? "found" : "manual"
+  end
 end
