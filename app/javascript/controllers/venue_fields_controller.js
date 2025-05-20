@@ -3,26 +3,94 @@ import { Controller } from "@hotwired/stimulus"
 // Connects to data-controller="venue-fields"
 export default class extends Controller {
   static targets = [
-    "venueIdInput",
-    "searchInput",
+    "id",
+    "name",
+    "address",
+    "city",
     "resultsList",
     "noResult",
     "template",
     "dropdown",
-    "address",
-    "city",
     "clearInputBtn",
-    "createVenueFields",
+    "searchBtn",
   ]
 
-  onVenueInput(_) {
-    this.clearInputBtnTarget.classList.toggle("hidden", !this.searchInputTarget.value.length);
-    this.show(this.dropdownTarget);
-    this.fetchVenues();
+  static values = {
+    mode: String, // in: "search", "manual", "found"
+    venueId: Number
+  }
+
+  venueIdValueChanged(id) {
+    this.idTarget.value = id;
+    if (!id) return;
+
+    this.venue = this.venues.find(venue => venue.id === id);
+    this.modeValue = "found";
+  }
+
+  modeValueChanged(mode) {
+    if (mode === "search") {
+      this.venueIdValue = 0;
+      this.toSearchMode();
+    }
+    else if (mode === "found") this.toFoundMode();
+    else if (mode === "manual") this.toManualMode();
+  }
+
+  toSearchMode() {
+    this.setInputsForSearch();
+    this.onVenueInput();
+  }
+
+  toFoundMode() {
+    this.hide(this.dropdownTarget);
+    this.setInputsForFound();
+  }
+
+  toManualMode() {
+    this.hide(this.dropdownTarget);
+    this.resultsListTarget.innerHTML = '';
+    this.setInputsForManual();
+  }
+
+  setInputsForSearch() {
+    this.setAddressAndCityInputsForSearch();
+  }
+
+  setInputsForFound() {
+    this.show(this.clearInputBtnTarget);
+    this.nameTarget.disabled = true;
+    this.nameTarget.value = this.venue.name;
+    this.addressTarget.value = this.venue.address;
+    this.cityTarget.value = this.venue.city;
+  }
+
+  setInputsForManual() {
+    this.hide(this.clearInputBtnTarget);
+    this.show(this.searchBtnTarget);
+    this.addressTarget.disabled = false;
+    this.addressTarget.value = "";
+    this.cityTarget.disabled = false;
+    this.cityTarget.value = "";
+  }
+
+  setAddressAndCityInputsForSearch() {
+    this.hide(this.searchBtnTarget);
+    this.addressTarget.disabled = true;
+    this.addressTarget.value = "";
+    this.cityTarget.disabled = true;
+    this.cityTarget.value = "";
+  }
+
+  clearInputs() {
+    this.hide(this.clearInputBtnTarget);
+    this.nameTarget.disabled = false;
+    this.nameTarget.value = "";
+    this.setAddressAndCityInputsForSearch();
   }
 
   fetchVenues() {
-    const url = `/venues?q=${this.searchInputTarget.value}`;
+    const url = `/venues?q=${this.nameTarget.value}`;
     const opts = { headers: { "Accept": "application/json" } };
     fetch(url, opts)
       .then(response => response.json())
@@ -31,8 +99,9 @@ export default class extends Controller {
 
   setAndRenderVenues(venues) {
     this.venues = venues;
-    this.noResultTarget.classList.toggle("hidden", !(this.venues.length === 0));
     this.renderVenues();
+    this.toggleHidden(this.noResultTarget, !(this.venues.length === 0))
+    this.toggleHidden(this.dropdownTarget, !this.nameTarget.value.length);
   }
 
   renderVenues() {
@@ -50,69 +119,38 @@ export default class extends Controller {
     this.resultsListTarget.appendChild(clone);
   }
 
+  onClearBtnClick(_) {
+    this.clearInputs();
+    this.modeValue = "search";
+    this.nameTarget.focus();
+  }
+
+  onSearchBtnClick(event) {
+    event.stopPropagation();
+    this.modeValue = "search";
+    this.nameTarget.focus();
+  }
+
+  onAddManually(event) {
+    event.stopPropagation();
+    this.modeValue = "manual";
+    this.nameTarget.focus();
+  }
+
   onVenueSelect(event) {
-    const venue_data = event.currentTarget.dataset;
-    this.setSelectedVenue(venue_data.id);
-    this.hide(this.dropdownTarget);
+    this.venueIdValue = event.currentTarget.dataset.id;
   }
 
-  setSelectedVenue(venueId) {
-    const venue = this.venues.find(venue => venue.id == venueId);
-    this.enableIdInput(venue);
-    this.disableSearchInput(venue);
-    this.displayAddressAndCity(venue);
-    this.hide(this.dropdownTarget);
+  onVenueInput(_) {
+    if (this.modeValue !== "search") return;
+
+    this.toggleHidden(this.clearInputBtnTarget, !this.nameTarget.value.length);
+    this.fetchVenues();
   }
 
-  enableIdInput(venue) {
-    this.venueIdInputTarget.disabled = false;
-    this.venueIdInputTarget.value = venue.id;
-  }
+  hide(element) { element.classList.toggle("hidden", true) }
 
-  resetIdInput() {
-    this.venueIdInputTarget.value = "";
-  }
+  show(element) { element.classList.toggle("hidden", false) }
 
-  resetSearchInput() {
-    this.hideAddressAndCity();
-    this.searchInputTarget.disabled = false;
-    this.searchInputTarget.value = "";
-    this.hide(this.clearInputBtnTarget);
-    this.hide(this.dropdownTarget);
-    this.searchInputTarget.focus();
-  }
-
-  disableSearchInput(venue) {
-    this.searchInputTarget.disabled = true;
-    this.searchInputTarget.value = venue.name;
-    this.show(this.clearInputBtnTarget);
-  }
-
-  displayAddressAndCity(venue) {
-    this.addressTarget.innerText = venue.address;
-    this.cityTarget.innerText = `${venue.city}`;
-    this.show(this.addressTarget);
-    this.show(this.cityTarget);
-  }
-
-  hideAddressAndCity() {
-    this.hide(this.addressTarget);
-    this.hide(this.cityTarget);
-  }
-
-  hide(element) { element.classList.add("hidden") }
-
-  show(element) { element.classList.remove("hidden") }
-
-  onClearBtnClick() {
-    this.resetSearchInput();
-    this.resetIdInput();
-  }
-
-  onCreateManually(_) {
-    this.show(this.createVenueFieldsTarget);
-    this.hide(this.searchInputTarget);
-    this.hide(this.clearInputBtnTarget);
-    this.hide(this.dropdownTarget);
-  }
+  toggleHidden(element, bool) { element.classList.toggle("hidden", bool) }
 }
