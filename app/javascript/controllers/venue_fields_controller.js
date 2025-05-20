@@ -16,11 +16,12 @@ export default class extends Controller {
   ]
 
   static values = {
-    mode: String, // in: "search", "manual", "found"
+    mode: {type: String, default: "search" }, // in: "search", "manual", "found"
   }
 
   connect() {
-    if (this.idTarget.value) this.setVenue(this.idTarget.value)
+    if (this.modeValue === "found") this.setVenue(this.idTarget.value);
+    else if (this.modeValue === "manual") this.toManualMode();
   }
 
   setVenue(id) {
@@ -32,12 +33,14 @@ export default class extends Controller {
   }
 
   toSearchMode() {
+    this.modeValue = "search";
     this.idTarget.value = "";
     this.setInputsForSearch();
     this.onVenueInput();
   }
 
   toFoundMode(venue) {
+    this.modeValue = "found";
     this.venue = venue;
     this.idTarget.value = venue.id;
     this.hide(this.dropdownTarget);
@@ -45,6 +48,7 @@ export default class extends Controller {
   }
 
   toManualMode() {
+    this.modeValue = "manual";
     this.idTarget.value = "";
     this.hide(this.dropdownTarget);
     this.resultsListTarget.innerHTML = '';
@@ -68,9 +72,7 @@ export default class extends Controller {
     this.hide(this.clearInputBtnTarget);
     this.show(this.searchBtnTarget);
     this.addressTarget.disabled = false;
-    this.addressTarget.value = "";
     this.cityTarget.disabled = false;
-    this.cityTarget.value = "";
   }
 
   setAddressAndCityInputsForSearch() {
@@ -127,6 +129,8 @@ export default class extends Controller {
     event.stopPropagation();
     this.toSearchMode();
     this.nameTarget.focus();
+    this.nameTarget.setSelectionRange(length, length);
+    const length = this.nameTarget.value.length;
   }
 
   onAddManually(event) {
