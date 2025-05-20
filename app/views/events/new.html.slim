@@ -38,7 +38,7 @@ section.event-day.overflow-visible
                     placeholder: "(Optionnel) Courte description, infos complémentaires..."
 
                 div.relative.flex.flex-col.justify-center
-                  = render "venues/form", venue: event.venue
+                  = render "venues/form", venue: event.venue, event_fields:
 
                 div.self-center
                   = event_fields.text_field :tarif,

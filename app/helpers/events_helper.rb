@@ -23,8 +23,10 @@ module EventsHelper
   end
 
   def venue_fields_mode(venue)
-    return "search" unless venue
-
-    venue.persisted? ? "found" : "manual"
+    if venue.persisted? then "found"
+    elsif venue.attributes.values.all?(&:blank?) then "search"
+    else
+      "manual"
+    end
   end
 end

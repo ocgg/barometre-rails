@@ -63,6 +63,8 @@ export default class extends Controller {
     this.show(this.clearInputBtnTarget);
     this.hide(this.searchBtnTarget);
     this.nameTarget.disabled = true;
+    this.addressTarget.disabled = true;
+    this.cityTarget.disabled = true;
     this.nameTarget.value = this.venue.name;
     this.addressTarget.value = this.venue.address;
     this.cityTarget.value = this.venue.city;

@@ -1,5 +1,6 @@
 class Event < ApplicationRecord
   belongs_to :venue
+  accepts_nested_attributes_for :venue
 
   validates :name, presence: true
   validates :date, presence: true
