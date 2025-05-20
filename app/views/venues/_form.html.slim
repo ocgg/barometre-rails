@@ -1,0 +1,63 @@
+div[
+  data-controller="venue-fields"
+  data-venue-fields-mode-value=venue_fields_mode(venue)
+]
+  = fields_for "events[][venue]", venue do |venue_fields|
+
+    div.relative.flex.flex-col.gap-2
+
+      = venue_fields.hidden_field :id,
+        data: {venue_fields_target: "id"}
+
+      = venue_fields.text_field :name,
+        # disabled: venue.persisted?,
+        class: "venue-name font-normal w-full",
+        placeholder: "Chercher un lieu...",
+        data: { action: "keyup->venue-fields#onVenueInput",
+                venue_fields_target: "name"}
+
+      = venue_fields.text_field :address,
+        disabled: true,
+        placeholder: "Adresse",
+        data: {venue_fields_target: "address"}
+
+      = venue_fields.text_field :city,
+        disabled: true,
+        placeholder: "Ville",
+        data: {venue_fields_target: "city"}
+
+      /clear input icon
+      svg.hidden.absolute.top-2.right-1.h-5.fill-fgcolor-faded.hover:fill-baro-yellow.hover:cursor-pointer[
+        data-venue-fields-target="clearInputBtn"
+        data-action="click->venue-fields#onClearBtnClick"
+        viewBox="0 0 512 512"
+      ]
+        path d="M256 48a208 208 0 1 1 0 416 208 208 0 1 1 0-416zm0 464A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM175 175c-9.4 9.4-9.4 24.6 0 33.9l47 47-47 47c-9.4 9.4-9.4 24.6 0 33.9s24.6 9.4 33.9 0l47-47 47 47c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-47-47 47-47c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-47 47-47-47c-9.4-9.4-24.6-9.4-33.9 0z"
+
+      /search icon
+      svg.hidden.absolute.top-2.right-1.h-5.fill-fgcolor-faded.hover:fill-baro-yellow.hover:cursor-pointer[
+        data-venue-fields-target="searchBtn"
+        data-action="click->venue-fields#onSearchBtnClick"
+        viewBox="0 0 512 512"
+      ]
+        path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z"
+
+      div.hidden.z-40.absolute.top-10.rounded-md.bg-card-bg.border-2.border-baro-yellow[
+        data-events-form-target="venueDropdown"
+        data-venue-fields-target="dropdown"
+      ]
+        ul data-venue-fields-target="resultsList"
+        template data-venue-fields-target="template"
+          li.p-2.hover:bg-baro-yellow.hover:cursor-pointer[
+            data-action="click->venue-fields#onVenueSelect"
+          ]
+            p.venue-name
+            p.venue-address class="whitespace-nowrap"
+        div.hidden.p-2.italic.text-center data-venue-fields-target="noResult"
+          | Aucun lieu trouvé
+        hr.border-baro-yellow-faded
+        div.p-2.text-center.hover:bg-baro-yellow.hover:cursor-pointer[
+          data-action="click->venue-fields#onAddManually"
+        ]
+          p.text-sm.italic.text-fgcolor-faded Pas dans la liste ?
+          p.font-bold Ajouter manuellement
