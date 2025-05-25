@@ -25,10 +25,10 @@ class EventsController < ApplicationController
   end
 
   def create
+    authorize Event
     @events = set_new_events
-    authorize @events
-
     valid = @events.map(&:valid?)
+
     if valid.all?
       @events.each(&:save)
       redirect_to root_path
