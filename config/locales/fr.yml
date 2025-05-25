@@ -143,15 +143,16 @@ fr:
     updated_at: "Modifié le"
 
   errors:
-    format: "%{message}"
+    format: "%{message} %{attribute}."
     messages: &errors_messages
       inclusion: "n'est pas inclus(e) dans la liste"
       exclusion: "n'est pas disponible"
       invalid: "n'est pas valide"
       confirmation: "ne concorde pas avec la confirmation"
       accepted: "doit être accepté(e)"
-      empty: "est obligatoire."
-      blank: "est obligatoire."
+      empty: "Il manque"
+      blank: "Il manque"
+      required: "Il manque"
       too_long: "est trop long (pas plus de %{count} caractères)"
       too_short: "est trop court (au moins %{count} caractères)"
       wrong_length: "ne fait pas la bonne longueur (doit comporter %{count} caractères)"
@@ -180,3 +181,8 @@ fr:
         <<: *errors_template
       full_messages:
         format: "%{attribute} %{message}"
+    attributes:
+      event:
+        venue: "le lieu"
+        name: "le nom"
+        date: "la date et/ou l'heure"

@@ -1,16 +1,33 @@
 class VenuesController < ApplicationController
-  def new
+  allow_unauthenticated_access
+
+  def index
+    sql = <<~SQL
+      name LIKE :string
+      OR address LIKE :string
+      OR city LIKE :string
+    SQL
+    @venues = Venue.where(sql, string: "%#{params[:q]}%").limit(5)
+    render json: @venues.to_json
   end
 
-  def create
+  def show
+    @venue = Venue.find(params[:id])
+    render json: @venue.to_json
   end
 
-  def edit
-  end
+  # def new
+  # end
 
-  def update
-  end
+  # def create
+  # end
 
-  def destroy
-  end
+  # def edit
+  # end
+
+  # def update
+  # end
+
+  # def destroy
+  # end
 end

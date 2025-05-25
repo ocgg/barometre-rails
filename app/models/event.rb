@@ -1,8 +1,9 @@
 class Event < ApplicationRecord
   belongs_to :venue
+  accepts_nested_attributes_for :venue
 
-  validates :name, presence: {message: "Le nom est obligatoire."}
-  validates :date, presence: {message: "La date et l'heure sont obligatoires."}
+  validates :name, presence: true
+  validates :date, presence: true
 
   def verified? = verified
 
