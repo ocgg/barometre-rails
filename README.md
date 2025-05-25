@@ -3,11 +3,12 @@
 ## Objectifs
 
 - Agenda culturel de Loire-Atlantique visant en gros à imiter ce que fait [TyZicos](https://www.tyzicos.com/) en Bretagne.
-- Liste spécifiquement les événements modestes en entrée libre ou peu coûteuse (bars, chez l'habitant...)
+- Concerts, jams sessions & open mics
+- Liste spécifiquement les événements modestes en entrée libre ou peu coûteuse (typiquement dans les bars)
 - 100% francophone
 - API JSON en lecture seule (?) pour servir les informations sur les évènements et les lieux associés.
 - Stack 100% open source (excepté GitHub...), de la conception au déploiement
-- Pas d'inscription utilisateur. Les événements proposés doivent être validés par un admin
+- Pas d'inscription utilisateur. Les événements (et lieux) proposés doivent être validés par un admin
 
 ## TODO
 
@@ -31,9 +32,10 @@
 
 - events#unverified:
   - faire comme events#index
+  - gérer les confirmations de venues
 
 - events#new:
-  - gérer la création de venues
+  - gérer la confirmation des nouveaux lieux (détection de doublons & remplacement, geocoding, validation Loire-Atlantique...)
   - option pour supprimer le lieu de la DB après la date de l'événement (par ex. en cas de concert chez l'habitant)
   - gestion des events récurrents
 
@@ -83,7 +85,7 @@ Particularités du stack:
 ```bash
 rbenv install 3.4.2 # si rbenv
 
-gh repo clone ocgg/barometre-rails
+gh repo fork ocgg/barometre-rails
 cd barometre-rails
 bundle install
 rails db:create db:migrate db:seed
