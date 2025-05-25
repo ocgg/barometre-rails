@@ -11,6 +11,7 @@ export default class extends Controller {
 
   connect() {
     this.eventsNumber = this.eventFieldsTargets.length;
+    if (this.eventsNumber > 1) this.showTrashIcons();
   }
 
   onPlusBtnClick(_) {
