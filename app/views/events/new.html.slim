@@ -1,3 +1,12 @@
+div.errors
+  /- if event.errors.any?
+  - if @events.any? {|evt| evt.errors.any?}
+    p.text-center
+      span.flex.gap-2.justify-center
+        svg.h-5.fill-fgcolor viewBox="0 0 512 512": path d="M256 32c14.2 0 27.3 7.5 34.5 19.8l216 368c7.3 12.4 7.3 27.7 .2 40.1S486.3 480 472 480L40 480c-14.3 0-27.6-7.7-34.7-20.1s-7-27.8 .2-40.1l216-368C228.7 39.5 241.8 32 256 32zm0 128c-13.3 0-24 10.7-24 24l0 112c0 13.3 10.7 24 24 24s24-10.7 24-24l0-112c0-13.3-10.7-24-24-24zm32 224a32 32 0 1 0 -64 0 32 32 0 1 0 64 0z"
+        | Il manque des informations !
+      | Remplissez les champs en surbrillance
+
 section.event-day.overflow-visible
   header.day-separator
     h3 class="flex-[1_0_60%]" Proposer des concerts
@@ -10,6 +19,7 @@ section.event-day.overflow-visible
 
   = form_for @events, url: events_path, data: {controller: "events-form", action: "click@window->events-form#handleVenueDropdownFocusOut"} do |form|
     ul.events-list data-events-form-target="eventsList"
+
       - @events.each do |event|
         li[
           data-events-form-target="eventFields"
@@ -18,7 +28,7 @@ section.event-day.overflow-visible
         ]
           = fields_for "events[]", event do |event_fields|
             article.relative.event-card.items-center.p-4.bg-card-bg.md:p-2
-              div.btn.flex.gap-8.max-md:justify-between.max-md:w-full.max-md:mb-8.md:flex-col.md:gap-1.w-fit.p-2.font-quicksand.rounded-lg.bg-fgcolor.text-bgcolor
+              div.btn.flex.gap-8.max-md:justify-between.max-md:w-full.max-md:mb-8.md:flex-col.md:gap-1.w-fit.p-2.font-quicksand.bg-fgcolor.text-bgcolor.hover:border-baro-yellow class=("border-baro-orange" if event.errors[:date].present?)
                 /= event_fields.hidden_field :date
                 div.flex.gap-2.items-center
                   svg.w-4.fill-bgcolor viewBox="0 0 448 512": path d="M128 0c17.7 0 32 14.3 32 32l0 32 128 0 0-32c0-17.7 14.3-32 32-32s32 14.3 32 32l0 32 48 0c26.5 0 48 21.5 48 48l0 48L0 160l0-48C0 85.5 21.5 64 48 64l48 0 0-32c0-17.7 14.3-32 32-32zM0 192l448 0 0 272c0 26.5-21.5 48-48 48L48 512c-26.5 0-48-21.5-48-48L0 192zm64 80l0 32c0 8.8 7.2 16 16 16l32 0c8.8 0 16-7.2 16-16l0-32c0-8.8-7.2-16-16-16l-32 0c-8.8 0-16 7.2-16 16zm128 0l0 32c0 8.8 7.2 16 16 16l32 0c8.8 0 16-7.2 16-16l0-32c0-8.8-7.2-16-16-16l-32 0c-8.8 0-16 7.2-16 16zm144-16c-8.8 0-16 7.2-16 16l0 32c0 8.8 7.2 16 16 16l32 0c8.8 0 16-7.2 16-16l0-32c0-8.8-7.2-16-16-16l-32 0zM64 400l0 32c0 8.8 7.2 16 16 16l32 0c8.8 0 16-7.2 16-16l0-32c0-8.8-7.2-16-16-16l-32 0c-8.8 0-16 7.2-16 16zm144-16c-8.8 0-16 7.2-16 16l0 32c0 8.8 7.2 16 16 16l32 0c8.8 0 16-7.2 16-16l0-32c0-8.8-7.2-16-16-16l-32 0zm112 16l0 32c0 8.8 7.2 16 16 16l32 0c8.8 0 16-7.2 16-16l0-32c0-8.8-7.2-16-16-16l-32 0c-8.8 0-16 7.2-16 16z"
@@ -52,12 +62,6 @@ section.event-day.overflow-visible
                 viewBox="0 0 448 512"
               ]
                 path d="M135.2 17.7L128 32 32 32C14.3 32 0 46.3 0 64S14.3 96 32 96l384 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-96 0-7.2-14.3C307.4 6.8 296.3 0 284.2 0L163.8 0c-12.1 0-23.2 6.8-28.6 17.7zM416 128L32 128 53.2 467c1.6 25.3 22.6 45 47.9 45l245.8 0c25.3 0 46.3-19.7 47.9-45L416 128z"
-
-          div.errors
-            - event.errors.each do |error|
-              p.flex.gap-2.justify-center
-                svg.h-5.fill-fgcolor viewBox="0 0 512 512": path d="M256 32c14.2 0 27.3 7.5 34.5 19.8l216 368c7.3 12.4 7.3 27.7 .2 40.1S486.3 480 472 480L40 480c-14.3 0-27.6-7.7-34.7-20.1s-7-27.8 .2-40.1l216-368C228.7 39.5 241.8 32 256 32zm0 128c-13.3 0-24 10.7-24 24l0 112c0 13.3 10.7 24 24 24s24-10.7 24-24l0-112c0-13.3-10.7-24-24-24zm32 224a32 32 0 1 0 -64 0 32 32 0 1 0 64 0z"
-                = error.full_message
 
     /"plus" button
     div.flex.justify-center
