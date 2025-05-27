@@ -2,7 +2,8 @@ import Styles from "datepicker/styles";
 import Helper from "datepicker/helpers";
 
 export default class Builder {
-  constructor(main, dates) {
+  constructor(main, dates, config) {
+    this.config = config
     this.main = main;
     this.dates = dates;
     this.css = new Styles();
@@ -17,6 +18,11 @@ export default class Builder {
   }
 
   updateInputValues() {
+    if (this.config.range)  this.#updatesInputValuesForRange();
+    else this.#updatesInputValuesForSingleDate();
+  }
+
+  #updatesInputValuesForRange() {
     if (this.dates.startWithoutEnd) {
       this.startInput.value = Helper.parsableStringFrom(this.dates.start);
       this.endInput.value = Helper.parsableStringFrom(this.dates.start);
@@ -29,6 +35,11 @@ export default class Builder {
       this.startInput.value = null;
       this.endInput.value = null;
     }
+  }
+
+  #updatesInputValuesForSingleDate() {
+    this.startInput.value = Helper.parsableStringFrom(this.dates.start);
+    this.endInput.value = Helper.parsableStringFrom(this.dates.start);
   }
 
   #buildMonthDaysFrom(day) {
@@ -57,14 +68,22 @@ export default class Builder {
   }
 
   #buildElements() {
-    this.mainContainer = document.createElement("div");
+    this.#buildMainContainer();
     this.#buildInputs();
     this.#buildMonthSectionElements();
     this.#buildDaysHeadersElements();
     this.#buildDaysContainer();
   }
 
+  #buildMainContainer() {
+    this.mainContainer = document.createElement("div");
+    this.mainContainer.classList.add("w-fit");
+  }
+
   #buildInputs() {
+    this.submitInput = document.createElement("input");
+    this.submitInput.classList.add("hidden");
+    this.submitInput.type = "submit";
     this.startInput = document.createElement("input");
     this.startInput.type = "hidden";
     this.endInput = document.createElement("input");
@@ -116,11 +135,23 @@ export default class Builder {
   }
 
   #classListFor(date) {
+    if (this.config.range) return this.#rangeClassListFor(date);
+    else return this.#singleClassListFor(date);
+  }
+
+  #rangeClassListFor(date) {
     if (this.dates.isBeforeToday(date)) return this.css.nonSelectableDay;
     else if (this.dates.isStartAndEnd(date)) return this.css.onlySelectedDay;
     else if (this.dates.isStart(date)) return this.css.selectedStartDay;
     else if (this.dates.isEnd(date)) return this.css.selectedEndDay;
     else if (this.dates.isBetween(date)) return this.css.selectedDay;
+    else if (this.dates.isInCurrentMonth(date)) return this.css.currentMonthDay;
+    else return this.css.otherMonthDay;
+  }
+
+  #singleClassListFor(date) {
+    if (this.dates.isBeforeToday(date)) return this.css.nonSelectableDay;
+    else if (this.dates.isStart(date)) return this.css.onlySelectedDay;
     else if (this.dates.isInCurrentMonth(date)) return this.css.currentMonthDay;
     else return this.css.otherMonthDay;
   }

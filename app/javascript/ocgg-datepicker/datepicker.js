@@ -3,9 +3,10 @@ import DatesManager from "datepicker/dates_manager";
 import Renderer from "datepicker/renderer";
 
 export default class Datepicker {
-  constructor(element) {
+  constructor(element, opts) {
+    this.config = opts;
     this.dates = new DatesManager();
-    this.elts = new Builder(this, this.dates);
+    this.elts = new Builder(this, this.dates, this.config);
     // this.render = new Renderer(this.dates);
 
     this.elts.renderCalendar(this.dates);
@@ -35,6 +36,11 @@ export default class Datepicker {
     event.stopPropagation();
 
     const selectedDate = new Date(event.currentTarget.dataset.date);
+    if (this.config.range) this.#selectDateForRange(selectedDate);
+    else this.#selectSingleDate(selectedDate);
+  }
+
+  #selectDateForRange(selectedDate) {
     if (!this.dates.start || this.dates.startAndEnd) {
       this.updateDates(selectedDate, null);
       if (this.active) this.desactivate();
@@ -49,5 +55,15 @@ export default class Datepicker {
       if (!this.active) this.activate();
       this.submit();
     }
+  }
+
+  #selectSingleDate(selectedDate) {
+    this.updateDates(selectedDate, selectedDate);
+    if (!this.active) this.activate();
+    this.submit();
+  }
+
+  submit() {
+    this.elts.submitInput.click();
   }
 }
