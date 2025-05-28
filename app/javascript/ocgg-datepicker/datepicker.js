@@ -3,7 +3,7 @@ import DatesManager from "datepicker/dates_manager";
 import Renderer from "datepicker/renderer";
 
 export default class Datepicker {
-  constructor(element, opts) {
+  constructor(element, opts = {}) {
     this.config = opts;
     this.dates = new DatesManager();
     this.elts = new Builder(this, this.dates, this.config);
@@ -15,20 +15,13 @@ export default class Datepicker {
 
   get active() { return !this.elts.startInput.disabled }
 
-  activate() {
-    this.elts.startInput.disabled = false;
-    this.elts.endInput.disabled = false;
+  setPrevMonth(_) {
+    this.dates.toPrevMonth();
+    this.elts.renderCalendar();
   }
 
-  desactivate() {
-    this.elts.startInput.disabled = true;
-    this.elts.endInput.disabled = true;
-  }
-
-  updateDates(start, end) {
-    this.dates.start = start;
-    this.dates.end = end;
-    this.elts.updateInputValues();
+  setNextMonth(_) {
+    this.dates.toNextMonth();
     this.elts.renderCalendar();
   }
 
@@ -40,30 +33,47 @@ export default class Datepicker {
     else this.#selectSingleDate(selectedDate);
   }
 
+  #activate() {
+    this.elts.startInput.disabled = false;
+    this.elts.endInput.disabled = false;
+  }
+
+  #desactivate() {
+    this.elts.startInput.disabled = true;
+    this.elts.endInput.disabled = true;
+  }
+
   #selectDateForRange(selectedDate) {
     if (!this.dates.start || this.dates.startAndEnd) {
-      this.updateDates(selectedDate, null);
-      if (this.active) this.desactivate();
+      this.#updateDates(selectedDate, null);
+      if (this.active) this.#desactivate();
     }
     else if (selectedDate < this.dates.start) {
-      this.updateDates(selectedDate, this.dates.start);
-      if (!this.active) this.activate();
-      this.submit();
+      this.#updateDates(selectedDate, this.dates.start);
+      if (!this.active) this.#activate();
+      this.#submit();
     }
     else {
-      this.updateDates(this.dates.start, selectedDate);
-      if (!this.active) this.activate();
-      this.submit();
+      this.#updateDates(this.dates.start, selectedDate);
+      if (!this.active) this.#activate();
+      this.#submit();
     }
+  }
+
+  #updateDates(start, end) {
+    this.dates.start = start;
+    this.dates.end = end;
+    this.elts.updateInputValues();
+    this.elts.renderCalendar();
   }
 
   #selectSingleDate(selectedDate) {
-    this.updateDates(selectedDate, selectedDate);
-    if (!this.active) this.activate();
-    this.submit();
+    this.#updateDates(selectedDate, selectedDate);
+    if (!this.active) this.#activate();
+    this.#submit();
   }
 
-  submit() {
+  #submit() {
     this.elts.submitInput.click();
   }
 }

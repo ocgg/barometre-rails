@@ -18,7 +18,7 @@ export default class Builder {
   }
 
   updateInputValues() {
-    if (this.config.range)  this.#updatesInputValuesForRange();
+    if (this.config.range) this.#updatesInputValuesForRange();
     else this.#updatesInputValuesForSingleDate();
   }
 
@@ -39,7 +39,7 @@ export default class Builder {
 
   #updatesInputValuesForSingleDate() {
     this.startInput.value = Helper.parsableStringFrom(this.dates.start);
-    this.endInput.value = Helper.parsableStringFrom(this.dates.start);
+    // this.endInput.value = Helper.parsableStringFrom(this.dates.start);
   }
 
   #buildMonthDaysFrom(day) {
@@ -84,13 +84,16 @@ export default class Builder {
     this.submitInput = document.createElement("input");
     this.submitInput.classList.add("hidden");
     this.submitInput.type = "submit";
+
     this.startInput = document.createElement("input");
     this.startInput.type = "hidden";
-    this.endInput = document.createElement("input");
-    this.endInput.type = "hidden";
-
     this.mainContainer.appendChild(this.startInput);
-    this.mainContainer.appendChild(this.endInput);
+
+    if (this.config.range) {
+      this.endInput = document.createElement("input");
+      this.endInput.type = "hidden";
+      this.mainContainer.appendChild(this.endInput);
+    }
   }
 
   #buildMonthSectionElements() {
@@ -98,16 +101,17 @@ export default class Builder {
     this.prevMonth = document.createElement("span");
     this.monthName = document.createElement("p");
     this.nextMonth = document.createElement("span");
-    this.prevMonthSvgString = '<svg class="fill-current h-6 hover:fill-baro-yellow" viewBox="0 0 16 16"><path d="M10.825 14.325C10.675 14.325 10.525 14.275 10.425 14.15L4.77501 8.40002C4.55001 8.17502 4.55001 7.82502 4.77501 7.60002L10.425 1.85002C10.65 1.62502 11 1.62502 11.225 1.85002C11.45 2.07502 11.45 2.42502 11.225 2.65002L5.97501 8.00003L11.25 13.35C11.475 13.575 11.475 13.925 11.25 14.15C11.1 14.25 10.975 14.325 10.825 14.325Z"></path></svg>';
-    this.nextMonthSvgString = '<svg class="fill-current h-6 hover:fill-baro-yellow" viewBox="0 0 16 16"><path d="M5.17501 14.325C5.02501 14.325 4.90001 14.275 4.77501 14.175C4.55001 13.95 4.55001 13.6 4.77501 13.375L10.025 8.00003L4.77501 2.65002C4.55001 2.42502 4.55001 2.07502 4.77501 1.85002C5.00001 1.62502 5.35001 1.62502 5.57501 1.85002L11.225 7.60002C11.45 7.82502 11.45 8.17502 11.225 8.40002L5.57501 14.15C5.47501 14.25 5.32501 14.325 5.17501 14.325Z"></path></svg>';
 
     this.monthSectionContainer.classList.add("flex", "items-center", "justify-between");
 
-    this.prevMonth.innerHTML = this.prevMonthSvgString;
-    this.nextMonth.innerHTML = this.nextMonthSvgString;
+    this.prevMonth.innerHTML = '<svg class="fill-current h-6 hover:fill-baro-yellow hover:cursor-pointer" viewBox="0 0 16 16"><path d="M10.825 14.325C10.675 14.325 10.525 14.275 10.425 14.15L4.77501 8.40002C4.55001 8.17502 4.55001 7.82502 4.77501 7.60002L10.425 1.85002C10.65 1.62502 11 1.62502 11.225 1.85002C11.45 2.07502 11.45 2.42502 11.225 2.65002L5.97501 8.00003L11.25 13.35C11.475 13.575 11.475 13.925 11.25 14.15C11.1 14.25 10.975 14.325 10.825 14.325Z"></path></svg>';
+    this.nextMonth.innerHTML = '<svg class="fill-current h-6 hover:fill-baro-yellow hover:cursor-pointer" viewBox="0 0 16 16"><path d="M5.17501 14.325C5.02501 14.325 4.90001 14.275 4.77501 14.175C4.55001 13.95 4.55001 13.6 4.77501 13.375L10.025 8.00003L4.77501 2.65002C4.55001 2.42502 4.55001 2.07502 4.77501 1.85002C5.00001 1.62502 5.35001 1.62502 5.57501 1.85002L11.225 7.60002C11.45 7.82502 11.45 8.17502 11.225 8.40002L5.57501 14.15C5.47501 14.25 5.32501 14.325 5.17501 14.325Z"></path></svg>';
     this.monthSectionContainer.appendChild(this.prevMonth);
     this.monthSectionContainer.appendChild(this.monthName);
     this.monthSectionContainer.appendChild(this.nextMonth);
+
+    this.prevMonth.addEventListener("click", this.main.setPrevMonth.bind(this.main))
+    this.nextMonth.addEventListener("click", this.main.setNextMonth.bind(this.main))
 
     this.mainContainer.appendChild(this.monthSectionContainer);
   }
