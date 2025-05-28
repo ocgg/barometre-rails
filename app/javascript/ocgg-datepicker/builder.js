@@ -2,10 +2,10 @@ import Styles from "datepicker/styles";
 import Helper from "datepicker/helpers";
 
 export default class Builder {
-  constructor(main, dates, config) {
-    this.config = config
+  constructor(main) {
     this.main = main;
-    this.dates = dates;
+    this.config = main.config
+    this.dates = main.dates;
     this.css = new Styles();
     this.#buildElements();
   }
@@ -39,7 +39,6 @@ export default class Builder {
 
   #updatesInputValuesForSingleDate() {
     this.startInput.value = Helper.parsableStringFrom(this.dates.start);
-    // this.endInput.value = Helper.parsableStringFrom(this.dates.start);
   }
 
   #buildMonthDaysFrom(day) {
@@ -86,12 +85,14 @@ export default class Builder {
       this.submitInput.classList.add("hidden");
       this.submitInput.name = "commit";
       this.submitInput.type = "submit";
+      this.mainContainer.appendChild(this.submitInput);
     }
 
     this.startInput = document.createElement("input");
     this.startInput.type = "hidden";
     this.startInput.name = this.config.startInputId;
     this.startInput.id = this.config.startInputId;
+    this.startInput.disabled = true;
     this.mainContainer.appendChild(this.startInput);
 
     if (this.config.range) {
@@ -99,6 +100,7 @@ export default class Builder {
       this.endInput.type = "hidden";
       this.endInput.name = this.config.endInputId;
       this.endInput.id = this.config.endInputId;
+      this.endInput.disabled = true;
       this.mainContainer.appendChild(this.endInput);
     }
   }
