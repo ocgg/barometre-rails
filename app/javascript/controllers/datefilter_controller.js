@@ -1,6 +1,4 @@
 import { Controller } from "@hotwired/stimulus"
-import DatesManager from "datepicker/dates_manager"
-import Renderer from "datepicker/renderer"
 import Datepicker from "datepicker/datepicker"
 
 // Connects to data-controller="datefilter"
