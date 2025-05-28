@@ -1,8 +1,8 @@
 # ROADMAP
 
 1. Datepicker:
-  - instanciation similaire à flatpickr
-  - options range/single, hour
+  - ~~instanciation similaire à flatpickr~~
+  - options ~~range/single~~, hour
 
 2. Intégrer datepicker au formulaire
 
