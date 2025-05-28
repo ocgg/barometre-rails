@@ -81,17 +81,24 @@ export default class Builder {
   }
 
   #buildInputs() {
-    this.submitInput = document.createElement("input");
-    this.submitInput.classList.add("hidden");
-    this.submitInput.type = "submit";
+    if (this.config.autosubmit) {
+      this.submitInput = document.createElement("input");
+      this.submitInput.classList.add("hidden");
+      this.submitInput.name = "commit";
+      this.submitInput.type = "submit";
+    }
 
     this.startInput = document.createElement("input");
     this.startInput.type = "hidden";
+    this.startInput.name = this.config.startInputId;
+    this.startInput.id = this.config.startInputId;
     this.mainContainer.appendChild(this.startInput);
 
     if (this.config.range) {
       this.endInput = document.createElement("input");
       this.endInput.type = "hidden";
+      this.endInput.name = this.config.endInputId;
+      this.endInput.id = this.config.endInputId;
       this.mainContainer.appendChild(this.endInput);
     }
   }

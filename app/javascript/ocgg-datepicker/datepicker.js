@@ -1,13 +1,12 @@
 import Builder from "datepicker/builder";
 import DatesManager from "datepicker/dates_manager";
-import Renderer from "datepicker/renderer";
 
 export default class Datepicker {
-  constructor(element, opts = {}) {
-    this.config = opts;
+  constructor(element, config = {}) {
+    this.#setConfig(config);
+
     this.dates = new DatesManager();
     this.elts = new Builder(this, this.dates, this.config);
-    // this.render = new Renderer(this.dates);
 
     this.elts.renderCalendar(this.dates);
     element.appendChild(this.elts.mainContainer)
@@ -29,8 +28,18 @@ export default class Datepicker {
     event.stopPropagation();
 
     const selectedDate = new Date(event.currentTarget.dataset.date);
-    if (this.config.range) this.#selectDateForRange(selectedDate);
-    else this.#selectSingleDate(selectedDate);
+    if (this.config.range) this.#rangeDateSelect(selectedDate);
+    else this.#singleDateSelect(selectedDate);
+  }
+
+  #setConfig(config) {
+    const defaultConfig = {
+      autosubmit: true,
+      range: false,
+      startInputId: "start",
+      endInputId: "end"
+    }
+    this.config = {...defaultConfig, ...config};
   }
 
   #activate() {
@@ -43,7 +52,7 @@ export default class Datepicker {
     this.elts.endInput.disabled = true;
   }
 
-  #selectDateForRange(selectedDate) {
+  #rangeDateSelect(selectedDate) {
     if (!this.dates.start || this.dates.startAndEnd) {
       this.#updateDates(selectedDate, null);
       if (this.active) this.#desactivate();
@@ -60,6 +69,12 @@ export default class Datepicker {
     }
   }
 
+  #singleDateSelect(selectedDate) {
+    this.#updateDates(selectedDate, null);
+    if (!this.active) this.#activate();
+    this.#submit();
+  }
+
   #updateDates(start, end) {
     this.dates.start = start;
     this.dates.end = end;
@@ -67,13 +82,9 @@ export default class Datepicker {
     this.elts.renderCalendar();
   }
 
-  #selectSingleDate(selectedDate) {
-    this.#updateDates(selectedDate, selectedDate);
-    if (!this.active) this.#activate();
-    this.#submit();
-  }
-
   #submit() {
+    if (!this.config.autosubmit) return;
+
     this.elts.submitInput.click();
   }
 }
