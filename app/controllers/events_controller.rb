@@ -74,13 +74,22 @@ class EventsController < ApplicationController
   end
 
   def events_params
-    params.expect(events: [[:date, :name, :description, :tarif, :venue_id, {venue_attributes: [:name, :address, :city]}]])
+    params.expect(events: [[:date, :time, :name, :description, :tarif, :venue_id, {venue_attributes: [:name, :address, :city]}]])
   end
 
   def set_new_events
     events_params.map do |attr|
-      date = attr[:date].present? && Time.new("#{attr[:date]}:00")
-      Event.new(date:, **attr)
+      if attr[:date] && attr[:time]
+        m_d_y = attr[:date].split("-")
+        h_m = attr[:time].split(":")
+        date = Time.new(m_d_y[2], m_d_y[0], m_d_y[1], h_m[0], h_m[1])
+        attr.delete(:time)
+        attr.delete(:date)
+        Event.new(date:, **attr)
+      else
+        attr.delete(:time)
+        Event.new(**attr)
+      end
     end
   end
 end
