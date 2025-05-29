@@ -9,7 +9,8 @@ export default class Datepicker {
     this.elts = new Builder(this);
 
     this.elts.renderCalendar(this.dates);
-    element.appendChild(this.elts.mainContainer)
+    element.innerHTML = "";
+    element.appendChild(this.elts.mainContainer);
   }
 
   get active() { return !this.elts.startInput.disabled }
@@ -62,11 +63,12 @@ export default class Datepicker {
       autosubmit: false,
       range: false,
       time: false,
-      startInputId: "start",
-      endInputId: "end",
-      timeInputId: "time"
+      startInput: { id: "start", name: "start" },
+      endInput: { id: "end", name: "end" },
+      timeInput: { id: "time", name: "time" }
     }
     this.config = { ...defaultConfig, ...config };
+    console.log(this.config)
   }
 
   #activate() {

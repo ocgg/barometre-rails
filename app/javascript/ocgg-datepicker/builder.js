@@ -84,23 +84,22 @@ export default class Builder {
     if (this.config.autosubmit) {
       this.submitInput = document.createElement("input");
       this.submitInput.classList.add("hidden");
-      this.submitInput.name = "commit";
       this.submitInput.type = "submit";
       this.mainContainer.appendChild(this.submitInput);
     }
 
     this.startInput = document.createElement("input");
     this.startInput.type = "hidden";
-    this.startInput.name = this.config.startInputId;
-    this.startInput.id = this.config.startInputId;
+    this.startInput.name = this.config.startInput.name;
+    this.startInput.id = this.config.startInput.id;
     this.startInput.disabled = true;
     this.mainContainer.appendChild(this.startInput);
 
     if (this.config.range) {
       this.endInput = document.createElement("input");
       this.endInput.type = "hidden";
-      this.endInput.name = this.config.endInputId;
-      this.endInput.id = this.config.endInputId;
+      this.endInput.name = this.config.endInput.name;
+      this.endInput.id = this.config.endInput.id;
       this.endInput.disabled = true;
       this.mainContainer.appendChild(this.endInput);
     }
@@ -159,8 +158,8 @@ export default class Builder {
     this.timeIcon.innerHTML = '<svg class="h-5 fill-fgcolor" viewBox="0 0 512 512"> <path d="M464 256A208 208 0 1 1 48 256a208 208 0 1 1 416 0zM0 256a256 256 0 1 0 512 0A256 256 0 1 0 0 256zM232 120l0 136c0 8 4 15.5 10.7 20l96 64c11 7.4 25.9 4.4 33.3-6.7s4.4-25.9-6.7-33.3L280 243.2 280 120c0-13.3-10.7-24-24-24s-24 10.7-24 24z"></path></svg>'
     this.timeInput = document.createElement("input");
     this.timeInput.type = "time";
-    this.timeInput.name = this.config.timeInputId;
-    this.timeInput.id = this.config.timeInputId;
+    this.timeInput.name = this.config.timeInput.name;
+    this.timeInput.id = this.config.timeInput.id;
 
     this.mainContainer.appendChild(this.separator);
     this.timeContainer.appendChild(this.timeIcon);
