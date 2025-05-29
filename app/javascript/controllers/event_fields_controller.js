@@ -15,7 +15,12 @@ export default class extends Controller {
   ]
 
   connect() {
-    const opts = { time: true }
+    console.log("coucou")
+    const opts = {
+      time: true,
+      startInput: {id: "events__date", name: "events[][date]"},
+      timeInput: {id: "events__time", name: "events[][time]"},
+    }
     this.datepicker = new Datepicker(this.datepickerContainerTarget, opts);
 
     this.datepicker.elts.startInput.dataset.action = "change->event-fields#onDateSelection"
