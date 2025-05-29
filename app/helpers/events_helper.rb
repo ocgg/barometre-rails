@@ -8,6 +8,11 @@ module EventsHelper
     l(date, format:).split.map(&:capitalize).join(" ")
   end
 
+  def date_to_ddMyyyy(date)
+    format = "%d %B %Y"
+    l(date, format:)
+  end
+
   def format_hour(date)
     date.strftime("%Hh%M")
   end
