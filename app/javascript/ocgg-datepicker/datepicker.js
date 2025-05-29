@@ -61,8 +61,10 @@ export default class Datepicker {
     const defaultConfig = {
       autosubmit: false,
       range: false,
+      time: false,
       startInputId: "start",
-      endInputId: "end"
+      endInputId: "end",
+      timeInputId: "time"
     }
     this.config = { ...defaultConfig, ...config };
   }
