@@ -2,11 +2,11 @@
   article class="event-card" class=(event.verified ? "odd:bg-card-bg" : "bg-baro-yellow-faded !text-fgcolor-faded")
 
     div.md-hour
-      div = format_hour(event.date)
+      div = event.formatted_time
 
     div.event-card-main
       div.sm-hour
-        p.text-lg = format_hour(event.date)
+        p.text-lg = event.formatted_time
         p.italic = event.tarif
 
       div.name-desc-ctn

@@ -9,6 +9,10 @@ class Event < ApplicationRecord
 
   def unverified? = !verified
 
+  def formatted_time
+    date.strftime("%Hh%M")
+  end
+
   class << self
     def filter_with_params(params)
       return self unless params.present?

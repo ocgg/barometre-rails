@@ -13,10 +13,6 @@ module EventsHelper
     l(date, format:)
   end
 
-  def format_hour(date)
-    date.strftime("%Hh%M")
-  end
-
   def navbar_btn_color(action)
     if params[:action] == action
       "fill-baro-yellow"
