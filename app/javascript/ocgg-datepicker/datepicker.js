@@ -5,7 +5,7 @@ export default class Datepicker {
   constructor(element, config = {}) {
     this.#setConfig(config);
 
-    this.dates = new DatesManager();
+    this.dates = new DatesManager(this.config.startInput.value, this.config.endInput.value);
     this.elts = new Builder(this);
 
     this.elts.renderCalendar(this.dates);
@@ -63,12 +63,11 @@ export default class Datepicker {
       autosubmit: false,
       range: false,
       time: false,
-      startInput: { id: "start", name: "start" },
-      endInput: { id: "end", name: "end" },
-      timeInput: { id: "time", name: "time" }
+      startInput: { id: "start", name: "start", value: null },
+      endInput: { id: "end", name: "end", value: null },
+      timeInput: { id: "time", name: "time", value: null }
     }
     this.config = { ...defaultConfig, ...config };
-    console.log(this.config)
   }
 
   #activate() {

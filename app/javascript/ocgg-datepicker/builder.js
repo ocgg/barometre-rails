@@ -92,7 +92,8 @@ export default class Builder {
     this.startInput.type = "hidden";
     this.startInput.name = this.config.startInput.name;
     this.startInput.id = this.config.startInput.id;
-    this.startInput.disabled = true;
+    this.startInput.value = this.config.startInput.value;
+    this.startInput.disabled = !this.startInput.value;
     this.mainContainer.appendChild(this.startInput);
 
     if (this.config.range) {
@@ -100,7 +101,8 @@ export default class Builder {
       this.endInput.type = "hidden";
       this.endInput.name = this.config.endInput.name;
       this.endInput.id = this.config.endInput.id;
-      this.endInput.disabled = true;
+      this.endInput.value = this.config.endInput.value;
+      this.endInput.disabled = !this.endInput.value;
       this.mainContainer.appendChild(this.endInput);
     }
   }
@@ -160,6 +162,7 @@ export default class Builder {
     this.timeInput.type = "time";
     this.timeInput.name = this.config.timeInput.name;
     this.timeInput.id = this.config.timeInput.id;
+    this.timeInput.value = this.config.timeInput.value;
 
     this.mainContainer.appendChild(this.separator);
     this.timeContainer.appendChild(this.timeIcon);

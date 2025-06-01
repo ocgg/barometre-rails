@@ -14,12 +14,24 @@ export default class extends Controller {
     "datepickerContainer"
   ]
 
+  static values = {
+    start: String,
+    time: String,
+  }
+
   connect() {
-    console.log("coucou")
     const opts = {
       time: true,
-      startInput: {id: "events__date", name: "events[][date]"},
-      timeInput: {id: "events__time", name: "events[][time]"},
+      startInput: {
+        id: "events__date",
+        name: "events[][date]",
+        value: this.startValue,
+      },
+      timeInput: {
+        id: "events__time",
+        name: "events[][time]",
+        value: this.timeValue,
+      },
     }
     this.datepicker = new Datepicker(this.datepickerContainerTarget, opts);
 
