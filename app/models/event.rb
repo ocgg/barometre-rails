@@ -9,9 +9,13 @@ class Event < ApplicationRecord
 
   def unverified? = !verified
 
-  def formatted_time
-    date.strftime("%Hh%M")
-  end
+  def formatted_numeric_date = date.strftime("%d/%m/%y")
+
+  def formatted_time = date.strftime("%Hh%M")
+
+  def js_parsable_date = date.strftime("%m-%d-%y")
+
+  def js_parsable_time = date.strftime("%H:%M")
 
   class << self
     def filter_with_params(params)
