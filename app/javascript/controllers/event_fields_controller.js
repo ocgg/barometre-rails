@@ -1,5 +1,5 @@
-import { Controller } from "@hotwired/stimulus"
-import Datepicker from "datepicker/datepicker"
+import { Controller } from "@hotwired/stimulus";
+import Datepicker from "datepicker/datepicker";
 
 // Connects to data-controller="new-event-form"
 export default class extends Controller {
@@ -32,11 +32,11 @@ export default class extends Controller {
         name: "events[][time]",
         value: this.timeValue,
       },
-    }
+    };
     this.datepicker = new Datepicker(this.datepickerContainerTarget, opts);
 
-    this.datepicker.elts.startInput.dataset.action = "change->event-fields#onDateSelection"
-    this.datepicker.elts.timeInput.dataset.action = "change->event-fields#onTimeInput"
+    this.datepicker.elts.startInput.dataset.action = "change->event-fields#onDateSelection";
+    this.datepicker.elts.timeInput.dataset.action = "change->event-fields#onTimeInput";
 
     this.updateDatepickerShadowSize();
   }
@@ -44,11 +44,11 @@ export default class extends Controller {
   get datepickerIsVisible() { return !this.datepickerContainerTarget.classList.contains("hidden") }
 
   setDatepickerVisible(bool) {
-    this.datetimeBtnTarget.classList.toggle("!bg-bgcolor", bool)
-    this.datetimeBtnTarget.classList.toggle("!text-fgcolor", bool)
-    this.iconsContainerTarget.classList.toggle("md:flex-col", !bool)
-    this.svgTargets.forEach(svg => svg.classList.toggle("fill-fgcolor", bool))
-    this.hourCtnTarget.classList.toggle("md:flex-row", !bool)
+    this.datetimeBtnTarget.classList.toggle("!bg-bgcolor", bool);
+    this.datetimeBtnTarget.classList.toggle("!text-fgcolor", bool);
+    this.iconsContainerTarget.classList.toggle("md:flex-col", !bool);
+    this.svgTargets.forEach(svg => svg.classList.toggle("fill-fgcolor", bool));
+    this.hourCtnTarget.classList.toggle("md:flex-row", !bool);
     this.datepickerContainerTarget.classList.toggle("hidden", !bool);
     if (!bool) this.updateDatepickerShadowSize();
   }
@@ -64,16 +64,16 @@ export default class extends Controller {
   onDateSelection(event) {
     if (!event.target.value) return;
 
+    this.startValue = event.target.value;
     const date = new Date(event.target.value);
-    this.dateString = this.readableStringFrom(date);
-    this.dateTarget.textContent = this.dateString;
+    this.dateTarget.textContent = this.readableStringFrom(date);
   }
 
   onTimeInput(event) {
     if (!event.target.value) return;
 
-    const time = event.target.value.replace(":", "h");
-    this.hourTarget.textContent = time;
+    this.timeValue = event.target.value
+    this.hourTarget.textContent = event.target.value.replace(":", "h");
   }
 
   readableStringFrom(date) {
