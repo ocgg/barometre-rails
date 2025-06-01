@@ -6,24 +6,34 @@ export default class extends Controller {
     "eventFields",
     "eventsList",
     "venueDropdown",
+    "datepickerDropdown",
     "trashIcon",
   ]
 
   connect() {
     this.eventsNumber = this.eventFieldsTargets.length;
-    if (this.eventsNumber > 1) this.showTrashIcons();
+    if (this.eventsNumber > 1) {
+      this.showTrashIcons();
+      this.setDatepickerDropdownsZIndexes();
+    }
   }
 
   onPlusBtnClick(_) {
     this.cloneLastEvent();
     this.eventsNumber++;
+    this.setDatepickerDropdownsZIndexes();
     this.showTrashIcons();
   }
 
   cloneLastEvent() {
     const clone = this.eventFieldsTargets[this.eventsNumber - 1].cloneNode(true);
-    clone.querySelector(".errors")?.remove();
     this.eventsListTarget.appendChild(clone);
+  }
+
+  setDatepickerDropdownsZIndexes() {
+    this.datepickerDropdownTargets.forEach((elt, index) => {
+      elt.style.zIndex = 20 + (this.eventsNumber - index - 1);
+    })
   }
 
   handleVenueDropdownFocusOut(event) {
