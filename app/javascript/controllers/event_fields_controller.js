@@ -77,7 +77,7 @@ export default class extends Controller {
   }
 
   readableStringFrom(date) {
-    const opts = { day: "numeric", month: "long", year: "numeric" };
+    const opts = { day: "numeric", month: "numeric", year: "2-digit" };
     return date.toLocaleDateString("fr-FR", opts);
   }
 
