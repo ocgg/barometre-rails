@@ -13,11 +13,8 @@ export default class Datepicker {
     element.appendChild(this.elts.mainContainer);
   }
 
-  get active() { return !this.elts.startInput.disabled }
-
   reset() {
     this.setDates(null, null);
-    this.#desactivate();
   }
 
   setPrevMonth(_) {
@@ -70,36 +67,22 @@ export default class Datepicker {
     this.config = { ...defaultConfig, ...config };
   }
 
-  #activate() {
-    this.elts.startInput.disabled = false;
-    if (this.config.range) this.elts.endInput.disabled = false;
-  }
-
-  #desactivate() {
-    this.elts.startInput.disabled = true;
-    if (this.config.range) this.elts.endInput.disabled = true;
-  }
-
   #rangeDateSelect(selectedDate) {
     if (!this.dates.start || this.dates.startAndEnd) {
       this.setDates(selectedDate, null);
-      if (this.active) this.#desactivate();
     }
     else if (selectedDate < this.dates.start) {
       this.setDates(selectedDate, this.dates.start);
-      if (!this.active) this.#activate();
       this.submit();
     }
     else {
       this.setDates(this.dates.start, selectedDate);
-      if (!this.active) this.#activate();
       this.submit();
     }
   }
 
   #singleDateSelect(selectedDate) {
     this.setDates(selectedDate, null);
-    if (!this.active) this.#activate();
     this.submit();
   }
 }

@@ -93,7 +93,6 @@ export default class Builder {
     this.startInput.name = this.config.startInput.name;
     this.startInput.id = this.config.startInput.id;
     this.startInput.value = this.config.startInput.value;
-    this.startInput.disabled = !this.startInput.value;
     this.mainContainer.appendChild(this.startInput);
 
     if (this.config.range) {
