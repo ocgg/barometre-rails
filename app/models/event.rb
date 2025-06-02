@@ -4,10 +4,19 @@ class Event < ApplicationRecord
 
   validates :name, presence: true
   validates :date, presence: true
+  validates :time, presence: true
 
   def verified? = verified
 
   def unverified? = !verified
+
+  def formatted_numeric_date = date.strftime("%d/%m/%y")
+
+  def formatted_time = time.strftime("%Hh%M")
+
+  def js_parsable_date = date.strftime("%m-%d-%Y")
+
+  def js_parsable_time = time.strftime("%H:%M")
 
   class << self
     def filter_with_params(params)

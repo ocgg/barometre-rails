@@ -8,8 +8,9 @@ module EventsHelper
     l(date, format:).split.map(&:capitalize).join(" ")
   end
 
-  def format_hour(date)
-    date.strftime("%Hh%M")
+  def date_to_ddMyyyy(date)
+    format = "%d %B %Y"
+    l(date, format:)
   end
 
   def navbar_btn_color(action)

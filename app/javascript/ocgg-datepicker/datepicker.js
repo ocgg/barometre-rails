@@ -5,18 +5,16 @@ export default class Datepicker {
   constructor(element, config = {}) {
     this.#setConfig(config);
 
-    this.dates = new DatesManager();
+    this.dates = new DatesManager(this.config.startInput.value, this.config.endInput.value);
     this.elts = new Builder(this);
 
     this.elts.renderCalendar(this.dates);
-    element.appendChild(this.elts.mainContainer)
+    element.innerHTML = "";
+    element.appendChild(this.elts.mainContainer);
   }
-
-  get active() { return !this.elts.startInput.disabled }
 
   reset() {
     this.setDates(null, null);
-    this.#desactivate();
   }
 
   setPrevMonth(_) {
@@ -61,42 +59,30 @@ export default class Datepicker {
     const defaultConfig = {
       autosubmit: false,
       range: false,
-      startInputId: "start",
-      endInputId: "end"
+      time: false,
+      startInput: { id: "start", name: "start", value: null },
+      endInput: { id: "end", name: "end", value: null },
+      timeInput: { id: "time", name: "time", value: null }
     }
     this.config = { ...defaultConfig, ...config };
-  }
-
-  #activate() {
-    this.elts.startInput.disabled = false;
-    if (this.config.range) this.elts.endInput.disabled = false;
-  }
-
-  #desactivate() {
-    this.elts.startInput.disabled = true;
-    if (this.config.range) this.elts.endInput.disabled = true;
   }
 
   #rangeDateSelect(selectedDate) {
     if (!this.dates.start || this.dates.startAndEnd) {
       this.setDates(selectedDate, null);
-      if (this.active) this.#desactivate();
     }
     else if (selectedDate < this.dates.start) {
       this.setDates(selectedDate, this.dates.start);
-      if (!this.active) this.#activate();
       this.submit();
     }
     else {
       this.setDates(this.dates.start, selectedDate);
-      if (!this.active) this.#activate();
       this.submit();
     }
   }
 
   #singleDateSelect(selectedDate) {
     this.setDates(selectedDate, null);
-    if (!this.active) this.#activate();
     this.submit();
   }
 }
