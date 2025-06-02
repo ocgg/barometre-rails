@@ -71,11 +71,10 @@ export default class extends Controller {
   }
 
   handleWindowResize(event) {
-    const toMdSize = event.matches;
-    this.datepickerBtnTargets.forEach(elt => {
-      const size = elt.getBoundingClientRect();
-      elt.parentNode.style.width = toMdSize ? `${Math.floor(size.width)}px` : "100%";
-      elt.parentNode.style.height = `${Math.floor(size.height)}px`;
+    this.eventFieldsTargets.forEach(elt => {
+      const controller = this.application.getControllerForElementAndIdentifier(elt, 'event-fields')
+      controller.setDatepickerVisible(false);
+      controller.updateDatepickerShadowSize();
     })
   }
 }

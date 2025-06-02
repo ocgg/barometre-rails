@@ -36,7 +36,7 @@ section.event-day.overflow-visible
                 data-event-fields-target="datetimeShadow"
                 data-action="click@window->event-fields#handleDatepickerFocusOut"
               ]
-                div.btn.absolute.w-full.py-2.bg-fgcolor.text-bgcolor.font-quicksand.md:w-fit[
+                div.btn.absolute.w-full.min-w-fit.z-20.py-2.bg-fgcolor.text-bgcolor.font-quicksand.md:w-fit[
                   class=("border-baro-orange" if event.errors[:date].present? || event.errors[:time].present?)
                   data-event-fields-target="datetimeBtn"
                   data-events-form-target="datepickerBtn"
@@ -54,7 +54,7 @@ section.event-day.overflow-visible
                       span.text-lg data-event-fields-target="hour"
                         = event.time ? event.formatted_time : "Heure"
                   /datepicker
-                  div.hidden.size-max.min-w-fit.flex-col.p-2.cursor-default[
+                  div.hidden.size-max.m-auto.flex-col.p-2.cursor-default[
                     data-event-fields-target="datepickerContainer"
                   ]
 
