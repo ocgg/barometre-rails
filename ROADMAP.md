@@ -9,7 +9,7 @@
 3. Gestion de la confirmation des Venues
   - venues#unverified
   - Confirmation + visualisation du geocoding
-  - un Event ne peux pas être validé si sa Venue n'est pas validée
+  - un Event ne peut pas être validé si sa Venue n'est pas validée
   - Détection des doublons
   - Si doublon: réaffectation de la Venue pour tous ses events
   - détection geocoding foireux (hors Loire-Atlantique p.e.)
@@ -27,6 +27,7 @@
   - datepicker plus petit
   - meilleur time input
   - fix: containers de jours dupliqués lors de la pagination
+  - HTML titles partout
 
 8. Choisir une licence
 

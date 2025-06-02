@@ -1,9 +1,16 @@
-h1
-  | Events#unverified
-p
-  | Logged in as: 
-  = current_user.email_address
-  |  (
-  = current_user.role
-  | )
-= render "events/events_list"
+= @pagy.count
+= turbo_frame_tag :events
+
+  section#events_days_container class="flex flex-col gap-27 md:gap-20"
+
+    - if @pagy.count.zero?
+      p.text-center.text-xl Aucun résultat
+    - elsif request.query_parameters.compact_blank.any?
+      p.-mt-13.-mb-13.text-center #{@pagy.count} résultat#{"s" if @pagy.count > 1}
+
+    = render "events/events_list"
+
+  - if @pagy.next.present?
+    = turbo_frame_tag :next_page,
+      src: unverified_path(**@query_params, page: @pagy.next, format: :turbo_stream),
+      loading: :lazy

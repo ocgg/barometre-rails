@@ -1,5 +1,5 @@
 class EventsController < ApplicationController
-  allow_unauthenticated_access
+  allow_unauthenticated_access except: :unverified
   before_action :set_events, only: %i[index map calendar]
   before_action :set_event, only: %i[verify destroy]
 
@@ -9,7 +9,12 @@ class EventsController < ApplicationController
   end
 
   def unverified
-    @events = authorize Event.unverified_upcoming
+    # @events = authorize Event.unverified_upcoming
+    # set_events_days
+    @query_params = request.query_parameters.compact_blank
+    @events = Event.filter_unverified_with_params(@query_params)
+    @events = authorize policy_scope(@events)
+    @pagy, @events = pagy(@events, limit: 20, count: @events.count)
     set_events_days
   end
 

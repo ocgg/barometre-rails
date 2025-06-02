@@ -19,6 +19,15 @@ class Event < ApplicationRecord
   def js_parsable_time = time.strftime("%H:%M")
 
   class << self
+    def filter_unverified_with_params(params)
+      return unverified_upcoming unless params.present?
+      filtered = unverified_upcoming
+      filtered = filtered.filter_by_dates(params) if params[:start]
+      filtered = filtered.filter_by_position(params) if params[:radius]
+      filtered = filtered.search(params[:q]) if params[:q]
+      filtered
+    end
+
     def filter_with_params(params)
       return self unless params.present?
       filtered = self

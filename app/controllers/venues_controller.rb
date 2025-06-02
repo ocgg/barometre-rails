@@ -1,5 +1,5 @@
 class VenuesController < ApplicationController
-  allow_unauthenticated_access
+  allow_unauthenticated_access except: :unverified
 
   def index
     sql = <<~SQL
@@ -9,6 +9,10 @@ class VenuesController < ApplicationController
     SQL
     @venues = Venue.where(sql, string: "%#{params[:q]}%").limit(5)
     render json: @venues.to_json
+  end
+
+  def unverified
+    @venues = Venue.where(verified: false)
   end
 
   def show
