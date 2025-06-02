@@ -56,8 +56,9 @@ export default class extends Controller {
   onDatetimeClick(_) { this.setDatepickerVisible(!this.datepickerIsVisible) }
 
   updateDatepickerShadowSize() {
+    const isMdSize = window.innerWidth >= 768;
     const size = this.datetimeBtnTarget.getBoundingClientRect();
-    this.datetimeShadowTarget.style.width = `${Math.floor(size.width)}px`;
+    this.datetimeShadowTarget.style.width = isMdSize ? `${Math.floor(size.width)}px` : "100%";
     this.datetimeShadowTarget.style.height = `${Math.floor(size.height)}px`;
   }
 

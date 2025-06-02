@@ -36,10 +36,10 @@ section.event-day.overflow-visible
                 data-event-fields-target="datetimeShadow"
                 data-action="click@window->event-fields#handleDatepickerFocusOut"
               ]
-                div.btn.absolute.py-2.bg-fgcolor.text-bgcolor.font-quicksand.md:w-fit[
+                div.btn.absolute.w-full.py-2.bg-fgcolor.text-bgcolor.font-quicksand.md:w-fit[
                   class=("border-baro-orange" if event.errors[:date].present? || event.errors[:time].present?)
                   data-event-fields-target="datetimeBtn"
-                  data-events-form-target="datepickerDropdown"
+                  data-events-form-target="datepickerBtn"
                 ]
                   div.flex.w-full.gap-8.justify-between.md:flex-col.md:gap-1[
                     data-action="click->event-fields#onDatetimeClick"
