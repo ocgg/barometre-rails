@@ -25,7 +25,7 @@ export default class Builder {
   #updatesInputValuesForRange() {
     if (this.dates.startWithoutEnd) {
       this.startInput.value = Helper.parsableStringFrom(this.dates.start);
-      this.endInput.value = Helper.parsableStringFrom(this.dates.start);
+      this.endInput.value = null;
     }
     else if (this.dates.startAndEnd) {
       this.startInput.value = Helper.parsableStringFrom(this.dates.start);
@@ -101,7 +101,6 @@ export default class Builder {
       this.endInput.name = this.config.endInput.name;
       this.endInput.id = this.config.endInput.id;
       this.endInput.value = this.config.endInput.value;
-      this.endInput.disabled = !this.endInput.value;
       this.mainContainer.appendChild(this.endInput);
     }
   }

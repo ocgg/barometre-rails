@@ -13,6 +13,12 @@ export default class Datepicker {
     element.appendChild(this.elts.mainContainer);
   }
 
+  get active() {
+    return this.config.range ?
+      this.elts.startInput.value && this.elts.endInput.value
+      : this.elts.startInput.value
+  }
+
   reset() {
     this.setDates(null, null);
   }

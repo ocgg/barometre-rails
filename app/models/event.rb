@@ -31,7 +31,6 @@ class Event < ApplicationRecord
     def filter_by_dates(params)
       start_date = Date.strptime(params[:start], "%m-%d-%Y")
       end_date = params[:end].present? ? Date.strptime(params[:end], "%m-%d-%Y") : start_date
-      end_date += 1.day
       between(start_date, end_date)
     end
 
