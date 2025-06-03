@@ -1,4 +1,7 @@
-h1 Lieux/bars à vérifier
+= turbo_frame_tag :content
 
-- @venues.each do |venue|
-  div=venue.name
+  section.flex.flex-col.gap-27.overflow-hidden.md:gap-8.md:rounded-lg
+
+    - @venues.each do |venue|
+
+      = render venue
