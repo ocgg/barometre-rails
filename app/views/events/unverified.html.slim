@@ -1,5 +1,4 @@
-= @pagy.count
-= turbo_frame_tag :events
+= turbo_frame_tag :content
 
   section#events_days_container class="flex flex-col gap-27 md:gap-20"
 
@@ -12,5 +11,5 @@
 
   - if @pagy.next.present?
     = turbo_frame_tag :next_page,
-      src: unverified_path(**@query_params, page: @pagy.next, format: :turbo_stream),
+      src: unverified_events_path(**@query_params, page: @pagy.next, format: :turbo_stream),
       loading: :lazy
