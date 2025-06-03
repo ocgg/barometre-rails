@@ -51,6 +51,7 @@ class EventsController < ApplicationController
       @event.update(verified: true)
       render @event
     else
+      # Should never happen
       render_unprocessable_entity_error
     end
   end
@@ -81,7 +82,10 @@ class EventsController < ApplicationController
   end
 
   def events_params
-    params.expect(events: [[:date, :time, :name, :description, :tarif, :venue_id, {venue_attributes: [:name, :address, :city]}]])
+    params.expect(events: [[
+      :date, :time, :name, :description, :tarif, :venue_id,
+      {venue_attributes: [:name, :address, :city]}
+    ]])
   end
 
   def set_new_events
