@@ -1,5 +1,5 @@
 class EventsController < ApplicationController
-  allow_unauthenticated_access
+  allow_unauthenticated_access except: %i[unverified verify destroy]
   before_action :set_events, only: %i[index map calendar]
   before_action :set_event, only: %i[verify destroy]
 
@@ -8,15 +8,18 @@ class EventsController < ApplicationController
   def index
   end
 
-  def unverified
-    @events = authorize Event.unverified_upcoming
-    set_events_days
-  end
-
   def map
   end
 
   def calendar
+  end
+
+  def unverified
+    @query_params = request.query_parameters.compact_blank
+    @events = Event.filter_unverified_with_params(@query_params)
+    @events = authorize policy_scope(@events)
+    @pagy, @events = pagy(@events, limit: 50, count: @events.count)
+    set_events_days
   end
 
   def new
@@ -44,8 +47,13 @@ class EventsController < ApplicationController
   # end
 
   def verify
-    @event.update(verified: true)
-    render @event
+    if @event.venue.verified?
+      @event.update(verified: true)
+      render @event
+    else
+      # Should never happen
+      render_unprocessable_entity_error
+    end
   end
 
   def destroy
@@ -74,7 +82,10 @@ class EventsController < ApplicationController
   end
 
   def events_params
-    params.expect(events: [[:date, :time, :name, :description, :tarif, :venue_id, {venue_attributes: [:name, :address, :city]}]])
+    params.expect(events: [[
+      :date, :time, :name, :description, :tarif, :venue_id,
+      {venue_attributes: [:name, :address, :city]}
+    ]])
   end
 
   def set_new_events

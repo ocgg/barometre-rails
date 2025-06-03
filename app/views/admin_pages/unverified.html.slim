@@ -1,0 +1,8 @@
+= turbo_frame_tag :links, target: :content
+  div.flex.justify-around
+    = link_to unverified_events_path, class: "text-xl hover:text-baro-yellow"
+      | Concerts (#{@unverified_events_count})
+    = link_to unverified_venues_path, class: "text-xl hover:text-baro-yellow"
+      | Lieux (#{@unverified_venues_count})
+
+= turbo_frame_tag :content, src: @section_path

@@ -7,11 +7,13 @@
 2. ~~Intégrer datepicker au formulaire~~
 
 3. Gestion de la confirmation des Venues
-  - venues#unverified
-  - Confirmation + visualisation du geocoding
-  - un Event ne peux pas être validé si sa Venue n'est pas validée
+  - ~~venues#unverified~~
+  - ~~Confirmation~~
+  - ~~visualisation du geocoding~~ **(lien OSM provisoire)**
+  - ~~un Event ne peut pas être validé si sa Venue n'est pas validée~~
+  - venues#destroy
   - Détection des doublons
-  - Si doublon: réaffectation de la Venue pour tous ses events
+  - Si doublon: réaffectation de la "bonne" Venue à tous ses events
   - détection geocoding foireux (hors Loire-Atlantique p.e.)
 
 4. Job nettoyage de DB
@@ -27,6 +29,7 @@
   - datepicker plus petit
   - meilleur time input
   - fix: containers de jours dupliqués lors de la pagination
+  - HTML titles partout
 
 8. Choisir une licence
 

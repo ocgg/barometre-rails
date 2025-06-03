@@ -11,4 +11,8 @@ class Venue < ApplicationRecord
   def full_address
     "#{address}, #{city}, Loire-Atlantique, France"
   end
+
+  def verified? = verified
+
+  def unverified? = !verified
 end
