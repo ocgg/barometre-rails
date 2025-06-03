@@ -7,8 +7,9 @@
 2. ~~Intégrer datepicker au formulaire~~
 
 3. Gestion de la confirmation des Venues
-  - venues#unverified
-  - Confirmation + visualisation du geocoding
+  - ~~venues#unverified~~
+  - ~~Confirmation~~
+  - ~~visualisation du geocoding~~ (lien OSM provisoire)
   - un Event ne peut pas être validé si sa Venue n'est pas validée
   - Détection des doublons
   - Si doublon: réaffectation de la Venue pour tous ses events

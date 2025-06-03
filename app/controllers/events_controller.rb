@@ -47,8 +47,12 @@ class EventsController < ApplicationController
   # end
 
   def verify
-    @event.update(verified: true)
-    render @event
+    if @event.venue.verified?
+      @event.update(verified: true)
+      render @event
+    else
+      render_unprocessable_entity_error
+    end
   end
 
   def destroy

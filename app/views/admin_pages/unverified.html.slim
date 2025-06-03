@@ -5,4 +5,4 @@
     = link_to unverified_venues_path, class: "text-xl hover:text-baro-yellow"
       | Lieux (#{@unverified_venues_count})
 
-= turbo_frame_tag :content, src: unverified_venues_path
+= turbo_frame_tag :content, src: @section_path

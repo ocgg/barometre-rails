@@ -15,8 +15,12 @@
           - if policy(event).edit?
             div.flex.items-center.justify-between.gap-2
               - if event.unverified?
-                = link_to verify_event_path(event), title: "✅ Valider l'événement", data: {turbo_method: :patch}
-                  svg.h-5.fill-fgcolor-faded.hover:fill-fgcolor viewBox="0 0 512 512": path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"
+                - if event.venue.verified?
+                  = link_to verify_event_path(event), title: "✅ Valider l'événement", data: {turbo_method: :patch}
+                    svg.h-5.fill-fgcolor-faded.hover:fill-fgcolor viewBox="0 0 512 512": path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"
+                - else
+                  = link_to unverified_path(section: "venues"), title: "❌ Le lieu n'est pas vérifié", data: {turbo_frame: :_top}
+                    svg.h-5.fill-baro-orange viewBox="0 0 512 512": path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zm0-384c13.3 0 24 10.7 24 24l0 112c0 13.3-10.7 24-24 24s-24-10.7-24-24l0-112c0-13.3 10.7-24 24-24zM224 352a32 32 0 1 1 64 0 32 32 0 1 1 -64 0z"
               = link_to event_path(event), title: "❌ Supprimer l'événement", data: {turbo_method: :delete, turbo_confirm: "Supprimer cet événement ?"}
                 svg.h-4.fill-fgcolor-faded.hover:fill-fgcolor viewBox="0 0 448 512": path d="M135.2 17.7L128 32 32 32C14.3 32 0 46.3 0 64S14.3 96 32 96l384 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-96 0-7.2-14.3C307.4 6.8 296.3 0 284.2 0L163.8 0c-12.1 0-23.2 6.8-28.6 17.7zM416 128L32 128 53.2 467c1.6 25.3 22.6 45 47.9 45l245.8 0c25.3 0 46.3-19.7 47.9-45L416 128z"
 
