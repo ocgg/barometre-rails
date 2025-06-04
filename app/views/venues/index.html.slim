@@ -1,5 +1,11 @@
 = turbo_frame_tag :content
 
+  div.flex.mb-12.-mt-20.justify-around.text-sm.underline.font-source.md:-mt-10
+
+    = link_to "Par nom", venues_path(order: :name), class: "hover:text-baro-yellow"
+    = link_to "Par date de création", venues_path(order: :created_at), class: "hover:text-baro-yellow"
+    = link_to "Par position", venues_path(order: :position), class: "hover:text-baro-yellow"
+
   section.flex.flex-col.gap-27.overflow-hidden.md:gap-8.md:rounded-lg
 
     = render @venues
