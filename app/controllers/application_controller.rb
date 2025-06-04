@@ -19,7 +19,7 @@ class ApplicationController < ActionController::Base
   end
 
   def authorized_controller?
-    authorized_controllers = %w[sessions pages venues]
+    authorized_controllers = %w[sessions pages]
     authorized_controllers.include? params[:controller]
   end
 

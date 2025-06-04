@@ -15,4 +15,17 @@ class Venue < ApplicationRecord
   def verified? = verified
 
   def unverified? = !verified
+
+  class << self
+    def filter_by_query(query)
+    sql = <<~SQL
+      name LIKE :string
+      OR address LIKE :string
+      OR city LIKE :string
+    SQL
+    @venues = Venue.where(verified: true)
+      .where(sql, string: "%#{query}%")
+      .limit(5)
+    end
+  end
 end

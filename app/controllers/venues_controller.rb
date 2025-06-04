@@ -3,17 +3,12 @@ class VenuesController < ApplicationController
   before_action :set_venue, only: %i[show verify destroy]
 
   def index
-    sql = <<~SQL
-      name LIKE :string
-      OR address LIKE :string
-      OR city LIKE :string
-    SQL
-    @venues = Venue.where(sql, string: "%#{params[:q]}%").limit(5)
+    @venues = authorize Venue.filter_by_query(params[:q])
     render json: @venues.to_json
   end
 
   def unverified
-    @venues = Venue.where(verified: false)
+    @venues = authorize Venue.where(verified: false)
   end
 
   def show
@@ -24,12 +19,6 @@ class VenuesController < ApplicationController
     @venue.update(verified: true)
     render @venue
   end
-
-  # def new
-  # end
-
-  # def create
-  # end
 
   # def edit
   # end
@@ -44,6 +33,6 @@ class VenuesController < ApplicationController
   private
 
   def set_venue
-    @venue = Venue.find(params[:id])
+    @venue = authorize Venue.find(params[:id])
   end
 end
