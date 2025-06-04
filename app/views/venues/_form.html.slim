@@ -50,7 +50,12 @@ div[
           li.p-2.hover:bg-baro-yellow.hover:cursor-pointer[
             data-action="click->venue-fields#onVenueSelect"
           ]
-            p.venue-name
+            div.flex.gap-2.items-center
+              - if policy(venue).edit?
+                /exclamation icon
+                = link_to unverified_path(section: "venues"), title: "❌ Le lieu n'est pas vérifié", data: {turbo_frame: :_top}
+                  svg.h-4.fill-baro-orange viewBox="0 0 512 512": path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zm0-384c13.3 0 24 10.7 24 24l0 112c0 13.3-10.7 24-24 24s-24-10.7-24-24l0-112c0-13.3 10.7-24 24-24zM224 352a32 32 0 1 1 64 0 32 32 0 1 1 -64 0z"
+              p.venue-name
             p.venue-address class="whitespace-nowrap"
         div.hidden.p-2.italic.text-center data-venue-fields-target="noResult"
           | Aucun lieu trouvé
