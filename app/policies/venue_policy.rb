@@ -17,7 +17,7 @@ class VenuePolicy < ApplicationPolicy
 
   class Scope < ApplicationPolicy::Scope
     def resolve
-      @user.admin? ? scope.all_upcoming : scope.verified_upcoming
+      @user.admin? ? scope.all : scope.where(verified: true)
     end
   end
 end
