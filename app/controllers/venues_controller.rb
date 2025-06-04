@@ -3,8 +3,12 @@ class VenuesController < ApplicationController
   before_action :set_venue, only: %i[show verify destroy]
 
   def index
-    @venues = authorize Venue.filter_by_query(params[:q])
-    render json: @venues.to_json
+    @venues = Venue.filter_by_query(params[:q])
+    @venues = authorize policy_scope(@venues)
+    respond_to do |format|
+      format.html { render slim: @venues }
+      format.json { render json: @venues.to_json }
+    end
   end
 
   def unverified
