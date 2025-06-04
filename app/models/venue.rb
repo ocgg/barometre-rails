@@ -16,14 +16,39 @@ class Venue < ApplicationRecord
 
   def unverified? = !verified
 
+  def duplicates
+    sql = <<~SQL
+      name LIKE :name
+      AND address LIKE :address
+      AND city LIKE :city
+    SQL
+    Venue.where(sql, name:, address:, city:)
+  end
+
+  def duplicate?
+    duplicates.count > 1
+  end
+
   class << self
     def filter_by_query(query)
       sql = <<~SQL
-        name LIKE :string
-        OR address LIKE :string
-        OR city LIKE :string
+        venues.name LIKE :string
+        OR venues.address LIKE :string
+        OR venues.city LIKE :string
       SQL
-      Venue.where(sql, string: "%#{query}%").limit(5)
+      Venue.where(sql, string: "%#{query}%")
+    end
+
+    def order_by(option)
+      case option
+      when "created_at" then order(:created_at)
+      when "position" then order(:latitude, :longitude)
+      else order("name")
+      end
+    end
+
+    def all_unverified
+      @venues = Venue.where(verified: false).order(:created_at)
     end
   end
 end
