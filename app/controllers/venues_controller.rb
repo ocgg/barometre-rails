@@ -1,5 +1,6 @@
 class VenuesController < ApplicationController
   allow_unauthenticated_access except: %i[unverified verify destroy]
+  before_action :set_venue, only: %i[show verify destroy]
 
   def index
     sql = <<~SQL
@@ -16,12 +17,10 @@ class VenuesController < ApplicationController
   end
 
   def show
-    @venue = Venue.find(params[:id])
     render json: @venue.to_json
   end
 
   def verify
-    @venue = authorize Venue.find(params[:id])
     @venue.update(verified: true)
     render @venue
   end
@@ -39,5 +38,12 @@ class VenuesController < ApplicationController
   # end
 
   def destroy
+    @venue.destroy
+  end
+
+  private
+
+  def set_venue
+    @venue = Venue.find(params[:id])
   end
 end
