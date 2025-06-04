@@ -11,9 +11,9 @@
   - ~~Confirmation~~
   - ~~visualisation du geocoding~~ **(lien OSM provisoire)**
   - ~~un Event ne peut pas être validé si sa Venue n'est pas validée~~
-  - venues#destroy
-  - Détection des doublons
-  - Si doublon: réaffectation de la "bonne" Venue à tous ses events
+  - ~~venues#destroy~~
+  - ~~Détection des doublons~~
+  - ~~Si doublon: réaffectation de la "bonne" Venue à tous ses events~~
   - détection geocoding foireux (hors Loire-Atlantique p.e.)
 
 4. Job nettoyage de DB
