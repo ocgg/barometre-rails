@@ -14,6 +14,7 @@
   - ~~venues#destroy~~
   - ~~Détection des doublons~~
   - ~~Si doublon: réaffectation de la "bonne" Venue à tous ses events~~
+  - ~~warning no geocoded~~
   - détection geocoding foireux (hors Loire-Atlantique p.e.)
   - transfert d'events de venue à venue
 
