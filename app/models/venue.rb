@@ -29,6 +29,11 @@ class Venue < ApplicationRecord
     duplicates.count > 1
   end
 
+  def in_loire_atlantique?
+    center = [47.3584, -1.7276]
+    Geocoder::Calculations.distance_between(center, self) < 60
+  end
+
   class << self
     def filter_by_query(query)
       sql = <<~SQL
