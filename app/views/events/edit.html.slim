@@ -1,1 +1,22 @@
-| h1 | Events#calendar p | Find me in app/views/events/calendar.html.erb 
+= turbo_frame_tag @event
+
+  = form_with model: @event,
+    method: :patch,
+    data: {controller: "events-form",
+           action: "click@window->events-form#handleVenueDropdownFocusOut"} do |form|
+
+    li.relative[
+      data-events-form-target="eventFields"
+      data-controller="event-fields"
+      data-event-fields-start-value=(@event.js_parsable_date if @event.date)
+      data-event-fields-time-value=(@event.js_parsable_time if @event.time)
+      data-event-fields-unique-event-value=true
+    ]
+  
+
+      = fields_for @event do |event_fields|
+        = render "form_fields", event: @event, event_fields:, unique_event: true
+      
+      div.md:absolute.md:right-2.md:bottom-2.flex.gap-1.items-center.justify-center.mt-2
+        = link_to "Annuler", @event, class: "btn"
+        = form.submit "OK", class: "btn btn-plain"
