@@ -18,8 +18,11 @@
   - ~~détection geocoding hors Loire-Atlantique~~ **(+ de 60km du centre géographique)**
   - bg job pour geocoding
   - edit venue
+  - z-index venue dropdown/date&time mobile:
+    - trouver une manière définitive et propre de gérer ça
 
-4. Edit event
+4. ~~Edit event~~
+  - fix dropdowns z-index aussi
 
 5. Job nettoyage de DB
 
@@ -41,7 +44,7 @@
 
 10. **Mise en prod**
 
-11. Map
+11. Searchbar, Map...
 
 ## TODO
 
@@ -54,7 +57,6 @@
 - revoir gestion user
 
 - events#index:
-  - turbo frame \#edit
   - gérer les permissions utilisateur
   - bouton pour revenir en haut de page (?)
   - gestion turbo stream (partials à virer)
