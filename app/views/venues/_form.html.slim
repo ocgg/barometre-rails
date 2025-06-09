@@ -4,7 +4,7 @@ div[
 ]
   = fields_for "events[][venue_attributes]", venue do |venue_fields|
 
-    div.relative.z-15.flex.flex-col.gap-2
+    div.relative.z-15.flex.flex-col.gap-2 data-events-form-target="venueFields"
 
       = event_fields.hidden_field :venue_id,
         data: {venue_fields_target: "id"}
