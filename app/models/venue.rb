@@ -16,22 +16,24 @@ class Venue < ApplicationRecord
 
   def unverified? = !verified
 
-  def duplicates
+  def possible_duplicates
     sql = <<~SQL
       name LIKE :name
-      AND address LIKE :address
-      AND city LIKE :city
+      OR (address LIKE :address AND city LIKE :city)
     SQL
-    Venue.where(sql, name:, address:, city:)
+    data_dups = Venue.where(sql, name:, address:, city:)
+    location_dups = geocoded? ? nearbys(0.01) : []
+    (data_dups + location_dups).uniq
   end
 
-  def duplicate?
-    duplicates.count > 1
+  def possible_duplicate?
+    possible_duplicates.count > 1
   end
 
   def in_loire_atlantique?
-    center = [47.3584, -1.7276]
-    Geocoder::Calculations.distance_between(center, self) < 60
+    return nil unless geocoded?
+    # [47.3584, -1.7276] = geographical center of Loire-Atlantique
+    distance_to([47.3584, -1.7276]) < 60
   end
 
   class << self
