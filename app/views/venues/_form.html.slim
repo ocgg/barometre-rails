@@ -2,7 +2,7 @@ div[
   data-controller="venue-fields"
   data-venue-fields-mode-value=venue_fields_mode(venue)
 ]
-  = fields_for "events[][venue_attributes]", venue do |venue_fields|
+  = fields_for unique_event ? "event[venue_attributes]" : "events[][venue_attributes]", venue do |venue_fields|
 
     div.relative.z-15.flex.flex-col.gap-2 data-events-form-target="venueFields"
 

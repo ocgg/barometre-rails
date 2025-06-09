@@ -29,7 +29,8 @@ section.event-day.overflow-visible
           data-action="event-fields:onTrashClick->events-form#onEventFieldsTrash"
         ]
 
-          = render "form_fields", event:
+          = fields_for "events[]", event do |event_fields|
+            = render "form_fields", event:, event_fields:, unique_event: false
 
     /"plus" button
     div.flex.justify-center
