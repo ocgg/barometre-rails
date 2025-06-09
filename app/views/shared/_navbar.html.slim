@@ -1,7 +1,7 @@
 nav[
   data-controller="navbar"
   data-action="click@window->navbar#handleFocusOut"
-  class="fixed z-50 bottom-0 w-screen px-[10vw] py-[3vw] bg-fgcolor md:w-fit md:px-0 md:py-4 md:static"
+  class="fixed z-1000 bottom-0 w-screen px-[10vw] py-[3vw] bg-fgcolor md:w-fit md:px-0 md:py-4 md:static"
 ]
   ul.flex.justify-between.md:gap-12
     - if current_user.admin?
