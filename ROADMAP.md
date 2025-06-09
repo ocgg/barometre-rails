@@ -9,15 +9,16 @@
 3. Gestion de la confirmation des Venues
   - ~~venues#unverified~~
   - ~~Confirmation~~
-  - ~~visualisation du geocoding~~ **(lien OSM provisoire)**
+  - ~~visualisation du geocoding~~ **(lien OSM provisoire en attendant la map)**
   - ~~un Event ne peut pas être validé si sa Venue n'est pas validée~~
   - ~~venues#destroy~~
-  - ~~Détection des doublons~~
+  - ~~Détection des doublons~~ **(à revoir)**
   - ~~Si doublon: réaffectation de la "bonne" Venue à tous ses events~~
   - ~~warning no geocoded~~
-  - détection geocoding hors Loire-Atlantique
+  - ~~détection geocoding hors Loire-Atlantique~~
   - transfert d'events de venue à venue
   - bg job pour geocoding
+  - edit venue
 
 4. Job nettoyage de DB
 
