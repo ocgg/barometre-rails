@@ -92,9 +92,6 @@ class EventsController < ApplicationController
     events_params.map do |attr|
       attr.compact_blank!
 
-      venue_attr = attr.delete("venue_attributes")
-      venue = Venue.find_or_create_by(venue_attr)
-
       if attr[:date]
         m_d_y = attr[:date].split("-").map(&:to_i)
         attr[:date] = Date.new(m_d_y[2], m_d_y[0], m_d_y[1])
@@ -106,8 +103,10 @@ class EventsController < ApplicationController
         attr[:time] = Time.new(d.year, d.month, d.day, h_m[0], h_m[1])
       end
 
-      Event.new(**attr, venue:)
+      venue_attr = attr.delete("venue_attributes")
+      venue = Venue.find_or_create_by(venue_attr)
+
+      venue_attr ? Event.new(**attr, venue:) : Event.new(**attr)
     end
   end
 end
-
