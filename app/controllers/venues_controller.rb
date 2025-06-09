@@ -1,36 +1,42 @@
 class VenuesController < ApplicationController
-  allow_unauthenticated_access except: %i[unverified verify destroy]
+  allow_unauthenticated_access only: %i[index show]
+  before_action :set_venue, only: %i[show verify destroy remove_duplicates]
 
   def index
-    sql = <<~SQL
-      name LIKE :string
-      OR address LIKE :string
-      OR city LIKE :string
-    SQL
-    @venues = Venue.where(sql, string: "%#{params[:q]}%").limit(5)
-    render json: @venues.to_json
+    @venues = Venue.filter_by_query(params[:q])
+    @venues = authorize policy_scope(@venues)
+    @venues = @venues.order_by(params[:order])
+    respond_to do |format|
+      format.html { render slim: @venues }
+      format.json { render json: @venues.limit(5).to_json }
+    end
   end
 
   def unverified
-    @venues = Venue.where(verified: false)
+    @venues = authorize Venue.all_unverified
   end
 
   def show
-    @venue = Venue.find(params[:id])
     render json: @venue.to_json
   end
 
   def verify
-    @venue = authorize Venue.find(params[:id])
     @venue.update(verified: true)
     render @venue
   end
 
-  # def new
-  # end
-
-  # def create
-  # end
+  def remove_duplicates
+    duplicates = @venue.duplicates.reject { |v| v == @venue }
+    # attach duplicate's events to @venue
+    duplicates.each do |venue|
+      # do not one-line this, or the events will still be associated to
+      # duplicated venue
+      events = venue.events
+      events.each { |event| event.update!(venue: @venue) }
+    end
+    duplicates.each(&:destroy!)
+    redirect_to unverified_path(section: "venues"), status: :see_other
+  end
 
   # def edit
   # end
@@ -39,5 +45,12 @@ class VenuesController < ApplicationController
   # end
 
   def destroy
+    @venue.destroy
+  end
+
+  private
+
+  def set_venue
+    @venue = authorize Venue.find(params[:id])
   end
 end

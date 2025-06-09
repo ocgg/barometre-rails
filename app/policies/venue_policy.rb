@@ -11,13 +11,15 @@ class VenuePolicy < ApplicationPolicy
 
   def edit? = @user.admin?
 
+  def remove_duplicates? = edit?
+
   def verify? = edit?
 
   def destroy? = edit?
 
   class Scope < ApplicationPolicy::Scope
     def resolve
-      @user.admin? ? scope.all_upcoming : scope.verified_upcoming
+      @user.admin? ? scope.includes(:events).all : scope.where(verified: true)
     end
   end
 end

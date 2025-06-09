@@ -9,33 +9,39 @@
 3. Gestion de la confirmation des Venues
   - ~~venues#unverified~~
   - ~~Confirmation~~
-  - ~~visualisation du geocoding~~ **(lien OSM provisoire)**
+  - ~~visualisation du geocoding~~ **(lien OSM provisoire en attendant la map)**
   - ~~un Event ne peut pas être validé si sa Venue n'est pas validée~~
-  - venues#destroy
-  - Détection des doublons
-  - Si doublon: réaffectation de la "bonne" Venue à tous ses events
-  - détection geocoding foireux (hors Loire-Atlantique p.e.)
+  - ~~venues#destroy~~
+  - ~~Détection des doublons~~
+  - ~~Si doublon: réaffectation de la "bonne" Venue à tous ses events~~
+  - ~~warning no geocoded~~
+  - ~~détection geocoding hors Loire-Atlantique~~ **(+ de 60km du centre géographique)**
+  - bg job pour geocoding
+  - edit venue
 
-4. Job nettoyage de DB
+4. Edit event
 
-5. Gérer les infos servies par l'API JSON
+5. Job nettoyage de DB
 
-6. Modales et pages statiques
+6. Gérer les infos servies par l'API JSON
+
+7. Modales et pages statiques
   - à propos
   - contact
   - infos sur la précision de la géoloc
 
-7. Divers ajustements UX
+8. Divers ajustements UX
+  - affichage mobile
   - datepicker plus petit
   - meilleur time input
   - fix: containers de jours dupliqués lors de la pagination
   - HTML titles partout
 
-8. Choisir une licence
+9. Choisir une licence
 
-9. **Mise en prod**
+10. **Mise en prod**
 
-10. Map
+11. Map
 
 ## TODO
 
@@ -51,10 +57,13 @@
   - turbo frame \#edit
   - gérer les permissions utilisateur
   - bouton pour revenir en haut de page (?)
+  - gestion turbo stream (partials à virer)
+  - duplication des .day-header 
+
+- transfert d'events de venue à venue
 
 - events#unverified:
   - faire comme events#index (pagination, partials)
-  - gérer les confirmations de venues
 
 - events#new:
   - option pour supprimer le lieu de la DB après la date de l'événement (par ex. en cas de concert chez l'habitant)
