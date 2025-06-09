@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  get "admin_pages/unverified"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
@@ -22,7 +21,7 @@ Rails.application.routes.draw do
     patch :remove_duplicates, on: :member
   end
 
-  resources :events, only: %i[index new create edit update destroy] do
+  resources :events do
     get :unverified, on: :collection
     patch :verify, on: :member
   end

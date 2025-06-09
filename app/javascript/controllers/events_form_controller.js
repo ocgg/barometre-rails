@@ -6,6 +6,7 @@ export default class extends Controller {
     "eventFields",
     "eventsList",
     "venueDropdown",
+    "venueFields",
     "datepickerBtn",
     "trashIcon",
   ]
@@ -15,6 +16,7 @@ export default class extends Controller {
     if (this.eventsNumber > 1) {
       this.showTrashIcons();
       this.setDatepickerDropdownsZIndexes();
+      this.setVenueFieldsZIndexes();
     }
     this.mediaQuery = window.matchMedia('(min-width: 768px)');
     this.mediaCallback = this.handleWindowResize.bind(this);
@@ -29,6 +31,7 @@ export default class extends Controller {
     this.cloneLastEvent();
     this.eventsNumber++;
     this.setDatepickerDropdownsZIndexes();
+    this.setVenueFieldsZIndexes();
     this.showTrashIcons();
   }
 
@@ -40,6 +43,12 @@ export default class extends Controller {
   setDatepickerDropdownsZIndexes() {
     this.datepickerBtnTargets.forEach((elt, index) => {
       elt.style.zIndex = 20 + (this.eventsNumber - index - 1);
+    })
+  }
+
+  setVenueFieldsZIndexes() {
+    this.venueFieldsTargets.forEach((elt, index) => {
+      elt.style.zIndex = 15 + (this.eventsNumber - index - 1);
     })
   }
 

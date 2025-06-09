@@ -17,6 +17,7 @@ export default class extends Controller {
   static values = {
     start: String,
     time: String,
+    uniqueEvent: Boolean
   }
 
   connect() {
@@ -24,12 +25,12 @@ export default class extends Controller {
       time: true,
       startInput: {
         id: "events__date",
-        name: "events[][date]",
+        name: this.uniqueEventValue? "event[date]" : "events[][date]",
         value: this.startValue,
       },
       timeInput: {
         id: "events__time",
-        name: "events[][time]",
+        name: this.uniqueEventValue? "event[time]" : "events[][time]",
         value: this.timeValue,
       },
     };

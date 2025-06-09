@@ -1,7 +1,7 @@
 class EventsController < ApplicationController
   allow_unauthenticated_access except: %i[unverified verify destroy]
   before_action :set_events, only: %i[index map calendar]
-  before_action :set_event, only: %i[verify destroy]
+  before_action :set_event, only: %i[show verify edit update destroy]
 
   include Pagy::Backend
 
@@ -12,6 +12,12 @@ class EventsController < ApplicationController
   end
 
   def calendar
+  end
+
+  def show
+    if turbo_frame_request?
+      render partial: @event
+    end
   end
 
   def unverified
@@ -40,11 +46,17 @@ class EventsController < ApplicationController
     end
   end
 
-  # def edit
-  # end
+  def edit
+  end
 
-  # def update
-  # end
+  def update
+    event_attrs = set_event_attributes(event_params)
+    if @event.update(event_attrs)
+      redirect_to @event
+    else
+      render :edit, status: :unprocessable_entity
+    end
+  end
 
   def verify
     if @event.venue.verified?
@@ -81,6 +93,13 @@ class EventsController < ApplicationController
     @event = authorize Event.find(params[:id])
   end
 
+  def event_params
+    params.expect(event: [
+      "name", "description", "tarif", "date", "time", "venue_id",
+      {venue_attributes: [:name, :address, :city]}
+      ])
+  end
+
   def events_params
     params.expect(events: [[
       :date, :time, :name, :description, :tarif, :venue_id,
@@ -91,23 +110,21 @@ class EventsController < ApplicationController
   def set_new_events
     events_params.map do |attr|
       attr.compact_blank!
+      Event.new(set_event_attributes(attr))
+    end
+  end
 
-      venue_attr = attr.delete("venue_attributes")
-      venue = Venue.find_or_create_by(venue_attr)
-
+  def set_event_attributes(attr)
       if attr[:date]
         m_d_y = attr[:date].split("-").map(&:to_i)
         attr[:date] = Date.new(m_d_y[2], m_d_y[0], m_d_y[1])
       end
-
       if attr[:time]
         h_m = attr[:time].split(":")
         d = attr[:date] || Time.now
         attr[:time] = Time.new(d.year, d.month, d.day, h_m[0], h_m[1])
       end
-
-      Event.new(**attr, venue:)
-    end
+      venue_attr = attr.delete("venue_attributes")
+      venue_attr ? attr.merge(venue: Venue.find_or_create_by(venue_attr)) : attr
   end
 end
-
