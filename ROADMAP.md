@@ -12,10 +12,10 @@
   - ~~visualisation du geocoding~~ **(lien OSM provisoire en attendant la map)**
   - ~~un Event ne peut pas être validé si sa Venue n'est pas validée~~
   - ~~venues#destroy~~
-  - ~~Détection des doublons~~ **(à revoir)**
+  - ~~Détection des doublons~~
   - ~~Si doublon: réaffectation de la "bonne" Venue à tous ses events~~
   - ~~warning no geocoded~~
-  - ~~détection geocoding hors Loire-Atlantique~~
+  - ~~détection geocoding hors Loire-Atlantique~~ **(+ de 60km du centre géographique)**
   - transfert d'events de venue à venue
   - bg job pour geocoding
   - edit venue
@@ -30,6 +30,7 @@
   - infos sur la précision de la géoloc
 
 7. Divers ajustements UX
+  - affichage mobile
   - datepicker plus petit
   - meilleur time input
   - fix: containers de jours dupliqués lors de la pagination
@@ -55,10 +56,11 @@
   - turbo frame \#edit
   - gérer les permissions utilisateur
   - bouton pour revenir en haut de page (?)
+  - gestion turbo stream (partials à virer)
+  - duplication des .day-header 
 
 - events#unverified:
   - faire comme events#index (pagination, partials)
-  - gérer les confirmations de venues
 
 - events#new:
   - option pour supprimer le lieu de la DB après la date de l'événement (par ex. en cas de concert chez l'habitant)
