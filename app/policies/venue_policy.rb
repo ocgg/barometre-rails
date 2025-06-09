@@ -3,6 +3,10 @@ class VenuePolicy < ApplicationPolicy
     true
   end
 
+  def show?
+    @user.admin? || @record.verified?
+  end
+
   def unverified? = @user.admin?
 
   def new? = index?
