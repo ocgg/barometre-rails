@@ -1,0 +1,57 @@
+= fields_for "events[]", event do |event_fields|
+
+  article.relative.event-card.gap-4.items-center.p-4.bg-card-bg.md:p-2
+
+    /date & time
+    div.relative.w-full.mb-8.whitespace-nowrap.md:w-fit.md:mb-0[
+      data-event-fields-target="datetimeShadow"
+      data-action="click@window->event-fields#handleDatepickerFocusOut"
+    ]
+      div.btn.absolute.w-full.min-w-fit.z-20.py-2.bg-fgcolor.text-bgcolor.font-quicksand.md:w-fit[
+        class=("border-baro-orange" if event.errors[:date].present? || event.errors[:time].present?)
+        data-event-fields-target="datetimeBtn"
+        data-events-form-target="datepickerBtn"
+      ]
+        div.flex.w-full.gap-8.justify-between.md:flex-col.md:gap-1[
+          data-action="click->event-fields#onDatetimeClick"
+          data-event-fields-target="iconsContainer"
+        ]
+          div.flex.gap-2.items-center
+            svg.w-4.fill-bgcolor data-event-fields-target="svg" viewBox="0 0 448 512": path d="M128 0c17.7 0 32 14.3 32 32l0 32 128 0 0-32c0-17.7 14.3-32 32-32s32 14.3 32 32l0 32 48 0c26.5 0 48 21.5 48 48l0 48L0 160l0-48C0 85.5 21.5 64 48 64l48 0 0-32c0-17.7 14.3-32 32-32zM0 192l448 0 0 272c0 26.5-21.5 48-48 48L48 512c-26.5 0-48-21.5-48-48L0 192zm64 80l0 32c0 8.8 7.2 16 16 16l32 0c8.8 0 16-7.2 16-16l0-32c0-8.8-7.2-16-16-16l-32 0c-8.8 0-16 7.2-16 16zm128 0l0 32c0 8.8 7.2 16 16 16l32 0c8.8 0 16-7.2 16-16l0-32c0-8.8-7.2-16-16-16l-32 0c-8.8 0-16 7.2-16 16zm144-16c-8.8 0-16 7.2-16 16l0 32c0 8.8 7.2 16 16 16l32 0c8.8 0 16-7.2 16-16l0-32c0-8.8-7.2-16-16-16l-32 0zM64 400l0 32c0 8.8 7.2 16 16 16l32 0c8.8 0 16-7.2 16-16l0-32c0-8.8-7.2-16-16-16l-32 0c-8.8 0-16 7.2-16 16zm144-16c-8.8 0-16 7.2-16 16l0 32c0 8.8 7.2 16 16 16l32 0c8.8 0 16-7.2 16-16l0-32c0-8.8-7.2-16-16-16l-32 0zm112 16l0 32c0 8.8 7.2 16 16 16l32 0c8.8 0 16-7.2 16-16l0-32c0-8.8-7.2-16-16-16l-32 0c-8.8 0-16 7.2-16 16z"
+            span.text-lg data-event-fields-target="date"
+              = event.date ? event.formatted_numeric_date : "Date"
+          div.flex.gap-2.items-center.flex-row-reverse.md:flex-row data-event-fields-target="hourCtn"
+            svg.w-4.fill-bgcolor data-event-fields-target="svg" viewBox="0 0 512 512": path d="M464 256A208 208 0 1 1 48 256a208 208 0 1 1 416 0zM0 256a256 256 0 1 0 512 0A256 256 0 1 0 0 256zM232 120l0 136c0 8 4 15.5 10.7 20l96 64c11 7.4 25.9 4.4 33.3-6.7s4.4-25.9-6.7-33.3L280 243.2 280 120c0-13.3-10.7-24-24-24s-24 10.7-24 24z"
+            span.text-lg data-event-fields-target="hour"
+              = event.time ? event.formatted_time : "Heure"
+        /datepicker
+        div.hidden.size-max.m-auto.flex-col.p-2.cursor-default[
+          data-event-fields-target="datepickerContainer"
+        ]
+
+    /name & description
+    div.flex.flex-col.w-full.gap-8 class="md:gap-1 md:flex-row md:flex-[2_0] md:items-center md:justify-between md:px-1 md:py-3"
+      div.name-desc-ctn.flex.flex-col.gap-4.md:gap-2.p-0
+        = event_fields.text_field :name,
+          class: "name w-full",
+          placeholder: "Nom de l'artiste ou de l'événement"
+        = event_fields.text_field :description,
+          class: "description w-full",
+          placeholder: "(Optionnel) Courte description, infos complémentaires..."
+
+      div.relative.flex.flex-col.justify-center
+        = render "venues/form", venue: event.venue || Venue.new, event_fields:
+
+      div.self-center
+        = event_fields.text_field :tarif,
+          class: "w-full :disabled",
+          placeholder: "Tarif (optionnel)"
+
+    /Trash icon
+    svg.hidden.absolute.max-md:bottom-6.right-6.md:top-2.md:right-2.h-4.fill-fgcolor-faded.self-end.hover:fill-fgcolor.hover:cursor-pointer[
+      data-action="click->event-fields#onTrashClick"
+      data-events-form-target="trashIcon"
+      viewBox="0 0 448 512"
+    ]
+      path d="M135.2 17.7L128 32 32 32C14.3 32 0 46.3 0 64S14.3 96 32 96l384 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-96 0-7.2-14.3C307.4 6.8 296.3 0 284.2 0L163.8 0c-12.1 0-23.2 6.8-28.6 17.7zM416 128L32 128 53.2 467c1.6 25.3 22.6 45 47.9 45l245.8 0c25.3 0 46.3-19.7 47.9-45L416 128z"
+
