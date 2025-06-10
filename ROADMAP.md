@@ -17,8 +17,9 @@
   - ~~warning no geocoded~~
   - ~~détection geocoding hors Loire-Atlantique~~ **(+ de 60km du centre géographique)**
   - ~~edit venue~~
+  - vérifier/jarter remove_duplicates
+    - transfert d'events de venue à venue à la place
   - bg job pour geocoding
-  - re-géocoder (edit)
   - z-index venue dropdown/date&time mobile:
     - trouver une manière définitive et propre de gérer ça
 
@@ -64,8 +65,6 @@
   - gérer les permissions utilisateur
   - bouton pour revenir en haut de page (?)
   - duplication des .day-header 
-
-- transfert d'events de venue à venue
 
 - events#unverified:
   - intégrer barre de recherche
