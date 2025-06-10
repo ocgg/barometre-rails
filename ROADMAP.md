@@ -31,6 +31,7 @@
 7. Modales et pages statiques
   - à propos
   - contact
+    - mailer
   - infos sur la précision de la géoloc
 
 8. Divers ajustements UX
@@ -52,6 +53,8 @@
 
 - sous-titre / description
 
+- glitches JS: gérer l'affichage façon v-cloak (search, forms)
+
 - thème sombre
 
 - revoir gestion user
@@ -59,13 +62,12 @@
 - events#index:
   - gérer les permissions utilisateur
   - bouton pour revenir en haut de page (?)
-  - gestion turbo stream (partials à virer)
   - duplication des .day-header 
 
 - transfert d'events de venue à venue
 
 - events#unverified:
-  - faire comme events#index (pagination, partials)
+  - intégrer barre de recherche
 
 - events#new:
   - option pour supprimer le lieu de la DB après la date de l'événement (par ex. en cas de concert chez l'habitant)
@@ -84,10 +86,11 @@
 - remplacer les alert() par des jolies modales
 
 - searchbar (général):
-  - glitches: gérer l'affichage de la searchbar façon v-cloak
   - insensible à la casse & accents (e = é = è...)
+    - elasticsearch ?
   - lien pour enlever tous les filtres (au niveau de "... résultats")
   - conserver la recherche d'une page à l'autre
+  - garder la query string dans l'url (pouvoir bookmark la recherche)
 
 - datepicker:
   - en faire un projet à part / package NPM
