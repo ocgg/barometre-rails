@@ -13,9 +13,7 @@
       data-event-fields-unique-event-value=true
     ]
   
-
-      = fields_for @event do |event_fields|
-        = render "form_fields", event: @event, event_fields:, unique_event: true
+      = render "form_fields", event: @event, for_params: @event
       
       div.md:absolute.md:right-2.md:bottom-2.flex.gap-1.items-center.justify-center.mt-2
         = link_to "Annuler", @event, class: "btn"
