@@ -16,8 +16,9 @@
   - ~~Si doublon: réaffectation de la "bonne" Venue à tous ses events~~
   - ~~warning no geocoded~~
   - ~~détection geocoding hors Loire-Atlantique~~ **(+ de 60km du centre géographique)**
+  - ~~edit venue~~
   - bg job pour geocoding
-  - edit venue
+  - re-géocoder (edit)
   - z-index venue dropdown/date&time mobile:
     - trouver une manière définitive et propre de gérer ça
 
@@ -39,7 +40,7 @@
   - datepicker plus petit
   - meilleur time input
   - fix: containers de jours dupliqués lors de la pagination
-  - HTML titles partout
+  - HTML titles partout (navbar, nom events, tout ce qui est susceptible d'être tronqué, etc.)
 
 9. Choisir une licence
 
