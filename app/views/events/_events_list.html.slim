@@ -14,3 +14,11 @@
 
     ul.events-list
       = render events
+
+- if @pagy.next.present?
+
+  - opts = {**@query_params, page: @pagy.next, format: :turbo_stream}
+  - path = params[:action] == "unverified" ? unverified_events_path(opts) : events_path(opts)
+
+  = turbo_stream.replace :next_page do
+    = turbo_frame_tag :next_page, src: path, loading: :lazy

@@ -6,6 +6,12 @@ class EventsController < ApplicationController
   include Pagy::Backend
 
   def index
+    respond_to do |format|
+      format.turbo_stream {
+        render turbo_stream: turbo_stream.append(:events_days_container, partial: "events_list")
+      }
+      format.html
+    end
   end
 
   def map
@@ -26,6 +32,13 @@ class EventsController < ApplicationController
     @events = authorize policy_scope(@events)
     @pagy, @events = pagy(@events, limit: 50, count: @events.count)
     set_events_days
+
+    respond_to do |format|
+      format.turbo_stream {
+        render turbo_stream: turbo_stream.append(:events_days_container, partial: "events_list")
+      }
+      format.html
+    end
   end
 
   def new
@@ -97,7 +110,7 @@ class EventsController < ApplicationController
     params.expect(event: [
       "name", "description", "tarif", "date", "time", "venue_id",
       {venue_attributes: [:name, :address, :city]}
-      ])
+    ])
   end
 
   def events_params
@@ -115,16 +128,16 @@ class EventsController < ApplicationController
   end
 
   def set_event_attributes(attr)
-      if attr[:date]
-        m_d_y = attr[:date].split("-").map(&:to_i)
-        attr[:date] = Date.new(m_d_y[2], m_d_y[0], m_d_y[1])
-      end
-      if attr[:time]
-        h_m = attr[:time].split(":")
-        d = attr[:date] || Time.now
-        attr[:time] = Time.new(d.year, d.month, d.day, h_m[0], h_m[1])
-      end
-      venue_attr = attr.delete("venue_attributes")
-      venue_attr ? attr.merge(venue: Venue.find_or_create_by(venue_attr)) : attr
+    if attr[:date]
+      m_d_y = attr[:date].split("-").map(&:to_i)
+      attr[:date] = Date.new(m_d_y[2], m_d_y[0], m_d_y[1])
+    end
+    if attr[:time]
+      h_m = attr[:time].split(":")
+      d = attr[:date] || Time.now
+      attr[:time] = Time.new(d.year, d.month, d.day, h_m[0], h_m[1])
+    end
+    venue_attr = attr.delete("venue_attributes")
+    venue_attr ? attr.merge(venue: Venue.find_or_create_by(venue_attr)) : attr
   end
 end
