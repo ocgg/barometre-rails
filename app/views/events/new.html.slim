@@ -1,5 +1,4 @@
 div.errors
-  /- if event.errors.any?
   - if @events.any? {|evt| evt.errors.any?}
     p.text-center
       span.flex.gap-2.justify-center
@@ -29,8 +28,7 @@ section.event-day.overflow-visible
           data-action="event-fields:onTrashClick->events-form#onEventFieldsTrash"
         ]
 
-          = fields_for "events[]", event do |event_fields|
-            = render "form_fields", event:, event_fields:, unique_event: false
+          = render "form_fields", event:, for_params: "events[]"
 
     /"plus" button
     div.flex.justify-center
