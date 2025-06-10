@@ -6,8 +6,9 @@ div[
 
     div.relative.z-15.flex.flex-col.gap-2 data-events-form-target="venueFields"
 
-      = event_fields.hidden_field :venue_id,
-        data: {venue_fields_target: "id"}
+      - if defined? event_fields
+        = event_fields.hidden_field :venue_id,
+          data: {venue_fields_target: "id"}
 
       = venue_fields.text_field :name,
         class: "venue-name font-normal w-full",
