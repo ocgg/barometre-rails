@@ -1,11 +1,12 @@
 class VenuesController < ApplicationController
   allow_unauthenticated_access only: %i[index show]
-  before_action :set_venue, only: %i[show verify destroy remove_duplicates]
+  before_action :set_venue, only: %i[show edit update verify destroy remove_duplicates]
 
   def index
     @venues = Venue.filter_by_query(params[:q])
     @venues = authorize policy_scope(@venues)
     @venues = @venues.order_by(params[:order])
+
     respond_to do |format|
       format.html { render slim: @venues }
       format.json { render json: @venues.limit(5).to_json }
@@ -17,7 +18,10 @@ class VenuesController < ApplicationController
   end
 
   def show
-    render json: @venue.to_json
+    respond_to do |format|
+      format.json { render json: @venue.to_json }
+      format.html { render partial: @venue if turbo_frame_request? }
+    end
   end
 
   def verify
@@ -38,11 +42,16 @@ class VenuesController < ApplicationController
     redirect_to unverified_path(section: "venues"), status: :see_other
   end
 
-  # def edit
-  # end
+  def edit
+  end
 
-  # def update
-  # end
+  def update
+    if @venue.update(venue_params)
+      redirect_to @venue
+    else
+      render :edit, status: :unprocessable_entity
+    end
+  end
 
   def destroy
     @venue.destroy
@@ -52,5 +61,9 @@ class VenuesController < ApplicationController
 
   def set_venue
     @venue = authorize Venue.find(params[:id])
+  end
+
+  def venue_params
+    params.expect(venue: [:name, :address, :city])
   end
 end

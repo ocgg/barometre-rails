@@ -15,6 +15,8 @@ class VenuePolicy < ApplicationPolicy
 
   def edit? = @user.admin?
 
+  def update? = edit?
+
   def remove_duplicates? = edit?
 
   def verify? = edit?
