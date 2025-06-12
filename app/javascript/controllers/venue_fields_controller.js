@@ -16,7 +16,7 @@ export default class extends Controller {
   ]
 
   static values = {
-    mode: {type: String, default: "search" }, // in: "search", "manual", "found"
+    mode: { type: String, default: "search" }, // in: "search", "manual", "found"
   }
 
   connect() {
@@ -102,8 +102,7 @@ export default class extends Controller {
 
   setAndRenderVenues(venues) {
     this.renderVenues(venues);
-    this.toggleHidden(this.noResultTarget, !(venues.length === 0))
-    this.toggleHidden(this.dropdownTarget, !this.nameTarget.value.length);
+    this.toggleHidden(this.noResultTarget, venues.length)
   }
 
   renderVenues(venues) {
@@ -150,8 +149,14 @@ export default class extends Controller {
   onVenueInput(_) {
     if (this.modeValue !== "search") return;
 
-    this.toggleHidden(this.clearInputBtnTarget, !this.nameTarget.value.length);
-    this.fetchVenues();
+    if (!this.nameTarget.value.length) this.resultsListTarget.innerHTML = '';
+    else this.fetchVenues();
+  }
+
+  onFocus(_) {
+    if (this.modeValue !== "search") return;
+
+    this.show(this.dropdownTarget);
   }
 
   hide(element) { element.classList.toggle("hidden", true) }

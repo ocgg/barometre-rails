@@ -53,16 +53,12 @@ export default class extends Controller {
   }
 
   handleVenueDropdownFocusOut(event) {
-    if (this.eventTargetIsInsideVenueDropdown(event.target)) return;
-    this.hideVenueFieldsDropdowns();
-  }
+    this.venueDropdownTargets.forEach(dropdown => {
+      const nameInput = dropdown.parentNode.querySelector(".venue-name");
+      if (dropdown.contains(event.target) || event.target === nameInput) return;
 
-  eventTargetIsInsideVenueDropdown(target) {
-    return this.venueDropdownTargets.some(dropdown => dropdown.contains(target));
-  }
-
-  hideVenueFieldsDropdowns() {
-    this.venueDropdownTargets.forEach(dropdown => dropdown.classList.toggle("hidden", true));
+      dropdown.classList.toggle("hidden", true);
+    });
   }
 
   onEventFieldsTrash({ detail: { toRemove: eventFields } }) {
