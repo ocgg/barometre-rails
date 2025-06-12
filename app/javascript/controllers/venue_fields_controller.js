@@ -51,7 +51,7 @@ export default class extends Controller {
     this.modeValue = "manual";
     this.idTarget.value = "";
     this.hide(this.dropdownTarget);
-    this.resultsListTarget.innerHTML = '';
+    this.emptyResultsList();
     this.setInputsForManual();
   }
 
@@ -106,7 +106,7 @@ export default class extends Controller {
   }
 
   renderVenues(venues) {
-    this.resultsListTarget.innerHTML = '';
+    this.emptyResultsList();
     venues.forEach(venue => this.renderVenue(venue));
   }
 
@@ -122,9 +122,15 @@ export default class extends Controller {
     this.resultsListTarget.appendChild(clone);
   }
 
+  emptyResultsList() {
+    this.resultsListTarget.innerHTML = '';
+    this.show(this.noResultTarget);
+  }
+
   onClearBtnClick(_) {
     this.clearInputs();
-    this.toSearchMode();
+    if (this.modeValue !== "search") this.toSearchMode();
+    this.emptyResultsList();
     this.nameTarget.focus();
   }
 
@@ -149,8 +155,14 @@ export default class extends Controller {
   onVenueInput(_) {
     if (this.modeValue !== "search") return;
 
-    if (!this.nameTarget.value.length) this.resultsListTarget.innerHTML = '';
-    else this.fetchVenues();
+    if (!this.nameTarget.value.length) {
+      this.hide(this.clearInputBtnTarget);
+      this.emptyResultsList();
+    }
+    else {
+      this.show(this.clearInputBtnTarget);
+      this.fetchVenues();
+    }
   }
 
   onFocus(_) {

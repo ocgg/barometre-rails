@@ -54,8 +54,7 @@ export default class extends Controller {
 
   handleVenueDropdownFocusOut(event) {
     this.venueDropdownTargets.forEach(dropdown => {
-      const nameInput = dropdown.parentNode.querySelector(".venue-name");
-      if (dropdown.contains(event.target) || event.target === nameInput) return;
+      if (dropdown.parentNode.contains(event.target)) return;
 
       dropdown.classList.toggle("hidden", true);
     });
