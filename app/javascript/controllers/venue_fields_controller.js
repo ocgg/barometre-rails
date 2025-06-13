@@ -16,7 +16,7 @@ export default class extends Controller {
   ]
 
   static values = {
-    mode: {type: String, default: "search" }, // in: "search", "manual", "found"
+    mode: { type: String, default: "search" }, // in: "search", "manual", "found"
   }
 
   connect() {
@@ -51,7 +51,7 @@ export default class extends Controller {
     this.modeValue = "manual";
     this.idTarget.value = "";
     this.hide(this.dropdownTarget);
-    this.resultsListTarget.innerHTML = '';
+    this.emptyResultsList();
     this.setInputsForManual();
   }
 
@@ -102,12 +102,11 @@ export default class extends Controller {
 
   setAndRenderVenues(venues) {
     this.renderVenues(venues);
-    this.toggleHidden(this.noResultTarget, !(venues.length === 0))
-    this.toggleHidden(this.dropdownTarget, !this.nameTarget.value.length);
+    this.toggleHidden(this.noResultTarget, venues.length)
   }
 
   renderVenues(venues) {
-    this.resultsListTarget.innerHTML = '';
+    this.emptyResultsList();
     venues.forEach(venue => this.renderVenue(venue));
   }
 
@@ -123,9 +122,15 @@ export default class extends Controller {
     this.resultsListTarget.appendChild(clone);
   }
 
+  emptyResultsList() {
+    this.resultsListTarget.innerHTML = '';
+    this.show(this.noResultTarget);
+  }
+
   onClearBtnClick(_) {
     this.clearInputs();
-    this.toSearchMode();
+    if (this.modeValue !== "search") this.toSearchMode();
+    this.emptyResultsList();
     this.nameTarget.focus();
   }
 
@@ -150,8 +155,20 @@ export default class extends Controller {
   onVenueInput(_) {
     if (this.modeValue !== "search") return;
 
-    this.toggleHidden(this.clearInputBtnTarget, !this.nameTarget.value.length);
-    this.fetchVenues();
+    if (!this.nameTarget.value.length) {
+      this.hide(this.clearInputBtnTarget);
+      this.emptyResultsList();
+    }
+    else {
+      this.show(this.clearInputBtnTarget);
+      this.fetchVenues();
+    }
+  }
+
+  onFocus(_) {
+    if (this.modeValue !== "search") return;
+
+    this.show(this.dropdownTarget);
   }
 
   hide(element) { element.classList.toggle("hidden", true) }

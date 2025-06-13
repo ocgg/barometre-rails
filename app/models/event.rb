@@ -66,7 +66,7 @@ class Event < ApplicationRecord
 
     def all_upcoming = upcoming_events
 
-    def verified_upcoming = upcoming_events.where(verified: true)
+    def verified_upcoming = upcoming_events.where(verified: true, venue: {verified: true})
 
     def unverified_upcoming = upcoming_events.where(verified: false)
 
