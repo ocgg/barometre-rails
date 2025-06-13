@@ -35,4 +35,8 @@
       background-color: var(--color-fgcolor);
     }
   }
+
+  .btn-plain {
+    @apply bg-fgcolor text-baro-yellow font-quicksand;
+  }
 }

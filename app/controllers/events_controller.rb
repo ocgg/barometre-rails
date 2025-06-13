@@ -1,16 +1,17 @@
 class EventsController < ApplicationController
-  allow_unauthenticated_access
+  allow_unauthenticated_access except: %i[unverified verify destroy]
   before_action :set_events, only: %i[index map calendar]
-  before_action :set_event, only: %i[verify destroy]
+  before_action :set_event, only: %i[show verify edit update destroy]
 
   include Pagy::Backend
 
   def index
-  end
-
-  def unverified
-    @events = authorize Event.unverified_upcoming
-    set_events_days
+    respond_to do |format|
+      format.turbo_stream {
+        render turbo_stream: turbo_stream.append(:events_days_container, partial: "events_list")
+      }
+      format.html
+    end
   end
 
   def map
@@ -19,23 +20,35 @@ class EventsController < ApplicationController
   def calendar
   end
 
+  def show
+    if turbo_frame_request?
+      render partial: @event
+    end
+  end
+
+  def unverified
+    @query_params = request.query_parameters.compact_blank
+    @events = Event.filter_unverified_with_params(@query_params)
+    @events = authorize policy_scope(@events)
+    @pagy, @events = pagy(@events, limit: 50, count: @events.count)
+    set_events_days
+
+    respond_to do |format|
+      format.turbo_stream {
+        render turbo_stream: turbo_stream.append(:events_days_container, partial: "events_list")
+      }
+      format.html
+    end
+  end
+
   def new
-    @events = [Event.new]
+    @events = [Event.new(venue: Venue.new)]
     authorize Event
   end
 
   def create
     authorize Event
-
-    @events = events_params.map do |attr|
-      venue_attr = attr.delete(:venue)
-      venue = Venue.find(venue_attr[:id])
-      # if venue don't exist, create it
-      # then create event
-      date = attr[:date].present? && Time.new("#{attr[:date]}:00")
-      Event.new(venue:, date:, **attr)
-    end
-
+    @events = set_new_events
     valid = @events.map(&:valid?)
 
     if valid.all?
@@ -46,15 +59,26 @@ class EventsController < ApplicationController
     end
   end
 
-  # def edit
-  # end
+  def edit
+  end
 
-  # def update
-  # end
+  def update
+    event_attrs = set_event_attributes(event_params)
+    if @event.update(event_attrs)
+      redirect_to @event
+    else
+      render :edit, status: :unprocessable_entity
+    end
+  end
 
   def verify
-    @event.update(verified: true)
-    render @event
+    if @event.venue.verified?
+      @event.update(verified: true)
+      render @event
+    else
+      # Should never happen
+      render_unprocessable_entity_error
+    end
   end
 
   def destroy
@@ -82,7 +106,38 @@ class EventsController < ApplicationController
     @event = authorize Event.find(params[:id])
   end
 
+  def event_params
+    params.expect(event: [
+      "name", "description", "tarif", "date", "time", "venue_id",
+      {venue_attributes: [:name, :address, :city]}
+    ])
+  end
+
   def events_params
-    params.expect(events: [[:date, :name, :description, :tarif, {venue: [:name, :id]}]])
+    params.expect(events: [[
+      :date, :time, :name, :description, :tarif, :venue_id,
+      {venue_attributes: [:name, :address, :city]}
+    ]])
+  end
+
+  def set_new_events
+    events_params.map do |attr|
+      attr.compact_blank!
+      Event.new(set_event_attributes(attr))
+    end
+  end
+
+  def set_event_attributes(attr)
+    if attr[:date]
+      m_d_y = attr[:date].split("-").map(&:to_i)
+      attr[:date] = Date.new(m_d_y[2], m_d_y[0], m_d_y[1])
+    end
+    if attr[:time]
+      h_m = attr[:time].split(":")
+      d = attr[:date] || Time.now
+      attr[:time] = Time.new(d.year, d.month, d.day, h_m[0], h_m[1])
+    end
+    venue_attr = attr.delete("venue_attributes")
+    venue_attr ? attr.merge(venue: Venue.find_or_create_by(venue_attr)) : attr
   end
 end

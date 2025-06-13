@@ -1,4 +1,4 @@
-class EventPolicy < ApplicationPolicy
+class VenuePolicy < ApplicationPolicy
   def index?
     true
   end
@@ -9,10 +9,6 @@ class EventPolicy < ApplicationPolicy
 
   def unverified? = @user.admin?
 
-  def map? = index?
-
-  def calendar? = index?
-
   def new? = index?
 
   def create? = new?
@@ -21,13 +17,15 @@ class EventPolicy < ApplicationPolicy
 
   def update? = edit?
 
+  def remove_duplicates? = edit?
+
   def verify? = edit?
 
   def destroy? = edit?
 
   class Scope < ApplicationPolicy::Scope
     def resolve
-      @user.admin? ? scope.all_upcoming : scope.verified_upcoming
+      @user.admin? ? scope.includes(:events).all : scope.where(verified: true, venue: {verified: true})
     end
   end
 end

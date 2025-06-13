@@ -18,15 +18,14 @@
 
 @layer components {
   .event-day {
-    @apply overflow-hidden
-    max-md:event-day-sm
-    @max-3xl:event-day-sm
-    rounded-lg;
+    @apply max-md:event-day-sm
+    @max-3xl:event-day-sm;
 
     .day-separator {
       @apply flex
       mb-1 pl-14 py-1.5
-      bg-fgcolor;
+      bg-fgcolor
+      rounded-t-lg;
 
       h3 {
         @apply flex-[1_0_44.5%]
@@ -44,6 +43,10 @@
 
     .events-list {
       @apply flex flex-col gap-1;
+
+      turbo-frame:last-child .md-hour {
+        @apply rounded-bl-lg;
+      }
     }
   }
 }

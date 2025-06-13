@@ -15,15 +15,20 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   root "events#index"
 
-  resources :events, only: %i[index new create edit update destroy] do
-    member do
-      patch :verify
-    end
+  resources :venues, only: %i[index show edit update destroy] do
+    get :unverified, on: :collection
+    patch :verify, on: :member
+    patch :remove_duplicates, on: :member
+  end
+
+  resources :events do
+    get :unverified, on: :collection
+    patch :verify, on: :member
   end
 
   get :team, to: "sessions#new"
+  get :unverified, to: "admin_pages#unverified"
 
-  get :unverified, to: "events#unverified"
   get :map, to: "events#map"
   get :calendar, to: "events#calendar"
 
