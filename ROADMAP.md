@@ -41,7 +41,6 @@
   - datepicker plus petit
   - meilleur time input
   - fix: containers de jours dupliqués lors de la pagination
-  - HTML titles partout (navbar, nom events, tout ce qui est susceptible d'être tronqué, etc.)
 
 9. Choisir une licence
 
