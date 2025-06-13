@@ -1,7 +1,8 @@
 require "faker"
 
-puts "Destroying all events..."
+puts "Destroying all events & venues..."
 
+Venue.destroy_all
 Event.destroy_all
 
 test_admin = User.find_by(email_address: "admin@admin.com")
@@ -16,7 +17,7 @@ venues_count = 0
     city: "Paimboeuf"
   },
   {
-    name: "Café du cinema",
+    name: "Café du Cinéma",
     address: "8 Rue des Carmélites",
     city: "Nantes"
   },
@@ -58,7 +59,7 @@ venues_count = 0
 ].each do |attrs|
   next if Venue.exists?(attrs)
 
-  Venue.create!(attrs)
+  Venue.create!(**attrs, verified: true)
   venues_count += 1
 end
 
