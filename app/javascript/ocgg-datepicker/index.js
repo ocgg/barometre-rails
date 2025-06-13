@@ -1,2 +1,5 @@
+import "datepicker/builder"
+import "datepicker/helpers"
+import "datepicker/styles"
 import "datepicker/dates_manager"
-import "datepicker/renderer"
+import "datepicker/datepicker"

@@ -1,4 +1,19 @@
-h1
-  | Venues#edit
-p
-  | Find me in app/views/venues/edit.html.erb
+= turbo_frame_tag dom_id(@venue, :edit)
+
+  div.relative.bg-card-bg.p-4.pb-12.text-fgcolor 
+
+    = form_with model: @venue do |form|
+
+      div.flex.flex-col.gap-2
+
+        = form.text_field :name,
+          class: "venue-name font-normal w-full",
+          placeholder: "Chercher un lieu..."
+
+        = form.text_field :address, placeholder: "Adresse"
+
+        = form.text_field :city, placeholder: "Ville"
+
+      div.md:absolute.md:right-2.md:bottom-2.flex.gap-1.items-center.justify-center.mt-2
+        = link_to "Annuler", @venue, class: "btn"
+        = form.submit "OK", class: "btn btn-plain"

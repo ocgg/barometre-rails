@@ -69,10 +69,12 @@ Faker::Config.locale = "fr"
 tarifs = ["Gratuit", "Prix libre", "5€", "10€", "chapeau", nil]
 
 100.times do
+  date = Time.now + (24 * 365 * Math.exp(Math.log(rand) * 3)).hours
   attrs = {
     name: Faker::Music::RockBand.name,
     verified: rand > 0.5,
-    date: Time.now + (24 * 365 * Math.exp(Math.log(rand) * 3)).hours,
+    date:,
+    time: date,
     tarif: tarifs.sample
   }
 

@@ -1,14 +1,33 @@
 class Event < ApplicationRecord
   belongs_to :venue
+  accepts_nested_attributes_for :venue
 
-  validates :name, presence: {message: "Le nom est obligatoire."}
-  validates :date, presence: {message: "La date et l'heure sont obligatoires."}
+  validates :name, presence: true
+  validates :date, presence: true
+  validates :time, presence: true
 
   def verified? = verified
 
   def unverified? = !verified
 
+  def formatted_numeric_date = date.strftime("%d/%m/%y")
+
+  def formatted_time = time.strftime("%Hh%M")
+
+  def js_parsable_date = date.strftime("%m-%d-%Y")
+
+  def js_parsable_time = time.strftime("%H:%M")
+
   class << self
+    def filter_unverified_with_params(params)
+      return unverified_upcoming unless params.present?
+      filtered = unverified_upcoming
+      filtered = filtered.filter_by_dates(params) if params[:start]
+      filtered = filtered.filter_by_position(params) if params[:radius]
+      filtered = filtered.search(params[:q]) if params[:q]
+      filtered
+    end
+
     def filter_with_params(params)
       return self unless params.present?
       filtered = self
@@ -21,7 +40,6 @@ class Event < ApplicationRecord
     def filter_by_dates(params)
       start_date = Date.strptime(params[:start], "%m-%d-%Y")
       end_date = params[:end].present? ? Date.strptime(params[:end], "%m-%d-%Y") : start_date
-      end_date += 1.day
       between(start_date, end_date)
     end
 
@@ -48,7 +66,7 @@ class Event < ApplicationRecord
 
     def all_upcoming = upcoming_events
 
-    def verified_upcoming = upcoming_events.where(verified: true)
+    def verified_upcoming = upcoming_events.where(verified: true, venue: {verified: true})
 
     def unverified_upcoming = upcoming_events.where(verified: false)
 

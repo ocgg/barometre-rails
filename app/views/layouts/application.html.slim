@@ -16,20 +16,27 @@ html
     = stylesheet_link_tag "tailwind", "data-turbo-track": "reload"
     = javascript_importmap_tags
 
-  body
+  body.pb-14.md:pb-0
     /Banner
     div.bg-fgcolor
       header.flex.justify-between.items-center.max-w-5xl.m-auto
+
         h1 class="py-4 text-baro-yellow text-4xl w-full text-center md:w-fit md:text-left"
           | BAROMÈTRE
+
         = render "shared/navbar"
 
     main.flex.flex-col.gap-27.max-w-5xl.m-auto.mb-96.mt-27.md:mt-20.md:mb-64.md:gap-20 class="@container"
-      - if %w[index map calendar unverified].include?(params[:action])
-        = turbo_frame_tag :searchform, target: :events
+
+      - if %w[index map calendar].include?(params[:action])
+
+        = turbo_frame_tag :searchform, target: :content
+
           search.relative.w-full.max-md:h-43.md:h-10
+
             = form_with(class: "absolute w-full flex items-center flex-col max-md:gap-8 md:w-full md:flex-row md:justify-between",
               method: :get) do |form|
+
               = render "shared/date_filter", form:
               = render "shared/location_filter", form:
               = render "shared/search_bar", form:

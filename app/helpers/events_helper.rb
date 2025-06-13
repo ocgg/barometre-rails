@@ -8,8 +8,9 @@ module EventsHelper
     l(date, format:).split.map(&:capitalize).join(" ")
   end
 
-  def format_hour(date)
-    date.strftime("%Hh%M")
+  def date_to_ddMyyyy(date)
+    format = "%d %B %Y"
+    l(date, format:)
   end
 
   def navbar_btn_color(action)
@@ -19,6 +20,14 @@ module EventsHelper
       "fill-baro-yellow"
     else
       "fill-(--light-bg)"
+    end
+  end
+
+  def venue_fields_mode(venue)
+    if venue.persisted? then "found"
+    elsif venue.attributes.values.all?(&:blank?) then "search"
+    else
+      "manual"
     end
   end
 end
