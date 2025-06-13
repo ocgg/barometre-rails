@@ -19,7 +19,7 @@
   - ~~edit venue~~
   - vérifier/jarter remove_duplicates
     - transfert d'events de venue à venue à la place
-  - bg job pour geocoding
+  - ~~bg job pour geocoding~~
   - z-index venue dropdown/date&time mobile:
     - trouver une manière définitive et propre de gérer ça
 
