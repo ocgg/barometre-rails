@@ -46,9 +46,13 @@
 
 10. **Mise en prod**
 
-11. Searchbar, Map...
+11. Map...
+  - leaflet stylesheets seulement sur layout map
+  - limit(5) dans venue#index json
 
 ## TODO
+
+- searchbar: instancier datepicker par JS
 
 - ***écrire des tests nom d'une pipe***
 
