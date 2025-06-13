@@ -6,7 +6,7 @@ class Venue < ApplicationRecord
   validates :address, presence: true
 
   geocoded_by :full_address
-  after_validation :geocode, if: ->(venue) { venue.address_changed? }
+  after_commit :geocode_later, on: :create
 
   def geocode_later
     GeocodeVenueJob.perform_later(self)
