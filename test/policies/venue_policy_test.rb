@@ -3,7 +3,7 @@ require 'test_helper'
 class VenuePolicyTest < ActiveSupport::TestCase
   def setup
     @admin = users(:admin)
-    @user = User.new
+    @user = User.new(role: "visitor")
     @venue = venues(:one)
     @unverified_venue = venues(:two)
   end
