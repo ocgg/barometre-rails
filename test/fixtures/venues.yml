@@ -15,3 +15,9 @@ two:
   latitude: 47.2181
   longitude: -1.5528
   verified: false
+
+ungenerated:
+  name: Lieu Sans Coordonnées
+  city: Nantes
+  address: 3 rue de la Paix
+  verified: true
