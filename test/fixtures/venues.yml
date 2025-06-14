@@ -1,15 +1,23 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  name: MyString
-  city: MyString
-  address: MyString
-  lat: MyString
-  long: MyString
+  name: Lieu Vérifié
+  city: Nantes
+  address: 1 rue de la Paix
+  latitude: 47.2181
+  longitude: -1.5528
+  verified: true
 
 two:
-  name: MyString
-  city: MyString
-  address: MyString
-  lat: MyString
-  long: MyString
+  name: Lieu Non Vérifié
+  city: Nantes
+  address: 2 rue de la Paix
+  latitude: 47.2181
+  longitude: -1.5528
+  verified: false
+
+ungenerated:
+  name: Lieu Sans Coordonnées
+  city: Nantes
+  address: 3 rue de la Paix
+  verified: true

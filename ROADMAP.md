@@ -52,9 +52,7 @@
 
 ## TODO
 
-- searchbar: instancier datepicker par JS
-
-- ***écrire des tests nom d'une pipe***
+- maintenir les tests
 
 - sous-titre / description
 

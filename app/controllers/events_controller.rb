@@ -1,5 +1,5 @@
 class EventsController < ApplicationController
-  allow_unauthenticated_access except: %i[unverified verify destroy]
+  allow_unauthenticated_access only: %i[index map calendar new create]
   before_action :set_events, only: %i[index map calendar]
   before_action :set_event, only: %i[show verify edit update destroy]
 
