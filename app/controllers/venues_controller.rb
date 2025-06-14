@@ -8,7 +8,10 @@ class VenuesController < ApplicationController
     @venues = @venues.order_by(params[:order])
 
     respond_to do |format|
-      format.html { render slim: @venues }
+      format.html {
+        require_authentication && return unless authenticated?
+        render slim: @venues
+      }
       format.json { render json: @venues.limit(5).to_json }
     end
   end
