@@ -1,17 +1,25 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  name: MyString
-  date: 2025-03-16 19:41:09
-  description: MyString
-  tarif: MyString
-  verified: false
+  name: Concert Vérifié
+  date: <%= 1.year.from_now %>
+  description: Un concert de rock
+  tarif: 20€
+  verified: true
   venue: one
 
 two:
-  name: MyString
-  date: 2025-03-16 19:41:09
-  description: MyString
-  tarif: MyString
+  name: Concert Non Vérifié
+  date: <%= 1.year.from_now %>
+  description: Un concert de jazz
+  tarif: 15€
   verified: false
   venue: two
+
+past_event:
+  name: Concert Passé
+  date: <%= 1.year.ago %>
+  description: Un concert qui a déjà eu lieu
+  tarif: 25€
+  verified: true
+  venue: one
