@@ -7,21 +7,9 @@ class VenuesControllerTest < ActionDispatch::IntegrationTest
     @unverified_venue = venues(:two)
   end
 
-  test "visitor should get venues index as json" do
-    get venues_url, as: :json
-    assert_response :success
-    assert_equal "application/json", @response.media_type
-  end
-
-  test "visitor should not get venues index as html" do
+  test "visitor should not get venues index" do
     get venues_url
     assert_redirected_to new_session_url
-  end
-
-  test "visitor should get venue show as json" do
-    get venue_url(@venue), as: :json
-    assert_response :success
-    assert_equal "application/json", @response.media_type
   end
 
   test "visitor should get venue show as turbo frame" do
