@@ -56,7 +56,7 @@
 
 ## TODO
 
-- maintenir les tests
+- refacto CSS (noms de variable, @base, @components, @container...)
 
 - front pour sessions#new
 - routes autorisées pour sessions (pas de create etc.)
