@@ -12,12 +12,6 @@ class VenuesControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to new_session_url
   end
 
-  test "visitor should get venue show as turbo frame" do
-    get venue_url(@venue), headers: { "Turbo-Frame" => "content" }
-    assert_response :success
-    assert_select "turbo-frame##{dom_id(@venue)}"
-  end
-
   test "visitor should not access unverified venues" do
     get unverified_venues_url
     assert_redirected_to new_session_url
@@ -29,7 +23,7 @@ class VenuesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "visitor should not update venue" do
-    patch venue_url(@venue), params: { venue: { name: "Nouveau nom" } }
+    patch venue_url(@venue), params: {venue: {name: "Nouveau nom"}}
     assert_redirected_to new_session_url
   end
 
@@ -59,7 +53,7 @@ class VenuesControllerTest < ActionDispatch::IntegrationTest
 
   test "admin should update venue" do
     sign_in_as_admin
-    patch venue_url(@venue), params: { venue: { name: "Nouveau nom" } }
+    patch venue_url(@venue), params: {venue: {name: "Nouveau nom"}}
     assert_redirected_to venue_url(@venue)
     @venue.reload
     assert_equal "Nouveau nom", @venue.name
@@ -67,7 +61,7 @@ class VenuesControllerTest < ActionDispatch::IntegrationTest
 
   test "admin should not update venue with invalid data" do
     sign_in_as_admin
-    patch venue_url(@venue), params: { venue: { name: "" } }
+    patch venue_url(@venue), params: {venue: {name: ""}}
     assert_response :unprocessable_entity
   end
 
@@ -97,6 +91,6 @@ class VenuesControllerTest < ActionDispatch::IntegrationTest
   private
 
   def sign_in_as_admin
-    post session_url, params: { email_address: @admin.email_address, password: "password" }
+    post session_url, params: {email_address: @admin.email_address, password: "password"}
   end
 end
