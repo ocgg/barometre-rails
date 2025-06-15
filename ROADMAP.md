@@ -48,7 +48,7 @@
 
 11. Map...
   - leaflet stylesheets seulement sur layout map
-  - limit(5) dans venue#index json
+  - ~~limit(5) dans venue#index json~~
 
 ## TODO
 
@@ -63,7 +63,6 @@
 - revoir gestion user
 
 - events#index:
-  - gérer les permissions utilisateur
   - bouton pour revenir en haut de page (?)
   - duplication des .day-header 
 
@@ -77,8 +76,6 @@
 - locationfilter:
   - informer le user au cas où il n'est pas localisé en Loire-Atlantique & de la précision de l'API
   - input steps: 1,3,5,10,15,20,30
-
-- Map: leaflet
 
 - API venues & events
 
