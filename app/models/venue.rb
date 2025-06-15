@@ -58,6 +58,10 @@ class Venue < ApplicationRecord
       end
     end
 
+    def all_verified
+      @venues = Venue.where(verified: true)
+    end
+
     def all_unverified
       @venues = Venue.where(verified: false).order(:created_at)
     end

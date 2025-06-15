@@ -9,7 +9,7 @@ export default class extends Controller {
       attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
     }).addTo(map);
 
-    const url = `/venues/`;
+    const url = "/api/venues";
     const opts = { headers: { "Accept": "application/json" } };
     fetch(url, opts)
       .then(response => response.json())

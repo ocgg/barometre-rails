@@ -33,4 +33,9 @@ Rails.application.routes.draw do
 
   get :contact, to: "pages#contact"
   get :apropos, to: "pages#about", as: :about
+
+  namespace :api do
+    resources :events, only: %i[index show]
+    resources :venues, only: %i[index show]
+  end
 end

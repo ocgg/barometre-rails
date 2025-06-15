@@ -1,5 +1,5 @@
 class VenuesController < ApplicationController
-  allow_unauthenticated_access only: %i[index show]
+  # allow_unauthenticated_access only: %i[]
   before_action :set_venue, only: %i[show edit update verify destroy]
 
   def index
@@ -7,14 +7,6 @@ class VenuesController < ApplicationController
       .limit(params[:limit])
       .order_by(params[:order])
     @venues = authorize policy_scope(@venues)
-
-    respond_to do |format|
-      format.html {
-        require_authentication && return unless authenticated?
-        render slim: @venues
-      }
-      format.json { render json: @venues.to_json }
-    end
   end
 
   def unverified
@@ -22,10 +14,7 @@ class VenuesController < ApplicationController
   end
 
   def show
-    respond_to do |format|
-      format.json { render json: @venue.to_json }
-      format.html { render partial: @venue if turbo_frame_request? }
-    end
+    render partial: @venue if turbo_frame_request?
   end
 
   def verify
