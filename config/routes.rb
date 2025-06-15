@@ -18,7 +18,6 @@ Rails.application.routes.draw do
   resources :venues, only: %i[index show edit update destroy] do
     get :unverified, on: :collection
     patch :verify, on: :member
-    patch :remove_duplicates, on: :member
   end
 
   resources :events do
