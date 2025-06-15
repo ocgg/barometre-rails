@@ -4,15 +4,16 @@ class VenuesController < ApplicationController
 
   def index
     @venues = Venue.filter_by_query(params[:q])
+      .limit(params[:limit])
+      .order_by(params[:order])
     @venues = authorize policy_scope(@venues)
-    @venues = @venues.order_by(params[:order])
 
     respond_to do |format|
       format.html {
         require_authentication && return unless authenticated?
         render slim: @venues
       }
-      format.json { render json: @venues.limit(5).to_json }
+      format.json { render json: @venues.to_json }
     end
   end
 

@@ -93,7 +93,7 @@ export default class extends Controller {
   }
 
   fetchVenues() {
-    const url = `/venues?q=${this.nameTarget.value}`;
+    const url = `/venues?q=${this.nameTarget.value}&limit=5`;
     const opts = { headers: { "Accept": "application/json" } };
     fetch(url, opts)
       .then(response => response.json())
