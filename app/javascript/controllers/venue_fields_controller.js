@@ -25,7 +25,7 @@ export default class extends Controller {
   }
 
   setVenue(id) {
-    const url = `/venues/${id}`;
+    const url = `/api/venues/${id}`;
     const opts = { headers: { "Accept": "application/json" } };
     fetch(url, opts)
       .then(response => response.json())
@@ -93,7 +93,7 @@ export default class extends Controller {
   }
 
   fetchVenues() {
-    const url = `/venues?q=${this.nameTarget.value}&limit=5`;
+    const url = `/api/venues?q=${this.nameTarget.value}&limit=5`;
     const opts = { headers: { "Accept": "application/json" } };
     fetch(url, opts)
       .then(response => response.json())
