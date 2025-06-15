@@ -17,7 +17,7 @@
   - ~~warning no geocoded~~
   - ~~détection geocoding hors Loire-Atlantique~~ **(+ de 60km du centre géographique)**
   - ~~edit venue~~
-  - vérifier/jarter remove_duplicates
+  - ~~vérifier/jarter remove_duplicates~~
     - transfert d'events de venue à venue à la place
   - ~~bg job pour geocoding~~
   - z-index venue dropdown/date&time mobile:

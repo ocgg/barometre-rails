@@ -17,8 +17,6 @@ class VenuePolicy < ApplicationPolicy
 
   def update? = edit?
 
-  def remove_duplicates? = edit?
-
   def verify? = edit?
 
   def destroy? = edit?

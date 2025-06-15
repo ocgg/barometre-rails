@@ -1,6 +1,6 @@
 class VenuesController < ApplicationController
   allow_unauthenticated_access only: %i[index show]
-  before_action :set_venue, only: %i[show edit update verify destroy remove_duplicates]
+  before_action :set_venue, only: %i[show edit update verify destroy]
 
   def index
     @venues = Venue.filter_by_query(params[:q])
@@ -31,19 +31,6 @@ class VenuesController < ApplicationController
   def verify
     @venue.update(verified: true)
     render @venue
-  end
-
-  def remove_duplicates
-    duplicates = @venue.duplicates.reject { |v| v == @venue }
-    # attach duplicate's events to @venue
-    duplicates.each do |venue|
-      # do not one-line this, or the events will still be associated to
-      # duplicated venue
-      events = venue.events
-      events.each { |event| event.update!(venue: @venue) }
-    end
-    duplicates.each(&:destroy!)
-    redirect_to unverified_path(section: "venues"), status: :see_other
   end
 
   def edit

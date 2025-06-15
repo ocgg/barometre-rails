@@ -24,7 +24,7 @@
         /warnings
         div.flex.gap-2.basis-8
           - if venue.possible_duplicate?
-            = link_to remove_duplicates_venue_path(venue), title: "⚠️ Doublon possible (nom ou proximité)", data: {turbo_method: :patch, turbo_frame: :_top, turbo_confirm: "- Les doublons seront supprimés\n- tous les événements rattachés aux doublons seront ramenés sur ce lieu"}
+            div title="⚠️ Doublon possible (nom ou proximité)"
               svg.h-5.fill-baro-orange viewBox="0 0 512 512": path d="M288 448L64 448l0-224 64 0 0-64-64 0c-35.3 0-64 28.7-64 64L0 448c0 35.3 28.7 64 64 64l224 0c35.3 0 64-28.7 64-64l0-64-64 0 0 64zm-64-96l224 0c35.3 0 64-28.7 64-64l0-224c0-35.3-28.7-64-64-64L224 0c-35.3 0-64 28.7-64 64l0 224c0 35.3 28.7 64 64 64z"
           - unless venue.geocoded?
             div title= "❌ Pas géocodé"
