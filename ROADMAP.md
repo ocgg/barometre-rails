@@ -1,3 +1,8 @@
+# FIXES
+
+- Barre de recherche cassée
+- venue fields mode marche pas quand on recharge la page du form
+
 # ROADMAP
 
 1. ~~Datepicker:~~
@@ -28,7 +33,7 @@
 
 5. Job nettoyage de DB
 
-6. Gérer les infos servies par l'API JSON
+6. ~~Gérer la data servies par l'API JSON~~
 
 7. Modales et pages statiques
   - à propos
@@ -48,11 +53,13 @@
 
 11. Map...
   - leaflet stylesheets seulement sur layout map
-  - ~~limit(5) dans venue#index json~~
 
 ## TODO
 
 - maintenir les tests
+
+- front pour sessions#new
+- routes autorisées pour sessions (pas de create etc.)
 
 - sous-titre / description
 
@@ -77,8 +84,6 @@
   - informer le user au cas où il n'est pas localisé en Loire-Atlantique & de la précision de l'API
   - input steps: 1,3,5,10,15,20,30
 
-- API venues & events
-
 - license
 
 - remplacer les alert() par des jolies modales
@@ -93,5 +98,7 @@
 - datepicker:
   - en faire un projet à part / package NPM
   - prévisualiser la range au hover
+
+- ~~API venues & events~~
 
 - beaucoup d'autres choses...
