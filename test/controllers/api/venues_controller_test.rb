@@ -29,11 +29,10 @@ class Api::VenuesControllerTest < ActionDispatch::IntegrationTest
     assert_response :not_found
   end
 
-  test "should not get verified, created_at & updated_at" do
+  test "should not get created_at & updated_at" do
     get api_venue_url(@venue)
     assert_response :success
     json_response = JSON.parse(response.body)
-    assert_not_includes json_response.keys, "verified"
     assert_not_includes json_response.keys, "created_at"
     assert_not_includes json_response.keys, "updated_at"
   end

@@ -1,13 +1,13 @@
 class Api::VenuesController < ApplicationController
   allow_unauthenticated_access only: %i[index show]
 
-  VENUE_COLUMNS = %i[id name address city latitude longitude]
+  VENUE_COLUMNS = %i[id name address city latitude longitude verified]
 
   def index
-    @venues = authorize Venue.filter_by_query(params[:q])
+    @venues = Venue.filter_by_query(params[:q])
       .limit(params[:limit])
       .order_by(params[:order])
-      .all_verified
+    @venues = authorize policy_scope(@venues)
     render json: @venues, only: VENUE_COLUMNS
   end
 
