@@ -4,54 +4,42 @@
 
 # ROADMAP
 
-1. ~~Datepicker:~~
-  - ~~instanciation similaire à flatpickr~~
-  - ~~options range/single, hour~~
-
-2. ~~Intégrer datepicker au formulaire~~
-
-3. Gestion de la confirmation des Venues
-  - ~~venues#unverified~~
-  - ~~Confirmation~~
-  - ~~visualisation du geocoding~~ **(lien OSM provisoire en attendant la map)**
+1. Gestion de la confirmation des Venues
+  - ~~visualisation du geocoding~~
+    - **lien OSM provisoire en attendant la map**
   - ~~un Event ne peut pas être validé si sa Venue n'est pas validée~~
-  - ~~venues#destroy~~
-  - ~~Détection des doublons~~
-  - ~~Si doublon: réaffectation de la "bonne" Venue à tous ses events~~
-  - ~~warning no geocoded~~
-  - ~~détection geocoding hors Loire-Atlantique~~ **(+ de 60km du centre géographique)**
-  - ~~edit venue~~
+    - **validation à faire**
   - ~~vérifier/jarter remove_duplicates~~
-    - transfert d'events de venue à venue à la place
-  - ~~bg job pour geocoding~~
+    - **transfert d'events de venue à venue à la place**
   - z-index venue dropdown/date&time mobile:
     - trouver une manière définitive et propre de gérer ça
+  - venue edit: relancer le geocoding
 
-4. ~~Edit event~~
+2. ~~Edit event~~
   - fix dropdowns z-index aussi
 
-5. Job nettoyage de DB
+3. Job nettoyage de DB
 
-6. ~~Gérer la data servies par l'API JSON~~
-
-7. Modales et pages statiques
+4. Modales et pages statiques
   - à propos
   - contact
     - mailer
   - infos sur la précision de la géoloc
 
-8. Divers ajustements UX
+5. Divers ajustements UX
   - affichage mobile
   - datepicker plus petit
   - meilleur time input
   - fix: containers de jours dupliqués lors de la pagination
 
-9. Choisir une licence
+6. Choisir une licence
 
-10. **Mise en prod**
+7. **Mise en prod**
 
-11. Map...
+8. Map
+  - layout
   - leaflet stylesheets seulement sur layout map
+  - search: datepicker sans l'option range
 
 ## TODO
 
