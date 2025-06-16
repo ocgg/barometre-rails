@@ -57,16 +57,16 @@ class Event < ApplicationRecord
         events.name LIKE :string
         OR events.tarif LIKE :string
         OR events.description LIKE :string
-        OR venue.name LIKE :string
-        OR venue.address LIKE :string
-        OR venue.city LIKE :string
+        OR venues.name LIKE :string
+        OR venues.address LIKE :string
+        OR venues.city LIKE :string
       SQL
-      upcoming_events.where(sql_subquery, string: "%#{string}%")
+      upcoming_events.joins(:venue).where(sql_subquery, string: "%#{string}%")
     end
 
     def all_upcoming = upcoming_events
 
-    def verified_upcoming = upcoming_events.where(verified: true, venue: {verified: true})
+    def verified_upcoming = upcoming_events.where(verified: true, venues: {verified: true})
 
     def unverified_upcoming = upcoming_events.where(verified: false)
 
