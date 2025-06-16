@@ -1,6 +1,5 @@
 # FIXES
 
-- Barre de recherche cassée
 - venue fields mode marche pas quand on recharge la page du form
 
 # ROADMAP
@@ -55,6 +54,11 @@
   - leaflet stylesheets seulement sur layout map
 
 ## TODO
+
+- FORM:
+  - address autocomplete [API adresses](https://adresse.data.gouv.fr/outils/api-doc/adresse)
+  - code postal dans venue form
+  - ne pas envoyer quand on appuie sur entrée
 
 - refacto CSS (noms de variable, @base, @components, @container...)
 
