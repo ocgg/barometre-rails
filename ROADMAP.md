@@ -12,7 +12,7 @@
     - **transfert d'events de venue à venue à la place**
   - z-index venue dropdown/date&time mobile:
     - trouver une manière définitive et propre de gérer ça
-  - venue edit: relancer le geocoding
+  - ~~venue edit: relancer le geocoding~~
   - gestion des adresses (adresse, ville, code postal)
   - séparer date & heure dans le form
 
@@ -43,6 +43,8 @@
   - search: datepicker sans l'option range
 
 ## TODO
+
+- venues#geocode: spinner & turbo stream
 
 - FORM:
   - address autocomplete [API adresses](https://adresse.data.gouv.fr/outils/api-doc/adresse)
