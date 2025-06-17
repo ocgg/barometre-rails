@@ -1,6 +1,6 @@
 class VenuesController < ApplicationController
   # allow_unauthenticated_access only: %i[]
-  before_action :set_venue, only: %i[show edit update verify destroy]
+  before_action :set_venue, only: %i[show edit update verify destroy geocode]
 
   def index
     @venues = Venue.filter_by_query(params[:q])
@@ -35,6 +35,10 @@ class VenuesController < ApplicationController
 
   def destroy
     @venue.destroy
+  end
+
+  def geocode
+    @venue.geocode_later
   end
 
   private

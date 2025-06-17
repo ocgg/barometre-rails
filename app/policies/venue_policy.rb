@@ -19,6 +19,8 @@ class VenuePolicy < ApplicationPolicy
 
   def verify? = edit?
 
+  def geocode? = edit?
+
   def destroy? = edit?
 
   class Scope < ApplicationPolicy::Scope
