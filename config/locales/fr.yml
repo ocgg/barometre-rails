@@ -143,16 +143,16 @@ fr:
     updated_at: "Modifié le"
 
   errors:
-    format: "%{message} %{attribute}."
+    format: "%{attribute} %{message}."
     messages: &errors_messages
       inclusion: "n'est pas inclus(e) dans la liste"
       exclusion: "n'est pas disponible"
       invalid: "n'est pas valide"
       confirmation: "ne concorde pas avec la confirmation"
       accepted: "doit être accepté(e)"
-      empty: "Il manque"
-      blank: "Il manque"
-      required: "Il manque"
+      empty: "doit être précisé"
+      blank: "doit être précisé"
+      required: "doit être précisé"
       too_long: "est trop long (pas plus de %{count} caractères)"
       too_short: "est trop court (au moins %{count} caractères)"
       wrong_length: "ne fait pas la bonne longueur (doit comporter %{count} caractères)"
@@ -175,14 +175,21 @@ fr:
     errors:
       messages:
         taken: "n'est pas disponible"
-        record_invalid: "La validation a échoué : %{errors}"
+        record_invalid: "Erreur de validation : %{errors}"
         <<: *errors_messages
       template:
         <<: *errors_template
       full_messages:
         format: "%{attribute} %{message}"
+      models:
+        event:
+          attributes:
+            verified:
+              venue_must_be_verified: "d'un événement impossible si son lieu n'est pas vérifié"
     attributes:
       event:
         venue: "le lieu"
         name: "le nom"
-        date: "la date et/ou l'heure"
+        date: "la date"
+        time: "l'heure"
+        verified: "vérification"
