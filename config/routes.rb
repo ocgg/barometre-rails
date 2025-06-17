@@ -18,6 +18,7 @@ Rails.application.routes.draw do
   resources :venues, only: %i[index show edit update destroy] do
     get :unverified, on: :collection
     patch :verify, on: :member
+    post :geocode, on: :member
   end
 
   resources :events do
