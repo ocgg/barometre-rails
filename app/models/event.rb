@@ -5,6 +5,7 @@ class Event < ApplicationRecord
   validates :name, presence: true
   validates :date, presence: true
   validates :time, presence: true
+  validate :venue_must_be_verified_to_verify_event
 
   def verified? = verified
 
@@ -17,6 +18,12 @@ class Event < ApplicationRecord
   def js_parsable_date = date.strftime("%m-%d-%Y")
 
   def js_parsable_time = time.strftime("%H:%M")
+
+  private
+
+  def venue_must_be_verified_to_verify_event
+    errors.add(:verified, :venue_must_be_verified) if verified? && !venue.verified?
+  end
 
   class << self
     def filter_unverified_with_params(params)
