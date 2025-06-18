@@ -1,6 +1,7 @@
 # FIXES
 
 - venue fields mode marche pas quand on recharge la page du form
+- les events sont pas triés par heure
 
 # ROADMAP
 
