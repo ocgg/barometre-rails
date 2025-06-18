@@ -74,9 +74,9 @@ export default class extends Controller {
     this.trashIconTargets.forEach(icon => icon.classList.toggle("hidden", false))
   }
 
-  handleWindowResize(event) {
+  handleWindowResize(_) {
     this.eventFieldsTargets.forEach(elt => {
-      const controller = this.application.getControllerForElementAndIdentifier(elt, 'event-fields')
+      const controller = this.application.getControllerForElementAndIdentifier(elt, 'event-fields');
       controller.setDatepickerVisible(false);
       controller.updateDatepickerShadowSize();
     })

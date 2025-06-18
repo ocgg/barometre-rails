@@ -8,6 +8,11 @@ module EventsHelper
     l(date, format:).split.map(&:capitalize).join(" ")
   end
 
+  def format_with_two_digits(time)
+    return if time.nil?
+    (time < 10) ? "0#{time}" : time
+  end
+
   def date_to_ddMyyyy(date)
     format = "%d %B %Y"
     l(date, format:)

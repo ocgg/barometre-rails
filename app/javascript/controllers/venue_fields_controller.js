@@ -138,8 +138,8 @@ export default class extends Controller {
     event.stopPropagation();
     this.toSearchMode();
     this.nameTarget.focus();
-    this.nameTarget.setSelectionRange(length, length);
     const length = this.nameTarget.value.length;
+    this.nameTarget.setSelectionRange(length, length);
   }
 
   onAddManually(event) {
