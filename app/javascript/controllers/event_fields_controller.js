@@ -10,7 +10,7 @@ export default class extends Controller {
     "svg",
     "date",
     "datepickerContainer",
-    "datetime",
+    "time",
     "hour",
     "minute"
   ]
@@ -62,7 +62,6 @@ export default class extends Controller {
     this.startValue = this.dateStringToYYYYMMDD(event.target.value);
     const date = new Date(event.target.value);
     this.dateTarget.textContent = this.readableStringFrom(date);
-    this.onDateOrTimeInputChange();
   }
 
   dateStringToYYYYMMDD(str) {
@@ -87,8 +86,19 @@ export default class extends Controller {
     if (value.length === 2) this.minuteTarget.select();
   }
 
-  onDateOrTimeInputChange() {
-    this.datetimeTarget.value = `${this.startValue} ${this.hourTarget.value}:${this.minuteTarget.value}`;
+  onTimeInputChange() {
+    if (!this.hourTarget.value && !this.minuteTarget.value) {
+      this.timeTarget.value = "";
+    }
+    else if (!this.hourTarget.value) {
+      this.timeTarget.value = `00:${this.minuteTarget.value}`;
+    }
+    else if (!this.minuteTarget.value) {
+      this.timeTarget.value = `${this.hourTarget.value}:00`;
+    }
+    else {
+      this.timeTarget.value = `${this.hourTarget.value}:${this.minuteTarget.value}`;
+    }
   }
 
   onTrashClick(_) {

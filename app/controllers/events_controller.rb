@@ -133,11 +133,9 @@ class EventsController < ApplicationController
       attr[:date] = Date.new(m_d_y[2], m_d_y[0], m_d_y[1])
     end
     if attr[:time]
-      h_m = attr[:time].split(":")
-      d = attr[:date] || Time.now
-      attr[:time] = Time.new(d.year, d.month, d.day, h_m[0], h_m[1])
+      attr[:time] = Time.zone.parse(attr[:time])
     end
-    venue_attr = attr.delete("venue_attributes")
-    venue_attr ? attr.merge(venue: Venue.find_or_create_by(venue_attr)) : attr
+    venue_attr = attr.delete("venue_attributes")&.compact_blank
+    venue_attr.present? ? attr.merge(venue: Venue.find_or_create_by(venue_attr)) : attr
   end
 end
