@@ -59,10 +59,15 @@ export default class extends Controller {
   onDateSelection(event) {
     if (!event.target.value) return;
 
-    this.startValue = event.target.value;
+    this.startValue = this.dateStringToYYYYMMDD(event.target.value);
     const date = new Date(event.target.value);
     this.dateTarget.textContent = this.readableStringFrom(date);
     this.onDateOrTimeInputChange();
+  }
+
+  dateStringToYYYYMMDD(str) {
+    const mdy = str.split("-");
+    return `${mdy[2]}-${mdy[0]}-${mdy[1]}`;
   }
 
   readableStringFrom(date) {
