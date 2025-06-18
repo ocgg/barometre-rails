@@ -2,6 +2,7 @@
 
 - venue fields mode marche pas quand on recharge la page du form
 - les events sont pas triés par heure
+- events#edit: changer l'event de jour quand on change.. le jour
 
 # ROADMAP
 
