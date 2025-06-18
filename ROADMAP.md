@@ -6,16 +6,16 @@
 # ROADMAP
 
 1. Gestion de la confirmation des Venues
+  - ~~un Event ne peut pas être validé si sa Venue n'est pas validée~~
+  - ~~séparer date & heure dans le form~~
+  - ~~venue edit: relancer le geocoding~~
   - ~~visualisation du geocoding~~
     - **lien OSM provisoire en attendant la map**
-  - ~~un Event ne peut pas être validé si sa Venue n'est pas validée~~
   - ~~vérifier/jarter remove_duplicates~~
     - **transfert d'events de venue à venue à la place**
   - z-index venue dropdown/date&time mobile:
     - trouver une manière définitive et propre de gérer ça
-  - ~~venue edit: relancer le geocoding~~
   - gestion des adresses (adresse, ville, code postal)
-  - séparer date & heure dans le form
 
 2. ~~Edit event~~
   - fix dropdowns z-index aussi
@@ -44,6 +44,9 @@
   - search: datepicker sans l'option range
 
 ## TODO
+
+- dates: refacto form, datepicker etc. pour toujours utiliser YYYY-MM-DD
+  - option dateFormat dans datepicker
 
 - venues#geocode: spinner & turbo stream
 
