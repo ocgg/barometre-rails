@@ -78,7 +78,7 @@ class Event < ApplicationRecord
     end
 
     def between(start_date, end_date)
-      where(datetime: start_date..end_date)
+      where(datetime: start_date..end_date.tomorrow)
     end
 
     def filter_by_position(params)
