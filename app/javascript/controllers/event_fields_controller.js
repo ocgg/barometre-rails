@@ -40,6 +40,7 @@ export default class extends Controller {
   setDatepickerVisible(bool) {
     this.datepickerBtnTarget.classList.toggle("!bg-card-bg", bool);
     this.datepickerBtnTarget.classList.toggle("!text-fgcolor", bool);
+    this.datepickerBtnTarget.classList.toggle("z-100", bool);
     this.iconsContainerTarget.classList.toggle("md:flex-col", !bool);
     this.svgTarget.classList.toggle("fill-fgcolor", bool);
     this.datepickerContainerTarget.classList.toggle("hidden", !bool);

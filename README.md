@@ -10,6 +10,25 @@
 - Stack 100% open source (excepté GitHub...), de la conception au déploiement
 - Pas d'inscription utilisateur. Les événements (et lieux) proposés doivent être validés par un admin
 
+## Fonctionnalités actuelles
+
+- Accès à la liste des concerts pour tous
+- Recherche par dates, position et/ou mots-clés
+- Création (proposition) d'événements/lieux ouvert à tous
+
+- Accès à la carte des événements pour tous (en cours)
+
+- Partie admin:
+  - Accès à tous les événement proposés
+  - Doit valider l'événement/lieu pour qu'il devienne visible par tous
+  - Peut valider/modifier/supprimer tout événement/lieu
+
+- API JSON (`/api/events` & `/api/venues`)
+  - options:
+    - `start` (`end` optionnel) pour filtrer par date ou fourchette de dates (au format MM-JJ-AAAA pour l'instant)
+    - `lat`, `long` et `radius` pour filtrer par position
+    - `q` pour filtrer par mot-clé (insensible à la casse, sensible aux accents pour l'instant)
+
 ## Todo
 
 Voir [Roadmap](ROADMAP.md)

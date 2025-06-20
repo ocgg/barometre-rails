@@ -6,7 +6,7 @@
       p.text-center.text-xl Aucun résultat
     - elsif request.query_parameters.compact_blank.any?
       p.-mt-13.-mb-13.text-center
-        | #{@pagy.count} résultat#{"s" if @pagy.count > 1} -
+        |> #{@pagy.count} résultat#{"s" if @pagy.count > 1} -
         = link_to "Réinitialiser la recherche",
           events_path, data: {turbo_frame: :_top},
           class: "text-fgcolor-faded hover:text-baro-yellow"
