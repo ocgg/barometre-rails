@@ -1,19 +1,20 @@
 # FIXES
 
 - venue fields mode marche pas quand on recharge la page du form
-- les events sont pas triés par heure
-- events#edit: changer l'event de jour quand on change.. le jour
+- events#edit: bouger l'event de jour quand on modifie sa date
 
 # ROADMAP
 
-1. Gestion de la confirmation des Venues
+1. Venues
   - ~~un Event ne peut pas être validé si sa Venue n'est pas validée~~
   - ~~séparer date & heure dans le form~~
   - ~~venue edit: relancer le geocoding~~
+
   - ~~visualisation du geocoding~~
     - **lien OSM provisoire en attendant la map**
   - ~~vérifier/jarter remove_duplicates~~
     - **transfert d'events de venue à venue à la place**
+
   - z-index venue dropdown/date&time mobile:
     - trouver une manière définitive et propre de gérer ça
   - gestion des adresses (adresse, ville, code postal)
@@ -32,14 +33,16 @@
 5. Divers ajustements UX
   - affichage mobile
   - datepicker plus petit
-  - meilleur time input
+  - ~~meilleur time input~~
   - fix: containers de jours dupliqués lors de la pagination
 
 6. Choisir une licence
 
-7. **Mise en prod**
+7. routes autorisées pour sessions (pas de create etc.)
 
-8. Map
+8. **Mise en prod**
+
+9. Map
   - layout
   - leaflet stylesheets seulement sur layout map
   - search: datepicker sans l'option range
@@ -59,7 +62,6 @@
 - refacto CSS (noms de variable, @base, @components, @container...)
 
 - front pour sessions#new
-- routes autorisées pour sessions (pas de create etc.)
 
 - sous-titre / description
 
