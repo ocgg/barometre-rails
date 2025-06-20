@@ -30,26 +30,12 @@ export default class extends Controller {
   onPlusBtnClick(_) {
     this.cloneLastEvent();
     this.eventsNumber++;
-    this.setDatepickerDropdownsZIndexes();
-    this.setVenueFieldsZIndexes();
     this.showTrashIcons();
   }
 
   cloneLastEvent() {
     const clone = this.eventFieldsTargets[this.eventsNumber - 1].cloneNode(true);
     this.eventsListTarget.appendChild(clone);
-  }
-
-  setDatepickerDropdownsZIndexes() {
-    this.datepickerBtnTargets.forEach((elt, index) => {
-      elt.style.zIndex = 20 + (this.eventsNumber - index - 1);
-    })
-  }
-
-  setVenueFieldsZIndexes() {
-    this.venueFieldsTargets.forEach((elt, index) => {
-      elt.style.zIndex = 15 + (this.eventsNumber - index - 1);
-    })
   }
 
   handleVenueDropdownFocusOut(event) {
