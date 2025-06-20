@@ -21,7 +21,7 @@ class Api::EventsControllerTest < ActionDispatch::IntegrationTest
     assert_equal @event.name, json_response["name"]
     assert_equal @event.description, json_response["description"]
     assert_equal @event.tarif, json_response["tarif"]
-    assert_equal @event.time.as_json, json_response["time"]
+    assert_equal @event.datetime, json_response["datetime"]
   end
 
   test "should not get show for non-existent event" do
@@ -76,25 +76,14 @@ class Api::EventsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should filter events by date range" do
-    event_date = @event.date
-    start_date = event_date.beginning_of_day
-    end_date = event_date.end_of_day
-
+    date = @event.datetime.strftime("%m-%d-%Y")
     get api_events_url, params: { 
-      start: start_date.strftime("%m-%d-%Y"),
-      end: end_date.strftime("%m-%d-%Y")
+      start: date,
+      end: date,
     }
     assert_response :success
     json_response = JSON.parse(response.body)
     assert_not_empty json_response
-    
-    json_response.each do |event|
-      event_time = Time.parse(event["time"])
-      event_hour = event_time.hour
-      event_min = event_time.min
-      assert event_hour >= 0 && event_hour <= 23
-      assert event_min >= 0 && event_min <= 59
-    end
   end
 
   test "should filter events by location" do
@@ -117,7 +106,7 @@ class Api::EventsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should combine multiple filters" do
-    event_date = @event.date
+    event_date = @event.datetime.to_date
     start_date = event_date.beginning_of_day
     end_date = event_date.end_of_day
 
@@ -132,11 +121,8 @@ class Api::EventsControllerTest < ActionDispatch::IntegrationTest
     json_response.each do |event|
       assert_includes event["name"], @event.name
       assert_equal @venue.id, event["venue"]["id"]
-      event_time = Time.parse(event["time"])
-      event_hour = event_time.hour
-      event_min = event_time.min
-      assert event_hour >= 0 && event_hour <= 23
-      assert event_min >= 0 && event_min <= 59
+      expected_time = @event.datetime
+      assert_equal expected_time, event["datetime"]
     end
   end
 end

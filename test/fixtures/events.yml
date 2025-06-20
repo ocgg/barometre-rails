@@ -2,8 +2,7 @@
 
 one:
   name: Concert Vérifié
-  date: <%= 1.year.from_now %>
-  time: <%= 1.year.from_now.change(hour: 20, min: 0) %>
+  datetime: <%= 1.year.from_now.change(hour: 20, min: 0) %>
   description: Un concert de rock
   tarif: 20€
   verified: true
@@ -11,8 +10,7 @@ one:
 
 two:
   name: Concert Non Vérifié
-  date: <%= 1.year.from_now %>
-  time: <%= 1.year.from_now.change(hour: 19, min: 30) %>
+  datetime: <%= 1.year.from_now.change(hour: 19, min: 30) %>
   description: Un concert de jazz
   tarif: 15€
   verified: false
@@ -20,8 +18,7 @@ two:
 
 past_event:
   name: Concert Passé
-  date: <%= 1.year.ago %>
-  time: <%= 1.year.ago.change(hour: 21, min: 0) %>
+  datetime: <%= 1.year.ago.change(hour: 21, min: 0) %>
   description: Un concert qui a déjà eu lieu
   tarif: 25€
   verified: true
