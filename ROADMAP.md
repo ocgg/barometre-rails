@@ -2,6 +2,7 @@
 
 - venue fields mode marche pas quand on recharge la page du form
 - events#edit: bouger l'event de jour quand on modifie sa date
+- container de jours possiblement dupliqué lors de la pagination
 
 # ROADMAP
 
@@ -15,44 +16,41 @@
   - ~~vérifier/jarter remove_duplicates~~
     - **transfert d'events de venue à venue à la place**
 
-  - z-index venue dropdown/date&time mobile:
-    - trouver une manière définitive et propre de gérer ça
+  - ~~z-index venue dropdown/date&time mobile:~~
   - gestion des adresses (adresse, ville, code postal)
 
-2. ~~Edit event~~
-  - fix dropdowns z-index aussi
+2. Job nettoyage de DB
 
-3. Job nettoyage de DB
-
-4. Modales et pages statiques
+3. Modales et pages statiques
   - à propos
   - contact
     - mailer
   - infos sur la précision de la géoloc
 
-5. Divers ajustements UX
+4. Divers ajustements UX
+  - ~~meilleur time input~~
   - affichage mobile
   - datepicker plus petit
-  - ~~meilleur time input~~
-  - fix: containers de jours dupliqués lors de la pagination
 
-6. Choisir une licence
+5. Choisir une licence
 
-7. routes autorisées pour sessions (pas de create etc.)
+6. routes autorisées pour sessions (pas de create etc.)
 
-8. **Mise en prod**
+7. **Mise en prod**
 
-9. Map
+8. Map
   - layout
   - leaflet stylesheets seulement sur layout map
   - search: datepicker sans l'option range
 
 ## TODO
 
-- dates: refacto form, datepicker etc. pour toujours utiliser YYYY-MM-DD
-  - option dateFormat dans datepicker
+- GeocodeVenueJob: si erreur, attendre quelques secondes et recommencer
 
 - venues#geocode: spinner & turbo stream
+
+- dates: refacto form, datepicker etc. pour toujours utiliser YYYY-MM-DD
+  - option dateFormat dans datepicker
 
 - FORM:
   - address autocomplete [API adresses](https://adresse.data.gouv.fr/outils/api-doc/adresse)
@@ -73,7 +71,6 @@
 
 - events#index:
   - bouton pour revenir en haut de page (?)
-  - duplication des .day-header 
 
 - events#unverified:
   - intégrer barre de recherche
@@ -85,8 +82,6 @@
 - locationfilter:
   - informer le user au cas où il n'est pas localisé en Loire-Atlantique & de la précision de l'API
   - input steps: 1,3,5,10,15,20,30
-
-- license
 
 - remplacer les alert() par des jolies modales
 
@@ -100,7 +95,5 @@
 - datepicker:
   - en faire un projet à part / package NPM
   - prévisualiser la range au hover
-
-- ~~API venues & events~~
 
 - beaucoup d'autres choses...
