@@ -10,17 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_06_04_100131) do
+ActiveRecord::Schema[8.0].define(version: 2025_06_19_103150) do
   create_table "events", force: :cascade do |t|
     t.string "name"
-    t.date "date"
     t.string "description"
     t.string "tarif"
     t.boolean "verified", default: false, null: false
     t.integer "venue_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.time "time"
+    t.datetime "datetime", null: false
     t.index ["venue_id"], name: "index_events_on_venue_id"
   end
 
