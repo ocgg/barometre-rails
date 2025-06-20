@@ -31,7 +31,6 @@ class EventsController < ApplicationController
     @events = Event.filter_unverified_with_params(@query_params)
     @events = authorize policy_scope(@events)
     @pagy, @events = pagy(@events, limit: 50, count: @events.count)
-    set_events_days
 
     respond_to do |format|
       format.turbo_stream {
@@ -50,7 +49,6 @@ class EventsController < ApplicationController
     authorize Event
     @events = set_new_events
     valid = @events.map(&:valid?)
-
     if valid.all?
       @events.each(&:save)
       redirect_to root_path
@@ -92,14 +90,6 @@ class EventsController < ApplicationController
     @events = Event.filter_with_params(@query_params)
     @events = authorize policy_scope(@events)
     @pagy, @events = pagy(@events, limit: 50, count: @events.count)
-    set_events_days
-  end
-
-  def set_events_days
-    @events_days = @events.group_by do |event|
-      date = event.date
-      Date.new(date.year, date.month, date.day)
-    end
   end
 
   def set_event
