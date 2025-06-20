@@ -1,4 +1,4 @@
-- @events_days.each do |date, events|
+- @events.group_by(&:date).each do |date, events|
 
   section.event-day
     header.day-separator

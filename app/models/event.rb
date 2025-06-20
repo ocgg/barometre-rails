@@ -5,7 +5,30 @@ class Event < ApplicationRecord
   validates :name, presence: true
   validates :date, presence: true
   validates :time, presence: true
+  validates :datetime, presence: true
   validate :venue_must_be_verified_to_verify_event
+
+  def date = @date ||= datetime&.to_date
+
+  def time = @time ||= datetime&.to_time
+
+  def date=(val)
+    @date = val
+    if val && @time
+      update_datetime_date_and_time
+    else
+      errors.add(:date)
+    end
+  end
+
+  def time=(val)
+    @time = val
+    if val && @date
+      update_datetime_date_and_time
+    else
+      errors.add(:time)
+    end
+  end
 
   def verified? = verified
 
@@ -20,6 +43,10 @@ class Event < ApplicationRecord
   def js_parsable_time = time.strftime("%H:%M")
 
   private
+
+  def update_datetime_date_and_time
+    self.datetime = Time.local(@date.year, @date.month, @date.day, @time.hour, @time.min)
+  end
 
   def venue_must_be_verified_to_verify_event
     errors.add(:verified, :venue_must_be_verified) if verified? && !venue.verified?
@@ -51,7 +78,7 @@ class Event < ApplicationRecord
     end
 
     def between(start_date, end_date)
-      where(date: start_date..end_date)
+      where(datetime: start_date..end_date.tomorrow)
     end
 
     def filter_by_position(params)
@@ -80,7 +107,7 @@ class Event < ApplicationRecord
     private
 
     def upcoming_events
-      includes(:venue).where("events.date >= ?", Date.today).order(:date)
+      includes(:venue).where("events.datetime >= ?", Date.today).order(:datetime)
     end
   end
 end
