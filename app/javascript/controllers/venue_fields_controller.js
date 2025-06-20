@@ -168,6 +168,11 @@ export default class extends Controller {
   onFocus(_) {
     if (this.modeValue !== "search") return;
 
+    this.showDropdown();
+  }
+
+  showDropdown() {
+    this.dropdownTarget.classList.toggle("z-100", true);
     this.show(this.dropdownTarget);
   }
 
