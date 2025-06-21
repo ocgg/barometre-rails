@@ -14,7 +14,7 @@
     ]
   
       = render "form_fields", event: @event, for_params: @event
-      
+
       div.md:absolute.md:right-2.md:bottom-2.flex.gap-1.items-center.justify-center.mt-2
         = link_to "Annuler", @event, class: "btn"
         = form.submit "OK", class: "btn btn-plain"
