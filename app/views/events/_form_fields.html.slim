@@ -28,27 +28,26 @@
           div.hidden.size-max.m-auto.flex-col.p-2.cursor-default data-event-fields-target="datepickerContainer"
 
       /time
-      div.px-2[
-        class="max-md:basis-[50%]"
-        class=("rounded-md py-0 border-3 border-baro-orange" if event.errors[:time].present?)
-      ]
+      div.px-2 class="max-md:basis-[50%]"
         div.flex.flex-row-reverse.items-center.gap-2.py-1.md:flex-row
           svg.w-5.fill-fgcolor viewBox="0 0 512 512": path d="M464 256A208 208 0 1 1 48 256a208 208 0 1 1 416 0zM0 256a256 256 0 1 0 512 0A256 256 0 1 0 0 256zM232 120l0 136c0 8 4 15.5 10.7 20l96 64c11 7.4 25.9 4.4 33.3-6.7s4.4-25.9-6.7-33.3L280 243.2 280 120c0-13.3-10.7-24-24-24s-24 10.7-24 24z"
           div.flex
             = event_fields.hidden_field :time, data: {event_fields_target: "time"}
             = text_field_tag nil, nil,
               maxlength: 2,
+              inputmode: "numeric", pattern: "[0-1]?[0-9]|2[0-3]",
               placeholder: "00",
               value: format_with_two_digits(event.time&.hour),
-              class: "w-9 py-0 font-quicksand border-1 text-right placeholder:not-italic",
+              class: "w-9 py-0 font-quicksand border-1 text-right placeholder:not-italic #{"border-baro-orange" if event.errors[:time].present?}",
               data: {event_fields_target: "hour",
                 action: "event-fields#onHoursChange event-fields#onTimeInputChange"}
             span.px-1 h
             = text_field_tag nil, nil,
               maxlength: 2,
+              inputmode: "numeric", pattern: "[0-5]?[0-9]",
               placeholder: "00",
               value: format_with_two_digits(event.time&.min),
-              class: "w-9 py-0 font-quicksand border-1 placeholder:not-italic",
+              class: "w-9 py-0 font-quicksand border-1 placeholder:not-italic #{"border-baro-orange" if event.errors[:time].present?}",
               data: {event_fields_target: "minute",
                 action: "event-fields#onTimeInputChange"}
 
@@ -67,6 +66,7 @@
 
       div.relative.flex.flex-col.justify-center
         = render "venues/form",
+          event:,
           venue: event.venue || Venue.new,
           event_fields:,
           for_params: for_params == @event ? "event[venue_attributes]" : "events[][venue_attributes]"

@@ -2,11 +2,12 @@ class Event < ApplicationRecord
   belongs_to :venue
   accepts_nested_attributes_for :venue
 
+  before_validation :unverify_event_if_venue_is_unverified, if: [:venue, :verified?]
+
   validates :name, presence: true
   validates :date, presence: true
   validates :time, presence: true
   validates :datetime, presence: true
-  validate :venue_must_be_verified_to_verify_event
 
   def date = @date ||= datetime&.to_date
 
@@ -14,20 +15,12 @@ class Event < ApplicationRecord
 
   def date=(val)
     @date = val
-    if val && @time
-      update_datetime_date_and_time
-    else
-      errors.add(:date)
-    end
+    (val && @time) ? update_datetime_date_and_time : errors.add(:date)
   end
 
   def time=(val)
     @time = val
-    if val && @date
-      update_datetime_date_and_time
-    else
-      errors.add(:time)
-    end
+    (val && @date) ? update_datetime_date_and_time : errors.add(:time)
   end
 
   def verified? = verified
@@ -44,12 +37,12 @@ class Event < ApplicationRecord
 
   private
 
-  def update_datetime_date_and_time
-    self.datetime = Time.local(@date.year, @date.month, @date.day, @time.hour, @time.min)
+  def unverify_event_if_venue_is_unverified
+    self.verified = false unless venue.verified?
   end
 
-  def venue_must_be_verified_to_verify_event
-    errors.add(:verified, :venue_must_be_verified) if verified? && !venue.verified?
+  def update_datetime_date_and_time
+    self.datetime = Time.local(@date.year, @date.month, @date.day, @time.hour, @time.min)
   end
 
   class << self

@@ -22,6 +22,7 @@ export default class extends Controller {
   connect() {
     if (this.modeValue === "found") this.setVenue(this.idTarget.value);
     else if (this.modeValue === "manual") this.toManualMode();
+    else this.setInputsForSearch();
   }
 
   setVenue(id) {
@@ -57,6 +58,7 @@ export default class extends Controller {
 
   setInputsForSearch() {
     this.setAddressAndCityInputsForSearch();
+    if (this.nameTarget.value) this.show(this.clearInputBtnTarget)
   }
 
   setInputsForFound() {
