@@ -193,6 +193,21 @@ class EventsControllerTest < ActionDispatch::IntegrationTest
     assert_response :unprocessable_entity
   end
 
+  test "a verified event updated with an unverified venue should turn to unverified" do
+    sign_in_as_admin
+    unverified_venue = venues(:two)
+    assert @event.verified?
+
+    patch event_url(@event), params: {
+      event: {
+        venue_id: unverified_venue.id
+      }
+    }
+    @event.reload
+    assert_equal unverified_venue.id, @event.venue_id
+    assert_not @event.verified?
+  end
+
   test "admin should destroy event" do
     sign_in_as_admin
     assert_difference("Event.count", -1) do

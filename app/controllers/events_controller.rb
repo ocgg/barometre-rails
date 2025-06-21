@@ -61,8 +61,8 @@ class EventsController < ApplicationController
   end
 
   def update
-    event_attrs = set_event_attributes(event_params)
-    if @event.update(event_attrs)
+    attrs = set_event_attributes(event_params)
+    if @event.update(attrs)
       redirect_to @event
     else
       render :edit, status: :unprocessable_entity
@@ -72,9 +72,8 @@ class EventsController < ApplicationController
   def verify
     if @event.venue.verified?
       @event.update(verified: true)
-      render @event
+      render @event if turbo_frame_request?
     else
-      # Should never happen
       render_unprocessable_entity_error
     end
   end
@@ -98,7 +97,7 @@ class EventsController < ApplicationController
 
   def event_params
     params.expect(event: [
-      "name", "description", "tarif", "date", "time", "venue_id",
+      :name, :description, :tarif, :date, :time, :venue_id,
       {venue_attributes: [:name, :address, :city]}
     ])
   end
@@ -125,7 +124,7 @@ class EventsController < ApplicationController
     if attr[:time]
       attr[:time] = Time.zone.parse(attr[:time])
     end
-    venue_attr = attr.delete("venue_attributes")&.compact_blank
+    venue_attr = attr.delete(:venue_attributes)&.compact_blank
     venue_attr.present? ? attr.merge(venue: Venue.find_or_create_by(venue_attr)) : attr
   end
 end
