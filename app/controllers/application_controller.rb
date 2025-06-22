@@ -19,8 +19,8 @@ class ApplicationController < ActionController::Base
   end
 
   def authorized_controller?
-    authorized_controllers = %w[sessions pages]
-    authorized_controllers.include? params[:controller]
+    authorized_controllers = %w[pages sessions passwords]
+    authorized_controllers.include? controller_name
   end
 
   def render_bad_request_error
