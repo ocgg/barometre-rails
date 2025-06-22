@@ -33,7 +33,7 @@
 
 5. Choisir une licence
 
-6. routes autorisées pour sessions (pas de create etc.)
+6. ~~routes autorisées pour sessions~~
 
 7. **Mise en prod**
 
