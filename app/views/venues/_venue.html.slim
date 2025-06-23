@@ -40,8 +40,9 @@
 
       = turbo_frame_tag dom_id(venue, :edit)
 
-        h3.text-xl.font-lato = "#{venue.name} (#{venue.city})"
-        p.font-source.text-lg = venue.address
+        h3.text-xl.font-lato = venue.name
+        p.font-source = venue.address
+        p.font-source.text-lg = "#{venue.zipcode} #{venue.city}"
 
     = link_to "https://www.openstreetmap.org/search?query=#{venue.latitude}%20#{venue.longitude}&zoom=20",
       class: "hover:text-baro-yellow flex items-center gap-2 grow"
