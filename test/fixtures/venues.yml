@@ -3,6 +3,7 @@
 one:
   name: Lieu Vérifié
   city: Nantes
+  zipcode: 44000
   address: 1 rue de la Paix
   latitude: 47.2181
   longitude: -1.5528
@@ -11,6 +12,7 @@ one:
 two:
   name: Lieu Non Vérifié
   city: Nantes
+  zipcode: 44000
   address: 2 rue de la Paix
   latitude: 47.2181
   longitude: -1.5528
@@ -19,5 +21,6 @@ two:
 ungenerated:
   name: Lieu Sans Coordonnées
   city: Nantes
+  zipcode: 44000
   address: 3 rue de la Paix
   verified: true

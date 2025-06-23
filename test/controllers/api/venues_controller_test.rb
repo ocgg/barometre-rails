@@ -19,6 +19,7 @@ class Api::VenuesControllerTest < ActionDispatch::IntegrationTest
     assert_equal @venue.id, json_response["id"]
     assert_equal @venue.name, json_response["name"]
     assert_equal @venue.address, json_response["address"]
+    assert_equal @venue.zipcode, json_response["zipcode"]
     assert_equal @venue.city, json_response["city"]
     assert_equal @venue.latitude.to_f, json_response["latitude"]
     assert_equal @venue.longitude.to_f, json_response["longitude"]
