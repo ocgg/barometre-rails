@@ -12,7 +12,15 @@
 
         = form.text_field :address, placeholder: "Adresse"
 
-        = form.text_field :city, placeholder: "Ville"
+        div.flex.gap-2
+
+          = form.text_field :zipcode,
+            maxlength: 5,
+            placeholder: "Code postal"
+
+          = form.text_field :city,
+            class: "w-full",
+            placeholder: "Ville"
 
       div.md:absolute.md:right-2.md:bottom-2.flex.gap-1.items-center.justify-center.mt-2
         = link_to "Annuler", @venue, class: "btn"
