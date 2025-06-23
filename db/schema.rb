@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_06_19_103150) do
+ActiveRecord::Schema[8.0].define(version: 2025_06_23_094741) do
   create_table "events", force: :cascade do |t|
     t.string "name"
     t.string "description"
@@ -50,6 +50,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_06_19_103150) do
     t.float "latitude"
     t.float "longitude"
     t.boolean "verified", default: false, null: false
+    t.string "zipcode", null: false
   end
 
   add_foreign_key "events", "venues"

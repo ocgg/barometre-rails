@@ -48,6 +48,6 @@ class VenuesController < ApplicationController
   end
 
   def venue_params
-    params.expect(venue: [:name, :address, :city])
+    params.expect(venue: [:name, :address, :zipcode, :city])
   end
 end

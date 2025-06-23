@@ -14,47 +14,64 @@ venues_count = 0
   {
     name: "Café de la Loire",
     address: "4 quai Boulay Paty",
-    city: "Paimboeuf"
+    city: "Paimboeuf",
+    zipcode: "44560"
   },
   {
     name: "Café du Cinéma",
     address: "8 Rue des Carmélites",
-    city: "Nantes"
+    city: "Nantes",
+    zipcode: "44000"
+
   },
   {
     name: "Le Chat Noir",
     address: "13 Allée Duguay-Trouin",
-    city: "Nantes"
+    city: "Nantes",
+    zipcode: "44000"
+
   },
   {
     name: "Delirium cafe",
     address: "19 allée Baco",
-    city: "Nantes"
+    city: "Nantes",
+    zipcode: "44000"
+
   },
   {
     name: "Live Bar",
     address: "6, rue de Strasbourg",
-    city: "Nantes"
+    city: "Nantes",
+    zipcode: "44000"
+
   },
   {
     name: "Le Melting Potes",
     address: "26 Bd de la Prairie au Duc",
-    city: "Nantes"
+    city: "Nantes",
+    zipcode: "44200"
+
   },
   {
     name: "Le Ferrailleur",
     address: "21 quai des antilles",
-    city: "Nantes"
+    city: "Nantes",
+    zipcode: "44200"
+
   },
   {
     name: "Le Petit Café de Rezé",
     address: "7 rue Maurice Lagathu",
-    city: "Rezé"
+    city: "Rezé",
+    zipcode: "44400"
+
   },
   {
-    name: "Café de l'Océan",
-    address: "2 Quai Saint Pierre",
-    city: "La Turballe"
+    name: "Cap 270",
+    address: "1 Quai Saint Pierre",
+    city: "La Turballe",
+    zipcode: "44420"
+
   }
 ].each do |attrs|
   next if Venue.exists?(attrs)

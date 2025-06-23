@@ -1,7 +1,7 @@
 class Api::VenuesController < ApplicationController
   allow_unauthenticated_access only: %i[index show]
 
-  VENUE_COLUMNS = %i[id name address city latitude longitude verified]
+  VENUE_COLUMNS = %i[id name address zipcode city latitude longitude verified]
 
   def index
     @venues = Venue.filter_by_query(params[:q])
