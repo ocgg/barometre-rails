@@ -98,14 +98,14 @@ class EventsController < ApplicationController
   def event_params
     params.expect(event: [
       :name, :description, :tarif, :date, :time, :venue_id,
-      {venue_attributes: [:name, :address, :city]}
+      {venue_attributes: [:name, :address, :zipcode, :city]}
     ])
   end
 
   def events_params
     params.expect(events: [[
       :date, :time, :name, :description, :tarif, :venue_id,
-      {venue_attributes: [:name, :address, :city]}
+      {venue_attributes: [:name, :address, :zipcode, :city]}
     ]])
   end
 

@@ -50,6 +50,7 @@ class EventsControllerTest < ActionDispatch::IntegrationTest
           venue_attributes: {
             name: "Nouveau lieu",
             address: "1 rue test",
+            zipcode: "44000",
             city: "Nantes"
           }
         }]

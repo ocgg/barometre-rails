@@ -6,6 +6,7 @@ export default class extends Controller {
     "id",
     "name",
     "address",
+    "zipcode",
     "city",
     "resultsList",
     "noResult",
@@ -50,7 +51,7 @@ export default class extends Controller {
 
   toManualMode() {
     this.modeValue = "manual";
-    this.idTarget.value = "";
+    if(this.hasIdTarget) this.idTarget.value = "";
     this.hide(this.dropdownTarget);
     this.emptyResultsList();
     this.setInputsForManual();
@@ -65,10 +66,12 @@ export default class extends Controller {
     this.show(this.clearInputBtnTarget);
     this.hide(this.searchBtnTarget);
     this.nameTarget.disabled = true;
-    this.addressTarget.disabled = true;
-    this.cityTarget.disabled = true;
     this.nameTarget.value = this.venue.name;
+    this.addressTarget.disabled = true;
     this.addressTarget.value = this.venue.address;
+    this.zipcodeTarget.disabled = true;
+    this.zipcodeTarget.value = this.venue.zipcode;
+    this.cityTarget.disabled = true;
     this.cityTarget.value = this.venue.city;
   }
 
@@ -76,6 +79,7 @@ export default class extends Controller {
     this.hide(this.clearInputBtnTarget);
     this.show(this.searchBtnTarget);
     this.addressTarget.disabled = false;
+    this.zipcodeTarget.disabled = false;
     this.cityTarget.disabled = false;
   }
 
@@ -83,6 +87,8 @@ export default class extends Controller {
     this.hide(this.searchBtnTarget);
     this.addressTarget.disabled = true;
     this.addressTarget.value = "";
+    this.zipcodeTarget.disabled = true;
+    this.zipcodeTarget.value = "";
     this.cityTarget.disabled = true;
     this.cityTarget.value = "";
   }

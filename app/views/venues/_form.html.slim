@@ -65,11 +65,21 @@ div[
             p.text-sm.text-fgcolor-faded Pas dans la liste ?
             p.font-bold Ajouter manuellement
 
-      = venue_fields.text_field :address,
-        placeholder: "Adresse",
-        data: {venue_fields_target: "address"}
+      div.flex.flex-col.gap-2
 
-      = venue_fields.text_field :city,
-        placeholder: "Ville",
-        data: {venue_fields_target: "city"}
+        = venue_fields.text_field :address,
+          placeholder: "1, rue du Nom de la Rue",
+          data: {venue_fields_target: "address"}
+
+        div.flex.gap-2
+
+          = venue_fields.text_field :zipcode,
+            maxlength: 5,
+            placeholder: "44000",
+            data: {venue_fields_target: "zipcode"}
+
+          = venue_fields.text_field :city,
+            class: "w-full",
+            placeholder: "Ville",
+            data: {venue_fields_target: "city"}
 
