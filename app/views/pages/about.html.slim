@@ -1,4 +1,52 @@
-h1
-  | Pages#about
-p
-  | Find me in app/views/pages/about.html.erb
+h2.text-3xl À propos
+
+ul.m-auto.flex.flex-col.items-center
+  li.w-fit.hover:text-baro-yellow: a href="#quisommesnous" Qui sommes-nous ?
+  li.w-fit.hover:text-baro-yellow: a href="#objectifs" Objectifs
+  li.w-fit.hover:text-baro-yellow: a href="#contribuer" Comment contribuer ?
+
+section#quisommesnous
+  h3.text-lg.mb-2 Qui sommes-nous ?
+
+  div.bg-card-bg.flex.flex-col.gap-4.p-4.md:rounded-lg
+    p.font-source.indent-6
+      | Baromètre est créé par Olivier Genel, musicien et technicien du son amateur, développeur et formateur formé au
+      a.font-bold<> href="https://www.lewagon.com" bootcamp du Wagon
+      | à Nantes.
+
+section#objectifs
+  h3.text-lg.mb-2 Objectifs
+
+  div.bg-card-bg.flex.flex-col.gap-4.p-4.md:rounded-lg
+    p.font-source.indent-6
+      | Baromètre vise simplement à faire ce que fait l'agenda collaboratif
+      a.font-bold<> href="https://www.tyzicos.com" Ty-Zicos
+      | en Bretagne, idéalement de manière un peu plus moderne et avec un penchant particulier pour les concerts et jams-sessions qui se passent dans les bars.
+      br
+      | L'objectif est de donner un moyen simple aux musiciens et organisateurs pour faire connaître leurs événements, et aux spectateurs d'y accéder.
+
+    p.font-source.indent-6
+      | Par ailleurs, Baromètre se veut être un logiciel libre, open-source, un vecteur d'apprentissage fait-maison, gratuit, sans pub, sans inscription et sans cookie ennuyeux. C'est aussi un moyen au créateur de montrer son travail, puisque c'est son premier projet web destiné au grand public.
+
+    p.font-source.indent-6
+      | Enfin, dans un futur incertain où les utilisateurs seront nombreux, une app pour mobile sera déployée.
+
+section#contribuer
+  h3.text-lg.mb-2 Comment contribuer ?
+
+  div.bg-card-bg.flex.flex-col.gap-4.p-4.md:rounded-lg
+    p.font-source.indent-6
+      | Voici 3 moyens de donner un coup de main, n'hésitez pas !
+    ul.list-disc.font-source.pl-6
+      li: p
+        | Proposez les événements dont vous avez connaissance ou dont vous faites partie : passez par le formulaire de la page "
+        = link_to "Proposer un concert", new_event_path, class: "font-bold"
+        |".
+      li: p
+        |> Vous proposer en tant que membre de l'équipe pour vérifier et valider les événements proposés par les autres utilisateurs :
+        = link_to "Envoyez-nous un message", contact_path, class: "font-bold"
+        |.
+      li: p
+        |> Contribuez au développement du projet si vous savez coder : Rendez-vous sur
+        = link_to "GitHub", "https://github.com/ocgg/barometre-rails", class: "font-bold"
+        |.
