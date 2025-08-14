@@ -147,11 +147,11 @@ fr:
     messages: &errors_messages
       inclusion: "n'est pas inclus(e) dans la liste"
       exclusion: "n'est pas disponible"
-      invalid: "n'est pas valide"
+      invalid: "non valide"
       confirmation: "ne concorde pas avec la confirmation"
       accepted: "doit être accepté(e)"
       empty: "doit être précisé"
-      blank: "doit être précisé"
+      blank: "ne doit pas être vide"
       required: "doit être précisé"
       too_long: "est trop long (pas plus de %{count} caractères)"
       too_short: "est trop court (au moins %{count} caractères)"
@@ -186,6 +186,7 @@ fr:
           attributes:
             verified:
               venue_must_be_verified: "d'un événement impossible si son lieu n'est pas vérifié"
+
     attributes:
       event:
         venue: "le lieu"
@@ -193,3 +194,15 @@ fr:
         date: "la date"
         time: "l'heure"
         verified: "vérification"
+
+  activemodel:
+    errors:
+      models:
+        contact_mailer:
+          attributes:
+            message:
+              too_short: "doit faire au moins %{count} caractères"
+
+    attributes:
+      contact_mailer:
+        message: "Le message"
