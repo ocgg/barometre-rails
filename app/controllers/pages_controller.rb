@@ -5,23 +5,24 @@ class PagesController < ApplicationController
   end
 
   def contact
+    @contact_form = ContactForm.new
   end
 
   def contact_form_submit
-    contact_params = contact_form_params
+    @contact_form = ContactForm.new(contact_form_params)
 
-    email = contact_params[:email]
-    message = contact_params[:message]
-    attachment = contact_params[:attachment]
-
-    # TODO: manage attachment
-    # TODO: Send email
-    # TODO: notify user
+    if @contact_form.valid?
+      form_data = {email: @contact_form.email, message: @contact_form.message}
+      ContactMailer.with(form_data).contact_email.deliver_later
+      redirect_to :contact, notice: "Message envoyé !"
+    else
+      render :contact, status: :unprocessable_entity
+    end
   end
 
   private
 
   def contact_form_params
-    params.require(:contact_form).permit(:email, :message, :attachment)
+    params.require(:contact_form).permit(:email, :message)
   end
 end
