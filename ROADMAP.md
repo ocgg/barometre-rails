@@ -6,43 +6,27 @@
 # ROADMAP
 
 1. Venues
-  - ~~un Event ne peut pas être validé si sa Venue n'est pas validée~~
-  - ~~séparer date & heure dans le form~~
-  - ~~venue edit: relancer le geocoding~~
-
-  - ~~visualisation du geocoding~~
-    - **lien OSM provisoire en attendant la map**
-  - ~~vérifier/jarter remove_duplicates~~
-    - **transfert d'events de venue à venue à la place**
-
-  - ~~z-index venue dropdown/date&time mobile:~~
-  - gestion des adresses (adresse, ville, code postal)
+  - transfert d'events de venue à venue en cas de doublons
 
 2. Job nettoyage de DB
 
 3. Modales et pages statiques
-  - ~~à propos~~
-  - ~~contact~~
-    - ~~mailer~~
   - infos sur la précision de la géoloc
   - flash alerts
 
 4. Divers ajustements UX
-  - ~~meilleur time input~~
+  - marges globales
   - affichage mobile
   - datepicker plus petit
   - footer
+  - search, form: gérer l'affichage façon v-cloak
 
-5. ~~Choisir une licence~~
+5. **Mise en prod**
 
-6. ~~routes autorisées pour sessions~~
-
-7. **Mise en prod**
-
-8. Map
+6. Map
   - layout
   - leaflet stylesheets seulement sur layout map
-  - search: datepicker sans l'option range
+  - search: datepicker sans range
 
 ## TODO
 
@@ -66,16 +50,9 @@
 
 - front pour sessions#new
 
-- sous-titre / description
-
-- glitches JS: gérer l'affichage façon v-cloak (search, forms)
-
 - thème sombre
 
 - revoir gestion user
-
-- events#index:
-  - bouton pour revenir en haut de page (?)
 
 - events#unverified:
   - intégrer barre de recherche
@@ -86,11 +63,8 @@
 
 - locationfilter:
   - informer le user au cas où il n'est pas localisé en Loire-Atlantique & de la précision de l'API
-  - input steps: 1,3,5,10,15,20,30
 
-- remplacer les alert() par des jolies modales
-
-- searchbar (général):
+- searchbar:
   - insensible à la casse & accents (e = é = è...)
     - elasticsearch ?
   - lien pour enlever tous les filtres (au niveau de "... résultats")
@@ -98,7 +72,7 @@
   - garder la query string dans l'url (pouvoir bookmark la recherche)
 
 - datepicker:
-  - en faire un projet à part / package NPM
   - prévisualiser la range au hover
+  - package NPM
 
 - beaucoup d'autres choses...
