@@ -44,11 +44,13 @@
     }
   }
 
-  .field_with_errors input {
+  .field_with_errors input,
+  .field_with_errors textarea {
     @apply w-full border-2 border-baro-orange;
   }
 
-  input {
+  input,
+  textarea {
     border: 2px solid var(--color-fgcolor-faded);
     border-radius: var(--radius-sm);
     padding-inline: calc(var(--spacing) * 1.5);

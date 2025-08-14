@@ -32,8 +32,10 @@ Rails.application.routes.draw do
   get :map, to: "events#map"
   get :calendar, to: "events#calendar"
 
-  get :contact, to: "pages#contact"
   get :apropos, to: "pages#about", as: :about
+
+  get :contact, to: "pages#contact"
+  post :contact, to: "pages#contact_form_submit"
 
   namespace :api do
     resources :events, only: %i[index show]

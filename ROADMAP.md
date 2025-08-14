@@ -21,17 +21,19 @@
 2. Job nettoyage de DB
 
 3. Modales et pages statiques
-  - à propos
-  - contact
-    - mailer
+  - ~~à propos~~
+  - ~~contact~~
+    - ~~mailer~~
   - infos sur la précision de la géoloc
+  - flash alerts
 
 4. Divers ajustements UX
   - ~~meilleur time input~~
   - affichage mobile
   - datepicker plus petit
+  - footer
 
-5. Choisir une licence
+5. ~~Choisir une licence~~
 
 6. ~~routes autorisées pour sessions~~
 
@@ -43,6 +45,10 @@
   - search: datepicker sans l'option range
 
 ## TODO
+
+- Nerd Fonts Symbols à la place des svg
+
+- Contact mail: action text
 
 - GeocodeVenueJob: si erreur, attendre quelques secondes et recommencer
 
