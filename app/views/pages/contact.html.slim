@@ -1,30 +1,29 @@
 h2.text-3xl Contact
 
 p
-  | Blablabla toute remarque blabla toute suggestion, blablabla hésitez surtout pas blabla envoyez votre prog si vous êtes un groupe ou un bar blablabla
+  | N'hésitez pas à nous envoyer un message pour toute remarque, suggestion, question...
+  br
+  | N'oubliez pas de donner votre email si vous souhaitez être recontacté !
 
-= form_with scope: :contact_form, url: contact_path, method: :post do |form|
+= form_with model: @contact_form, url: contact_path, method: :post do |form|
 
-  section.bg-card-bg.flex.flex-col.gap-4.p-4.md:rounded-lg
+  section.bg-card-bg.flex.flex-col.gap-8.p-4.md:rounded-lg
 
-    = form.text_field :email,
-      class: "md:w-64",
-      placeholder: "email (optionnel)..."
+    div.flex.gap-2.flex-col.md:flex-row.md:items-center
+      = form.text_field :email,
+        class: "md:w-64",
+        placeholder: "email (optionnel)..."
 
-    = form.text_area :message,
-      class: "h-64",
-      placeholder: "Votre message..."
+      - if @contact_form.errors[:email].any?
+        p.font-source.text-baro-orange.italic.text-sm = @contact_form.errors.full_messages_for(:email).first
 
-    = form.file_field :attachment,
-      class: "hidden",
-      id: "file-upload",
-      data: { controller: "file-upload" }
+    div.flex.gap-2.flex-col
+      = form.text_area :message,
+        class: "h-64",
+        placeholder: "Votre message..."
 
-    div.flex.flex-col.gap-12.justify-center.md:flex-row.md:justify-between.md:items-center
+      - if @contact_form.errors[:message].any?
+        p.font-source.text-baro-orange.italic.text-sm = @contact_form.errors.full_messages_for(:message).first
 
-      = form.label :attachment, "Fichier (optionnel)...",
-        class: "border-3 border-fgcolor-faded rounded-lg text-fgcolor-faded italic text-center md:w-64 hover:border-baro-yellow",
-        for: "file-upload"
-
-      = form.submit "Envoyer",
-        class: "btn btn-plain py-1 px-16 md:self-end md:px-8"
+    = form.submit "Envoyer",
+      class: "btn btn-plain py-1 px-16 md:self-end md:px-8"
