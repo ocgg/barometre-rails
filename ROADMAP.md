@@ -12,10 +12,8 @@
 
 3. Modales et pages statiques
   - infos sur la précision de la géoloc
-  - flash alerts
 
 4. Divers ajustements UX
-  - marges globales
   - affichage mobile
   - datepicker plus petit
   - footer
@@ -23,14 +21,14 @@
 
 5. **Mise en prod**
 
-6. Map
+5. Map
   - layout
   - leaflet stylesheets seulement sur layout map
   - search: datepicker sans range
 
 ## TODO
 
-- Nerd Fonts Symbols à la place des svg
+- `<i>` à la place des svg
 
 - Contact mail: action text
 

@@ -21,7 +21,9 @@ module EventsHelper
   def navbar_btn_color(action)
     if params[:action] == action
       "fill-baro-yellow"
-    elsif action == "menu" && %w[about contact new].include?(params[:action])
+    elsif action == "new" && params[:action] == "create"
+      "fill-baro-yellow"
+    elsif action == "menu" && %w[about contact contact_form_submit].include?(params[:action])
       "fill-baro-yellow"
     else
       "fill-(--light-bg)"

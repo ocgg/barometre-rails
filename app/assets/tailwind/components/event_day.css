@@ -3,7 +3,7 @@
     @apply !rounded-none !overflow-visible;
 
     .day-separator {
-      @apply !block !pl-0 sticky top-0;
+      @apply !block !pl-0 sticky top-0 !rounded-none;
 
       h3 {
         @apply text-center;
