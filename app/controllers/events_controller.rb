@@ -51,6 +51,8 @@ class EventsController < ApplicationController
     valid = @events.map(&:valid?)
     if valid.all?
       @events.each(&:save)
+      flash[:notice] = "Vos événements ont bien été envoyés !"
+      flash[:subtext] = "Ils devront être validés par un admin avant d'être visibles par tout le monde."
       redirect_to root_path
     else
       render :new, status: :unprocessable_entity

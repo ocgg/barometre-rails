@@ -57,7 +57,7 @@
     padding-block: calc(var(--spacing) * 0.5);
     font-family: var(--font-source);
 
-    &:focus {
+    &:focus{
       outline: none;
       border-color: var(--color-baro-yellow);
     }
