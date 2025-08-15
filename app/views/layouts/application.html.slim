@@ -14,9 +14,9 @@ html
     = tag.link rel: "icon", href: "/icon.svg", type: "image/svg+xml"
     = tag.link rel: "apple-touch-icon", href: "/icon.png"
     = stylesheet_link_tag "tailwind", "data-turbo-track": "reload"
-    = stylesheet_link_tag "https://unpkg.com/leaflet@1.9.4/dist/leaflet.css", integrity: "sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=", crossorigin: ""
+    /= stylesheet_link_tag "https://unpkg.com/leaflet@1.9.4/dist/leaflet.css", integrity: "sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=", crossorigin: ""
     = javascript_importmap_tags
-    = javascript_include_tag "https://unpkg.com/leaflet@1.9.4/dist/leaflet.js", integrity: "sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=", crossorigin: ""
+    /= javascript_include_tag "https://unpkg.com/leaflet@1.9.4/dist/leaflet.js", integrity: "sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=", crossorigin: ""
 
   body.pb-14.md:pb-0
     /Banner
@@ -28,19 +28,20 @@ html
 
         = render "shared/navbar"
 
-    main.flex.flex-col.gap-27.max-w-5xl.m-auto.mb-96.mt-27.md:mt-20.md:mb-64.md:gap-20 class="@container"
+    div class="md:px-[2%]"
+      main.flex.flex-col.gap-27.max-w-5xl.m-auto.mb-96.mt-27.md:mt-20.md:mb-64.md:gap-20 class="@container"
 
-      - if %w[index map calendar].include?(params[:action])
+        - if %w[index map calendar].include?(params[:action])
 
-        = turbo_frame_tag :searchform, target: :content
+          = turbo_frame_tag :searchform, target: :content
 
-          search.relative.w-full.max-md:h-43.md:h-10
+            search.relative.w-full.max-md:h-43.md:h-10
 
-            = form_with(class: "absolute w-full flex items-center flex-col max-md:gap-8 md:w-full md:flex-row md:justify-between",
-              method: :get) do |form|
+              = form_with(class: "absolute w-full flex items-center flex-col max-md:gap-8 md:w-full md:flex-row md:justify-between",
+                method: :get) do |form|
 
-              = render "shared/date_filter", form:
-              = render "shared/location_filter", form:
-              = render "shared/search_bar", form:
+                = render "shared/date_filter", form:
+                = render "shared/location_filter", form:
+                = render "shared/search_bar", form:
 
-      = yield
+        = yield
