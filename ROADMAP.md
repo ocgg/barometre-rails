@@ -8,8 +8,6 @@
 1. Venues
   - transfert d'events de venue à venue en cas de doublons
 
-2. Job nettoyage de DB
-
 3. Modales et pages statiques
   - infos sur la précision de la géoloc
 
@@ -18,6 +16,7 @@
   - datepicker plus petit
   - footer
   - search, form: gérer l'affichage façon v-cloak
+  - events#new: empêcher le submit quand on appuie sur entrée
 
 5. **Mise en prod**
 
@@ -28,40 +27,6 @@
 
 ## TODO
 
-- `<i>` à la place des svg
-
-- Contact mail: action text
-
-- GeocodeVenueJob: si erreur, attendre quelques secondes et recommencer
-
-- venues#geocode: spinner & turbo stream
-
-- dates: refacto form, datepicker etc. pour toujours utiliser YYYY-MM-DD
-  - option dateFormat dans datepicker
-
-- FORM:
-  - address autocomplete [API adresses](https://adresse.data.gouv.fr/outils/api-doc/adresse)
-  - code postal dans venue form
-  - ne pas envoyer quand on appuie sur entrée
-
-- refacto CSS (noms de variable, @base, @components, @container...)
-
-- front pour sessions#new
-
-- thème sombre
-
-- revoir gestion user
-
-- events#unverified:
-  - intégrer barre de recherche
-
-- events#new:
-  - option pour supprimer le lieu de la DB après la date de l'événement (par ex. en cas de concert chez l'habitant)
-  - gestion des events récurrents
-
-- locationfilter:
-  - informer le user au cas où il n'est pas localisé en Loire-Atlantique & de la précision de l'API
-
 - searchbar:
   - insensible à la casse & accents (e = é = è...)
     - elasticsearch ?
@@ -69,8 +34,42 @@
   - conserver la recherche d'une page à l'autre
   - garder la query string dans l'url (pouvoir bookmark la recherche)
 
+- locationfilter:
+  - informer le user au cas où il n'est pas localisé en Loire-Atlantique & de la précision de l'API
+
+- CSS/Tailwind:
+  - renommer les variables
+  - refacto
+  - `<i>` à la place des svg
+  - thème sombre
+
+- Contact mail: action text
+
+- Jobs:
+  - geocode & mailer: si erreur, attendre quelques secondes et recommencer
+  - Job nettoyage de DB
+
+- events#new:
+  - address autocomplete [API adresses](https://adresse.data.gouv.fr/outils/api-doc/adresse)
+  - code postal dans venue form
+  - option événements récurents
+  - option concert chez l'habitant
+  - dans ce cas: option pour supprimer le lieu de la DB après l'événement
+
 - datepicker:
+  - toujours utiliser YYYY-MM-DD
+  - option dateFormat dans datepicker
   - prévisualiser la range au hover
   - package NPM
+
+- Backend: revoir gestion user
+
+- Pages admin:
+  - front pour sessions#new
+  - events#unverified: intégrer barre de recherche
+  - venues#geocode: spinner & turbo stream
+
+- Refaire tout l'UI, le plus simple et modulaire possible (Vue/React? ViewComponent?)
+- Config facile pour adapter à d'autres départements (un config/barometre.yml)
 
 - beaucoup d'autres choses...
