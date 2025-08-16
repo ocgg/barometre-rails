@@ -1,9 +1,9 @@
-h2.text-3xl Contact
+h2.text-3xl.pl-10 Contact
 
-p
+p.pl-10
   | N'hésitez pas à nous envoyer un message pour toute remarque, suggestion, question...
   br
-  | N'oubliez pas de donner votre email si vous souhaitez être recontacté !
+  | N'oubliez pas de donner votre email si vous souhaitez être recontacté&nbsp;!
 
 = form_with model: @contact_form, url: contact_path, method: :post do |form|
 

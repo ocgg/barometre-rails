@@ -46,8 +46,8 @@ html
 
         = render "shared/navbar"
 
-    div class="md:px-[2%]"
-      main.flex.flex-col.gap-27.max-w-5xl.m-auto.mb-96.mt-27.md:mt-20.md:mb-64.md:gap-20 class="@container"
+    div.flex.flex-col.items-center class="@container/main"
+      main.flex.flex-col.gap-27.max-w-5xl.w-full.m-auto.mb-96.mt-27.md:mt-20.md:mb-64.md:gap-20 class="md:px-[2%]"
 
         - if %w[index map calendar].include?(params[:action])
 
