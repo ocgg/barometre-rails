@@ -19,7 +19,7 @@
 @layer components {
   .event-day {
     @apply max-md:event-day-sm
-    @max-3xl:event-day-sm;
+    @max-3xl/main:event-day-sm;
 
     .day-separator {
       @apply flex
