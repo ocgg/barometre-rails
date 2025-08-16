@@ -14,7 +14,7 @@ class Venue < ApplicationRecord
   end
 
   def full_address
-    "#{address}, #{city}, Loire-Atlantique, France"
+    "#{address}, #{zipcode} #{city}, France"
   end
 
   def verified? = verified
@@ -35,10 +35,12 @@ class Venue < ApplicationRecord
     possible_duplicates.count > 1
   end
 
-  def in_loire_atlantique?
+  def in_department?
     return nil unless geocoded?
-    # [47.3584, -1.7276] = geographical center of Loire-Atlantique
-    distance_to([47.3584, -1.7276]) < 60
+
+    code = "44"
+    geographical_center = [47.3584, -1.7276] # Loire-Atlantique
+    zipcode.start_with?(code) && distance_to(geographical_center) < 60
   end
 
   class << self
