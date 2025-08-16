@@ -1,9 +1,19 @@
 = fields_for for_params, event do |event_fields|
 
-  article.relative.event-card.gap-4.items-center.p-4.bg-card-bg.md:p-2
+  article.relative.event-card.flex-wrap.gap-4.px-4.pt-2.pb-10.bg-card-bg.md:gap-2
+
+    div.w-full.min-h-4
+      /Trash icon
+      svg.hidden.h-4.fill-fgcolor-faded.hover:fill-fgcolor.hover:cursor-pointer[
+        data-action="click->event-fields#onTrashClick"
+        data-events-form-target="trashIcon"
+        viewBox="0 0 448 512"
+      ]
+        title Supprimer l'événement
+        path d="M135.2 17.7L128 32 32 32C14.3 32 0 46.3 0 64S14.3 96 32 96l384 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-96 0-7.2-14.3C307.4 6.8 296.3 0 284.2 0L163.8 0c-12.1 0-23.2 6.8-28.6 17.7zM416 128L32 128 53.2 467c1.6 25.3 22.6 45 47.9 45l245.8 0c25.3 0 46.3-19.7 47.9-45L416 128z"
 
     /date & time
-    div.w-full.flex.gap-2.mb-8.justify-between.font-quicksand.md:w-auto.md:mb-0.md:flex-col
+    div.w-full.flex.gap-2.mb-8.font-quicksand.md:w-auto.md:mb-0.md:flex-col
 
       /date
       div.relative.whitespace-nowrap[
@@ -29,7 +39,7 @@
 
       /time
       div.px-2 class="max-md:basis-[50%]"
-        div.flex.flex-row-reverse.items-center.gap-2.py-1.md:flex-row
+        div.flex.flex-row-reverse.items-center.gap-2.mt-1.md:flex-row
           svg.w-5.fill-fgcolor viewBox="0 0 512 512": path d="M464 256A208 208 0 1 1 48 256a208 208 0 1 1 416 0zM0 256a256 256 0 1 0 512 0A256 256 0 1 0 0 256zM232 120l0 136c0 8 4 15.5 10.7 20l96 64c11 7.4 25.9 4.4 33.3-6.7s4.4-25.9-6.7-33.3L280 243.2 280 120c0-13.3-10.7-24-24-24s-24 10.7-24 24z"
           div.flex
             = event_fields.hidden_field :time, data: {event_fields_target: "time"}
@@ -52,9 +62,11 @@
                 action: "event-fields#onTimeInputChange"}
 
     /name & description
-    div.flex.flex-col.w-full.gap-8 class="md:gap-1 md:flex-row md:flex-[2_0] md:items-center md:justify-between md:px-1 md:py-3"
+    div.flex.flex-col.w-full.gap-8.md:flex-row.md:gap-1[
+      class="md:flex-[2_0] md:justify-between"
+    ]
 
-      div.name-desc-ctn.flex.flex-col.gap-4.md:gap-2.p-0
+      div.name-desc-ctn.flex.flex-col.gap-2.p-0
 
         = event_fields.text_field :name,
           class: "name w-full",
@@ -71,16 +83,7 @@
           event_fields:,
           for_params: for_params == @event ? "event[venue_attributes]" : "events[][venue_attributes]"
 
-      div.self-center
+      div
         = event_fields.text_field :tarif,
           class: "w-full :disabled",
           placeholder: "Tarif (optionnel)"
-
-    /Trash icon
-    svg.hidden.absolute.max-md:bottom-6.right-6.md:top-2.md:right-2.h-4.fill-fgcolor-faded.self-end.hover:fill-fgcolor.hover:cursor-pointer[
-      data-action="click->event-fields#onTrashClick"
-      data-events-form-target="trashIcon"
-      viewBox="0 0 448 512"
-    ]
-      path d="M135.2 17.7L128 32 32 32C14.3 32 0 46.3 0 64S14.3 96 32 96l384 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-96 0-7.2-14.3C307.4 6.8 296.3 0 284.2 0L163.8 0c-12.1 0-23.2 6.8-28.6 17.7zM416 128L32 128 53.2 467c1.6 25.3 22.6 45 47.9 45l245.8 0c25.3 0 46.3-19.7 47.9-45L416 128z"
-
