@@ -2,12 +2,16 @@ import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
   connect() {
-    var map = L.map('map').setView([47.216671, -1.55], 13);
+    var map = L.map('map', {
+      zoomControl: false,
+    }).setView([47.216671, -1.55], 13);
 
     L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
       maxZoom: 19,
       attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
     }).addTo(map);
+
+    L.control.zoom({position: "bottomright"}).addTo(map);
 
     const url = "/api/venues";
     const opts = { headers: { "Accept": "application/json" } };
@@ -16,8 +20,8 @@ export default class extends Controller {
       .then((data => {
         data.forEach(venue => {
           L.marker([venue.latitude, venue.longitude])
+            .bindPopup(`<b>${venue.name}</b><br>${venue.address}`)
             .addTo(map)
-            .bindPopup(`<b>${venue.name}</b><br>${venue.address}`);
         });
       }));
   }

@@ -15,6 +15,7 @@ class EventsController < ApplicationController
   end
 
   def map
+    render layout: "layouts/map"
   end
 
   def calendar

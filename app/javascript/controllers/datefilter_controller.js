@@ -10,12 +10,16 @@ export default class extends Controller {
     "clearInputBtn",
   ]
 
+  static values = {
+    range: Boolean,
+  }
+
   connect() {
-    const opts = { autosubmit: true, range: true }
-    this.datepicker = new Datepicker(this.datepickerContainerTarget, opts);
+    this.opts = { autosubmit: true, range: this.rangeValue }
+    this.datepicker = new Datepicker(this.datepickerContainerTarget, this.opts);
 
     this.datepicker.elts.startInput.dataset.action = "change->datefilter#onStartDateSelection"
-    this.datepicker.elts.endInput.dataset.action = "change->datefilter#onEndDateSelection"
+    if (this.opts.range) this.datepicker.elts.endInput.dataset.action = "change->datefilter#onEndDateSelection"
 
     this.containerClass = "bg-card-bg";
     this.mainContainerTarget.classList.toggle(this.containerClass, this.datepicker.active);
@@ -44,8 +48,14 @@ export default class extends Controller {
 
     const date = new Date(event.target.value);
     this.startDateString = this.readableStringFrom(date);
-    this.buttonTarget.textContent = `${this.startDateString} ➞ ...`;
-    this.clearInputBtnTarget.classList.toggle("hidden", false)
+    this.buttonTarget.textContent = this.startDateString;
+    if (this.opts.range) {
+      this.buttonTarget.textContent += " ➞ ...";
+    }
+    else {
+      this.setVisible(false)
+    }
+    this.clearInputBtnTarget.classList.toggle("hidden", false);
   }
 
   onEndDateSelection(event) {

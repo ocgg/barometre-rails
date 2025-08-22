@@ -1,9 +1,10 @@
 = turbo_frame_tag :content
 
-  section#events_days_container class="flex flex-col gap-27 md:gap-20"
+  section#events_days_container.flex.flex-col.gap-27.md:gap-20
 
     - if @pagy.count.zero?
-      p.text-center.text-xl Aucun résultat
+        p.text-center.text-xl Aucun résultat
+
     - elsif request.query_parameters.compact_blank.any?
       p.-mt-13.-mb-13.text-center
         |> #{@pagy.count} résultat#{"s" if @pagy.count > 1} -

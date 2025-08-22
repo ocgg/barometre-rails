@@ -1,41 +1,11 @@
 doctype html
 html
   head
-    title = content_for(:title) || "Barometre Rails"
-    meta[name="viewport" content="width=device-width,initial-scale=1"]
-    meta[name="apple-mobile-web-app-capable" content="yes"]
-    meta[name="mobile-web-app-capable" content="yes"]
-    = csrf_meta_tags
-    = csp_meta_tag
-    = yield :head
-    /Enable PWA manifest for installable apps (make sure to enable in config/routes.rb too!)
-    /= tag.link rel: "manifest", href: pwa_manifest_path(format: :json)
-    = tag.link rel: "icon", href: "/icon.png", type: "image/png"
-    = tag.link rel: "icon", href: "/icon.svg", type: "image/svg+xml"
-    = tag.link rel: "apple-touch-icon", href: "/icon.png"
-    = stylesheet_link_tag "tailwind", "data-turbo-track": "reload"
-    /= stylesheet_link_tag "https://unpkg.com/leaflet@1.9.4/dist/leaflet.css", integrity: "sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=", crossorigin: ""
-    = javascript_importmap_tags
-    /= javascript_include_tag "https://unpkg.com/leaflet@1.9.4/dist/leaflet.js", integrity: "sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=", crossorigin: ""
+    = render "layouts/head"
 
   body.pb-14.md:pb-0
 
-    - if flash[:notice]
-      dialog.m-auto.z-1001.group[
-        class="backdrop:bg-[black]/20 bg-transparent"
-        closedby="any"
-        data-controller="flashes"
-      ]
-        form method="dialog"
-          button.flex.flex-col.gap-4.px-4.py-4.md:px-8.bg-card-bg.rounded-xl.outline-none
-            p.text-fgcolor
-              = flash[:notice]
-            svg.h-12.fill-fgcolor.group-has-hover:fill-baro-yellow viewBox="0 0 640 640": path d="M320 112C434.9 112 528 205.1 528 320C528 434.9 434.9 528 320 528C205.1 528 112 434.9 112 320C112 205.1 205.1 112 320 112zM320 576C461.4 576 576 461.4 576 320C576 178.6 461.4 64 320 64C178.6 64 64 178.6 64 320C64 461.4 178.6 576 320 576zM404.4 276.7C411.4 265.5 408 250.7 396.8 243.6C385.6 236.5 370.8 240 363.7 251.2L302.3 349.5L275.3 313.5C267.3 302.9 252.3 300.7 241.7 308.7C231.1 316.7 228.9 331.7 236.9 342.3L284.9 406.3C289.6 412.6 297.2 416.2 305.1 415.9C313 415.6 320.2 411.4 324.4 404.6L404.4 276.6z"
-            div
-              p.text-fgcolor.text-sm.font-source
-                = flash[:subtext]
-              p.text-fgcolor-faded.text-sm.italic.font-source
-                | Cliquez n'importe où pour fermer
+    = render "shared/flashes"
 
     /Banner
     div.bg-fgcolor class="md:px-[2%]"
@@ -53,7 +23,7 @@ html
 
           = turbo_frame_tag :searchform, target: :content
 
-            search.relative.w-full.max-md:h-43.md:h-10
+            search.relative.w-full.h-43.md:h-10
 
               = form_with(class: "absolute w-full flex items-center flex-col max-md:gap-8 md:w-full md:flex-row md:justify-between",
                 method: :get) do |form|
