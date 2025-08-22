@@ -54,6 +54,7 @@ export default class extends Controller {
     const date = this.datepicker.dates.end;
     this.endDateString = this.readableStringFrom(date);
     this.buttonTarget.textContent = `${this.startDateString} ➞ ${this.endDateString}`;
+    this.setVisible(false);
   }
 
   readableStringFrom(date) {
