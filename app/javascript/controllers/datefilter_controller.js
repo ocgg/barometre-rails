@@ -42,7 +42,7 @@ export default class extends Controller {
   onStartDateSelection(event) {
     if (!event.target.value) return;
 
-    const date = new Date(event.target.value);
+    const date = this.datepicker.dates.start;
     this.startDateString = this.readableStringFrom(date);
     this.buttonTarget.textContent = `${this.startDateString} ➞ ...`;
     this.clearInputBtnTarget.classList.toggle("hidden", false)
@@ -51,9 +51,10 @@ export default class extends Controller {
   onEndDateSelection(event) {
     if (!event.target.value) return;
 
-    const date = new Date(event.target.value);
+    const date = this.datepicker.dates.end;
     this.endDateString = this.readableStringFrom(date);
     this.buttonTarget.textContent = `${this.startDateString} ➞ ${this.endDateString}`;
+    this.setVisible(false);
   }
 
   readableStringFrom(date) {
