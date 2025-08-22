@@ -35,8 +35,8 @@ export default class Datepicker {
 
   selectDate(event) {
     event.stopPropagation();
-
-    const selectedDate = new Date(event.currentTarget.dataset.date);
+    const [day, month, year] = event.currentTarget.dataset.date.split('-');
+    const selectedDate = new Date(year, month - 1, day);
     if (this.config.range) this.#rangeDateSelect(selectedDate);
     else this.#singleDateSelect(selectedDate);
   }

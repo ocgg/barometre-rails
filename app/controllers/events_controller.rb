@@ -121,8 +121,7 @@ class EventsController < ApplicationController
 
   def set_event_attributes(attr)
     if attr[:date]
-      m_d_y = attr[:date].split("-").map(&:to_i)
-      attr[:date] = Date.new(m_d_y[2], m_d_y[0], m_d_y[1])
+      attr[:date] = Date.strptime(attr[:date], "%d-%m-%Y")
     end
     if attr[:time]
       attr[:time] = Time.zone.parse(attr[:time])
