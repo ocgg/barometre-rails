@@ -31,7 +31,7 @@ class Event < ApplicationRecord
 
   def formatted_time = time.strftime("%Hh%M")
 
-  def js_parsable_date = date.strftime("%m-%d-%Y")
+  def js_parsable_date = date.strftime("%d-%m-%Y")
 
   def js_parsable_time = time.strftime("%H:%M")
 
@@ -48,6 +48,7 @@ class Event < ApplicationRecord
   class << self
     def filter_unverified_with_params(params)
       return unverified_upcoming unless params.present?
+
       filtered = unverified_upcoming
       filtered = filtered.filter_by_dates(params) if params[:start]
       filtered = filtered.filter_by_position(params) if params[:radius]
@@ -57,6 +58,7 @@ class Event < ApplicationRecord
 
     def filter_with_params(params)
       return self unless params.present?
+
       filtered = self
       filtered = filter_by_dates(params) if params[:start]
       filtered = filtered.filter_by_position(params) if params[:radius]
@@ -65,8 +67,8 @@ class Event < ApplicationRecord
     end
 
     def filter_by_dates(params)
-      start_date = Date.strptime(params[:start], "%m-%d-%Y")
-      end_date = params[:end].present? ? Date.strptime(params[:end], "%m-%d-%Y") : start_date
+      start_date = Date.strptime(params[:start], "%d-%m-%Y")
+      end_date = params[:end].present? ? Date.strptime(params[:end], "%d-%m-%Y") : start_date
       between(start_date, end_date)
     end
 

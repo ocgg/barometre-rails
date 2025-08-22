@@ -60,14 +60,10 @@ export default class extends Controller {
   onDateSelection(event) {
     if (!event.target.value) return;
 
-    this.startValue = this.dateStringToYYYYMMDD(event.target.value);
-    const date = new Date(event.target.value);
+    const [day, month, year] = event.target.value.split('-');
+    const date = new Date(year, month - 1, day);
     this.dateTarget.textContent = this.readableStringFrom(date);
-  }
-
-  dateStringToYYYYMMDD(str) {
-    const mdy = str.split("-");
-    return `${mdy[2]}-${mdy[0]}-${mdy[1]}`;
+    this.setDatepickerVisible(false);
   }
 
   readableStringFrom(date) {
