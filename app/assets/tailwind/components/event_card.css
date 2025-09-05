@@ -1,7 +1,7 @@
 @layer components {
   .event-card {
     @apply flex
-    text-fgcolor font-source;
+    text-blue font-paragraph;
 
     .event-card-main {
       @apply flex gap-1
@@ -12,11 +12,11 @@
       @apply flex-[0_1_45%] p-1 overflow-hidden;
 
       .name {
-        @apply font-lato text-xl
+        @apply font-title text-xl
         text-ellipsis overflow-hidden whitespace-nowrap;
       }
       .description {
-        @apply text-sm italic text-fgcolor-faded
+        @apply text-sm italic text-blue-faded
         text-ellipsis overflow-hidden whitespace-nowrap;
       }
     }
@@ -52,7 +52,7 @@
 
       .sm-hour {
         @apply flex items-center justify-between
-        text-fgcolor-faded;
+        text-blue-faded;
       }
 
       .venue-name-address-ctn {
@@ -78,8 +78,8 @@
       .md-hour {
         @apply flex items-center justify-center
         w-12
-        font-quicksand font-bold
-        bg-fgcolor text-bgcolor;
+        font-base font-bold
+        bg-blue text-bg-light;
       }
 
       .event-card-main {
@@ -104,7 +104,7 @@
       }
 
       .md-venue-address {
-        @apply text-fgcolor-faded underline decoration-dotted
+        @apply text-blue-faded underline decoration-dotted
         text-ellipsis overflow-hidden whitespace-nowrap;
       }
 
@@ -120,7 +120,7 @@
         p-1;
 
         p {
-          @apply italic text-fgcolor-faded
+          @apply italic text-blue-faded
           text-ellipsis overflow-hidden whitespace-nowrap;
         }
       }

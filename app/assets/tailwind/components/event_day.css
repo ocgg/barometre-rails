@@ -24,12 +24,12 @@
     .day-separator {
       @apply flex
       mb-1 pl-14 py-1.5
-      bg-fgcolor
+      bg-blue
       rounded-t-lg;
 
       h3 {
         @apply flex-[1_0_44.5%]
-        text-bgcolor text-lg font-bold;
+        text-bg-light text-lg font-bold;
       }
     }
 
@@ -37,7 +37,7 @@
       @apply flex items-center flex-[0_1_55.5%];
 
       svg {
-        @apply h-5 fill-bgcolor;
+        @apply h-5 fill-bg-light;
       }
     }
 

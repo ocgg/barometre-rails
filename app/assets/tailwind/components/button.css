@@ -3,7 +3,7 @@
     --btn-padding-x: calc(var(--spacing) * 3);
 
     height: fit-content;
-    border: 3px solid var(--color-fgcolor);
+    border: 3px solid var(--color-blue);
     border-radius: var(--radius-lg);
     line-height: var(--tw-leading), var(--text-lg--line-height);
     padding-inline: var(--btn-padding-x);
@@ -29,16 +29,16 @@
     &:hover,
     &:has(input:checked):hover {
       outline: none;
-      border-color: var(--color-baro-yellow);
+      border-color: var(--color-yellow);
     }
 
     &:has(input:checked) {
-      color: var(--color-bgcolor);
-      background-color: var(--color-fgcolor);
+      color: var(--color-bg-light);
+      background-color: var(--color-blue);
     }
   }
 
   .btn-plain {
-    @apply bg-fgcolor text-baro-yellow font-quicksand;
+    @apply bg-blue text-yellow font-base;
   }
 }

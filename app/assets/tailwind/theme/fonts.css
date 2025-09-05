@@ -25,7 +25,7 @@
 
 @theme {
   --font-*: initial;
-  --font-quicksand: Quicksand;
-  --font-lato: Lato;
-  --font-source: "Source Sans 3";
+  --font-base: Quicksand;
+  --font-title: Lato;
+  --font-paragraph: "Source Sans 3";
 }

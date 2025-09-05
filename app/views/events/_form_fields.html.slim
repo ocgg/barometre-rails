@@ -1,10 +1,10 @@
 = fields_for for_params, event do |event_fields|
 
-  article.px-12.pb-12.bg-card-bg.md:pb-8.md:px-4
+  article.px-12.pb-12.bg-white.md:pb-8.md:px-4
 
     div.min-h-12.p-4.pl-2.md:min-h-8.md:p-2
       /Trash icon
-      svg.hidden.h-4.fill-fgcolor-faded.hover:fill-fgcolor.hover:cursor-pointer[
+      svg.hidden.h-4.fill-blue-faded.hover:fill-blue.hover:cursor-pointer[
         data-action="click->event-fields#onTrashClick"
         data-events-form-target="trashIcon"
         viewBox="0 0 448 512"
@@ -15,7 +15,7 @@
     div.relative.flex.flex-col.gap-12.sm:flex-row.sm:gap-2
 
       /date & time
-      div.w-full.flex.gap-2.font-quicksand.md:w-auto.md:mb-0.md:flex-col
+      div.w-full.flex.gap-2.font-base.md:w-auto.md:mb-0.md:flex-col
 
         /date
         div.relative.whitespace-nowrap[
@@ -23,8 +23,8 @@
           data-event-fields-target="datepickerShadow"
           data-action="click@window->event-fields#handleDatepickerFocusOut"
         ]
-          div.btn.px-2.absolute.w-full.min-w-fit.bg-fgcolor.text-bgcolor[
-            class=("border-baro-orange" if event.errors[:date].present?)
+          div.btn.px-2.absolute.w-full.min-w-fit.bg-blue.text-bg-light[
+            class=("border-orange" if event.errors[:date].present?)
             data-event-fields-target="datepickerBtn"
             data-events-form-target="datepickerBtn"
           ]
@@ -33,7 +33,7 @@
               data-event-fields-target="iconsContainer"
             ]
               div.flex.gap-2.items-center
-                svg.w-4.fill-bgcolor data-event-fields-target="svg" viewBox="0 0 448 512": path d="M128 0c17.7 0 32 14.3 32 32l0 32 128 0 0-32c0-17.7 14.3-32 32-32s32 14.3 32 32l0 32 48 0c26.5 0 48 21.5 48 48l0 48L0 160l0-48C0 85.5 21.5 64 48 64l48 0 0-32c0-17.7 14.3-32 32-32zM0 192l448 0 0 272c0 26.5-21.5 48-48 48L48 512c-26.5 0-48-21.5-48-48L0 192zm64 80l0 32c0 8.8 7.2 16 16 16l32 0c8.8 0 16-7.2 16-16l0-32c0-8.8-7.2-16-16-16l-32 0c-8.8 0-16 7.2-16 16zm128 0l0 32c0 8.8 7.2 16 16 16l32 0c8.8 0 16-7.2 16-16l0-32c0-8.8-7.2-16-16-16l-32 0c-8.8 0-16 7.2-16 16zm144-16c-8.8 0-16 7.2-16 16l0 32c0 8.8 7.2 16 16 16l32 0c8.8 0 16-7.2 16-16l0-32c0-8.8-7.2-16-16-16l-32 0zM64 400l0 32c0 8.8 7.2 16 16 16l32 0c8.8 0 16-7.2 16-16l0-32c0-8.8-7.2-16-16-16l-32 0c-8.8 0-16 7.2-16 16zm144-16c-8.8 0-16 7.2-16 16l0 32c0 8.8 7.2 16 16 16l32 0c8.8 0 16-7.2 16-16l0-32c0-8.8-7.2-16-16-16l-32 0zm112 16l0 32c0 8.8 7.2 16 16 16l32 0c8.8 0 16-7.2 16-16l0-32c0-8.8-7.2-16-16-16l-32 0c-8.8 0-16 7.2-16 16z"
+                svg.w-4.fill-bg-light data-event-fields-target="svg" viewBox="0 0 448 512": path d="M128 0c17.7 0 32 14.3 32 32l0 32 128 0 0-32c0-17.7 14.3-32 32-32s32 14.3 32 32l0 32 48 0c26.5 0 48 21.5 48 48l0 48L0 160l0-48C0 85.5 21.5 64 48 64l48 0 0-32c0-17.7 14.3-32 32-32zM0 192l448 0 0 272c0 26.5-21.5 48-48 48L48 512c-26.5 0-48-21.5-48-48L0 192zm64 80l0 32c0 8.8 7.2 16 16 16l32 0c8.8 0 16-7.2 16-16l0-32c0-8.8-7.2-16-16-16l-32 0c-8.8 0-16 7.2-16 16zm128 0l0 32c0 8.8 7.2 16 16 16l32 0c8.8 0 16-7.2 16-16l0-32c0-8.8-7.2-16-16-16l-32 0c-8.8 0-16 7.2-16 16zm144-16c-8.8 0-16 7.2-16 16l0 32c0 8.8 7.2 16 16 16l32 0c8.8 0 16-7.2 16-16l0-32c0-8.8-7.2-16-16-16l-32 0zM64 400l0 32c0 8.8 7.2 16 16 16l32 0c8.8 0 16-7.2 16-16l0-32c0-8.8-7.2-16-16-16l-32 0c-8.8 0-16 7.2-16 16zm144-16c-8.8 0-16 7.2-16 16l0 32c0 8.8 7.2 16 16 16l32 0c8.8 0 16-7.2 16-16l0-32c0-8.8-7.2-16-16-16l-32 0zm112 16l0 32c0 8.8 7.2 16 16 16l32 0c8.8 0 16-7.2 16-16l0-32c0-8.8-7.2-16-16-16l-32 0c-8.8 0-16 7.2-16 16z"
                 span.text-lg data-event-fields-target="date"
                   = event.date ? event.formatted_numeric_date : "Date"
             /datepicker
@@ -42,7 +42,7 @@
         /time
         div.px-2 class="max-md:basis-[50%]"
           div.flex.flex-row-reverse.items-center.gap-2.mt-1.md:flex-row
-            svg.w-5.fill-fgcolor viewBox="0 0 512 512": path d="M464 256A208 208 0 1 1 48 256a208 208 0 1 1 416 0zM0 256a256 256 0 1 0 512 0A256 256 0 1 0 0 256zM232 120l0 136c0 8 4 15.5 10.7 20l96 64c11 7.4 25.9 4.4 33.3-6.7s4.4-25.9-6.7-33.3L280 243.2 280 120c0-13.3-10.7-24-24-24s-24 10.7-24 24z"
+            svg.w-5.fill-blue viewBox="0 0 512 512": path d="M464 256A208 208 0 1 1 48 256a208 208 0 1 1 416 0zM0 256a256 256 0 1 0 512 0A256 256 0 1 0 0 256zM232 120l0 136c0 8 4 15.5 10.7 20l96 64c11 7.4 25.9 4.4 33.3-6.7s4.4-25.9-6.7-33.3L280 243.2 280 120c0-13.3-10.7-24-24-24s-24 10.7-24 24z"
             div.flex
               = event_fields.hidden_field :time, data: {event_fields_target: "time"}
               = text_field_tag nil, nil,
@@ -50,7 +50,7 @@
                 inputmode: "numeric", pattern: "[0-1]?[0-9]|2[0-3]",
                 placeholder: "00",
                 value: format_with_two_digits(event.time&.hour),
-                class: "w-9 py-0 font-quicksand border-1 text-right placeholder:not-italic #{"border-baro-orange" if event.errors[:time].present?}",
+                class: "w-9 py-0 font-base border-1 text-right placeholder:not-italic #{"border-orange" if event.errors[:time].present?}",
                 data: {event_fields_target: "hour",
                   action: "event-fields#onHoursChange event-fields#onTimeInputChange"}
               span.px-1 h
@@ -59,18 +59,18 @@
                 inputmode: "numeric", pattern: "[0-5]?[0-9]",
                 placeholder: "00",
                 value: format_with_two_digits(event.time&.min),
-                class: "w-9 py-0 font-quicksand border-1 placeholder:not-italic #{"border-baro-orange" if event.errors[:time].present?}",
+                class: "w-9 py-0 font-base border-1 placeholder:not-italic #{"border-orange" if event.errors[:time].present?}",
                 data: {event_fields_target: "minute",
                   action: "event-fields#onTimeInputChange"}
 
       div.flex.flex-col.gap-2.p-0.grow
 
         = event_fields.text_field :name,
-          class: "font-lato text-xl text-ellipsis overflow-hidden whitespace-nowrap w-full",
+          class: "font-title text-xl text-ellipsis overflow-hidden whitespace-nowrap w-full",
           placeholder: "Nom de l'artiste ou de l'événement"
 
         = event_fields.text_field :description,
-          class: "w-full text-sm italic text-fgcolor-faded text-ellipsis overflow-hidden whitespace-nowrap",
+          class: "w-full text-sm italic text-blue-faded text-ellipsis overflow-hidden whitespace-nowrap",
           placeholder: "(Opt.) Courte description, infos complémentaires..."
 
       div.name-desc-ctn

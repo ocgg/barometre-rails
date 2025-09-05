@@ -1,7 +1,7 @@
 nav.flex.justify-between[
   data-controller="navbar"
   data-action="click@window->navbar#handleFocusOut"
-  class="fixed z-1000 bottom-0 gap-4 w-screen px-[7vw] bg-fgcolor md:w-full md:pr-0 md:pl-24 py-4 md:static"
+  class="fixed z-1000 bottom-0 gap-4 w-screen px-[7vw] bg-blue md:w-full md:pr-0 md:pl-24 py-4 md:static"
 ]
   ul.flex.grow.items-center.md:gap-12 class="gap-[7vw]"
     - if current_user.admin?
@@ -45,11 +45,11 @@ nav.flex.justify-between[
     /dropdown menu
     ul[
       data-navbar-target="dropdown"
-      class="hidden fixed bottom-18 right-0 w-full flex-col-reverse gap-2 items-center p-2 bg-card-bg text-xl md:flex-col md:items-end md:absolute md:min-w-3xs md:rounded-b-xl md:top-14 md:bottom-auto"
+      class="hidden fixed bottom-18 right-0 w-full flex-col-reverse gap-2 items-center p-2 bg-white text-xl md:flex-col md:items-end md:absolute md:min-w-3xs md:rounded-b-xl md:top-14 md:bottom-auto"
     ]
-      li.hover:text-baro-yellow = link_to "Proposer un concert", new_event_path
-      li.hover:text-baro-yellow = link_to "À propos", about_path
-      li.hover:text-baro-yellow = link_to "Contact", contact_path
+      li.hover:text-yellow = link_to "Proposer un concert", new_event_path
+      li.hover:text-yellow = link_to "À propos", about_path
+      li.hover:text-yellow = link_to "Contact", contact_path
       - if current_user.admin?
-        li.hover:text-baro-yellow
+        li.hover:text-yellow
           = button_to "Déconnexion admin", session_path, method: :delete, data: {turbo: false}

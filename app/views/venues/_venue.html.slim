@@ -1,54 +1,54 @@
 = turbo_frame_tag venue
 
-  article.flex.flex-col.p-2.gap-8.items-center.md:flex-row class=(venue.verified ? "odd:bg-card-bg" : "bg-baro-yellow-faded !text-fgcolor-faded")
+  article.flex.flex-col.p-2.gap-8.items-center.md:flex-row class=(venue.verified ? "bg-white" : "bg-yellow-faded !text-blue-faded")
     
     - if policy(venue).edit?
       div.flex.flex-row-reverse.gap-8.justify-around.items-center.md:flex-col.md:gap-1
         div.flex.gap-2.basis-8.items-center
           /edit icon
           = link_to edit_venue_path(venue), title: "Modifier le lieu", data: {turbo_frame: dom_id(venue, :edit)}
-            svg.h-5.fill-fgcolor-faded.hover:fill-fgcolor viewBox="0 0 512 512": path d="M471.6 21.7c-21.9-21.9-57.3-21.9-79.2 0L362.3 51.7l97.9 97.9 30.1-30.1c21.9-21.9 21.9-57.3 0-79.2L471.6 21.7zm-299.2 220c-6.1 6.1-10.8 13.6-13.5 21.9l-29.6 88.8c-2.9 8.6-.6 18.1 5.8 24.6s15.9 8.7 24.6 5.8l88.8-29.6c8.2-2.7 15.7-7.4 21.9-13.5L437.7 172.3 339.7 74.3 172.4 241.7zM96 64C43 64 0 107 0 160L0 416c0 53 43 96 96 96l256 0c53 0 96-43 96-96l0-96c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 96c0 17.7-14.3 32-32 32L96 448c-17.7 0-32-14.3-32-32l0-256c0-17.7 14.3-32 32-32l96 0c17.7 0 32-14.3 32-32s-14.3-32-32-32L96 64z"
+            svg.h-5.fill-blue-faded.hover:fill-blue viewBox="0 0 512 512": path d="M471.6 21.7c-21.9-21.9-57.3-21.9-79.2 0L362.3 51.7l97.9 97.9 30.1-30.1c21.9-21.9 21.9-57.3 0-79.2L471.6 21.7zm-299.2 220c-6.1 6.1-10.8 13.6-13.5 21.9l-29.6 88.8c-2.9 8.6-.6 18.1 5.8 24.6s15.9 8.7 24.6 5.8l88.8-29.6c8.2-2.7 15.7-7.4 21.9-13.5L437.7 172.3 339.7 74.3 172.4 241.7zM96 64C43 64 0 107 0 160L0 416c0 53 43 96 96 96l256 0c53 0 96-43 96-96l0-96c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 96c0 17.7-14.3 32-32 32L96 448c-17.7 0-32-14.3-32-32l0-256c0-17.7 14.3-32 32-32l96 0c17.7 0 32-14.3 32-32s-14.3-32-32-32L96 64z"
           /trash icon
           = link_to venue_path(venue),
             class: "h-fit",
             title: "❌ Supprimer le lieu",
             data: {turbo_method: :delete, turbo_confirm: "Supprimer ce lieu ?\n#{venue.events.count} événements associés seront supprimés:#{venue.events.map{|e| "#{e.name}"}}"}
-            svg.h-4.fill-fgcolor-faded.hover:fill-fgcolor viewBox="0 0 448 512": path d="M135.2 17.7L128 32 32 32C14.3 32 0 46.3 0 64S14.3 96 32 96l384 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-96 0-7.2-14.3C307.4 6.8 296.3 0 284.2 0L163.8 0c-12.1 0-23.2 6.8-28.6 17.7zM416 128L32 128 53.2 467c1.6 25.3 22.6 45 47.9 45l245.8 0c25.3 0 46.3-19.7 47.9-45L416 128z"
+            svg.h-4.fill-blue-faded.hover:fill-blue viewBox="0 0 448 512": path d="M135.2 17.7L128 32 32 32C14.3 32 0 46.3 0 64S14.3 96 32 96l384 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-96 0-7.2-14.3C307.4 6.8 296.3 0 284.2 0L163.8 0c-12.1 0-23.2 6.8-28.6 17.7zM416 128L32 128 53.2 467c1.6 25.3 22.6 45 47.9 45l245.8 0c25.3 0 46.3-19.7 47.9-45L416 128z"
           - if venue.unverified?
             /confirm icon
             = link_to verify_venue_path(venue),
               class: "h-fit",
               title: "✅ Valider le lieu",
               data: {turbo_method: :patch}
-              svg.h-5.fill-fgcolor-faded.hover:fill-fgcolor viewBox="0 0 512 512": path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"
+              svg.h-5.fill-blue-faded.hover:fill-blue viewBox="0 0 512 512": path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"
         /warnings
         div.flex.gap-2.basis-8
           - if venue.possible_duplicate?
             div title="⚠️ Doublon possible (nom ou proximité)"
-              svg.h-5.fill-baro-orange viewBox="0 0 512 512": path d="M288 448L64 448l0-224 64 0 0-64-64 0c-35.3 0-64 28.7-64 64L0 448c0 35.3 28.7 64 64 64l224 0c35.3 0 64-28.7 64-64l0-64-64 0 0 64zm-64-96l224 0c35.3 0 64-28.7 64-64l0-224c0-35.3-28.7-64-64-64L224 0c-35.3 0-64 28.7-64 64l0 224c0 35.3 28.7 64 64 64z"
+              svg.h-5.fill-orange viewBox="0 0 512 512": path d="M288 448L64 448l0-224 64 0 0-64-64 0c-35.3 0-64 28.7-64 64L0 448c0 35.3 28.7 64 64 64l224 0c35.3 0 64-28.7 64-64l0-64-64 0 0 64zm-64-96l224 0c35.3 0 64-28.7 64-64l0-224c0-35.3-28.7-64-64-64L224 0c-35.3 0-64 28.7-64 64l0 224c0 35.3 28.7 64 64 64z"
           - unless venue.geocoded?
               = link_to geocode_venue_path(venue),
                 class: "h-fit",
                 title: "❌ Pas géocodé. Cliquer pour recalculer les coordonnées à partir de l'adresse",
                 data: {turbo_method: :post, turbo_confirm: "Le geocoding est asynchrone: rechargez la page dans quelques secondes pour voir le résultat"}
-                svg.h-5.fill-baro-orange viewBox="0 0 640 512": path d="M38.8 5.1C28.4-3.1 13.3-1.2 5.1 9.2S-1.2 34.7 9.2 42.9l592 464c10.4 8.2 25.5 6.3 33.7-4.1s6.3-25.5-4.1-33.7L481.4 352c9.8-.4 18.9-5.3 24.6-13.3c6-8.3 7.7-19.1 4.4-28.8l-1-3c-13.8-41.5-42.8-74.8-79.5-94.7L418.5 64 448 64c17.7 0 32-14.3 32-32s-14.3-32-32-32L192 0c-17.7 0-32 14.3-32 32s14.3 32 32 32l29.5 0-6.1 79.5L38.8 5.1zM324.9 352L177.1 235.6c-20.9 18.9-37.2 43.3-46.5 71.3l-1 3c-3.3 9.8-1.6 20.5 4.4 28.8s15.7 13.3 26 13.3l164.9 0zM288 384l0 96c0 17.7 14.3 32 32 32s32-14.3 32-32l0-96-64 0z"
+                svg.h-5.fill-orange viewBox="0 0 640 512": path d="M38.8 5.1C28.4-3.1 13.3-1.2 5.1 9.2S-1.2 34.7 9.2 42.9l592 464c10.4 8.2 25.5 6.3 33.7-4.1s6.3-25.5-4.1-33.7L481.4 352c9.8-.4 18.9-5.3 24.6-13.3c6-8.3 7.7-19.1 4.4-28.8l-1-3c-13.8-41.5-42.8-74.8-79.5-94.7L418.5 64 448 64c17.7 0 32-14.3 32-32s-14.3-32-32-32L192 0c-17.7 0-32 14.3-32 32s14.3 32 32 32l29.5 0-6.1 79.5L38.8 5.1zM324.9 352L177.1 235.6c-20.9 18.9-37.2 43.3-46.5 71.3l-1 3c-3.3 9.8-1.6 20.5 4.4 28.8s15.7 13.3 26 13.3l164.9 0zM288 384l0 96c0 17.7 14.3 32 32 32s32-14.3 32-32l0-96-64 0z"
           - if venue.geocoded? && !venue.in_department?
             div title= "❌ Pas en Loire-Atlantique"
-              svg.h-5.fill-baro-orange viewBox="0 0 640 512": path d="M381 114.9L186.1 41.8c-16.7-6.2-35.2-5.3-51.1 2.7L89.1 67.4C78 73 77.2 88.5 87.6 95.2l146.9 94.5L136 240 77.8 214.1c-8.7-3.9-18.8-3.7-27.3 .6L18.3 230.8c-9.3 4.7-11.8 16.8-5 24.7l73.1 85.3c6.1 7.1 15 11.2 24.3 11.2l137.7 0c5 0 9.9-1.2 14.3-3.4L535.6 212.2c46.5-23.3 82.5-63.3 100.8-112C645.9 75 627.2 48 600.2 48l-57.4 0c-20.2 0-40.2 4.8-58.2 14L381 114.9zM0 480c0 17.7 14.3 32 32 32l576 0c17.7 0 32-14.3 32-32s-14.3-32-32-32L32 448c-17.7 0-32 14.3-32 32z"
+              svg.h-5.fill-orange viewBox="0 0 640 512": path d="M381 114.9L186.1 41.8c-16.7-6.2-35.2-5.3-51.1 2.7L89.1 67.4C78 73 77.2 88.5 87.6 95.2l146.9 94.5L136 240 77.8 214.1c-8.7-3.9-18.8-3.7-27.3 .6L18.3 230.8c-9.3 4.7-11.8 16.8-5 24.7l73.1 85.3c6.1 7.1 15 11.2 24.3 11.2l137.7 0c5 0 9.9-1.2 14.3-3.4L535.6 212.2c46.5-23.3 82.5-63.3 100.8-112C645.9 75 627.2 48 600.2 48l-57.4 0c-20.2 0-40.2 4.8-58.2 14L381 114.9zM0 480c0 17.7 14.3 32 32 32l576 0c17.7 0 32-14.3 32-32s-14.3-32-32-32L32 448c-17.7 0-32 14.3-32 32z"
 
     div.w-full.text-center class="w-full md:text-left md:basis-[40%]"
 
       = turbo_frame_tag dom_id(venue, :edit)
 
-        h3.text-xl.font-lato = venue.name
-        p.font-source.text-fgcolor-faded.italic = venue.address
-        p.font-source.text-lg = "#{venue.zipcode} #{venue.city}"
+        h3.text-xl.font-title = venue.name
+        p.font-paragraph.text-blue-faded.italic = venue.address
+        p.font-paragraph.text-lg = "#{venue.zipcode} #{venue.city}"
 
     = link_to "https://www.openstreetmap.org/search?query=#{venue.latitude}%20#{venue.longitude}&zoom=20",
-      class: "hover:text-baro-yellow flex items-center gap-2 grow"
+      class: "hover:text-yellow flex items-center gap-2 grow"
       div
         /Location label
-        svg.h-5.fill-fgcolor-faded viewBox="0 0 384 512": path d="M215.7 499.2C267 435 384 279.4 384 192C384 86 298 0 192 0S0 86 0 192c0 87.4 117 243 168.3 307.2c12.3 15.3 35.1 15.3 47.4 0zM192 128a64 64 0 1 1 0 128 64 64 0 1 1 0-128z"
+        svg.h-5.fill-blue-faded viewBox="0 0 384 512": path d="M215.7 499.2C267 435 384 279.4 384 192C384 86 298 0 192 0S0 86 0 192c0 87.4 117 243 168.3 307.2c12.3 15.3 35.1 15.3 47.4 0zM192 128a64 64 0 1 1 0 128 64 64 0 1 1 0-128z"
 
       div
         div.flex.flex-row.gap-2.md:flex-col

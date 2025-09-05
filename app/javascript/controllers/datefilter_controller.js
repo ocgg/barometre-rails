@@ -17,7 +17,7 @@ export default class extends Controller {
     this.datepicker.elts.startInput.dataset.action = "change->datefilter#onStartDateSelection"
     this.datepicker.elts.endInput.dataset.action = "change->datefilter#onEndDateSelection"
 
-    this.containerClass = "bg-card-bg";
+    this.containerClass = "bg-white";
     this.mainContainerTarget.classList.toggle(this.containerClass, this.datepicker.active);
     this.updateElementSize();
   }

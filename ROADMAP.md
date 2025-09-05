@@ -27,6 +27,13 @@
 
 ## TODO
 
+- À réfléchir:
+  - Même les events non validés sont visibles par tous
+  - tout le monde peut éditer, façon article wiki
+  - faire une show avec des infos optionnelles (photo, rich text, liens)
+
+- liens sur les cards pour aller vers la map
+
 - searchbar:
   - insensible à la casse & accents (e = é = è...)
     - elasticsearch ?
@@ -38,7 +45,6 @@
   - informer le user au cas où il n'est pas localisé en Loire-Atlantique & de la précision de l'API
 
 - CSS/Tailwind:
-  - renommer les variables
   - refacto
   - `<i>` à la place des svg
   - thème sombre
