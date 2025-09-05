@@ -66,7 +66,7 @@ class Api::EventsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should filter events by keyword" do
-    get api_events_url, params: { q: @event.name }
+    get api_events_url, params: {q: @event.name}
     assert_response :success
     json_response = JSON.parse(response.body)
     assert_not_empty json_response
@@ -76,10 +76,10 @@ class Api::EventsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should filter events by date range" do
-    date = @event.datetime.strftime("%m-%d-%Y")
-    get api_events_url, params: { 
+    date = @event.datetime.strftime("%d-%m-%Y")
+    get api_events_url, params: {
       start: date,
-      end: date,
+      end: date
     }
     assert_response :success
     json_response = JSON.parse(response.body)
@@ -112,8 +112,8 @@ class Api::EventsControllerTest < ActionDispatch::IntegrationTest
 
     get api_events_url, params: {
       q: @event.name,
-      start: start_date.strftime("%m-%d-%Y"),
-      end: end_date.strftime("%m-%d-%Y")
+      start: start_date.strftime("%d-%m-%Y"),
+      end: end_date.strftime("%d-%m-%Y")
     }
     assert_response :success
     json_response = JSON.parse(response.body)
