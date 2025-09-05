@@ -2,21 +2,21 @@
   div.errors
     p.text-center
       span.flex.gap-2.justify-center
-        svg.h-5.fill-fgcolor viewBox="0 0 512 512": path d="M256 32c14.2 0 27.3 7.5 34.5 19.8l216 368c7.3 12.4 7.3 27.7 .2 40.1S486.3 480 472 480L40 480c-14.3 0-27.6-7.7-34.7-20.1s-7-27.8 .2-40.1l216-368C228.7 39.5 241.8 32 256 32zm0 128c-13.3 0-24 10.7-24 24l0 112c0 13.3 10.7 24 24 24s24-10.7 24-24l0-112c0-13.3-10.7-24-24-24zm32 224a32 32 0 1 0 -64 0 32 32 0 1 0 64 0z"
+        svg.h-5.fill-blue viewBox="0 0 512 512": path d="M256 32c14.2 0 27.3 7.5 34.5 19.8l216 368c7.3 12.4 7.3 27.7 .2 40.1S486.3 480 472 480L40 480c-14.3 0-27.6-7.7-34.7-20.1s-7-27.8 .2-40.1l216-368C228.7 39.5 241.8 32 256 32zm0 128c-13.3 0-24 10.7-24 24l0 112c0 13.3 10.7 24 24 24s24-10.7 24-24l0-112c0-13.3-10.7-24-24-24zm32 224a32 32 0 1 0 -64 0 32 32 0 1 0 64 0z"
         | Il manque des informations !
       | Remplissez les champs en surbrillance
 
 section.event-day.overflow-visible
-  header.hidden.flex.gap-2.mb-1.px-4.bg-fgcolor.rounded-none.md:rounded-t-lg.md:flex class="py-1.5"
-    h3.grow.pl-8.text-bgcolor.text-lg.basis-1/2 Proposer des concerts
+  header.hidden.flex.gap-2.mb-1.px-4.bg-blue.rounded-none.md:rounded-t-lg.md:flex class="py-1.5"
+    h3.grow.pl-8.text-bg-light.text-lg.basis-1/2 Proposer des concerts
 
     div.flex.items-center.gap-2
       /Location icon
       div.flex.justify-center.items-center.w-56
-        svg.h-5.fill-bgcolor viewBox="0 0 384 512": path d="M215.7 499.2C267 435 384 279.4 384 192C384 86 298 0 192 0S0 86 0 192c0 87.4 117 243 168.3 307.2c12.3 15.3 35.1 15.3 47.4 0zM192 128a64 64 0 1 1 0 128 64 64 0 1 1 0-128z"
+        svg.h-5.fill-bg-light viewBox="0 0 384 512": path d="M215.7 499.2C267 435 384 279.4 384 192C384 86 298 0 192 0S0 86 0 192c0 87.4 117 243 168.3 307.2c12.3 15.3 35.1 15.3 47.4 0zM192 128a64 64 0 1 1 0 128 64 64 0 1 1 0-128z"
       /Euro icon
       div.flex.justify-center.items-center.w-32
-        svg.h-5.fill-bgcolor  viewBox="0 0 320 512": path d="M48.1 240c-.1 2.7-.1 5.3-.1 8l0 16c0 2.7 0 5.3 .1 8L32 272c-17.7 0-32 14.3-32 32s14.3 32 32 32l28.3 0C89.9 419.9 170 480 264 480l24 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-24 0c-57.9 0-108.2-32.4-133.9-80L256 336c17.7 0 32-14.3 32-32s-14.3-32-32-32l-143.8 0c-.1-2.6-.2-5.3-.2-8l0-16c0-2.7 .1-5.4 .2-8L256 240c17.7 0 32-14.3 32-32s-14.3-32-32-32l-125.9 0c25.7-47.6 76-80 133.9-80l24 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-24 0C170 32 89.9 92.1 60.3 176L32 176c-17.7 0-32 14.3-32 32s14.3 32 32 32l16.1 0z"
+        svg.h-5.fill-bg-light  viewBox="0 0 320 512": path d="M48.1 240c-.1 2.7-.1 5.3-.1 8l0 16c0 2.7 0 5.3 .1 8L32 272c-17.7 0-32 14.3-32 32s14.3 32 32 32l28.3 0C89.9 419.9 170 480 264 480l24 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-24 0c-57.9 0-108.2-32.4-133.9-80L256 336c17.7 0 32-14.3 32-32s-14.3-32-32-32l-143.8 0c-.1-2.6-.2-5.3-.2-8l0-16c0-2.7 .1-5.4 .2-8L256 240c17.7 0 32-14.3 32-32s-14.3-32-32-32l-125.9 0c25.7-47.6 76-80 133.9-80l24 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-24 0C170 32 89.9 92.1 60.3 176L32 176c-17.7 0-32 14.3-32 32s14.3 32 32 32l16.1 0z"
 
   = form_with model: @events, url: events_path, data: {turbo: false, controller: "events-form", action: "click@window->events-form#handleVenueDropdownFocusOut"} do |form|
     ul.flex.flex-col.gap-18.md:gap-4 data-events-form-target="eventsList"
@@ -34,13 +34,13 @@ section.event-day.overflow-visible
 
     /"plus" button
     div.flex.justify-center
-    div.w-10.h-10.m-auto.flex.justify-center.items-center.my-5.btn.p-0.rounded-full.text-2xl.bg-fgcolor.text-bgcolor[
+    div.w-10.h-10.m-auto.flex.justify-center.items-center.my-5.btn.p-0.rounded-full.text-2xl.bg-blue.text-bg-light[
         data-action="click->events-form#onPlusBtnClick"
       ] +
 
-    div.flex.flex-col.items-center.gap-2.bg-card-bg.p-2.rounded-b-lg.md:flex-row.md:justify-between
+    div.flex.flex-col.items-center.gap-2.bg-white.p-2.rounded-b-lg.md:flex-row.md:justify-between
       div.flex.items-center.gap-2.md:flex-row
-        svg.hidden.h-10.fill-fgcolor.md:block viewBox="0 0 512 512": path d="M464 256A208 208 0 1 0 48 256a208 208 0 1 0 416 0zM0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256zm169.8-90.7c7.9-22.3 29.1-37.3 52.8-37.3l58.3 0c34.9 0 63.1 28.3 63.1 63.1c0 22.6-12.1 43.5-31.7 54.8L280 264.4c-.2 13-10.9 23.6-24 23.6c-13.3 0-24-10.7-24-24l0-13.5c0-8.6 4.6-16.5 12.1-20.8l44.3-25.4c4.7-2.7 7.6-7.7 7.6-13.1c0-8.4-6.8-15.1-15.1-15.1l-58.3 0c-3.4 0-6.4 2.1-7.5 5.3l-.4 1.2c-4.4 12.5-18.2 19-30.6 14.6s-19-18.2-14.6-30.6l.4-1.2zM224 352a32 32 0 1 1 64 0 32 32 0 1 1 -64 0z"
+        svg.hidden.h-10.fill-blue.md:block viewBox="0 0 512 512": path d="M464 256A208 208 0 1 0 48 256a208 208 0 1 0 416 0zM0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256zm169.8-90.7c7.9-22.3 29.1-37.3 52.8-37.3l58.3 0c34.9 0 63.1 28.3 63.1 63.1c0 22.6-12.1 43.5-31.7 54.8L280 264.4c-.2 13-10.9 23.6-24 23.6c-13.3 0-24-10.7-24-24l0-13.5c0-8.6 4.6-16.5 12.1-20.8l44.3-25.4c4.7-2.7 7.6-7.7 7.6-13.1c0-8.4-6.8-15.1-15.1-15.1l-58.3 0c-3.4 0-6.4 2.1-7.5 5.3l-.4 1.2c-4.4 12.5-18.2 19-30.6 14.6s-19-18.2-14.6-30.6l.4-1.2zM224 352a32 32 0 1 1 64 0 32 32 0 1 1 -64 0z"
         div
           p.font-source.italic Les événements proposés devront être validés par l'équipe avant d'être visibles par les autres utilisateurs.
           p.font-source.italic
@@ -48,4 +48,4 @@ section.event-day.overflow-visible
             = link_to "nous contacter", contact_path
 
       = form.submit "Envoyer",
-        class: "btn py-1 px-16 md:px-8 bg-fgcolor text-baro-yellow font-quicksand"
+        class: "btn py-1 px-16 md:px-8 bg-blue text-yellow font-quicksand"

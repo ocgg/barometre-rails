@@ -3,30 +3,24 @@
   --light-bg: rgba(234, 227, 210, 1);
   --light-fg: rgba(2, 0, 100, 1);
   --light-faded: rgba(2, 0, 100, .5);
-  --light-card-bg-odd: rgba(255, 255, 255, .5);
-  --light-card-bg-even: rgba(255, 255, 255, .3);
-  --light-card-bg: rgba(244, 241, 232, 1);
+  --light-white: rgba(244, 241, 232, 1);
 
   /* Dark theme */
   /* --dark-bg: #181221; */
   /* --dark-fg: #d4c8a9; */
   /* --dark-faded: rgba(212, 200, 169, .6); */
-  /* --dark-card-bg-odd: rgba(255, 255, 255, .08); */
-  /* --dark-card-bg-even: rgba(255, 255, 255, .05); */
 }
 
 @theme {
-  --color-*: initial;
   /* overrides default colors */
-  --color-baro-orange: #EB5B00;
-  --color-baro-yellow: rgba(255, 178, 0, 1);
-  --color-baro-yellow-faded: rgba(255, 178, 0, .25);
+  --color-*: initial;
 
-  /* These can change according to chosen theme */
-  --color-fgcolor: var(--fgcolor);
-  --color-bgcolor: var(--bgcolor);
-  --color-fgcolor-faded: var(--fgcolor-faded);
-  --color-card-bg-even: var(--cardcolor-even);
-  --color-card-bg-odd: var(--cardcolor-odd);
-  --color-card-bg: var(--cardcolor);
+  --color-orange: #EB5B00;
+  --color-yellow: rgb(255, 178, 0);
+  --color-yellow-faded: rgba(255, 178, 0, .25);
+
+  --color-blue: var(--blue);
+  --color-blue-faded: var(--blue-faded);
+  --color-bg-light: var(--bg-light);
+  --color-white: var(--white);
 }

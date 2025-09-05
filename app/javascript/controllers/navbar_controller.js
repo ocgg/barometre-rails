@@ -5,12 +5,12 @@ export default class extends Controller {
   static targets = ["main", "dropdown", "icon"];
 
   connect() {
-    this.currentPageFromMenuLinks = this.iconTarget.classList.contains("fill-baro-yellow");
+    this.currentPageFromMenuLinks = this.iconTarget.classList.contains("fill-yellow");
   }
 
   toggle() {
     if (!this.currentPageFromMenuLinks) {
-      this.iconTarget.classList.toggle("fill-baro-yellow");
+      this.iconTarget.classList.toggle("fill-yellow");
     }
     this.dropdownTarget.classList.toggle("hidden");
     this.dropdownTarget.classList.toggle("flex");
@@ -18,7 +18,7 @@ export default class extends Controller {
 
   hide() {
     if (!this.currentPageFromMenuLinks) {
-      this.iconTarget.classList.toggle("fill-baro-yellow");
+      this.iconTarget.classList.toggle("fill-yellow");
     }
     this.dropdownTarget.classList.add("hidden");
     this.dropdownTarget.classList.remove("flex");

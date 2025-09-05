@@ -7,7 +7,7 @@ p.pl-10
 
 = form_with model: @contact_form, url: contact_path, method: :post do |form|
 
-  section.bg-card-bg.flex.flex-col.gap-8.p-4.md:rounded-lg
+  section.bg-white.flex.flex-col.gap-8.p-4.md:rounded-lg
 
     div.flex.gap-2.flex-col.md:flex-row.md:items-center
       = form.text_field :email,
@@ -15,7 +15,7 @@ p.pl-10
         placeholder: "email (optionnel)..."
 
       - if @contact_form.errors[:email].any?
-        p.font-source.text-baro-orange.italic.text-sm = @contact_form.errors.full_messages_for(:email).first
+        p.font-source.text-orange.italic.text-sm = @contact_form.errors.full_messages_for(:email).first
 
     div.flex.gap-2.flex-col
       = form.text_area :message,
@@ -23,7 +23,7 @@ p.pl-10
         placeholder: "Votre message..."
 
       - if @contact_form.errors[:message].any?
-        p.font-source.text-baro-orange.italic.text-sm = @contact_form.errors.full_messages_for(:message).first
+        p.font-source.text-orange.italic.text-sm = @contact_form.errors.full_messages_for(:message).first
 
     = form.submit "Envoyer",
       class: "btn btn-plain py-1 px-16 md:self-end md:px-8"

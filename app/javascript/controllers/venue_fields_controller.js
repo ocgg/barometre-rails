@@ -123,7 +123,7 @@ export default class extends Controller {
     const li = clone.querySelector("li");
     li.dataset.id = venue.id;
     li.dataset.name = venue.name;
-    li.classList.toggle("bg-baro-yellow-faded", !venue.verified);
+    li.classList.toggle("bg-yellow-faded", !venue.verified);
     if (venue.verified) clone.querySelector("a")?.remove();
     clone.querySelector(".venue-name-selector").innerText = venue.name;
     clone.querySelector(".venue-address-selector").innerText = `${venue.address} (${venue.city})`;

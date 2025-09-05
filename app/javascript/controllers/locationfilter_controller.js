@@ -16,7 +16,7 @@ export default class extends Controller {
 
   connect() {
     this.active ? this.updateButtonText() : this.resetButtonText();
-    this.mainContainerTarget.classList.toggle("bg-card-bg", this.active);
+    this.mainContainerTarget.classList.toggle("bg-white", this.active);
     this.updateElementSize();
   }
 
@@ -29,7 +29,7 @@ export default class extends Controller {
   set visible(bool) {
     this.rangeContainerTarget.classList.toggle("hidden", !bool);
     this.mainContainerTarget.classList.toggle("max-md:translate-x-[-25%]", bool);
-    this.mainContainerTarget.classList.toggle("bg-card-bg", bool || this.active);
+    this.mainContainerTarget.classList.toggle("bg-white", bool || this.active);
     if (!bool) this.updateElementSize();
   }
 

@@ -1,28 +1,24 @@
 @layer base {
   html {
-    accent-color: var(--color-baro-yellow);
+    accent-color: var(--color-yellow);
     color-scheme: light;
-    --fgcolor: var(--light-fg);
-    --fgcolor-faded: var(--light-faded);
-    --bgcolor: var(--light-bg);
-    --cardcolor-odd: var(--light-card-bg-odd);
-    --cardcolor-even: var(--light-card-bg-even);
-    --cardcolor: var(--light-card-bg);
+    --blue: var(--light-fg);
+    --blue-faded: var(--light-faded);
+    --bg-light: var(--light-bg);
+    --white: var(--light-white);
   }
 
   /* html.dark { */
   /*   color-scheme: dark; */
-  /*   --fgcolor: var(--dark-fg); */
-  /*   --fgcolor-faded: var(--dark-faded); */
-  /*   --bgcolor: var(--dark-bg); */
-  /*   --cardcolor-odd: var(--dark-card-bg-odd); */
-  /*   --cardcolor-even: var(--dark-card-bg-even); */
+  /*   --blue: var(--dark-fg); */
+  /*   --blue-faded: var(--dark-faded); */
+  /*   --bg-light: var(--dark-bg); */
   /* } */
 
   body {
     font-family: var(--font-quicksand);
-    color: var(--color-fgcolor);
-    background-color: var(--color-bgcolor);
+    color: var(--color-blue);
+    background-color: var(--color-bg-light);
     max-width: 100vw;
     overflow-x: hidden;
     min-height: 100vh;
@@ -40,18 +36,18 @@
     text-decoration-style: dotted;
     
     &:hover {
-      @apply text-baro-yellow;
+      @apply text-yellow;
     }
   }
 
   .field_with_errors input,
   .field_with_errors textarea {
-    @apply w-full border-2 border-baro-orange;
+    @apply w-full border-2 border-orange;
   }
 
   input,
   textarea {
-    border: 2px solid var(--color-fgcolor-faded);
+    border: 2px solid var(--color-blue-faded);
     border-radius: var(--radius-sm);
     padding-inline: calc(var(--spacing) * 1.5);
     padding-block: calc(var(--spacing) * 0.5);
@@ -59,17 +55,17 @@
 
     &:focus{
       outline: none;
-      border-color: var(--color-baro-yellow);
+      border-color: var(--color-yellow);
     }
 
     &:disabled {
-      @apply bg-baro-yellow-faded;
+      @apply bg-yellow-faded;
     }
 
     &::placeholder {
       font-style: italic;
       line-height: var(--tw-leading, var(--text-sm--line-height));
-      color: var(--color-fgcolor-faded);
+      color: var(--color-blue-faded);
     }
   }
 }
