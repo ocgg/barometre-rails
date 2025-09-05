@@ -3,7 +3,7 @@
   section#events_days_container.flex.flex-col.gap-27.md:gap-20
 
     - if @pagy.count.zero?
-        p.text-center.text-xl Aucun résultat
+        p.text-center.text-xl.bg-card-bg.py-4 Aucun résultat
 
     - elsif request.query_parameters.compact_blank.any?
       p.-mt-13.-mb-13.text-center

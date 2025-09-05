@@ -12,10 +12,15 @@ export default class extends Controller {
 
   static values = {
     range: Boolean,
+    initial: String,
   }
 
   connect() {
-    this.opts = { autosubmit: true, range: this.rangeValue }
+    this.opts = {
+      autosubmit: true,
+      range: this.rangeValue,
+      startInput: {value: this.initialValue}
+    }
     this.datepicker = new Datepicker(this.datepickerContainerTarget, this.opts);
 
     this.datepicker.elts.startInput.dataset.action = "change->datefilter#onStartDateSelection"
@@ -24,6 +29,7 @@ export default class extends Controller {
     this.containerClass = "bg-card-bg";
     this.mainContainerTarget.classList.toggle(this.containerClass, this.datepicker.active);
     this.updateElementSize();
+    if (this.initialValue) this.onStartDateSelection({target: {value: this.initialValue}})
   }
 
   get visible() { return !this.datepickerContainerTarget.classList.contains("hidden") }
@@ -49,12 +55,8 @@ export default class extends Controller {
     const date = this.datepicker.dates.start;
     this.startDateString = this.readableStringFrom(date);
     this.buttonTarget.textContent = this.startDateString;
-    if (this.opts.range) {
-      this.buttonTarget.textContent += " ➞ ...";
-    }
-    else {
-      this.setVisible(false)
-    }
+    if (this.opts.range) this.buttonTarget.textContent += " ➞ ...";
+    else this.setVisible(false)
     this.clearInputBtnTarget.classList.toggle("hidden", false);
   }
 

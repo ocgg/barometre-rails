@@ -56,19 +56,21 @@ export default class Datepicker {
     this.elts.updateInputValues();
 
     if (startChanged) this.elts.startInput.dispatchEvent(new Event('change'));
-    if (endChanged) this.elts.endInput.dispatchEvent(new Event('change'));
+    if (this.config.range && endChanged) this.elts.endInput.dispatchEvent(new Event('change'));
 
     this.elts.renderCalendar();
   }
 
   #setConfig(config) {
-    const defaultConfig = {
+    console.log(config)
+    this.config = {
       autosubmit: false,
       range: false,
-      startInput: { id: "start", name: "start", value: null },
-      endInput: { id: "end", name: "end", value: null },
+      ...config,
+      startInput: { id: "start", name: "start", value: null, ...config.startInput },
+      endInput: { id: "end", name: "end", value: null, ...config.endInput },
     }
-    this.config = { ...defaultConfig, ...config };
+    console.log(this.config)
   }
 
   #rangeDateSelect(selectedDate) {

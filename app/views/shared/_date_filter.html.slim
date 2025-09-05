@@ -1,6 +1,7 @@
 div.relative.whitespace-nowrap[
   data-controller="datefilter" 
   data-datefilter-range-value="#{params[:action] != 'map'}"
+  data-datefilter-initial-value="#{content_for(:initial_date)}"
   data-action="click@window->datefilter#handleFocusOut"
 ]
 
