@@ -62,7 +62,7 @@ class VenuesControllerTest < ActionDispatch::IntegrationTest
   test "admin should not update venue with invalid data" do
     sign_in_as_admin
     patch venue_url(@venue), params: {venue: {name: ""}}
-    assert_response :unprocessable_entity
+    assert_response :unprocessable_content
   end
 
   test "admin should verify venue" do

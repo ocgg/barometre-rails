@@ -16,7 +16,7 @@ class PagesController < ApplicationController
       ContactMailer.with(form_data).contact_email.deliver_later
       redirect_to :contact, notice: "Message bien envoyé !"
     else
-      render :contact, status: :unprocessable_entity
+      render :contact, status: :unprocessable_content
     end
   end
 
