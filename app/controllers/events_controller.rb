@@ -56,7 +56,7 @@ class EventsController < ApplicationController
       flash[:subtext] = "Ils devront être validés par un admin avant d'être visibles par tout le monde."
       redirect_to root_path
     else
-      render :new, status: :unprocessable_entity
+      render :new, status: :unprocessable_content
     end
   end
 
@@ -68,7 +68,7 @@ class EventsController < ApplicationController
     if @event.update(attrs)
       redirect_to @event
     else
-      render :edit, status: :unprocessable_entity
+      render :edit, status: :unprocessable_content
     end
   end
 
@@ -77,7 +77,7 @@ class EventsController < ApplicationController
       @event.update(verified: true)
       render @event if turbo_frame_request?
     else
-      render_unprocessable_entity_error
+      render_unprocessable_content_error
     end
   end
 

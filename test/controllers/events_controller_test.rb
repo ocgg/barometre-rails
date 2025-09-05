@@ -44,7 +44,7 @@ class EventsControllerTest < ActionDispatch::IntegrationTest
         events: [{
           name: "Nouvel événement",
           description: "Description",
-          date: "03-16-2025",
+          date: Date.tomorrow.strftime("%d-%m-%Y"),
           time: "19:00",
           tarif: "20€",
           venue_attributes: {
@@ -64,12 +64,12 @@ class EventsControllerTest < ActionDispatch::IntegrationTest
       post events_url, params: {
         events: [{
           name: "",
-          date: "03-16-2025",
+          date: Date.tomorrow.strftime("%d-%m-%Y"),
           time: "19:00"
         }]
       }
     end
-    assert_response :unprocessable_entity
+    assert_response :unprocessable_content
   end
 
   test "visitor should be redirected to login page when showing event" do
@@ -160,7 +160,7 @@ class EventsControllerTest < ActionDispatch::IntegrationTest
       event: {
         name: "Événement modifié",
         description: "Nouvelle description",
-        date: "03-16-2025",
+        date: Date.tomorrow.strftime("%d-%m-%Y"),
         time: "20:00",
         tarif: "25€"
       }
@@ -177,7 +177,7 @@ class EventsControllerTest < ActionDispatch::IntegrationTest
         name: ""
       }
     }
-    assert_response :unprocessable_entity
+    assert_response :unprocessable_content
   end
 
   test "admin should verify event" do
@@ -191,7 +191,7 @@ class EventsControllerTest < ActionDispatch::IntegrationTest
   test "admin should not verify event with unverified venue" do
     sign_in_as_admin
     patch verify_event_url(@unverified_event)
-    assert_response :unprocessable_entity
+    assert_response :unprocessable_content
   end
 
   test "a verified event updated with an unverified venue should turn to unverified" do

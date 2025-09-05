@@ -27,7 +27,7 @@ class ApplicationController < ActionController::Base
     render file: "#{Rails.root}/public/400.html", layout: false, status: :unauthorized
   end
 
-  def render_unprocessable_entity_error
-    render file: "#{Rails.root}/public/422.html", layout: false, status: :unprocessable_entity
+  def render_unprocessable_content_error
+    render file: "#{Rails.root}/public/422.html", layout: false, status: :unprocessable_content
   end
 end
