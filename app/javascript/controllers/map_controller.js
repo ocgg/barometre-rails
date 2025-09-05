@@ -2,7 +2,7 @@ import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
   connect() {
-    var map = L.map('map', {
+    const map = L.map('map', {
       zoomControl: false,
     }).setView([47.216671, -1.55], 13);
 

@@ -15,6 +15,7 @@ class EventsController < ApplicationController
   end
 
   def map
+    @initial_date = Date.today.strftime("%d-%m-%Y")
     render layout: "layouts/map"
   end
 

@@ -1,6 +1,6 @@
 = turbo_frame_tag :content
 
-  section#events_days_container.flex.flex-col.gap-27.md:gap-20
+  section#events_days_container.flex.flex-col.gap-27.md:gap-20 class="overflow-scroll"
 
     - if @pagy.count.zero?
         p.text-center.text-xl.bg-card-bg.py-4 Aucun résultat

@@ -1,9 +1,9 @@
-= content_for :title, "Coucou"
+= content_for :title, "Baromètre - vue carte"
 
 = content_for :head do
   = stylesheet_link_tag "https://unpkg.com/leaflet@1.9.4/dist/leaflet.css", integrity: "sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=", crossorigin: ""
   = javascript_include_tag "https://unpkg.com/leaflet@1.9.4/dist/leaflet.js", integrity: "sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=", crossorigin: ""
 
-= content_for :initial_date, Date.today.strftime("%d-%m-%Y")
+= content_for :initial_date, @initial_date
 
-= turbo_frame_tag :content, src: events_path(start: l(Date.today, format: "%d-%m-%Y"), end: l(Date.today, format: "%d-%m-%Y"))
+= turbo_frame_tag :content, src: events_path(start: @initial_date, end: @initial_date)
