@@ -5,7 +5,7 @@ div.search-bar[
 ]
   = form.submit "", class: "hidden", data: {search_target: "submit"}
   = form.search_field :q,
-    class: "peer min-w-10 grow pl-3 pr-0 py-1 border-none font-quicksand",
+    class: "peer min-w-10 grow pl-3 pr-0 py-1 border-none font-base",
     placeholder: "Rechercher...",
     value: params[:q],
     data: {search_target: "input", action: "keydown.enter->search#submit"}

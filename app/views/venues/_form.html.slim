@@ -43,7 +43,7 @@ div[
           ul data-venue-fields-target="resultsList"
 
           template data-venue-fields-target="template"
-            li.p-2.font-source.hover:bg-yellow.hover:cursor-pointer[
+            li.p-2.font-paragraph.hover:bg-yellow.hover:cursor-pointer[
               data-action="click->venue-fields#onVenueSelect"
             ]
               div.flex.gap-2.items-center
@@ -54,12 +54,12 @@ div[
                 p.venue-name-selector.font-bold.text-lg/5.text-ellipsis.overflow-hidden.whitespace-nowrap class="l"
               p.venue-address-selector.text-sm.text-blue-faded.text-ellipsis.overflow-hidden.whitespace-nowrap
 
-          div.p-2.italic.text-center.text-blue-faded.font-source data-venue-fields-target="noResult"
+          div.p-2.italic.text-center.text-blue-faded.font-paragraph data-venue-fields-target="noResult"
             | Aucun résultat
 
           hr.border-yellow-faded
 
-          div.p-2.text-center.font-source.hover:bg-yellow.hover:cursor-pointer[
+          div.p-2.text-center.font-paragraph.hover:bg-yellow.hover:cursor-pointer[
             data-action="click->venue-fields#onAddManually"
           ]
             p.text-sm.text-blue-faded Pas dans la liste ?

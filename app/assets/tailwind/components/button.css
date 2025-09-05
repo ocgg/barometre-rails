@@ -39,6 +39,6 @@
   }
 
   .btn-plain {
-    @apply bg-blue text-yellow font-quicksand;
+    @apply bg-blue text-yellow font-base;
   }
 }

@@ -1,7 +1,7 @@
 @layer components {
   .event-card {
     @apply flex
-    text-blue font-source;
+    text-blue font-paragraph;
 
     .event-card-main {
       @apply flex gap-1
@@ -12,7 +12,7 @@
       @apply flex-[0_1_45%] p-1 overflow-hidden;
 
       .name {
-        @apply font-lato text-xl
+        @apply font-title text-xl
         text-ellipsis overflow-hidden whitespace-nowrap;
       }
       .description {
@@ -78,7 +78,7 @@
       .md-hour {
         @apply flex items-center justify-center
         w-12
-        font-quicksand font-bold
+        font-base font-bold
         bg-blue text-bg-light;
       }
 

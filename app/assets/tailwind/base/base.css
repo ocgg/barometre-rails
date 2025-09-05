@@ -16,7 +16,7 @@
   /* } */
 
   body {
-    font-family: var(--font-quicksand);
+    font-family: var(--font-base);
     color: var(--color-blue);
     background-color: var(--color-bg-light);
     max-width: 100vw;
@@ -51,7 +51,7 @@
     border-radius: var(--radius-sm);
     padding-inline: calc(var(--spacing) * 1.5);
     padding-block: calc(var(--spacing) * 0.5);
-    font-family: var(--font-source);
+    font-family: var(--font-paragraph);
 
     &:focus{
       outline: none;
