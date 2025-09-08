@@ -7,7 +7,11 @@ html
     = render "shared/flashes"
 
 
-    div#map.absolute.top-0.bottom-0.left-0.right-0.z-0 class="@container/main" data-controller="map"
+    div#map.absolute.top-0.bottom-0.left-0.right-0.z-0[
+      class="@container/main"
+      data-controller="map"
+      data-map-marker-icon-value="#{asset_path("map_marker.svg")}"
+    ]
 
     main.absolute.w-96.top-0.left-0 class="@container/main"
       div.z-1000.mb-4 class="[&_nav]:p-4!"
