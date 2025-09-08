@@ -79,7 +79,7 @@
         @apply flex items-center justify-center
         w-12
         font-base font-bold
-        bg-blue text-bg-light;
+        bg-blue text-light;
       }
 
       .event-card-main {

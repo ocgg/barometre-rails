@@ -4,7 +4,7 @@
     color-scheme: light;
     --blue: var(--light-fg);
     --blue-faded: var(--light-faded);
-    --bg-light: var(--light-bg);
+    --light: var(--light-bg);
     --white: var(--light-white);
   }
 
@@ -12,13 +12,13 @@
   /*   color-scheme: dark; */
   /*   --blue: var(--dark-fg); */
   /*   --blue-faded: var(--dark-faded); */
-  /*   --bg-light: var(--dark-bg); */
+  /*   --light: var(--dark-bg); */
   /* } */
 
   body {
     font-family: var(--font-base);
     color: var(--color-blue);
-    background-color: var(--color-bg-light);
+    background-color: var(--color-light);
     max-width: 100vw;
     overflow-x: hidden;
     min-height: 100vh;

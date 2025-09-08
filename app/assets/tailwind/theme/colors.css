@@ -21,6 +21,6 @@
 
   --color-blue: var(--blue);
   --color-blue-faded: var(--blue-faded);
-  --color-bg-light: var(--bg-light);
+  --color-light: var(--light);
   --color-white: var(--white);
 }

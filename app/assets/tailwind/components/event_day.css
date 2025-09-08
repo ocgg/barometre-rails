@@ -29,7 +29,7 @@
 
       h3 {
         @apply flex-[1_0_44.5%]
-        text-bg-light text-lg font-bold;
+        text-light text-lg font-bold;
       }
     }
 
@@ -37,7 +37,7 @@
       @apply flex items-center flex-[0_1_55.5%];
 
       svg {
-        @apply h-5 fill-bg-light;
+        @apply h-5 fill-light;
       }
     }
 

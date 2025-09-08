@@ -33,7 +33,7 @@
     }
 
     &:has(input:checked) {
-      color: var(--color-bg-light);
+      color: var(--color-light);
       background-color: var(--color-blue);
     }
   }
