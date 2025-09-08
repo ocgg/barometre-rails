@@ -1,0 +1,28 @@
+doctype html
+html
+  head
+    = render "layouts/head"
+
+  body.relative class="max-w-[100vw] max-h-[100vh] overflow-hidden"
+    = render "shared/flashes"
+
+
+    div#map.absolute.top-0.bottom-0.left-0.right-0.z-0 class="@container/main" data-controller="map"
+
+    main.absolute.w-96.top-0.left-0 class="@container/main"
+      div.z-1000.mb-4 class="[&_nav]:p-4!"
+        = render "shared/navbar"
+
+      = turbo_frame_tag :searchform, target: :content
+
+        search.w-full.h-43.mb-4
+
+          = form_with(class: "w-full flex flex-col gap-4 p-4 [&_div]:bg-bg-light [&_div_div]:w-full",
+            method: :get,
+            url: events_path) do |form|
+
+            = render "shared/search_bar", form:
+            = render "shared/location_filter", form:
+            = render "shared/date_filter", form:
+
+      = yield

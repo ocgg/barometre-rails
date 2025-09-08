@@ -1,7 +1,3 @@
-h1
-  | Events Map
+= content_for :title, "Baromètre - vue carte"
 
-
-div id="map" class="@container/main w-full min-h-[50vh]" data-controller="map"
-  = turbo_frame_tag "events", src: events_path do
-    p Remplacé par les eveeeents
+= turbo_frame_tag :content, src: events_path(start: Date.today.strftime("%d-%m-%Y"), end: Date.today.strftime("%d-%m-%Y"))
