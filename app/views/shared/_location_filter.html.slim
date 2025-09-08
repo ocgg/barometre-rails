@@ -1,6 +1,9 @@
-div.relative.whitespace-nowrap  data-controller="locationfilter" data-action="click@window->locationfilter#handleFocusOut"
+div.relative.whitespace-nowrap.bg-light[
+  data-controller="locationfilter"
+  data-action="click@window->locationfilter#handleFocusOut"
+]
 
-  div.btn.px-2.absolute.z-10  data-locationfilter-target="mainContainer"
+  div.btn.px-2.absolute.z-10 data-locationfilter-target="mainContainer" class="@max-md:w-full"
     = form.submit "", class: "hidden", data: {locationfilter_target: "submit"}
 
     div.flex.gap-2.items-center data-action="click->locationfilter#onButtonClick"
