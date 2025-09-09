@@ -1,7 +1,8 @@
 class EventsController < ApplicationController
   allow_unauthenticated_access only: %i[index map calendar new create]
-  before_action :set_events, only: %i[index map calendar]
+  before_action :set_events, only: %i[index calendar]
   before_action :set_event, only: %i[show verify edit update destroy]
+  layout "layouts/map", only: :map
 
   include Pagy::Backend
 
@@ -15,7 +16,11 @@ class EventsController < ApplicationController
   end
 
   def map
-    render layout: "layouts/map"
+    params[:start] ||= Date.today
+    params[:end] ||= params[:start]
+    @query_params = request.query_parameters.compact_blank
+    @events = Event.filter_with_params(@query_params)
+    @events = authorize policy_scope(@events)
   end
 
   def calendar

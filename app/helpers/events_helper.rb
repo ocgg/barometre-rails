@@ -1,10 +1,10 @@
 module EventsHelper
   def format_date(date)
+    date = Date.strptime(date, "%d-%m-%Y") if date.is_a?(String)
     return "Aujourd'hui" if date == Date.today
     return "Demain" if date == Date.tomorrow
 
     format = (date.year == Date.today.year) ? "%A %d %B" : "%A %d %B %Y"
-
     l(date, format:).split.map(&:capitalize).join(" ")
   end
 
