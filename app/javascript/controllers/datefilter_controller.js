@@ -12,14 +12,14 @@ export default class extends Controller {
 
   static values = {
     range: Boolean,
-    initial: String,
+    initialStart: String,
   }
 
   connect() {
     this.opts = {
       autosubmit: true,
       range: this.rangeValue,
-      startInput: {value: this.initialValue}
+      startInput: {value: this.initialStartValue}
     }
     this.datepicker = new Datepicker(this.datepickerContainerTarget, this.opts);
 
@@ -29,7 +29,7 @@ export default class extends Controller {
     this.containerClass = "bg-white";
     this.mainContainerTarget.classList.toggle(this.containerClass, this.datepicker.active);
     this.updateElementSize();
-    if (this.initialValue) this.onStartDateSelection({target: {value: this.initialValue}})
+    if (this.initialStartValue) this.onStartDateSelection({target: {value: this.initialStartValue}})
   }
 
   get visible() { return !this.datepickerContainerTarget.classList.contains("hidden") }

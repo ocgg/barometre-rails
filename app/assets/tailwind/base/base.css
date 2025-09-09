@@ -3,8 +3,9 @@
     accent-color: var(--color-yellow);
     color-scheme: light;
     --blue: var(--light-fg);
-    --blue-faded: var(--light-faded);
+    --blue-faded: var(--light-fg-faded);
     --light: var(--light-bg);
+    --light-faded: var(--light-bg-faded);
     --white: var(--light-white);
   }
 

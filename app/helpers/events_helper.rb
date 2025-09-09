@@ -1,6 +1,5 @@
 module EventsHelper
   def format_date(date)
-    date = Date.strptime(date, "%d-%m-%Y") if date.is_a?(String)
     return "Aujourd'hui" if date == Date.today
     return "Demain" if date == Date.tomorrow
 

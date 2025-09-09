@@ -21,9 +21,7 @@
 5. **Mise en prod**
 
 5. Map
-  - layout
-  - leaflet stylesheets seulement sur layout map
-  - search: datepicker sans range
+  - Si geoloc: afficher la distance
 
 ## TODO
 
@@ -39,7 +37,7 @@
     - elasticsearch ?
   - lien pour enlever tous les filtres (au niveau de "... résultats")
   - conserver la recherche d'une page à l'autre
-  - garder la query string dans l'url (pouvoir bookmark la recherche)
+  - garder la query string dans l'url (pouvoir bookmark la recherche) (data: {turbo_action: :advance})
 
 - locationfilter:
   - informer le user au cas où il n'est pas localisé en Loire-Atlantique & de la précision de l'API

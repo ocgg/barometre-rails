@@ -16,11 +16,9 @@ class EventsController < ApplicationController
   end
 
   def map
-    params[:start] ||= Date.today
-    params[:end] ||= params[:start]
-    @query_params = request.query_parameters.compact_blank
-    @events = Event.filter_with_params(@query_params)
-    @events = authorize policy_scope(@events)
+    params[:start] ||= Date.today.strftime("%d-%m-%Y")
+    params[:end] = params[:start]
+    @events = authorize policy_scope(Event.filter_with_params(params))
   end
 
   def calendar
