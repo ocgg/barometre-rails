@@ -38,7 +38,12 @@ export default class Builder {
   }
 
   #updatesInputValuesForSingleDate() {
-    this.startInput.value = Helper.parsableStringFrom(this.dates.start);
+    if (this.dates.start) {
+      this.startInput.value = Helper.parsableStringFrom(this.dates.start);
+    }
+    else {
+      this.startInput.value = null;
+    }
   }
 
   #buildMonthDaysFrom(day) {
