@@ -1,18 +1,18 @@
 import { Controller } from "@hotwired/stimulus"
-import "leaflet"
+import L from "leaflet"
 import "leaflet-css"
 
 export default class extends Controller {
-  static values = { markerIcon: String }
-  connect() {
-    this.initMap();
-    this.fetchVenues();
+  static targets = ["venuesData"]
+
+  static values = {
+    markerIcon: String,
   }
 
-  initMap() {
-    this.map = L.map('map', {
-      zoomControl: false,
-    }).setView([47.216671, -1.55], 13);
+  initialize() {
+    this.markers = [];
+    this.map = L.map('map').setView([47.216671, -1.55], 13);
+    this.map.zoomControl.setPosition("bottomright");
 
     L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
       maxZoom: 19,
@@ -21,6 +21,7 @@ export default class extends Controller {
 
     this.markerIcon = L.icon({
       iconUrl: this.markerIconValue,
+      className: "hover:cursor-pointer",
       iconSize: [38, 38],
       iconAnchor: [19, 38],
       popupAnchor: [0, -19] // relative to iconAnchor
@@ -28,21 +29,30 @@ export default class extends Controller {
       // shadowSize: [50, 64],
       // shadowAnchor: [4, 62],
     });
-
-    L.control.zoom({ position: "bottomright" }).addTo(this.map);
   }
 
-  fetchVenues() {
-    const url = "/api/venues";
-    const opts = { headers: { "Accept": "application/json" } };
-    fetch(url, opts)
-      .then(response => response.json())
-      .then((data => {
-        data.forEach(venue => {
-          L.marker([venue.latitude, venue.longitude], { icon: this.markerIcon })
-            .bindPopup(`<b>${venue.name}</b><br>${venue.address}`)
-            .addTo(this.map)
-        });
-      }));
+  venuesDataTargetConnected() {
+    this.removeMarkers();
+    this.createMarkers();
+    this.addMarkersToMap();
+  }
+
+  removeMarkers() {
+    this.markers.forEach(marker => marker.remove());
+    this.markers = [];
+  }
+
+  createMarkers() {
+    JSON.parse(this.venuesDataTarget.value).forEach(venue => this.createMarker(venue));
+  }
+
+  createMarker(venue) {
+    const marker = L.marker([venue.latitude, venue.longitude], { icon: this.markerIcon })
+      .bindPopup(`<b>${venue.name}</b><br>${venue.address}`)
+    this.markers.push(marker)
+  }
+
+  addMarkersToMap() {
+    this.markers.forEach(marker => marker.addTo(this.map))
   }
 }

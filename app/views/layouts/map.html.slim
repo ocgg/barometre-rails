@@ -3,14 +3,16 @@ html
   head
     = render "layouts/head"
 
-  body.relative class="max-w-[100vw] max-h-[100vh] overflow-hidden"
+  body.relative.overflow-hidden[
+    class="max-w-[100vw] max-h-[100vh]"
+    data-controller="map"
+    data-map-marker-icon-value="#{asset_path("map_marker.svg")}"
+  ]
 
     = render "shared/flashes"
 
     div#map.absolute.top-0.bottom-0.left-0.right-0.z-0[
       class="@container/main"
-      data-controller="map"
-      data-map-marker-icon-value="#{asset_path("map_marker.svg")}"
     ]
 
     main.absolute.w-96.top-0.left-0.bottom-0.right-0.flex.flex-col class="@container/main"

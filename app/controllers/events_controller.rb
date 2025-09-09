@@ -18,7 +18,10 @@ class EventsController < ApplicationController
   def map
     params[:start] ||= Date.today.strftime("%d-%m-%Y")
     params[:end] = params[:start]
-    @events = authorize policy_scope(Event.filter_with_params(params))
+    @events = Event.filter_with_params(params)
+    venue_columns = %w[name address latitude longitude]
+    @events = authorize policy_scope(@events)
+    @venues = Venue.select(venue_columns).where(id: @events.select(:venue_id))
   end
 
   def calendar

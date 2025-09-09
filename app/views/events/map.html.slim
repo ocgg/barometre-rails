@@ -2,9 +2,18 @@
 
 = turbo_frame_tag :content, class: "grow overflow-hidden"
 
-  section#events_days_container.event-day.flex.flex-col.gap-27.md:gap-20.h-full
+  /this input is only here to pass venues data to map controller
+  input[
+    type="hidden"
+    data-map-target="venuesData"
+    value=@venues.to_json
+  ]
+
+  section#events_days_container.flex.flex-col.h-full
+
     - if @events.count.zero?
       p.py-4.text-center.text-xl.bg-white Aucun résultat
 
-    ul.events-list.overflow-y-scroll
-      = render @events
+    ul.flex.flex-col.gap-1.overflow-y-scroll
+      - @events.each do |event|
+        = render event
