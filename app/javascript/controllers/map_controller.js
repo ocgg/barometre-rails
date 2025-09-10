@@ -10,7 +10,7 @@ export default class extends Controller {
   }
 
   initialize() {
-    this.markers = [];
+    this.venuesMarkers = {};
     this.map = L.map('map').setView([47.216671, -1.55], 13);
     this.map.zoomControl.setPosition("bottomright");
 
@@ -31,16 +31,18 @@ export default class extends Controller {
     });
   }
 
+  get markers() { return Object.values(this.venuesMarkers) }
+
   venuesDataTargetConnected() {
     this.removeMarkers();
     this.createMarkers();
     this.addMarkersToMap();
-    this.setBoundaries();
+    this.setBoundaries(this.markers);
   }
 
   removeMarkers() {
     this.markers.forEach(marker => marker.remove());
-    this.markers = [];
+    this.venuesMarkers = {};
   }
 
   createMarkers() {
@@ -51,17 +53,24 @@ export default class extends Controller {
   createMarker(venue) {
     const marker = L.marker([venue.latitude, venue.longitude], { icon: this.markerIcon })
       .bindPopup(`<b>${venue.name}</b><br>${venue.address}`)
-    this.markers.push(marker)
+    this.venuesMarkers[venue.id] = marker
   }
 
   addMarkersToMap() {
     this.markers.forEach(marker => marker.addTo(this.map))
   }
 
-  setBoundaries() {
-    if (this.markers.length === 0) return;
+  setBoundaries(points) {
+    if (this.venuesMarkers.length === 0) return;
 
-    const group = new L.featureGroup(this.markers);
-    this.map.fitBounds(group.getBounds().pad(0.5), {maxZoom: 13, paddingTopLeft: [384, 0]})
+    const group = new L.featureGroup(points);
+    const opts = {animate: true, maxZoom: 13, paddingTopLeft: [384, 0]}
+    this.map.fitBounds(group.getBounds().pad(0.5), opts)
+  }
+
+  onEventClick(event) {
+    const venueId = event.currentTarget.dataset.venueId;
+    const venueMarker = this.venuesMarkers[venueId]
+    this.setBoundaries([venueMarker])
   }
 }

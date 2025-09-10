@@ -19,7 +19,7 @@ class EventsController < ApplicationController
     params[:start] ||= Date.today.strftime("%d-%m-%Y")
     params[:end] = params[:start]
     @events = Event.filter_with_params(params)
-    venue_columns = %w[name address latitude longitude]
+    venue_columns = %w[id name address latitude longitude]
     @events = authorize policy_scope(@events)
     @venues = Venue.select(venue_columns).where(id: @events.select(:venue_id))
   end

@@ -16,4 +16,8 @@
 
     ul.flex.flex-col.gap-1.overflow-y-scroll
       - @events.each do |event|
-        = render event
+        a[
+          data-action="click->map#onEventClick"
+          data-venue-id=event.venue.id
+        ]
+          = render event
