@@ -35,6 +35,7 @@ export default class extends Controller {
     this.removeMarkers();
     this.createMarkers();
     this.addMarkersToMap();
+    this.setBoundaries();
   }
 
   removeMarkers() {
@@ -43,7 +44,8 @@ export default class extends Controller {
   }
 
   createMarkers() {
-    JSON.parse(this.venuesDataTarget.value).forEach(venue => this.createMarker(venue));
+    const venues = JSON.parse(this.venuesDataTarget.value)
+    venues.forEach(venue => this.createMarker(venue));
   }
 
   createMarker(venue) {
@@ -54,5 +56,12 @@ export default class extends Controller {
 
   addMarkersToMap() {
     this.markers.forEach(marker => marker.addTo(this.map))
+  }
+
+  setBoundaries() {
+    if (this.markers.length === 0) return;
+
+    const group = new L.featureGroup(this.markers);
+    this.map.fitBounds(group.getBounds().pad(0.5), {maxZoom: 13, paddingTopLeft: [384, 0]})
   }
 }
