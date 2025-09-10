@@ -15,9 +15,9 @@ html
       class="@container/main"
     ]
 
-    main.absolute.w-96.top-0.left-0.bottom-0.right-0.flex.flex-col class="@container/main"
+    main.absolute.md:w-96.top-0.left-0.bottom-0.right-0.flex.flex-col class="@container/main"
       div.z-1000 class="[&_nav]:p-4!"
-        = render "shared/navbar"
+        = render "shared/map_navbar"
 
       = turbo_frame_tag :searchform, target: :content
 
