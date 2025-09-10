@@ -6,7 +6,8 @@ html
   body.relative.overflow-hidden[
     class="max-w-[100vw] max-h-[100vh]"
     data-controller="map"
-    data-map-marker-icon-value="#{asset_path("map_marker.svg")}"
+    data-map-marker-icon-value=asset_path("map_marker.svg")
+    data-map-marker-icon-hover-value=asset_path("map_marker_hover.svg")
   ]
 
     = render "shared/flashes"
@@ -21,7 +22,7 @@ html
 
       = turbo_frame_tag :searchform, target: :content
 
-        search.w-full.h-40
+        search.w-full.h-43
 
           = form_with(class: "w-full", method: :get, url: map_path) do |form|
 
@@ -29,12 +30,12 @@ html
               = render "shared/search_bar", form:
               = render "shared/location_filter", form:
 
-            div.relative.whitespace-nowrap[
+            div.relative.whitespace-nowrap.mx-1[
               data-controller="datefilter"
               data-datefilter-initial-start-value="#{params[:start]}"
               data-action="click@window->datefilter#handleFocusOut"
             ]
-              div.btn.rounded-b-none.p-0.absolute.z-20[
+              div.btn.p-0.absolute.z-20[
                 class="@max-md:w-full bg-blue"
                 data-datefilter-target="mainContainer"
               ]

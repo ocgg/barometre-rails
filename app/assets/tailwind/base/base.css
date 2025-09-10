@@ -31,11 +31,11 @@
   label[for] {
     cursor: pointer;
   }
-  
+
   p a {
     text-decoration: underline;
     text-decoration-style: dotted;
-    
+
     &:hover {
       @apply text-yellow;
     }
@@ -54,7 +54,7 @@
     padding-block: calc(var(--spacing) * 0.5);
     font-family: var(--font-paragraph);
 
-    &:focus{
+    &:focus {
       outline: none;
       border-color: var(--color-yellow);
     }
@@ -68,5 +68,16 @@
       line-height: var(--tw-leading, var(--text-sm--line-height));
       color: var(--color-blue-faded);
     }
+  }
+
+  .leaflet-bottom.leaflet-right {
+    display: flex;
+    align-items: end;
+    gap: 1rem;
+    padding: .5rem
+  }
+
+  .leaflet-control {
+    margin: 0 !important
   }
 }
