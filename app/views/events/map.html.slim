@@ -14,7 +14,7 @@
     - if @events.count.zero?
       p.py-4.text-center.text-xl.bg-white Aucun résultat
 
-    ul.flex.flex-col.gap-1.overflow-y-scroll.px-1.rounded-lg.overflow-hidden
+    ul.flex.flex-col.gap-1.overflow-y-scroll.px-1.mb-1.rounded-lg.overflow-hidden
       - @events.each do |event|
         a.border-l-8.border-white[
           data-action="click->map#onEventClick mouseenter->map#onEventMouseOver mouseleave->map#onEventMouseLeave"
