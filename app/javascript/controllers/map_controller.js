@@ -86,23 +86,23 @@ export default class extends Controller {
     const venueId = event.target.dataset.venueId
     const marker = this.venuesMarkers[venueId]
     const events = this.eventEltTargets.filter(elt => elt.dataset.venueId == venueId)
-    this.addHoverClass(events, marker._icon)
+    this.addEventHoverClass(events, marker._icon)
   }
 
   onEventMouseLeave(event) {
     const venueId = event.target.dataset.venueId
     const marker = this.venuesMarkers[venueId]
     const events = this.eventEltTargets.filter(elt => elt.dataset.venueId == venueId)
-    this.removeHoverClass(events, marker._icon)
+    this.removeEventHoverClass(events, marker._icon)
   }
 
-  addHoverClass(eventElts, markerElt) {
+  addEventHoverClass(eventElts, markerElt) {
     eventElts.forEach(elt => elt.classList.add("border-yellow"))
     markerElt.classList.add("bg-yellow");
     markerElt.style.zIndex += 250;
   }
 
-  removeHoverClass(eventElts, markerElt) {
+  removeEventHoverClass(eventElts, markerElt) {
     eventElts.forEach(elt => elt.classList.remove("border-yellow"))
     markerElt.classList.remove("bg-yellow");
     markerElt.style.zIndex -= 250;
