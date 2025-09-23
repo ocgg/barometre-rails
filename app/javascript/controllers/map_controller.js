@@ -3,10 +3,11 @@ import L from "leaflet"
 import "leaflet-css"
 
 export default class extends Controller {
-  static targets = ["venuesData", "eventElt"]
+  static targets = ["venuesData", "eventElt", "eventList"]
 
   static values = {
     markerIcon: String,
+    locationIcon: String,
   }
 
   initialize() {
@@ -34,7 +35,13 @@ export default class extends Controller {
     });
   }
 
-  get markers() { return Object.values(this.venuesMarkers) }
+  get markers() {
+    if (this.localized) {
+      return [...Object.values(this.venuesMarkers), this.locationMarker]
+    }
+    else return Object.values(this.venuesMarkers)
+
+  }
 
   venuesDataTargetConnected() {
     this.removeMarkers();
@@ -43,7 +50,7 @@ export default class extends Controller {
   }
 
   removeMarkers() {
-    this.markers.forEach(marker => marker.remove());
+    Object.values(this.venuesMarkers).forEach(marker => marker.remove());
     this.venuesMarkers = {};
   }
 
@@ -91,6 +98,10 @@ export default class extends Controller {
 
   onMarkerClick(marker) {
     this.panTo(marker);
+    const venueId = marker._icon.dataset.venueId;
+    const event = this.eventEltTargets.find(elt => elt.dataset.venueId == venueId);
+    const top = event.offsetTop - this.eventListTarget.offsetTop;
+    this.eventListTarget.scrollTo({ top: top, behavior: "smooth" });
   }
 
   onEventMouseOver(event) {
@@ -117,5 +128,17 @@ export default class extends Controller {
     eventElts.forEach(elt => elt.classList.remove("border-yellow"));
     markerElt.classList.remove("bg-yellow");
     markerElt.style.zIndex -= 250;
+  }
+
+  // called from locationfilter controller
+  onLocalization(lat, long) {
+    const locationIcon = L.icon({
+      iconUrl: this.locationIconValue,
+      className: "hover:cursor-pointer rounded-full",
+      iconSize: [38, 38],
+      iconAnchor: [19, 19],
+    });
+    this.locationMarker = L.marker([lat, long], { icon: locationIcon }).addTo(this.map);
+    this.localized = true;
   }
 }

@@ -115,6 +115,8 @@ export default class extends Controller {
     this.activate();
     this.show();
     this.submit();
+    const mapController = this.application.getControllerForElementAndIdentifier(document.querySelector("body"), "map");
+    if (mapController) mapController.onLocalization(position.coords.latitude, position.coords.longitude);
   }
 
   onLocalizationError(err) {
