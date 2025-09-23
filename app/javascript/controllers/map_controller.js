@@ -23,7 +23,7 @@ export default class extends Controller {
     const leafletAttribbution = '<a href="https://leafletjs.com"><svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="12" height="8" viewBox="0 0 12 8" class="leaflet-attribution-flag inline"><path fill="#4C7BE1" d="M0 0h12v4H0z"></path><path fill="#FFD500" d="M0 4h12v3H0z"></path><path fill="#E0BC00" d="M0 7h12v1H0z"></path></svg> Leaflet</a>';
     L.control.attribution({ prefix: leafletAttribbution, position: "topright" })
       .addAttribution('&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>')
-      .addTo(this.map)
+      .addTo(this.map);
 
     this.markerIcon = L.icon({
       iconUrl: this.markerIconValue,
@@ -31,9 +31,6 @@ export default class extends Controller {
       iconSize: [38, 38],
       iconAnchor: [19, 38],
       popupAnchor: [0, -19] // relative to iconAnchor
-      // shadowUrl: this.markerIconValue,
-      // shadowSize: [50, 64],
-      // shadowAnchor: [4, 62],
     });
   }
 
@@ -42,7 +39,7 @@ export default class extends Controller {
   venuesDataTargetConnected() {
     this.removeMarkers();
     this.createMarkers();
-    this.setBoundaries(this.markers);
+    this.fitToMarkers();
   }
 
   removeMarkers() {
@@ -51,59 +48,73 @@ export default class extends Controller {
   }
 
   createMarkers() {
-    const venues = JSON.parse(this.venuesDataTarget.value)
+    const venues = JSON.parse(this.venuesDataTarget.value);
     venues.forEach(venue => this.createMarker(venue));
   }
 
   createMarker(venue) {
     const marker = L.marker([venue.latitude, venue.longitude], { icon: this.markerIcon })
       .bindPopup(`<b>${venue.name}</b><br>${venue.address}`)
-      .addTo(this.map)
-    marker._icon.addEventListener("mouseover", this.onEventMouseOver.bind(this))
-    marker._icon.addEventListener("mouseleave", this.onEventMouseLeave.bind(this))
+      .addTo(this.map);
+    marker._icon.addEventListener("mouseover", this.onEventMouseOver.bind(this));
+    marker._icon.addEventListener("mouseleave", this.onEventMouseLeave.bind(this));
+    marker._icon.addEventListener("click", () => this.onMarkerClick(marker));
     marker._icon.dataset.venueId = venue.id;
     this.venuesMarkers[venue.id] = marker;
   }
 
-  setBoundaries(points) {
-    if (points.length === 0) return;
+  fitToMarkers() {
+    if (this.markers.length === 0) return;
 
-    const group = new L.featureGroup(points);
+    const group = new L.featureGroup(this.markers);
     const opts = {
       maxZoom: 13,
       paddingTopLeft: [384, 0]
-    }
-    this.map.flyToBounds(group.getBounds().pad(0.5), opts)
+    };
+    this.map.flyToBounds(group.getBounds().pad(0.5), opts);
+  }
+
+  panTo(marker) {
+    const group = new L.featureGroup([marker]);
+    const opts = {
+      maxZoom: this.map.getZoom(),
+      paddingTopLeft: [384, 0],
+    };
+    this.map.flyToBounds(group.getBounds().pad(0.5), opts);
   }
 
   onEventClick(event) {
     const venueId = event.currentTarget.dataset.venueId;
-    const venueMarker = this.venuesMarkers[venueId]
-    this.setBoundaries([venueMarker])
+    const venueMarker = this.venuesMarkers[venueId];
+    this.panTo(venueMarker);
+  }
+
+  onMarkerClick(marker) {
+    this.panTo(marker);
   }
 
   onEventMouseOver(event) {
-    const venueId = event.target.dataset.venueId
-    const marker = this.venuesMarkers[venueId]
-    const events = this.eventEltTargets.filter(elt => elt.dataset.venueId == venueId)
-    this.addEventHoverClass(events, marker._icon)
+    const venueId = event.target.dataset.venueId;
+    const marker = this.venuesMarkers[venueId];
+    const events = this.eventEltTargets.filter(elt => elt.dataset.venueId == venueId);
+    this.addEventHoverClass(events, marker._icon);
   }
 
   onEventMouseLeave(event) {
-    const venueId = event.target.dataset.venueId
-    const marker = this.venuesMarkers[venueId]
-    const events = this.eventEltTargets.filter(elt => elt.dataset.venueId == venueId)
-    this.removeEventHoverClass(events, marker._icon)
+    const venueId = event.target.dataset.venueId;
+    const marker = this.venuesMarkers[venueId];
+    const events = this.eventEltTargets.filter(elt => elt.dataset.venueId == venueId);
+    this.removeEventHoverClass(events, marker._icon);
   }
 
   addEventHoverClass(eventElts, markerElt) {
-    eventElts.forEach(elt => elt.classList.add("border-yellow"))
+    eventElts.forEach(elt => elt.classList.add("border-yellow"));
     markerElt.classList.add("bg-yellow");
     markerElt.style.zIndex += 250;
   }
 
   removeEventHoverClass(eventElts, markerElt) {
-    eventElts.forEach(elt => elt.classList.remove("border-yellow"))
+    eventElts.forEach(elt => elt.classList.remove("border-yellow"));
     markerElt.classList.remove("bg-yellow");
     markerElt.style.zIndex -= 250;
   }
