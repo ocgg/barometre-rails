@@ -6,10 +6,10 @@ export default class Styles {
     this.calendarContainer = "bg-white"
     this.currentMonthDay = this.active
     this.otherMonthDay = `${this.active} text-blue-faded`
-    this.selectedDay = `${this.active} bg-blue text-bg-light rounded-none`
-    this.selectedStartDay = `${this.active} bg-blue text-bg-light rounded-r-none`
-    this.selectedEndDay = `${this.active} bg-blue text-bg-light rounded-l-none`
-    this.onlySelectedDay = `${this.active} bg-blue text-bg-light rounded-full`
+    this.selectedDay = `${this.active} bg-blue text-light rounded-none`
+    this.selectedStartDay = `${this.active} bg-blue text-light rounded-r-none`
+    this.selectedEndDay = `${this.active} bg-blue text-light rounded-l-none`
+    this.onlySelectedDay = `${this.active} bg-blue text-light rounded-full`
     this.nonSelectableDay = `${this.base} opacity-15 rounded-none`
   }
 }

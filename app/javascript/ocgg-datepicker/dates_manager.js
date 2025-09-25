@@ -1,7 +1,13 @@
 export default class DatesManager {
   constructor(start_str, end_str) {
-    this.start = start_str ? new Date(start_str) : null;
-    this.end = end_str ? new Date(end_str) : null;
+    if (start_str) {
+      const [startday, startmonth, startyear] = start_str.split('-');
+      this.start = new Date(startyear, startmonth - 1, startday);
+    }
+    if (end_str) {
+      const [endday, endmonth, endyear] = end_str.split('-');
+      this.end = new Date(endyear, endmonth - 1, endday);
+    }
 
     this.current = this.start ? new Date(this.start) : new Date();
     this.current.setHours(0, 0, 0, 0);

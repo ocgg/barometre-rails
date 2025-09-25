@@ -4,7 +4,6 @@ module EventsHelper
     return "Demain" if date == Date.tomorrow
 
     format = (date.year == Date.today.year) ? "%A %d %B" : "%A %d %B %Y"
-
     l(date, format:).split.map(&:capitalize).join(" ")
   end
 

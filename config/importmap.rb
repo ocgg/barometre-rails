@@ -8,3 +8,5 @@ pin "@hotwired/stimulus-loading", to: "stimulus-loading.js"
 pin_all_from "app/javascript/ocgg-datepicker", under: "datepicker", to: "ocgg-datepicker"
 
 pin_all_from "app/javascript/controllers", under: "controllers"
+pin "leaflet" # @1.9.4
+pin "leaflet-css" # @0.1.0

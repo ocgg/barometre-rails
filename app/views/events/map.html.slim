@@ -1,7 +1,24 @@
-h1
-  | Events Map
+= content_for :title, "Baromètre - vue carte"
 
+= turbo_frame_tag :content, class: "grow overflow-hidden"
 
-div id="map" class="@container/main w-full min-h-[50vh]" data-controller="map"
-  = turbo_frame_tag "events", src: events_path do
-    p Remplacé par les eveeeents
+  /this input is only here to pass venues data to map controller
+  input[
+    type="hidden"
+    data-map-target="venuesData"
+    value=@venues.to_json
+  ]
+
+  section#events_days_container.flex.flex-col.h-full
+
+    - if @events.count.zero?
+      p.px-1.py-4.mb-1.ml-1.text-center.text-xl.bg-white Aucun résultat
+
+    ul.flex.flex-col.gap-1.overflow-y-scroll.px-1.mb-1 data-map-target="eventList"
+      - @events.each do |event|
+        a.border-l-8.border-white[
+          data-action="click->map#onEventClick mouseenter->map#onEventMouseOver mouseleave->map#onEventMouseLeave"
+          data-map-target="eventElt"
+          data-venue-id=event.venue.id
+        ]
+          = render event

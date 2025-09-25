@@ -1,8 +1,9 @@
 :root {
   /* Light theme */
   --light-bg: rgba(234, 227, 210, 1);
+  --light-bg-faded: rgba(234, 227, 210, .7);
   --light-fg: rgba(2, 0, 100, 1);
-  --light-faded: rgba(2, 0, 100, .5);
+  --light-fg-faded: rgba(2, 0, 100, .5);
   --light-white: rgba(244, 241, 232, 1);
 
   /* Dark theme */
@@ -21,6 +22,7 @@
 
   --color-blue: var(--blue);
   --color-blue-faded: var(--blue-faded);
-  --color-bg-light: var(--bg-light);
+  --color-light: var(--light);
+  --color-light-faded: var(--light-faded);
   --color-white: var(--white);
 }
