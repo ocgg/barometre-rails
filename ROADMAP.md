@@ -9,8 +9,8 @@
 
 2. Map
   - Si geoloc: afficher la distance
-  - marker de position quand "autour de moi" activé
-  - front mobile
+  - !! FRONT MOBILE !!
+    - réécriture front searchbar
 
 3. Divers ajustements UX
   - gestion flashes
