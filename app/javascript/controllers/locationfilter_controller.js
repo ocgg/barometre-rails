@@ -20,6 +20,11 @@ export default class extends Controller {
     this.updateElementSize();
   }
 
+  get hasMap() {
+    this.mapController = this.application.getControllerForElementAndIdentifier(document.querySelector("body"), "map");
+    return !!this.mapController;
+  }
+
   get active() { return !this.radiusInputTarget.disabled; }
 
   get isLocalized() { return !!this.latInputTarget.value; }
@@ -36,6 +41,7 @@ export default class extends Controller {
   activate() {
     this.enableInputs();
     this.updateButtonText();
+    if (this.hasMap) this.mapController.onLocalization(this.latInputTarget.value, this.longInputTarget.value);
   }
 
   enableInputs() {
@@ -48,6 +54,7 @@ export default class extends Controller {
     this.disableInputs();
     this.resetButtonText();
     this.hide();
+    if (this.hasMap) this.mapController.onDesactivateLocalization();
   }
 
   disableInputs() {
@@ -115,8 +122,6 @@ export default class extends Controller {
     this.activate();
     this.show();
     this.submit();
-    const mapController = this.application.getControllerForElementAndIdentifier(document.querySelector("body"), "map");
-    if (mapController) mapController.onLocalization(position.coords.latitude, position.coords.longitude);
   }
 
   onLocalizationError(err) {

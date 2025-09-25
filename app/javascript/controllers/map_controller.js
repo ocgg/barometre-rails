@@ -141,4 +141,9 @@ export default class extends Controller {
     this.locationMarker = L.marker([lat, long], { icon: locationIcon }).addTo(this.map);
     this.localized = true;
   }
+
+  onDesactivateLocalization() {
+    this.locationMarker.remove();
+    this.localized = false;
+  }
 }
