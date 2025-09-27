@@ -2,6 +2,7 @@
 
 - events#edit: bouger l'event de jour quand on modifie sa date
 - container de jours possiblement dupliqué lors de la pagination
+- Chrome: searchbar: layout bug entre entre 768-780px~ (problème de @container)
 
 # ROADMAP
 
@@ -10,7 +11,6 @@
 2. Map
   - Si geoloc: afficher la distance
   - !! FRONT MOBILE !!
-    - réécriture front searchbar
 
 3. Divers ajustements UX
   - gestion flashes
