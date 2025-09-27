@@ -14,11 +14,12 @@
     - if @events.count.zero?
       p.px-1.py-4.mb-1.ml-1.text-center.text-xl.bg-white Aucun résultat
 
-    ul.flex.flex-col.gap-1.overflow-y-scroll.px-1.mb-1 data-map-target="eventList"
-      - @events.each do |event|
-        a.border-l-8.border-white[
-          data-action="click->map#onEventClick mouseenter->map#onEventMouseOver mouseleave->map#onEventMouseLeave"
-          data-map-target="eventElt"
-          data-venue-id=event.venue.id
-        ]
-          = render event
+    div.overflow-y-scroll.px-1.mb-1 class="[direction:rtl] [scrollbar-width:thin]"
+      ul.flex.flex-col.gap-1 class="[direction:ltr]" data-map-target="eventList"
+        - @events.each do |event|
+          a.border-l-8.border-white[
+            data-action="click->map#onEventClick mouseenter->map#onEventMouseOver mouseleave->map#onEventMouseLeave"
+            data-map-target="eventElt"
+            data-venue-id=event.venue.id
+          ]
+            = render event
