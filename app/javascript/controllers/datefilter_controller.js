@@ -36,7 +36,6 @@ export default class extends Controller {
 
     this.containerClass = "bg-white";
     this.mainContainerTarget.classList.toggle(this.containerClass, this.datepicker.active);
-    this.updateElementSize();
     if (this.initialStartValue) this.onStartDateSelection({target: {value: this.initialStartValue}})
   }
 
@@ -44,15 +43,7 @@ export default class extends Controller {
 
   setVisible(bool) {
     this.datepickerContainerTarget.classList.toggle("hidden", !bool);
-    this.mainContainerTarget.classList.toggle("max-md:translate-x-[-25%]", bool);
     this.mainContainerTarget.classList.toggle(this.containerClass, bool || this.datepicker.active);
-    if (!bool) this.updateElementSize();
-  }
-
-  updateElementSize() {
-    const size = this.mainContainerTarget.getBoundingClientRect();
-    this.element.style.width = `${Math.floor(size.width)}px`;
-    this.element.style.height = `${Math.floor(size.height)}px`;
   }
 
   onButtonClick(_) { this.setVisible(!this.visible) }

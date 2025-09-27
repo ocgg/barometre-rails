@@ -17,7 +17,6 @@ export default class extends Controller {
   connect() {
     this.active ? this.updateButtonText() : this.resetButtonText();
     this.mainContainerTarget.classList.toggle("bg-white", this.active);
-    this.updateElementSize();
   }
 
   get hasMap() {
@@ -33,10 +32,12 @@ export default class extends Controller {
 
   set visible(bool) {
     this.rangeContainerTarget.classList.toggle("hidden", !bool);
-    this.mainContainerTarget.classList.toggle("max-md:translate-x-[-25%]", bool);
     this.mainContainerTarget.classList.toggle("bg-white", bool || this.active);
-    if (!bool) this.updateElementSize();
   }
+
+  show() { this.visible = true }
+
+  hide() { this.visible = false; }
 
   activate() {
     this.enableInputs();
@@ -63,11 +64,6 @@ export default class extends Controller {
     this.longInputTarget.disabled = true;
   }
 
-  hide() {
-    this.visible = false;
-    this.updateElementSize();
-  }
-
   onRadiusInput() {
     this.updateButtonText();
   }
@@ -82,20 +78,10 @@ export default class extends Controller {
     this.clearInputBtnTarget.classList.toggle("hidden", true);
   }
 
-  updateElementSize() {
-    const size = this.mainContainerTarget.getBoundingClientRect();
-    this.element.style.width = `${Math.floor(size.width)}px`;
-    this.element.style.height = `${Math.floor(size.height)}px`;
-  }
-
   onButtonClick() {
     if (this.active) this.show();
     else if (this.isLocalized) { this.activate(); this.show(); }
     else this.checkGeolocation();
-  }
-
-  show() {
-    this.visible = true
   }
 
   checkGeolocation() {
