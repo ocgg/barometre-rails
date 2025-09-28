@@ -1,10 +1,19 @@
-# FIXES
+## WIP
+
+- z-index markers marche pas bien sur event hover
+- rendre les espaces vides de main "transparents" à la souris (accès à la map)
+- scroller vers l'event au click sur marker, même après dragging de la liste
+- ne pas ouvrir le calendrier si on mouseup sur event-days-ctn après dragging (élément séparé pour le drag)
+
+## FIXES
 
 - events#edit: bouger l'event de jour quand on modifie sa date
 - container de jours possiblement dupliqué lors de la pagination
 - Chrome: searchbar: layout bug entre entre 768-780px~ (problème de @container)
+- éléments de la searchbar ne doivent pas bouger quand on "ouvre" le calendrier ou la loc
+- il semble que quand les events sont récupérés avec ajax, la timezone est pas prise en compte (p.e. un evt du 2 juin à 00h40 est affiché le 1er juin)
 
-# ROADMAP
+## ROADMAP
 
 1. Geoloc: message (modale) si user pas dans le 44
 

@@ -3,7 +3,12 @@ import L from "leaflet"
 import "leaflet-css"
 
 export default class extends Controller {
-  static targets = ["venuesData", "eventElt", "eventList"]
+  static targets = [
+    "venuesData",
+    "eventElt",
+    "eventList",
+    "dateElt"
+  ]
 
   static values = {
     markerIcon: String,
@@ -121,13 +126,32 @@ export default class extends Controller {
   addEventHoverClass(eventElts, markerElt) {
     eventElts.forEach(elt => elt.classList.add("border-yellow"));
     markerElt.classList.add("bg-yellow");
-    markerElt.style.zIndex += 250;
+    markerElt.style.zIndex += 1000000;
   }
 
   removeEventHoverClass(eventElts, markerElt) {
     eventElts.forEach(elt => elt.classList.remove("border-yellow"));
     markerElt.classList.remove("bg-yellow");
-    markerElt.style.zIndex -= 250;
+    markerElt.style.zIndex -= 1000000;
+  }
+
+  startEventListDrag(event) {
+    event.preventDefault(); // to keep listening when mouse leaves drag elt
+    const baseY = event.clientY;
+    // TODO: set drag limits & use them in onMove()
+    const maxY = 0;
+    const minY = 0;
+    const onMove = (moveEvt) => {
+      // this is broken
+      const mouseY = moveEvt.clientY - baseY;
+      this.dateEltTarget.style.marginTop = `${mouseY}px`;
+    }
+    const onUp = (upEvt) => {
+      document.removeEventListener("mousemove", onMove);
+      document.removeEventListener("mouseup", onUp);
+    }
+    document.addEventListener("mousemove", onMove);
+    document.addEventListener("mouseup", onUp);
   }
 
   // called from locationfilter controller
