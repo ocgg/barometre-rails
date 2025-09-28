@@ -3,11 +3,7 @@
 = turbo_frame_tag :content, class: "grow overflow-hidden"
 
   /this input is only here to pass venues data to map controller
-  input[
-    type="hidden"
-    data-map-target="venuesData"
-    value=@venues.to_json
-  ]
+  input type="hidden" data-map-target="venuesData" value=@venues.to_json
 
   section#events_days_container.flex.flex-col.h-full
 
