@@ -56,7 +56,7 @@ export default class extends Controller {
     this.buttonTarget.textContent = this.startDateString;
     if (this.opts.range) this.buttonTarget.textContent += " ➞ ...";
     else this.setVisible(false)
-    this.clearInputBtnTarget.classList.toggle("hidden", false);
+    if (this.hasClearInputBtnTarget) this.clearInputBtnTarget.classList.toggle("hidden", false);
   }
 
   onEndDateSelection(event) {
