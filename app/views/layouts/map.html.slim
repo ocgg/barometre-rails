@@ -16,13 +16,16 @@ html
       class="@container/main"
     ]
 
-    main.absolute.md:w-96.top-0.left-0.bottom-0.right-0.flex.flex-col.pointer-events-none class="@container/main"
+    main.absolute.md:w-96.top-0.left-0.bottom-0.right-0.flex.flex-col.pointer-events-none[
+      class="@container/main"
+      data-map-target="mainElt"
+    ]
       div.z-1000.pointer-events-auto class="[&>nav]:p-4!"
         = render "shared/map_navbar"
 
       = turbo_frame_tag :searchform, target: :content
 
-        search.w-full.mb-1
+        search.w-full.mb-1 data-map-target="searchbar"
 
           = form_with(class: "w-full", method: :get, url: map_path) do |form|
 
