@@ -149,24 +149,28 @@ export default class extends Controller {
     markerElt.style.zIndex -= 1000000;
   }
 
-  dragEventList(event) {
+  dragEventListHeight(event) {
     const baseMouseY = event.clientY;
     const searchBarHeight = this.searchbarTarget.offsetHeight;
+    const navbarHeight = 72;
 
-    const baseHeight = this.eventsMainCtnTarget.offsetHeight;
-    const maxHeight = window.innerHeight - searchBarHeight - 72;
-    const minHeight = 36;
+    const base = this.eventsMainCtnTarget.offsetHeight;
+    const max = window.innerHeight - searchBarHeight - navbarHeight;
+    const min = 36;
 
     const onMouseMove = (moveEvt) => {
       const offset = baseMouseY - moveEvt.clientY;
-      if (baseHeight + offset > maxHeight) return;
-      if (baseHeight + offset < minHeight) return;
-      this.eventsMainCtnTarget.style.maxHeight = `${baseHeight + offset}px`;
+      const target = base + offset;
+      if (target > max || target < min) return;
+
+      this.eventsMainCtnTarget.style.maxHeight = `${target}px`;
     }
+
     const onMouseUp = (_upEvt) => {
       document.removeEventListener("mousemove", onMouseMove);
       document.removeEventListener("mouseup", onMouseUp);
     }
+
     document.addEventListener("mousemove", onMouseMove);
     document.addEventListener("mouseup", onMouseUp);
   }
