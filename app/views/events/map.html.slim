@@ -1,14 +1,17 @@
 = content_for :title, "Baromètre - vue carte"
 
-= turbo_frame_tag :content, class: "grow overflow-hidden"
+= turbo_frame_tag :content, class: "grow overflow-hidden relative"
 
   /this input is only here to pass venues data to map controller
   input type="hidden" data-map-target="venuesData" value=@venues.to_json
 
-  section#events_days_container.relative.flex.flex-col.h-full data-map-target="eventsMainCtn"
+  section#events_days_container.flex.flex-col.absolute.left-0.bottom-0.right-0[
+    class="top-[33vh] md:top-0!"
+    data-map-target="eventsMainCtn"
+  ]
 
     /grab icon
-    div.absolute.top-0.px-0.py-1.rounded.pointer-events-auto[
+    div.absolute.top-0.px-0.py-1.rounded.pointer-events-auto.md:hidden[
       class="left-[50%]"
       data-action="mousedown->map#startEventListDrag"
     ]
@@ -18,7 +21,10 @@
       p.px-1.py-8.mb-1.ml-1.text-center.text-xl.bg-white Aucun résultat
 
     div.overflow-y-scroll.px-1.mb-1 class="[direction:rtl] [scrollbar-width:thin]"
-      ul.flex.flex-col.gap-1.pointer-events-auto class="[direction:ltr]" data-map-target="eventList"
+      ul.flex.flex-col.gap-1.pointer-events-auto[
+        class="[direction:ltr]"
+        data-map-target="eventList"
+      ]
         - @events.each do |event|
           a.border-l-8.border-white[
             data-action="click->map#onEventClick mouseenter->map#onEventMouseOver mouseleave->map#onEventMouseLeave"

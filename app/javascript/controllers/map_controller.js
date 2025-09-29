@@ -158,7 +158,7 @@ export default class extends Controller {
     const onMove = (moveEvt) => {
       // this is broken
       const mouseY = moveEvt.clientY - baseY;
-      this.eventsMainCtnTarget.style.marginTop = `${mouseY}px`;
+      this.eventsMainCtnTarget.style.top = `${mouseY}px`;
     }
     const onUp = (upEvt) => {
       document.removeEventListener("mousemove", onMove);
