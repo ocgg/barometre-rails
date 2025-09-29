@@ -16,8 +16,8 @@ html
       class="@container/main"
     ]
 
-    main.absolute.md:w-96.top-0.left-0.bottom-0.right-0.flex.flex-col class="@container/main"
-      div.z-1000 class="[&>nav]:p-4!"
+    main.absolute.md:w-96.top-0.left-0.bottom-0.right-0.flex.flex-col.pointer-events-none class="@container/main"
+      div.z-1000.pointer-events-auto class="[&>nav]:p-4!"
         = render "shared/map_navbar"
 
       = turbo_frame_tag :searchform, target: :content
@@ -26,15 +26,14 @@ html
 
           = form_with(class: "w-full", method: :get, url: map_path) do |form|
 
-            div class= "w-full flex items-center flex-col gap-4 py-4"
+            div.w-full.flex.items-center.flex-col.gap-4.py-4
               = render "shared/search_bar", form:
               = render "shared/location_filter", form:
 
-            div.relative.z-10.whitespace-nowrap.mx-1[
+            div.relative.z-10.whitespace-nowrap.mx-1.h-10.pointer-events-auto[
               data-controller="datefilter"
               data-datefilter-initial-start-value="#{params[:start]}"
               data-action="click@window->datefilter#handleFocusOut"
-              data-map-target="dateElt"
             ]
               div.btn.p-0.overflow-hidden[
                 class="@max-md:w-full bg-blue"
@@ -57,9 +56,6 @@ html
                       viewBox="0 0 16 16"
                     ]
                       path d="M5.17501 14.325C5.02501 14.325 4.90001 14.275 4.77501 14.175C4.55001 13.95 4.55001 13.6 4.77501 13.375L10.025 8.00003L4.77501 2.65002C4.55001 2.42502 4.55001 2.07502 4.77501 1.85002C5.00001 1.62502 5.35001 1.62502 5.57501 1.85002L11.225 7.60002C11.45 7.82502 11.45 8.17502 11.225 8.40002L5.57501 14.15C5.47501 14.25 5.32501 14.325 5.17501 14.325Z"
-                  div draggable="true" data-action="mousedown->map#startEventListDrag"
-                    /grab icon
-                    svg.fill-light.size-5.hover:fill-yellow.hover:cursor-grab viewBox="0 0 320 512": path d="M128 40c0-22.1-17.9-40-40-40L40 0C17.9 0 0 17.9 0 40L0 88c0 22.1 17.9 40 40 40l48 0c22.1 0 40-17.9 40-40l0-48zm0 192c0-22.1-17.9-40-40-40l-48 0c-22.1 0-40 17.9-40 40l0 48c0 22.1 17.9 40 40 40l48 0c22.1 0 40-17.9 40-40l0-48zM0 424l0 48c0 22.1 17.9 40 40 40l48 0c22.1 0 40-17.9 40-40l0-48c0-22.1-17.9-40-40-40l-48 0c-22.1 0-40 17.9-40 40zM320 40c0-22.1-17.9-40-40-40L232 0c-22.1 0-40 17.9-40 40l0 48c0 22.1 17.9 40 40 40l48 0c22.1 0 40-17.9 40-40l0-48zM192 232l0 48c0 22.1 17.9 40 40 40l48 0c22.1 0 40-17.9 40-40l0-48c0-22.1-17.9-40-40-40l-48 0c-22.1 0-40 17.9-40 40zM320 424c0-22.1-17.9-40-40-40l-48 0c-22.1 0-40 17.9-40 40l0 48c0 22.1 17.9 40 40 40l48 0c22.1 0 40-17.9 40-40l0-48z"
                 /datepicker
                 div.hidden.m-auto.size-max.min-w-fit.flex-col.p-2.cursor-default data-datefilter-target="datepickerContainer"
 
