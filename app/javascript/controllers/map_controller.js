@@ -80,7 +80,7 @@ export default class extends Controller {
   fitToMarkers() {
     if (this.markers.length === 0) return;
 
-    const {mapLeft, mapTop, mapBottom} = this.getLeftTopBottomMapPadding();
+    const { mapLeft, mapTop, mapBottom } = this.getLeftTopBottomMapPadding();
     const group = new L.featureGroup(this.markers);
     const opts = {
       maxZoom: 13,
@@ -91,7 +91,7 @@ export default class extends Controller {
   }
 
   panTo(marker) {
-    const {mapLeft, mapTop, mapBottom} = this.getLeftTopBottomMapPadding();
+    const { mapLeft, mapTop, mapBottom } = this.getLeftTopBottomMapPadding();
     const group = new L.featureGroup([marker]);
     const opts = {
       maxZoom: this.map.getZoom(),
@@ -106,7 +106,7 @@ export default class extends Controller {
     const mapTop = smallScreen ? this.searchbarTarget.offsetHeight : 0;
     const mapLeft = smallScreen ? 0 : this.mainEltTarget.offsetWidth;
     const mapBottom = smallScreen ? window.innerHeight - this.eventsMainCtnTarget.getBoundingClientRect().top : 0;
-    return {mapLeft, mapTop, mapBottom}
+    return { mapLeft, mapTop, mapBottom }
   }
 
   onEventClick(event) {
@@ -149,23 +149,28 @@ export default class extends Controller {
     markerElt.style.zIndex -= 1000000;
   }
 
-  startEventListDrag(event) {
+  dragEventList(event) {
     event.preventDefault(); // to keep listening when mouse leaves drag elt
-    const baseY = event.clientY;
-    // TODO: set drag limits & use them in onMove()
-    const maxY = 0;
-    const minY = 0;
-    const onMove = (moveEvt) => {
-      // this is broken
-      const mouseY = moveEvt.clientY - baseY;
-      this.eventsMainCtnTarget.style.top = `${mouseY}px`;
+    const baseMouseY = event.clientY;
+    const searchBarMargin = parseInt(window.getComputedStyle(this.searchbarTarget).getPropertyValue("margin-bottom"));
+    const searchBarHeight = this.searchbarTarget.offsetHeight + searchBarMargin;
+
+    const baseHeight = this.eventsMainCtnTarget.offsetHeight;
+    const maxHeight = window.innerHeight - searchBarHeight - 72;
+    const minHeight = 30;
+
+    const onMouseMove = (moveEvt) => {
+      const offset = baseMouseY - moveEvt.clientY;
+      if (baseHeight + offset > maxHeight) return;
+      if (baseHeight + offset < minHeight) return;
+      this.eventsMainCtnTarget.style.maxHeight = `${baseHeight + offset}px`;
     }
-    const onUp = (upEvt) => {
-      document.removeEventListener("mousemove", onMove);
-      document.removeEventListener("mouseup", onUp);
+    const onMouseUp = (_upEvt) => {
+      document.removeEventListener("mousemove", onMouseMove);
+      document.removeEventListener("mouseup", onMouseUp);
     }
-    document.addEventListener("mousemove", onMove);
-    document.addEventListener("mouseup", onUp);
+    document.addEventListener("mousemove", onMouseMove);
+    document.addEventListener("mouseup", onMouseUp);
   }
 
   // called from locationfilter controller
