@@ -150,14 +150,12 @@ export default class extends Controller {
   }
 
   dragEventList(event) {
-    event.preventDefault(); // to keep listening when mouse leaves drag elt
     const baseMouseY = event.clientY;
-    const searchBarMargin = parseInt(window.getComputedStyle(this.searchbarTarget).getPropertyValue("margin-bottom"));
-    const searchBarHeight = this.searchbarTarget.offsetHeight + searchBarMargin;
+    const searchBarHeight = this.searchbarTarget.offsetHeight;
 
     const baseHeight = this.eventsMainCtnTarget.offsetHeight;
     const maxHeight = window.innerHeight - searchBarHeight - 72;
-    const minHeight = 30;
+    const minHeight = 36;
 
     const onMouseMove = (moveEvt) => {
       const offset = baseMouseY - moveEvt.clientY;
