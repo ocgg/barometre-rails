@@ -1,12 +1,8 @@
-## WIP
-
-- z-index markers marche pas bien sur event hover
-- rendre les espaces vides de main "transparents" à la souris (accès à la map)
-- scroller vers l'event au click sur marker, même après dragging de la liste
-- ne pas ouvrir le calendrier si on mouseup sur event-days-ctn après dragging (élément séparé pour le drag)
+# WIP
 
 ## FIXES
 
+- map: z-index markers marche pas bien sur event card hover
 - events#edit: bouger l'event de jour quand on modifie sa date
 - container de jours possiblement dupliqué lors de la pagination
 - Chrome: searchbar: layout bug entre entre 768-780px~ (problème de @container)
@@ -19,7 +15,6 @@
 
 2. Map
   - Si geoloc: afficher la distance
-  - !! FRONT MOBILE !!
 
 3. Divers ajustements UX
   - gestion flashes
@@ -54,8 +49,6 @@
   - front pour sessions#new
   - events#unverified: intégrer barre de recherche
   - venues#geocode: spinner & turbo stream
-
-- ...
 
 ## MAYDO
 
