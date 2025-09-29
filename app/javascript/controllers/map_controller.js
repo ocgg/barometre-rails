@@ -3,7 +3,14 @@ import L from "leaflet"
 import "leaflet-css"
 
 export default class extends Controller {
-  static targets = ["venuesData", "eventElt", "eventList"]
+  static targets = [
+    "venuesData",
+    "eventElt",
+    "eventList",
+    "eventsMainCtn",
+    "searchbar",
+    "mainElt",
+  ]
 
   static values = {
     markerIcon: String,
@@ -61,7 +68,7 @@ export default class extends Controller {
 
   createMarker(venue) {
     const marker = L.marker([venue.latitude, venue.longitude], { icon: this.markerIcon })
-      .bindPopup(`<b>${venue.name}</b><br>${venue.address}`)
+      // .bindPopup(`<b>${venue.name}</b><br>${venue.address}`)
       .addTo(this.map);
     marker._icon.addEventListener("mouseover", this.onEventMouseOver.bind(this));
     marker._icon.addEventListener("mouseleave", this.onEventMouseLeave.bind(this));
@@ -73,21 +80,33 @@ export default class extends Controller {
   fitToMarkers() {
     if (this.markers.length === 0) return;
 
+    const { mapLeft, mapTop, mapBottom } = this.getLeftTopBottomMapPadding();
     const group = new L.featureGroup(this.markers);
     const opts = {
       maxZoom: 13,
-      paddingTopLeft: [384, 0]
+      paddingTopLeft: [mapLeft, mapTop],
+      paddingBottomRight: [0, mapBottom]
     };
     this.map.flyToBounds(group.getBounds().pad(0.5), opts);
   }
 
   panTo(marker) {
+    const { mapLeft, mapTop, mapBottom } = this.getLeftTopBottomMapPadding();
     const group = new L.featureGroup([marker]);
     const opts = {
       maxZoom: this.map.getZoom(),
-      paddingTopLeft: [384, 0],
+      paddingTopLeft: [mapLeft, mapTop],
+      paddingBottomRight: [0, mapBottom]
     };
     this.map.flyToBounds(group.getBounds().pad(0.5), opts);
+  }
+
+  getLeftTopBottomMapPadding() {
+    const smallScreen = window.innerWidth < 768;
+    const mapTop = smallScreen ? this.searchbarTarget.offsetHeight : 0;
+    const mapLeft = smallScreen ? 0 : this.mainEltTarget.offsetWidth;
+    const mapBottom = smallScreen ? window.innerHeight - this.eventsMainCtnTarget.getBoundingClientRect().top : 0;
+    return { mapLeft, mapTop, mapBottom }
   }
 
   onEventClick(event) {
@@ -121,13 +140,35 @@ export default class extends Controller {
   addEventHoverClass(eventElts, markerElt) {
     eventElts.forEach(elt => elt.classList.add("border-yellow"));
     markerElt.classList.add("bg-yellow");
-    markerElt.style.zIndex += 250;
+    markerElt.style.zIndex += 1000000;
   }
 
   removeEventHoverClass(eventElts, markerElt) {
     eventElts.forEach(elt => elt.classList.remove("border-yellow"));
     markerElt.classList.remove("bg-yellow");
-    markerElt.style.zIndex -= 250;
+    markerElt.style.zIndex -= 1000000;
+  }
+
+  dragEventList(event) {
+    const baseMouseY = event.clientY;
+    const searchBarHeight = this.searchbarTarget.offsetHeight;
+
+    const baseHeight = this.eventsMainCtnTarget.offsetHeight;
+    const maxHeight = window.innerHeight - searchBarHeight - 72;
+    const minHeight = 36;
+
+    const onMouseMove = (moveEvt) => {
+      const offset = baseMouseY - moveEvt.clientY;
+      if (baseHeight + offset > maxHeight) return;
+      if (baseHeight + offset < minHeight) return;
+      this.eventsMainCtnTarget.style.maxHeight = `${baseHeight + offset}px`;
+    }
+    const onMouseUp = (_upEvt) => {
+      document.removeEventListener("mousemove", onMouseMove);
+      document.removeEventListener("mouseup", onMouseUp);
+    }
+    document.addEventListener("mousemove", onMouseMove);
+    document.addEventListener("mouseup", onMouseUp);
   }
 
   // called from locationfilter controller

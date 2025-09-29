@@ -1,16 +1,20 @@
-# FIXES
+# WIP
 
+## FIXES
+
+- map: z-index markers marche pas bien sur event card hover
 - events#edit: bouger l'event de jour quand on modifie sa date
 - container de jours possiblement dupliqué lors de la pagination
 - Chrome: searchbar: layout bug entre entre 768-780px~ (problème de @container)
+- éléments de la searchbar ne doivent pas bouger quand on "ouvre" le calendrier ou la loc
+- il semble que quand les events sont récupérés avec ajax, la timezone est pas prise en compte (p.e. un evt du 2 juin à 00h40 est affiché le 1er juin)
 
-# ROADMAP
+## ROADMAP
 
 1. Geoloc: message (modale) si user pas dans le 44
 
 2. Map
   - Si geoloc: afficher la distance
-  - !! FRONT MOBILE !!
 
 3. Divers ajustements UX
   - gestion flashes
@@ -45,8 +49,6 @@
   - front pour sessions#new
   - events#unverified: intégrer barre de recherche
   - venues#geocode: spinner & turbo stream
-
-- ...
 
 ## MAYDO
 

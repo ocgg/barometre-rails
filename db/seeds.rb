@@ -22,56 +22,48 @@ venues_count = 0
     address: "8 Rue des Carmélites",
     city: "Nantes",
     zipcode: "44000"
-
   },
   {
     name: "Le Chat Noir",
     address: "13 Allée Duguay-Trouin",
     city: "Nantes",
     zipcode: "44000"
-
   },
   {
     name: "Delirium cafe",
     address: "19 allée Baco",
     city: "Nantes",
     zipcode: "44000"
-
   },
   {
     name: "Live Bar",
     address: "6, rue de Strasbourg",
     city: "Nantes",
     zipcode: "44000"
-
   },
   {
     name: "Le Melting Potes",
     address: "26 Bd de la Prairie au Duc",
     city: "Nantes",
     zipcode: "44200"
-
   },
   {
     name: "Le Ferrailleur",
     address: "21 quai des antilles",
     city: "Nantes",
     zipcode: "44200"
-
   },
   {
     name: "Le Petit Café de Rezé",
     address: "7 rue Maurice Lagathu",
     city: "Rezé",
     zipcode: "44400"
-
   },
   {
     name: "Cap 270",
     address: "1 Quai Saint Pierre",
     city: "La Turballe",
     zipcode: "44420"
-
   }
 ].each do |attrs|
   next if Venue.exists?(attrs)
