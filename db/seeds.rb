@@ -2,7 +2,7 @@ require "faker"
 
 puts "Destroying all events & venues..."
 
-Venue.destroy_all
+# Venue.destroy_all
 Event.destroy_all
 
 test_admin = User.find_by(email_address: "admin@admin.com")
@@ -10,7 +10,7 @@ User.create!(email_address: "admin@admin.com", password: "123456", role: "admin"
 
 puts "Creating venues..."
 venues_count = 0
-[
+venue_attrs = [
   {
     name: "Café de la Loire",
     address: "4 quai Boulay Paty",
@@ -65,7 +65,17 @@ venues_count = 0
     city: "La Turballe",
     zipcode: "44420"
   }
-].each do |attrs|
+]
+
+# Destroy all venues other than these above
+allowed_keys = venue_attrs.map { |v| [v[:name], v[:address], v[:city], v[:zipcode]] }
+Venue.find_each do |venue|
+  unless allowed_keys.include?([venue.name, venue.address, venue.city, venue.zipcode])
+    venue.destroy!
+  end
+end
+
+venue_attrs.each do |attrs|
   next if Venue.exists?(attrs)
 
   Venue.create!(**attrs, verified: true)
