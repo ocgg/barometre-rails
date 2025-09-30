@@ -132,12 +132,12 @@ export default class extends Controller {
     if (this.selectedMarker) this.deselect();
     const venueId = marker._icon.dataset.venueId;
     this.selectedMarker = marker;
-    this.selectedEventElts = this.eventEltTargets.filter(elt => elt.dataset.venueId == venueId)
+    this.selectedEventElts = this.eventEltTargets.filter(elt => elt.dataset.venueId == venueId);
     this.highlightSelected();
   }
 
   deselect() {
-    this.unhighlightSelected(this.selectedEventElts, this.selectedMarker);
+    this.unhighlightSelected();
     this.selectedMarker = null;
     this.selectedEventElts = null;
   }
@@ -148,8 +148,10 @@ export default class extends Controller {
   }
 
   unhighlightSelected() {
-    this.selectedEventElts.forEach(elt => elt.classList.remove("border-yellow!"));
-    this.selectedMarker._icon.classList.remove("bg-yellow!", "z-5000!");
+    // safe operator is needed here in case of search form submit (entire event
+    // list & markers are renewed and elements won't exist anymore)
+    this.selectedEventElts.forEach(elt => elt?.classList.remove("border-yellow!"));
+    this.selectedMarker._icon?.classList.remove("bg-yellow!", "z-5000!");
   }
 
   onEventMouseOver(event) {
