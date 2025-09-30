@@ -74,6 +74,7 @@ export default class extends Controller {
     marker._icon.addEventListener("mouseleave", this.onEventMouseLeave.bind(this));
     marker._icon.addEventListener("click", () => this.onMarkerClick(marker));
     marker._icon.dataset.venueId = venue.id;
+    marker.setZIndexOffset(0);
     this.venuesMarkers[venue.id] = marker;
   }
 
@@ -127,26 +128,26 @@ export default class extends Controller {
     const venueId = event.target.dataset.venueId;
     const marker = this.venuesMarkers[venueId];
     const events = this.eventEltTargets.filter(elt => elt.dataset.venueId == venueId);
-    this.addEventHoverClass(events, marker._icon);
+    this.highlightEventCardsAndMarker(events, marker);
   }
 
   onEventMouseLeave(event) {
     const venueId = event.target.dataset.venueId;
     const marker = this.venuesMarkers[venueId];
     const events = this.eventEltTargets.filter(elt => elt.dataset.venueId == venueId);
-    this.removeEventHoverClass(events, marker._icon);
+    this.unhighlightEventCardsAndMarker(events, marker);
   }
 
-  addEventHoverClass(eventElts, markerElt) {
+  highlightEventCardsAndMarker(eventElts, marker) {
     eventElts.forEach(elt => elt.classList.add("border-yellow"));
-    markerElt.classList.add("bg-yellow");
-    markerElt.style.zIndex += 1000000;
+    marker._icon.classList.add("bg-yellow");
+    marker.setZIndexOffset(1000);
   }
 
-  removeEventHoverClass(eventElts, markerElt) {
+  unhighlightEventCardsAndMarker(eventElts, marker) {
     eventElts.forEach(elt => elt.classList.remove("border-yellow"));
-    markerElt.classList.remove("bg-yellow");
-    markerElt.style.zIndex -= 1000000;
+    marker._icon.classList.remove("bg-yellow");
+    marker.setZIndexOffset(0);
   }
 
   dragEventListHeight(event) {
