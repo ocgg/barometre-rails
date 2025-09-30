@@ -16,9 +16,10 @@
   /* overrides default colors */
   --color-*: initial;
 
-  --color-orange: #EB5B00;
+  --color-orange: rgb(235, 91, 0);
   --color-yellow: rgb(255, 178, 0);
   --color-yellow-faded: rgba(255, 178, 0, .25);
+  --color-yellow-dim: rgba(255, 178, 0, .55);
 
   --color-blue: var(--blue);
   --color-blue-faded: var(--blue-faded);

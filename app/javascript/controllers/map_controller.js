@@ -113,15 +113,43 @@ export default class extends Controller {
   onEventClick(event) {
     const venueId = event.currentTarget.dataset.venueId;
     const venueMarker = this.venuesMarkers[venueId];
+    this.select(venueMarker);
     this.panTo(venueMarker);
   }
 
   onMarkerClick(marker) {
+    this.select(marker);
     this.panTo(marker);
     const venueId = marker._icon.dataset.venueId;
     const event = this.eventEltTargets.find(elt => elt.dataset.venueId == venueId);
     const top = event.offsetTop - this.eventListTarget.offsetTop;
     this.eventListTarget.scrollTo({ top: top, behavior: "smooth" });
+  }
+
+  select(marker) {
+    if (this.selectedMarker === marker) { this.deselect(); return; }
+
+    if (this.selectedMarker) this.deselect();
+    const venueId = marker._icon.dataset.venueId;
+    this.selectedMarker = marker;
+    this.selectedEventElts = this.eventEltTargets.filter(elt => elt.dataset.venueId == venueId)
+    this.highlightSelected();
+  }
+
+  deselect() {
+    this.unhighlightSelected(this.selectedEventElts, this.selectedMarker);
+    this.selectedMarker = null;
+    this.selectedEventElts = null;
+  }
+
+  highlightSelected() {
+    this.selectedEventElts.forEach(elt => elt.classList.add("border-yellow!"));
+    this.selectedMarker._icon.classList.add("bg-yellow!", "z-5000!");
+  }
+
+  unhighlightSelected() {
+    this.selectedEventElts.forEach(elt => elt.classList.remove("border-yellow!"));
+    this.selectedMarker._icon.classList.remove("bg-yellow!", "z-5000!");
   }
 
   onEventMouseOver(event) {
@@ -139,14 +167,14 @@ export default class extends Controller {
   }
 
   highlightEventCardsAndMarker(eventElts, marker) {
-    eventElts.forEach(elt => elt.classList.add("border-yellow"));
-    marker._icon.classList.add("bg-yellow");
+    eventElts.forEach(elt => elt.classList.add("border-yellow-dim"));
+    marker._icon.classList.add("bg-yellow-dim");
     marker.setZIndexOffset(1000);
   }
 
   unhighlightEventCardsAndMarker(eventElts, marker) {
-    eventElts.forEach(elt => elt.classList.remove("border-yellow"));
-    marker._icon.classList.remove("bg-yellow");
+    eventElts.forEach(elt => elt.classList.remove("border-yellow-dim"));
+    marker._icon.classList.remove("bg-yellow-dim");
     marker.setZIndexOffset(0);
   }
 
