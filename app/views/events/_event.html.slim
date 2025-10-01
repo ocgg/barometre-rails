@@ -2,8 +2,7 @@
   li
     article class="event-card" class=(event.verified ? "bg-white" : "bg-yellow-faded !text-blue-faded")
 
-      div.md-hour
-        div = event.formatted_time
+      div.md-hour = event.formatted_time
 
       div.event-card-main
         div.sm-hour
