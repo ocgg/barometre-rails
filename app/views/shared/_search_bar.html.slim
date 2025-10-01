@@ -1,22 +1,24 @@
-div.group.flex.gap-1.border-3.rounded-xl.border-blue.bg-light.pointer-events-auto[
+div.group.flex.gap-1.border-3.rounded-lg.border-blue.bg-light.pointer-events-auto[
   class="@max-3xl:w-90 focus-within:bg-white [&:has(input[type=search]:not(:placeholder-shown))]:bg-white focus-within:border-yellow hover:border-yellow"
   data-controller="search"
 ]
   = form.submit "", class: "hidden", data: {search_target: "submit"}
   = form.search_field :q,
-    class: "peer min-w-10 grow pl-3 pr-0 py-1 border-none font-base",
+    class: "peer grow basis-12 pl-3 pr-0 border-none font-base",
     placeholder: "Rechercher...",
     value: params[:q],
     data: {search_target: "input", action: "keydown.enter->search#submit"}
 
+  /clear input btn
   svg[
     class="cursor-pointer hover:fill-yellow"
-    class="invisible peer-not-placeholder-shown:visible h-5 fill-blue-faded self-center"
+    class="hidden peer-not-placeholder-shown:block h-5 fill-blue-faded self-center"
     data-action="click->search#clearInput"
     viewBox="0 0 512 512"
   ]
     path d="M256 48a208 208 0 1 1 0 416 208 208 0 1 1 0-416zm0 464A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM175 175c-9.4 9.4-9.4 24.6 0 33.9l47 47-47 47c-9.4 9.4-9.4 24.6 0 33.9s24.6 9.4 33.9 0l47-47 47 47c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-47-47 47-47c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-47 47-47-47c-9.4-9.4-24.6-9.4-33.9 0z"
 
+  /magnifying glass btn
   button[
     data-action="click->search#submit"
     class="pl-3 pr-2.5 border-none rounded-none bg-blue"
