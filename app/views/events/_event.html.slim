@@ -1,13 +1,21 @@
 = turbo_frame_tag event
-  li
-    article class="event-card" class=(event.verified ? "bg-white" : "bg-yellow-faded !text-blue-faded")
+
+  - li_attrs = {}
+  - if defined?(map_view) && map_view
+    - li_attrs["class"] = "border-l-8 border-white hover:cursor-pointer"
+    - li_attrs["data-action"] = "click->map#onEventClick mouseenter->map#onEventMouseOver mouseleave->map#onEventMouseLeave"
+    - li_attrs["data-map-target"] = "eventElt"
+    - li_attrs["data-venue-id"] = event.venue.id
+
+  li[*li_attrs]
+    article.event-card class=(event.verified ? "bg-white" : "bg-yellow-faded-hard !text-blue-faded")
 
       div.md-hour = event.formatted_time
 
       div.event-card-main
         div.sm-hour
-          p.text-lg = event.formatted_time
-          p.italic = event.tarif
+          p = event.formatted_time
+          p = event.tarif
 
         div.name-desc-ctn
           div.flex.justify-between
@@ -35,12 +43,13 @@
 
         address
           div.venue-name-address-ctn
-            div.md:hidden
-              /Location label
-              svg.h-4.fill-blue viewBox="0 0 384 512": path d="M215.7 499.2C267 435 384 279.4 384 192C384 86 298 0 192 0S0 86 0 192c0 87.4 117 243 168.3 307.2c12.3 15.3 35.1 15.3 47.4 0zM192 128a64 64 0 1 1 0 128 64 64 0 1 1 0-128z"
-            p.venue-name title=event.venue.name = event.venue.name
-            p.md-venue-address title=event.venue.address = event.venue.address
-
+            div.flex.flex-col.overflow-hidden
+              p.venue-name title=event.venue.name = event.venue.name
+              div.flex.gap-1.items-center
+                /Location label
+                svg.h-3.fill-blue-faded viewBox="0 0 384 512": path d="M215.7 499.2C267 435 384 279.4 384 192C384 86 298 0 192 0S0 86 0 192c0 87.4 117 243 168.3 307.2c12.3 15.3 35.1 15.3 47.4 0zM192 128a64 64 0 1 1 0 128 64 64 0 1 1 0-128z"
+                p.venue-address title="#{event.venue.address}, #{event.venue.zipcode}"
+                  = "#{event.venue.address}, #{event.venue.zipcode}"
           p.venue-city title=event.venue.city = event.venue.city
 
         div.md-tarif

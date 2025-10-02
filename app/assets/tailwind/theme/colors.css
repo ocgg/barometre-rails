@@ -19,6 +19,7 @@
   --color-orange: rgb(235, 91, 0);
   --color-yellow: rgb(255, 178, 0);
   --color-yellow-faded: rgba(255, 178, 0, .25);
+  --color-yellow-faded-hard: #EFD79D;
   --color-yellow-dim: rgba(255, 178, 0, .55);
 
   --color-blue: var(--blue);
