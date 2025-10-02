@@ -1,8 +1,8 @@
 = fields_for for_params, event do |event_fields|
 
-  article.px-12.pb-12.bg-white.md:pb-8.md:px-4
+  article.px-12.pb-12.bg-white class="@3xl:pb-12 @3xl:px-4"
 
-    div.min-h-12.p-4.pl-2.md:min-h-8.md:p-2
+    div.min-h-12.p-4.pl-2 class="@3xl:min-h-8 @3xl:p-2"
       /Trash icon
       svg.hidden.h-4.fill-blue-faded.hover:fill-blue.hover:cursor-pointer[
         data-action="click->event-fields#onTrashClick"
@@ -12,14 +12,14 @@
         title Supprimer l'événement
         path d="M135.2 17.7L128 32 32 32C14.3 32 0 46.3 0 64S14.3 96 32 96l384 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-96 0-7.2-14.3C307.4 6.8 296.3 0 284.2 0L163.8 0c-12.1 0-23.2 6.8-28.6 17.7zM416 128L32 128 53.2 467c1.6 25.3 22.6 45 47.9 45l245.8 0c25.3 0 46.3-19.7 47.9-45L416 128z"
 
-    div.relative.flex.flex-col.gap-12.sm:flex-row.sm:gap-2
+    div.relative.flex.flex-col.gap-12 class="@3xl:flex-row @3xl:gap-2"
 
       /date & time
-      div.w-full.flex.gap-2.font-base.md:w-auto.md:mb-0.md:flex-col
+      div.w-full.flex.gap-2.font-base class="@3xl:w-auto @3xl:mb-0 @3xl:flex-col"
 
         /date
         div.relative.whitespace-nowrap[
-          class="max-md:basis-[50%]"
+          class="@max-3xl:basis-[50%]"
           data-event-fields-target="datepickerShadow"
           data-action="click@window->event-fields#handleDatepickerFocusOut"
         ]
@@ -40,8 +40,8 @@
             div.hidden.size-max.m-auto.flex-col.p-2.cursor-default data-event-fields-target="datepickerContainer"
 
         /time
-        div.px-2 class="max-md:basis-[50%]"
-          div.flex.flex-row-reverse.items-center.gap-2.mt-1.md:flex-row
+        div.px-2 class="@max-3xl:basis-[50%]"
+          div.flex.flex-row-reverse.items-center.gap-2.mt-1 class="@3xl:flex-row"
             svg.w-5.fill-blue viewBox="0 0 512 512": path d="M464 256A208 208 0 1 1 48 256a208 208 0 1 1 416 0zM0 256a256 256 0 1 0 512 0A256 256 0 1 0 0 256zM232 120l0 136c0 8 4 15.5 10.7 20l96 64c11 7.4 25.9 4.4 33.3-6.7s4.4-25.9-6.7-33.3L280 243.2 280 120c0-13.3-10.7-24-24-24s-24 10.7-24 24z"
             div.flex
               = event_fields.hidden_field :time, data: {event_fields_target: "time"}
@@ -74,14 +74,14 @@
           placeholder: "(Opt.) Courte description, infos complémentaires..."
 
       div.name-desc-ctn
-        div.relative.flex.flex-col.justify-center.md:w-56
+        div.relative.flex.flex-col.justify-center class="@3xl:w-56"
           = render "venues/form",
             event:,
             venue: event.venue || Venue.new,
             event_fields:,
             for_params: for_params == @event ? "event[venue_attributes]" : "events[][venue_attributes]"
 
-      div.md:w-32
+      div class="@3xl:w-32"
         = event_fields.text_field :tarif,
           class: "w-full",
           placeholder: "(Opt.) Tarif"
