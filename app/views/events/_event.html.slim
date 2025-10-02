@@ -1,6 +1,14 @@
 = turbo_frame_tag event
-  li
-    article.event-card class=(event.verified ? "bg-white" : "bg-yellow-faded !text-blue-faded")
+
+  - li_attrs = {}
+  - if defined?(map_view) && map_view
+    - li_attrs["class"] = "border-l-8 border-white hover:cursor-pointer"
+    - li_attrs["data-action"] = "click->map#onEventClick mouseenter->map#onEventMouseOver mouseleave->map#onEventMouseLeave"
+    - li_attrs["data-map-target"] = "eventElt"
+    - li_attrs["data-venue-id"] = event.venue.id
+
+  li[*li_attrs]
+    article.event-card class=(event.verified ? "bg-white" : "bg-yellow-faded-hard !text-blue-faded")
 
       div.md-hour = event.formatted_time
 

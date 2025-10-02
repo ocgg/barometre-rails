@@ -26,9 +26,4 @@
           li: p.px-1.py-8.mb-1.ml-1.text-center.text-xl.bg-white Aucun résultat
 
         - @events.each do |event|
-          a.border-l-8.border-white[
-            data-action="click->map#onEventClick mouseenter->map#onEventMouseOver mouseleave->map#onEventMouseLeave"
-            data-map-target="eventElt"
-            data-venue-id=event.venue.id
-          ]
-            = render event
+          = render partial: "events/event", locals: { event:, map_view: true }
