@@ -2,22 +2,14 @@
 
 ## FIXES
 
-- events#edit: bouger l'event de jour quand on modifie sa date
-- container de jours possiblement dupliqué lors de la pagination
-- Chrome: searchbar: layout bug entre entre 768-780px~ (problème de @container)
-- éléments de la searchbar ne doivent pas bouger quand on "ouvre" le calendrier ou la loc
-- il semble que quand les events sont récupérés avec ajax, la timezone est pas prise en compte (p.e. un evt du 2 juin à 00h40 est affiché le 1er juin)
+[=> GH issues](https://github.com/ocgg/barometre-rails/issues)
 
 ## ROADMAP
 
 1. Geoloc: message (modale) si user pas dans le 44
 
-2. Map
-  - Si geoloc: afficher la distance
-
 3. Divers ajustements UX
   - gestion flashes
-  - largeur navbar
   - affichage mobile
   - datepicker plus petit
   - footer
@@ -26,6 +18,8 @@
 4. **Mise en prod**
 
 ## TODO
+
+- update event mobile card: la même que sur map
 
 - venues+admin: transfert d'events de venue à venue en cas de doublons
 
