@@ -29,7 +29,7 @@ class EventsController < ApplicationController
 
   def show
     if turbo_frame_request?
-      render partial: @event
+      render @event, locals: {map_view: request.referer.include?("/map")}
     end
   end
 
