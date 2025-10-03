@@ -26,4 +26,4 @@
           li: p.px-1.py-8.mb-1.ml-1.text-center.text-xl.bg-white Aucun résultat
 
         - @events.each do |event|
-          = render partial: "events/event", locals: { event:, map_view: true }
+          = render event, event:, map_view: true
