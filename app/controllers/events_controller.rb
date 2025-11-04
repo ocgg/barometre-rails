@@ -29,7 +29,8 @@ class EventsController < ApplicationController
 
   def show
     if turbo_frame_request?
-      render @event, locals: {map_view: request.referer.include?("/map")}
+      # TOFIX: safe operator needed for the tests to pass
+      render @event, locals: {map_view: request.referer&.include?("/map")}
     end
   end
 
