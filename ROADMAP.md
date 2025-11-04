@@ -25,8 +25,7 @@
 
 - liens sur les cards pour aller vers la map
 
-- searchbar (elasticsearch?):
-  - insensible à la casse & accents (e = é = è...)
+- searchbar:
   - conserver la recherche d'une page à l'autre
   - garder la query string dans l'url (pouvoir bookmark la recherche) (data: {turbo_action: :advance})
 
