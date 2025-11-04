@@ -7,6 +7,7 @@ one:
   tarif: 20€
   verified: true
   venue: one
+  normalized_fields: Concert Verifie Un concert de rock 20?
 
 two:
   name: Concert Non Vérifié
@@ -15,6 +16,7 @@ two:
   tarif: 15€
   verified: false
   venue: two
+  normalized_fields: Concert Non Verifie Un concert de jazz 15?
 
 past_event:
   name: Concert Passé
@@ -23,3 +25,4 @@ past_event:
   tarif: 25€
   verified: true
   venue: one
+  normalized_fields: Concert Passe Un concert qui a deja eu lieu 25?
