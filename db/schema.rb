@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_06_23_094741) do
+ActiveRecord::Schema[8.0].define(version: 2025_11_04_072531) do
   create_table "events", force: :cascade do |t|
     t.string "name"
     t.string "description"
@@ -20,6 +20,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_06_23_094741) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.datetime "datetime", null: false
+    t.string "normalized_fields"
     t.index ["venue_id"], name: "index_events_on_venue_id"
   end
 
@@ -51,6 +52,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_06_23_094741) do
     t.float "longitude"
     t.boolean "verified", default: false, null: false
     t.string "zipcode", null: false
+    t.string "normalized_fields"
   end
 
   add_foreign_key "events", "venues"

@@ -8,6 +8,7 @@ class Venue < ApplicationRecord
 
   geocoded_by :full_address
   after_commit :geocode_later, on: :create
+  before_save :normalize_fields_for_search, if: [:changed?]
 
   def geocode_later
     GeocodeVenueJob.perform_later(self)
@@ -41,6 +42,11 @@ class Venue < ApplicationRecord
     code = "44"
     geographical_center = [47.3584, -1.7276] # Loire-Atlantique
     zipcode.start_with?(code) && distance_to(geographical_center) < 60
+  end
+
+  def normalize_fields_for_search
+    search_fields = "#{name} #{address} #{city}"
+    self.normalized_fields = I18n.transliterate(search_fields)
   end
 
   class << self

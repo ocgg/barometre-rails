@@ -78,3 +78,5 @@ gem "tailwindcss-rails", "~> 4.2"
 gem "geocoder"
 
 gem "pagy"
+
+gem "openssl"

@@ -3,6 +3,7 @@ class Event < ApplicationRecord
   accepts_nested_attributes_for :venue
 
   before_validation :unverify_event_if_venue_is_unverified, if: [:venue, :verified?]
+  before_save :normalize_fields_for_search, if: [:changed?]
 
   validates :name, presence: true
   validates :date, presence: true
@@ -39,6 +40,11 @@ class Event < ApplicationRecord
 
   def unverify_event_if_venue_is_unverified
     self.verified = false unless venue.verified?
+  end
+
+  def normalize_fields_for_search
+    search_fields = "#{name} #{description}"
+    self.normalized_fields = I18n.transliterate(search_fields)
   end
 
   def update_datetime_date_and_time
@@ -82,15 +88,12 @@ class Event < ApplicationRecord
     end
 
     def search(string)
-      sql_subquery = <<~SQL
-        events.name LIKE :string
-        OR events.tarif LIKE :string
-        OR events.description LIKE :string
-        OR venues.name LIKE :string
-        OR venues.address LIKE :string
-        OR venues.city LIKE :string
+      string = I18n.transliterate(string)
+      query = <<~SQL
+        events.normalized_fields LIKE :string
+        OR venues.normalized_fields LIKE :string
       SQL
-      upcoming_events.joins(:venue).where(sql_subquery, string: "%#{string}%")
+      upcoming_events.joins(:venue).where(query, string: "%#{string}%")
     end
 
     def all_upcoming = upcoming_events

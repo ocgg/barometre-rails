@@ -8,6 +8,7 @@ one:
   latitude: 47.2181
   longitude: -1.5528
   verified: true
+  normalized_fields: Lieu Verifie Nantes 1 rue de la paix
 
 two:
   name: Lieu Non Vérifié
@@ -17,6 +18,7 @@ two:
   latitude: 47.2181
   longitude: -1.5528
   verified: false
+  normalized_fields: Lieu Non Verifie Nantes 2 rue de la Paix
 
 ungenerated:
   name: Lieu Sans Coordonnées
@@ -24,3 +26,4 @@ ungenerated:
   zipcode: 44000
   address: 3 rue de la Paix
   verified: true
+  normalized_fields: Lieu Sans Coordonnees Nantes 3 rue de la Paix
