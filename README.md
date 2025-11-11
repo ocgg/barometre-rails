@@ -1,8 +1,10 @@
 # README
 
-**Ty-Zicos est mort, vive le Ty-Zicos** ♥️
-
-*[TyZicos](https://www.tyzicos.com/) était un agenda culturel de Bretagne, produit, maintenu et imprimé pendant 23 ans par les membres de la société d'imprimerie et diffusion Glaz Diffusion. Le dernier numéro de Ty-Zicos est sorti en Octobre 2025. C'était la principale source d'inspiration de ce projet, à la base conçu pour la Loire-Atlantique seule.*
+> **Ty-Zicos est mort, vive le Ty-Zicos**
+>
+> *[TyZicos](https://www.tyzicos.com/) était un agenda culturel de Bretagne, produit, maintenu et imprimé pendant 23 ans par les membres de la société d'imprimerie et diffusion Glaz Diffusion. Le dernier numéro est sorti en Octobre 2025.*
+>
+> *C'était la principale source d'inspiration de ce projet, à la base conçu pour la Loire-Atlantique seule. L'objectif du projet est désormais d'arriver à la cheville du Ty-Zicos, pour toute la Bretagne.*
 
 ## Objectifs
 
