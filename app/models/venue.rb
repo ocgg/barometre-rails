@@ -36,12 +36,10 @@ class Venue < ApplicationRecord
     possible_duplicates.count > 1
   end
 
-  def in_department?
+  def in_region?
     return nil unless geocoded?
 
-    code = "44"
-    geographical_center = [47.3584, -1.7276] # Loire-Atlantique
-    zipcode.start_with?(code) && distance_to(geographical_center) < 60
+    zipcode.start_with?("22", "29", "35", "44", "56")
   end
 
   def normalize_fields_for_search

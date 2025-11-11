@@ -22,7 +22,7 @@ class GeocodeVenueJobTest < ActiveJob::TestCase
           'latitude' => 47.2181,
           'longitude' => -1.5528,
           'address' => @venue.full_address,
-          'state' => 'Loire-Atlantique',
+          'county' => 'Loire-Atlantique',
           'country' => 'France'
         }
       ]

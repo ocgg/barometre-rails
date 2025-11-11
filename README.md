@@ -2,7 +2,7 @@
 
 ## Objectifs
 
-- Agenda culturel de Loire-Atlantique visant en gros à imiter ce que fait [TyZicos](https://www.tyzicos.com/) en Bretagne.
+- Agenda culturel de Bretagne et Loire-Atlantique, visant à imiter, voire remplacer feu le [TyZicos](https://www.tyzicos.com/).
 - Concerts, jams sessions & open mics
 - Liste spécifiquement les événements modestes en entrée libre ou peu coûteuse (typiquement dans les bars)
 - 100% francophone
