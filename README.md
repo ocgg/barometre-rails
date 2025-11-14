@@ -1,8 +1,14 @@
 # README
 
+> **Ty-Zicos est mort, vive le Ty-Zicos**
+>
+> *[TyZicos](https://www.tyzicos.com/) était un agenda culturel de Bretagne, produit, maintenu et imprimé pendant 23 ans par les membres de la société d'imprimerie et diffusion [Glaz Diffusion](https://yanntyzicos.wixsite.com/website-1). Le dernier numéro est sorti en Octobre 2025.*
+>
+> *C'était la principale source d'inspiration de ce projet, à la base conçu pour la Loire-Atlantique seule. L'objectif du projet est désormais d'arriver à la cheville du Ty-Zicos, pour toute la Bretagne.*
+
 ## Objectifs
 
-- Agenda culturel de Loire-Atlantique visant en gros à imiter ce que fait [TyZicos](https://www.tyzicos.com/) en Bretagne.
+- Agenda culturel de Bretagne et Loire-Atlantique.
 - Concerts, jams sessions & open mics
 - Liste spécifiquement les événements modestes en entrée libre ou peu coûteuse (typiquement dans les bars)
 - 100% francophone

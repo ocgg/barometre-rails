@@ -6,7 +6,10 @@
 
 ## ROADMAP
 
-1. Geoloc: message (modale) si user pas dans le 44
+1. Étendre l'app à la Bretagne (le Ty-Zicos est mort, vive le Ty-Zicos)
+  - Adapter les tests
+
+2. Geoloc: message (modale) si user pas dans en Bretagne/Loire-Atlantique
 
 3. Divers ajustements UX
   - gestion flashes
@@ -14,10 +17,14 @@
   - datepicker plus petit
   - footer
   - events#new: ne pas submit quand on appuie sur entrée
+  - message à propos de la beta version
+  - (beta): facilités de contact (lien visible)
 
-4. **Mise en prod**
+4. **Mise en prod** (beta test)
 
 ## TODO
+
+- commenter le code, refactoriser rails way
 
 - update event mobile card: la même que sur map
 
@@ -63,7 +70,7 @@
   - package NPM
 
 - locationfilter:
-  - informer le user au cas où il n'est pas localisé en Loire-Atlantique & de la précision de l'API
+  - informer le user au cas où il n'est pas localisé en Bretagne/Loire-Atlantique & de la précision de l'API
 
 - Contact mail: action text
 
