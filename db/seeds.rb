@@ -1,12 +1,21 @@
 require "faker"
 
+puts "Seeding..."
+
+if Rails.env.production?
+  puts "#! Don't use these seeds in production environment !#"
+  puts "Exiting seeds..."
+  exit
+end
+
 puts "Destroying all events & venues..."
 
-# Venue.destroy_all
 Event.destroy_all
 
-test_admin = User.find_by(email_address: "admin@admin.com")
-User.create!(email_address: "admin@admin.com", password: "123456", role: "admin") unless test_admin
+if Rails.env.development?
+  test_admin = User.find_by(email_address: "admin@admin.com")
+  User.create!(email_address: "admin@admin.com", password: "123456", role: "admin") unless test_admin
+end
 
 puts "Creating venues..."
 venues_count = 0
@@ -81,8 +90,8 @@ venue_attrs.each do |attrs|
   Venue.create!(**attrs, verified: true)
   venues_count += 1
 end
-
-puts "Creating events..."
+ 
+puts "Creating fake events..."
 
 Faker::Config.locale = "fr"
 
