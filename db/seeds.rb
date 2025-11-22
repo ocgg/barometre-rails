@@ -4,6 +4,7 @@ puts "Seeding..."
 
 if Rails.env.production?
   puts "#! Don't use these seeds in production environment !#"
+  puts "To seed real venues, use rails db:venues_seeds"
   puts "Exiting seeds..."
   exit
 end
