@@ -6,7 +6,7 @@
 
 ## ROADMAP
 
-1. Étendre l'app à la Bretagne (le Ty-Zicos est mort, vive le Ty-Zicos)
+1. ~Étendre l'app à la Bretagne (le Ty-Zicos est mort, vive le Ty-Zicos)~
   - Adapter les tests
 
 2. Geoloc: message (modale) si user pas dans en Bretagne/Loire-Atlantique
@@ -23,6 +23,9 @@
 4. **Mise en prod** (beta test)
 
 ## TODO
+
+- Popup (flash alert) avec OK + cookie pour ne pas le réafficher
+- Ne pas créer de Venues dans seeds.rb (proposer de lancer venues_seeds.rb)
 
 - commenter le code, refactoriser rails way
 
