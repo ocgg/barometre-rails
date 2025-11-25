@@ -4,6 +4,14 @@ html
     = render "layouts/head"
 
   body.pb-14.md:pb-0
+    div[
+      data-controller="modal"
+      data-modal-config-value='{
+        "mainText": "ouiiii bonjour",
+        "subText": "dummy subText blablabla ouiiiii euuuh coucou lala OUAIS",
+        "icon": "danger"
+      }'
+    ]
 
     = render "shared/flashes"
 
