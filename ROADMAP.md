@@ -24,6 +24,8 @@
 
 ## TODO
 
+- CONTACT FORM: email input ne doit pas être requis
+
 - finir modal.js
   - nettoyer modal en commentaire sur application.html.slim
   - nettoyer stimulus flashes_controller
