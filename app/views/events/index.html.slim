@@ -1,30 +1,3 @@
-dialog.m-auto.z-1001.group[
-  class="backdrop:bg-[black]/20 bg-transparent"
-  closedby="any"
-  data-controller="flashes"
-]
-  form.md:max-w-3xl method="dialog"
-    button.flex.flex-col.gap-4.px-4.py-4.md:px-8.bg-white.rounded-xl.outline-none
-      p.text-blue.text-lg
-        = "Attention : ce site est en bêta-test !"
-      div
-        p.text-blue.font-paragraph.mb-8.text-left
-          |> Baromètre est actuellement en cours de développement. Vous pourrez rencontrer des bugs, des erreurs ou des fonctionnalités manquantes,
-          strong notamment sur mobile
-          | .
-          br
-          br
-          |> Si vous constatez des problèmes, ou pour toute remarque ou suggestion,
-          strong vous nous aiderez beaucoup
-          |<> en nous en parlant via
-          = link_to "le formulaire de contact", contact_path, class: "font-bold"
-          |.
-
-        p.text-blue.font-paragraph.mb-8
-          | Pensez-y et merci d'utiliser Baromètre !
-        p.text-blue-faded.text-sm.italic.font-paragraph
-          | Cliquez n'importe où pour fermer
-
 = turbo_frame_tag :content
 
   section#events_days_container class="flex flex-col gap-27 md:gap-20"

@@ -24,6 +24,11 @@
 
 ## TODO
 
+- finir modal.js
+  - nettoyer modal en commentaire sur application.html.slim
+  - nettoyer stimulus flashes_controller
+  - utiliser ocgg-modal pour les flashes
+
 - Popup (flash alert) avec OK + cookie pour ne pas le réafficher
 - Ne pas créer de Venues dans seeds.rb (proposer de lancer venues_seeds.rb)
 
