@@ -17,12 +17,10 @@ export default class extends Controller {
   connect() {
     this.active ? this.updateButtonText() : this.resetButtonText();
     this.mainContainerTarget.classList.toggle("bg-white", this.active);
+    this.mapController = this.application.getControllerForElementAndIdentifier(document.querySelector("body"), "map");
   }
 
-  get hasMap() {
-    this.mapController = this.application.getControllerForElementAndIdentifier(document.querySelector("body"), "map");
-    return !!this.mapController;
-  }
+  get hasMap() { return !!this.mapController; }
 
   get active() { return !this.radiusInputTarget.disabled; }
 
@@ -103,6 +101,7 @@ export default class extends Controller {
 
   onLocalizationSuccess(position) {
     this.hideSpinner();
+    console.log(position)
     this.latInputTarget.value = position.coords.latitude;
     this.longInputTarget.value = position.coords.longitude;
     this.activate();
