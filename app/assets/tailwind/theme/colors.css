@@ -10,6 +10,7 @@
   /* --dark-bg: #181221; */
   /* --dark-fg: #d4c8a9; */
   /* --dark-faded: rgba(212, 200, 169, .6); */
+  --overlay: rgba(0, 0, 0, .3);
 }
 
 @theme {
@@ -27,4 +28,5 @@
   --color-light: var(--light);
   --color-light-faded: var(--light-faded);
   --color-white: var(--white);
+  --color-overlay: var(--overlay);
 }
