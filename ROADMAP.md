@@ -6,15 +6,13 @@
 
 ## ROADMAP
 
-1. ~Étendre l'app à la Bretagne (le Ty-Zicos est mort, vive le Ty-Zicos)~
-  - Adapter les tests
+1. Adapter les tests pour la Bretagne (actuellement conçus pour 44 uniquement)
 
 2. Geoloc: message (modale) si user pas dans en Bretagne/Loire-Atlantique
 
 3. Divers ajustements UX
   - affichage mobile
   - datepicker plus petit
-  - events#new: ne pas submit quand on appuie sur entrée
   - (beta): lien visible pour signaler un bug
 
 ## TODO

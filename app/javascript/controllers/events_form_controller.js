@@ -27,6 +27,11 @@ export default class extends Controller {
     this.mediaQuery.removeEventListener("change", this.mediaCallback);
   }
 
+  // Prevent form to be submitted on Enter key press
+  onPressEnter(e) {
+    e.preventDefault();
+  }
+
   onPlusBtnClick(_) {
     this.cloneLastEvent();
     this.eventsNumber++;
