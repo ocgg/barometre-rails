@@ -4,14 +4,21 @@ html
     = render "layouts/head"
 
   body.pb-14.md:pb-0
-    /div[
-      data-controller="modal"
-      data-modal-config-value='{
-        "mainText": "ouiiii bonjour",
-        "subText": "dummy subText blablabla ouiiiii euuuh coucou lala OUAIS",
-        "icon": "danger"
-      }'
-      ]
+    template data-controller="beta-warning"
+      div.flex.flex-wrap.justify-center.items-center.gap-2
+        /danger icon
+        svg.h-6.fill-blue viewBox="0 0 640 640": path d="M320 64C334.7 64 348.2 72.1 355.2 85L571.2 485C577.9 497.4 577.6 512.4 570.4 524.5C563.2 536.6 550.1 544 536 544L104 544C89.9 544 76.8 536.6 69.6 524.5C62.4 512.4 62.1 497.4 68.8 485L284.8 85C291.8 72.1 305.3 64 320 64zM320 416C302.3 416 288 430.3 288 448C288 465.7 302.3 480 320 480C337.7 480 352 465.7 352 448C352 430.3 337.7 416 320 416zM320 224C301.8 224 287.3 239.5 288.6 257.7L296 361.7C296.9 374.2 307.4 384 319.9 384C332.5 384 342.9 374.3 343.8 361.7L351.2 257.7C352.5 239.5 338.1 224 319.8 224z"
+        h3.text-lg.text-blue.text-center
+          | Ce site est actuellement en bêta-test&nbsp;!
+      p.font-paragraph
+        | Vous nous serez d'une grande aide en nous faisant remonter les problèmes et bugs que vous rencontrez, ou simplement en nous faisant part de vos remarques ou suggestions.
+      p.font-paragraph
+        |> Pour ce faire, passez par le
+        = link_to "formulaire de contact", contact_path
+        | .
+      p.text-center Merci pour votre aide !
+      p.text-blue-faded.text-sm.italic.font-paragraph.text-center
+        | Cliquez n'importe où pour fermer
 
     = render "shared/flashes"
 
