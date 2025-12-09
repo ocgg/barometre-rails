@@ -19,8 +19,6 @@
 
 ## TODO
 
-- CONTACT FORM: email input ne doit pas être requis
-
 - Ne pas créer de Venues dans seeds.rb (proposer de lancer venues_seeds.rb)
 
 - commenter le code, refactoriser rails way
