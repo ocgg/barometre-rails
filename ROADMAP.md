@@ -12,26 +12,15 @@
 2. Geoloc: message (modale) si user pas dans en Bretagne/Loire-Atlantique
 
 3. Divers ajustements UX
-  - gestion flashes
   - affichage mobile
   - datepicker plus petit
-  - footer
   - events#new: ne pas submit quand on appuie sur entrée
-  - message à propos de la beta version
-  - (beta): facilités de contact (lien visible)
-
-4. **Mise en prod** (beta test)
+  - (beta): lien visible pour signaler un bug
 
 ## TODO
 
 - CONTACT FORM: email input ne doit pas être requis
 
-- finir modal.js
-  - nettoyer modal en commentaire sur application.html.slim
-  - nettoyer stimulus flashes_controller
-  - utiliser ocgg-modal pour les flashes
-
-- Popup (flash alert) avec OK + cookie pour ne pas le réafficher
 - Ne pas créer de Venues dans seeds.rb (proposer de lancer venues_seeds.rb)
 
 - commenter le code, refactoriser rails way
