@@ -10,7 +10,7 @@
     data-map-target="eventsMainCtn"
   ]
     /grab icon
-    button.md:hidden.relative.w-fit.m-auto.top-2.pt-1.pb-2.px-2.bg-white.rounded-t.pointer-events-auto[
+    button.md:hidden.relative.w-fit.m-auto.top-2.pt-1.pb-2.px-2.bg-white.rounded-t.pointer-events-auto.touch-none[
       class="group hover:cursor-grab active:cursor-grabbing"
       data-action="mousedown->map#dragEventListHeight"
     ]
@@ -20,7 +20,7 @@
       class="[direction:rtl] [scrollbar-width:thin]"
       data-map-target="eventList"
     ]
-      ul.flex.flex-col.gap-1.pointer-events-auto class="[direction:ltr]"
+      ul.flex.flex-col.gap-1.pointer-events-auto.touch-none class="[direction:ltr]"
 
         - if @events.count.zero?
           li: p.px-1.py-8.mb-1.ml-1.text-center.text-xl.bg-white Aucun résultat

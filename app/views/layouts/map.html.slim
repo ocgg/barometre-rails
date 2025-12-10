@@ -3,8 +3,7 @@ html
   head
     = render "layouts/head"
 
-  body.relative.overflow-hidden[
-    class="max-w-[100vw] max-h-[100vh]"
+  body.relative.overflow-hidden.max-w-screen.max-h-screen[
     data-controller="map"
     data-map-marker-icon-value=asset_path("map_marker.svg")
     data-map-location-icon-value=asset_path("map_location_marker.svg")
@@ -16,11 +15,11 @@ html
       class="@container/main"
     ]
 
-    main.absolute.md:w-96.top-0.left-0.bottom-18.md:bottom-0.right-0.flex.flex-col.pointer-events-none[
+    main.absolute.md:w-96.top-0.left-0.bottom-18.md:bottom-0.right-0.flex.flex-col.pointer-events-none.touch-none[
       class="@container/main"
       data-map-target="mainElt"
     ]
-      div.z-1000.pointer-events-auto class="[&>nav]:p-4!"
+      div.z-1000.pointer-events-auto.touch-none class="[&>nav]:p-4!"
         = render "shared/map_navbar"
 
       = turbo_frame_tag :searchform, target: :content
@@ -33,7 +32,7 @@ html
               = render "shared/search_bar", form:
               = render "shared/location_filter", form:
 
-            div.relative.z-10.whitespace-nowrap.mx-1.h-10.pointer-events-auto[
+            div.relative.z-10.whitespace-nowrap.mx-1.h-10.pointer-events-auto.touch-none[
               data-controller="datefilter"
               data-datefilter-initial-start-value="#{params[:start]}"
               data-action="click@window->datefilter#handleFocusOut"
