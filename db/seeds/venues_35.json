@@ -1,1 +1,80 @@
-[]
+[
+  {
+    "name": "L'Autruche",
+    "address": "44 rue Legraverend",
+    "city": "Rennes",
+    "zipcode": "35000"
+  },
+  {
+    "name": "Bar'Zouges",
+    "address": "1 rue Jules Duval",
+    "city": "Hédé-Bazouges",
+    "zipcode": "35630"
+  },
+  {
+    "name": "La Bascule",
+    "address": "2 rue de la Bascule",
+    "city": "Rennes",
+    "zipcode": "35000"
+  },
+  {
+    "name": "La Basse Cour",
+    "address": "Chemin Robert de Boron",
+    "city": "Rennes",
+    "zipcode": "35000"
+  },
+  {
+    "name": "Les Grands Gamins",
+    "address": "40 mail François Mitterand",
+    "city": "Rennes",
+    "zipcode": "35000"
+  },
+  {
+    "name": "Jardin Moderne",
+    "address": "11 rue du Manoir de Sévigné",
+    "city": "Rennes",
+    "zipcode": "35000"
+  },
+  {
+    "name": "Melody Maker",
+    "address": "14 rue Saint-Melaine",
+    "city": "Rennes",
+    "zipcode": "35000"
+  },
+  {
+    "name": "Noktambül",
+    "address": "264 avenue Général George Patton",
+    "city": "Rennes",
+    "zipcode": "35700"
+  },
+  {
+    "name": "Penny Lane",
+    "address": "1 rue de Coëtquen",
+    "city": "Rennes",
+    "zipcode": "35000"
+  },
+  {
+    "name": "Le Point Zéro",
+    "address": "Camping de la Cité d'Alet",
+    "city": "Saint-Malo",
+    "zipcode": "35400"
+  },
+  {
+    "name": "Le Sablier",
+    "address": "70 rue Jean Guéhenno",
+    "city": "Rennes",
+    "zipcode": "35700"
+  },
+  {
+    "name": "La Trinquette",
+    "address": "26 rue de Saint-Malo",
+    "city": "Rennes",
+    "zipcode": "35000"
+  },
+  {
+    "name": "Ty Anna",
+    "address": "19 place Sainte-Anne",
+    "city": "Rennes",
+    "zipcode": "35000"
+  }
+]

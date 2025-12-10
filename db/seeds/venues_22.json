@@ -1,1 +1,14 @@
-[]
+[
+  {
+    "name": "Café de la Plage",
+    "address": "rue du Clos du Doué",
+    "city": "Fréhel",
+    "zipcode": "22240"
+  },
+  {
+    "name": "L'Éprouvette",
+    "address": "1 route de Calorguen",
+    "city": "Saint-André-des-Eaux",
+    "zipcode": "22630"
+  }
+]

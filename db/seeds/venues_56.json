@@ -1,1 +1,38 @@
-[]
+[
+  {
+    "name": "BaraGwin",
+    "address": "8 impasse d'Olibarte, Port Haliguen 2",
+    "city": "Quiberon",
+    "zipcode": "56170"
+  },
+  {
+    "name": "Café des Matelots",
+    "address": "21 quai Gambetta",
+    "city": "Le Palais",
+    "zipcode": "56630"
+  },
+  {
+    "name": "Le Coota",
+    "address": "ZAC de Kerhilio",
+    "city": "Erdeven",
+    "zipcode": "56410"
+  },
+  {
+    "name": "La Godaille",
+    "address": "6 avenue Carnot",
+    "city": "Le Palais",
+    "zipcode": "56360"
+  },
+  {
+    "name": "La Peau de l'Ours",
+    "address": "16 Grande Rue",
+    "city": "Port-Louis",
+    "zipcode": "56290"
+  },
+  {
+    "name": "Maison Glaz",
+    "address": "Route des Saisies",
+    "city": "Gâvres",
+    "zipcode": "56680"
+  }
+]
