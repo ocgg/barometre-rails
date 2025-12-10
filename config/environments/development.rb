@@ -53,6 +53,8 @@ Rails.application.configure do
     read_timeout: 5
   }
 
+  config.hosts << ".trycloudflare.com"
+
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log
 
