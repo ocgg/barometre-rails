@@ -181,7 +181,7 @@ export default class extends Controller {
   }
 
   dragEventListHeight(event) {
-    const baseMouseY = event.clientY;
+    const baseMouseY = event.clientY || event.touches[0].clientY;
     const searchBarHeight = this.searchbarTarget.offsetHeight;
     const navbarHeight = 72;
 
@@ -190,7 +190,8 @@ export default class extends Controller {
     const min = 36;
 
     const onMouseMove = (moveEvt) => {
-      const offset = baseMouseY - moveEvt.clientY;
+      const clientY = moveEvt.clientY || moveEvt.touches[0].clientY
+      const offset = baseMouseY - clientY;
       const target = base + offset;
       if (target > max || target < min) return;
 
@@ -200,10 +201,14 @@ export default class extends Controller {
     const onMouseUp = (_upEvt) => {
       document.removeEventListener("mousemove", onMouseMove);
       document.removeEventListener("mouseup", onMouseUp);
+      document.removeEventListener("touchmove", onMouseMove);
+      document.removeEventListener("touchend", onMouseUp);
     }
 
     document.addEventListener("mousemove", onMouseMove);
     document.addEventListener("mouseup", onMouseUp);
+    document.addEventListener("touchmove", onMouseMove);
+    document.addEventListener("touchend", onMouseUp);
   }
 
   // called from locationfilter controller
