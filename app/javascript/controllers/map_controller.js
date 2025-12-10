@@ -35,7 +35,7 @@ export default class extends Controller {
 
     this.markerIcon = L.icon({
       iconUrl: this.markerIconValue,
-      className: "hover:cursor-pointer rounded-full",
+      className: "hover:cursor-pointer rounded-full touch-none",
       iconSize: [38, 38],
       iconAnchor: [19, 38],
       popupAnchor: [0, -19] // relative to iconAnchor
@@ -211,7 +211,7 @@ export default class extends Controller {
   onLocalization(lat, long) {
     const locationIcon = L.icon({
       iconUrl: this.locationIconValue,
-      className: "hover:cursor-pointer rounded-full",
+      className: "hover:cursor-pointer rounded-full touch-none",
       iconSize: [38, 38],
       iconAnchor: [19, 19],
     });
