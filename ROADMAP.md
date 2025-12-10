@@ -17,6 +17,8 @@
 
 ## TODO
 
+- Utiliser l'API geocoding du gouvernement au lieu de nominatim (limite de requête plus élevé, moins souvent down)
+
 - Ne pas créer de Venues dans seeds.rb (proposer de lancer venues_seeds.rb)
 
 - commenter le code, refactoriser rails way

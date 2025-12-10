@@ -35,7 +35,7 @@ export default class extends Controller {
 
     this.markerIcon = L.icon({
       iconUrl: this.markerIconValue,
-      className: "hover:cursor-pointer rounded-full",
+      className: "hover:cursor-pointer rounded-full touch-none",
       iconSize: [38, 38],
       iconAnchor: [19, 38],
       popupAnchor: [0, -19] // relative to iconAnchor
@@ -181,7 +181,7 @@ export default class extends Controller {
   }
 
   dragEventListHeight(event) {
-    const baseMouseY = event.clientY;
+    const baseMouseY = event.clientY || event.touches[0].clientY;
     const searchBarHeight = this.searchbarTarget.offsetHeight;
     const navbarHeight = 72;
 
@@ -190,7 +190,8 @@ export default class extends Controller {
     const min = 36;
 
     const onMouseMove = (moveEvt) => {
-      const offset = baseMouseY - moveEvt.clientY;
+      const clientY = moveEvt.clientY || moveEvt.touches[0].clientY
+      const offset = baseMouseY - clientY;
       const target = base + offset;
       if (target > max || target < min) return;
 
@@ -198,19 +199,19 @@ export default class extends Controller {
     }
 
     const onMouseUp = (_upEvt) => {
-      document.removeEventListener("mousemove", onMouseMove);
-      document.removeEventListener("mouseup", onMouseUp);
+      document.removeEventListener("pointermove", onMouseMove);
+      document.removeEventListener("pointerup", onMouseUp);
     }
 
-    document.addEventListener("mousemove", onMouseMove);
-    document.addEventListener("mouseup", onMouseUp);
+    document.addEventListener("pointermove", onMouseMove);
+    document.addEventListener("pointerup", onMouseUp);
   }
 
   // called from locationfilter controller
   onLocalization(lat, long) {
     const locationIcon = L.icon({
       iconUrl: this.locationIconValue,
-      className: "hover:cursor-pointer rounded-full",
+      className: "hover:cursor-pointer rounded-full touch-none",
       iconSize: [38, 38],
       iconAnchor: [19, 19],
     });
