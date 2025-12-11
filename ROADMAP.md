@@ -6,18 +6,16 @@
 
 ## ROADMAP
 
-1. Adapter les tests pour la Bretagne (actuellement conçus pour 44 uniquement)
+- Adapter les tests pour la Bretagne (actuellement conçus pour 44 uniquement)
 
-2. Geoloc: message (modale) si user pas dans en Bretagne/Loire-Atlantique
+- Geoloc: message (modale) si user pas dans en Bretagne/Loire-Atlantique
 
-3. Divers ajustements UX
+- Divers ajustements UX
   - affichage mobile
   - datepicker plus petit
   - (beta): lien visible pour signaler un bug
 
 ## TODO
-
-- Utiliser l'API geocoding du gouvernement au lieu de nominatim (limite de requête plus élevé, moins souvent down)
 
 - Ne pas créer de Venues dans seeds.rb (proposer de lancer venues_seeds.rb)
 
@@ -32,6 +30,7 @@
 - searchbar:
   - conserver la recherche d'une page à l'autre
   - garder la query string dans l'url (pouvoir bookmark la recherche) (data: {turbo_action: :advance})
+  - fuzzy search
 
 - Jobs:
   - geocode & mailer: si erreur, attendre quelques secondes et recommencer
@@ -69,7 +68,7 @@
 - locationfilter:
   - informer le user au cas où il n'est pas localisé en Bretagne/Loire-Atlantique & de la précision de l'API
 
-- Contact mail: action text
+- Contact mail: action text / render markdown
 
 - events#new:
   - address autocomplete [API adresses](https://adresse.data.gouv.fr/outils/api-doc/adresse)

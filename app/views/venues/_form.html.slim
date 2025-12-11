@@ -51,7 +51,7 @@ div[
                   /exclamation icon
                   = link_to unverified_path(section: "venues"), title: "❌ Le lieu n'est pas vérifié", data: {turbo_frame: :_top}
                     svg.h-4.fill-orange viewBox="0 0 512 512": path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zm0-384c13.3 0 24 10.7 24 24l0 112c0 13.3-10.7 24-24 24s-24-10.7-24-24l0-112c0-13.3 10.7-24 24-24zM224 352a32 32 0 1 1 64 0 32 32 0 1 1 -64 0z"
-                p.venue-name-selector.font-bold.text-lg/5.text-ellipsis.overflow-hidden.whitespace-nowrap class="l"
+                p.venue-name-selector.font-bold.text-lg/5.text-ellipsis.overflow-hidden.whitespace-nowrap
               p.venue-address-selector.text-sm.text-blue-faded.text-ellipsis.overflow-hidden.whitespace-nowrap
 
           div.p-2.italic.text-center.text-blue-faded.font-paragraph data-venue-fields-target="noResult"
@@ -62,19 +62,33 @@ div[
           div.p-2.text-center.font-paragraph.hover:bg-yellow.hover:cursor-pointer[
             data-action="click->venue-fields#onAddManually"
           ]
-            p.text-sm.text-blue-faded Pas dans la liste ?
             p.font-bold Ajouter manuellement
 
-      div.flex.flex-col.gap-2
+      div.flex.flex-col.gap-2.relative
         = venue_fields.text_field :address,
-          placeholder: "1, rue du Nom de la Rue",
-          data: {venue_fields_target: "address"}
+          placeholder: "Adresse",
+          data: {venue_fields_target: "address",
+            action: "keyup->venue-fields#onAddressInput"}
+
+        div.hidden.z-40.absolute.top-10.rounded-md.bg-white.border-2.border-yellow[
+          data-events-form-target="venueDropdown"
+          data-venue-fields-target="addressDropdown"
+        ]
+          ul data-venue-fields-target="addressesList"
+
+          template data-venue-fields-target="addressTemplate"
+            li.px-2.py-1.min-w-55.leading-5.font-paragraph.hover:bg-yellow.hover:cursor-pointer.focus:bg-yellow[
+              data-action="click->venue-fields#onAddressSelect"
+              tabindex=0
+            ]
+              p.address-first.text-ellipsis.overflow-hidden.whitespace-nowrap
+              p.address-last.text-blue-faded.text-ellipsis.overflow-hidden.whitespace-nowrap
 
         div.flex.gap-2
 
           = venue_fields.text_field :zipcode,
             maxlength: 5,
-            placeholder: "44000",
+            placeholder: "CP",
             data: {venue_fields_target: "zipcode"}
 
           = venue_fields.text_field :city,

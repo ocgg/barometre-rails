@@ -14,6 +14,9 @@ export default class extends Controller {
     "dropdown",
     "clearInputBtn",
     "searchBtn",
+    "addressDropdown",
+    "addressesList",
+    "addressTemplate",
   ]
 
   static values = {
@@ -182,6 +185,52 @@ export default class extends Controller {
   showDropdown() {
     this.dropdownTarget.classList.toggle("z-100", true);
     this.show(this.dropdownTarget);
+  }
+
+  onAddressInput(_) {
+    const input = this.addressTarget.value;
+    if (input.length < 3) return;
+
+    // documentation for french gov address autocomplete API:
+    // https://geoservices.ign.fr/documentation/services/services-geoplateforme/autocompletion
+    const limit = 10;
+    const regions = "22,29,35,44,56";
+    const queryString = `type=StreetAddress&text=${input}&terr=${regions}&maximumResponses=${limit}`;
+    const url = `https://data.geopf.fr/geocodage/completion/?${queryString}`;
+    this.#fetchAddressAutocompleteAPI(url);
+  }
+
+  #fetchAddressAutocompleteAPI(url) {
+    fetch(url).then(response => response.json()).then(data => {
+      if (!data.results) return;
+
+      this.#renderAddresses(data.results)
+    })
+  }
+
+  #renderAddresses(addresses) {
+    this.toggleHidden(this.addressDropdownTarget, !addresses.length)
+    this.addressesListTarget.innerHTML = '';
+    addresses.forEach(address => this.#renderAddress(address));
+  }
+
+  #renderAddress(address) {
+    const clone = this.addressTemplateTarget.content.cloneNode(true);
+    const li = clone.firstChild;
+    li.dataset.address = address.fulltext.replace(/,[^,]*$/, "");
+    li.dataset.city = address.city;
+    li.dataset.zipcode = address.zipcode;
+    li.querySelector(".address-first").innerText = li.dataset.address;
+    li.querySelector(".address-last").innerText = `${address.city} ${address.zipcode}`;
+    this.addressesListTarget.appendChild(clone);
+  }
+
+  onAddressSelect(event) {
+    const data = event.currentTarget.dataset;
+    this.addressTarget.value = data.address;
+    this.zipcodeTarget.value = data.zipcode;
+    this.cityTarget.value = data.city;
+    this.hide(this.addressDropdownTarget);
   }
 
   hide(element) { element.classList.toggle("hidden", true) }
