@@ -17,6 +17,12 @@
 
 ## TODO
 
+- events#new: datepicker:
+  - ouvrir le mois courant
+  - avoir une entrée textuelle pour la date
+  - admin: case à cocher pour vérifier l'event direct
+  - TODO: en cas de plusieurs evts créés sur une nouvelle Venue, vérifier que la même Venue est pas créée plusieurs fois (si oui -> find_or_create_by)
+
 - Ne pas créer de Venues dans seeds.rb (proposer de lancer venues_seeds.rb)
 
 - commenter le code, refactoriser rails way
