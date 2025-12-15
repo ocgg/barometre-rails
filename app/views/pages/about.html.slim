@@ -1,52 +1,61 @@
 h2.text-3xl.pl-10 À propos
 
 ul.m-auto.flex.flex-col.items-center
+  li.w-fit.hover:text-yellow: a href="#dev-info" Informations sur le développement
   li.w-fit.hover:text-yellow: a href="#quisommesnous" Qui sommes-nous ?
   li.w-fit.hover:text-yellow: a href="#objectifs" Objectifs
   li.w-fit.hover:text-yellow: a href="#contribuer" Comment contribuer ?
+
+section#dev-info
+  h3.text-lg.mb-2.pl-10 Informations sur le développement
+
+  div.bg-white.flex.flex-col.gap-4.p-4.md:rounded-lg
+    p.font-paragraph.indent-6
+      | Outre la récolte d'avis et les corrections de bugs, la prochaine étape est notamment de choisir un nom définitif et d'acheter un nom de domaine.
+      br
+      | Plus de détails à venir...
 
 section#quisommesnous
   h3.text-lg.mb-2.pl-10 Qui sommes-nous ?
 
   div.bg-white.flex.flex-col.gap-4.p-4.md:rounded-lg
     p.font-paragraph.indent-6
-      | Baromètre est créé par Olivier Genel, musicien et technicien du son amateur, développeur et formateur formé au
-      a.font-bold<> href="https://www.lewagon.com" bootcamp du Wagon
-      | à Nantes.
+      | Baromètre est créé par Olivier Genel, musicien, développeur et formateur de la région de Nantes.
 
 section#objectifs
   h3.text-lg.mb-2.pl-10 Objectifs
 
   div.bg-white.flex.flex-col.gap-4.p-4.md:rounded-lg
     p.font-paragraph.indent-6
-      | Baromètre vise simplement à faire ce que fait l'agenda collaboratif
+      | Baromètre vise simplement à faire ce que faisait l'agenda collaboratif
       a.font-bold<> href="https://www.tyzicos.com" Ty-Zicos
       | en Bretagne, idéalement de manière un peu plus moderne et avec un penchant particulier pour les concerts et jams-sessions qui se passent dans les bars.
       br
       | L'objectif est de donner un moyen simple aux musiciens et organisateurs pour faire connaître leurs événements, et aux spectateurs d'y accéder.
 
     p.font-paragraph.indent-6
-      | Par ailleurs, Baromètre se veut être un logiciel libre, open-source, un vecteur d'apprentissage fait-maison, gratuit, sans pub, sans inscription et sans cookie ennuyeux. C'est aussi un moyen au créateur de montrer son travail, puisque c'est son premier projet web destiné au grand public.
+      | Par ailleurs, Baromètre se veut être un logiciel libre, open-source, fait-maison, gratuit, sans pub, non lucratif, sans inscription et sans cookie ennuyeux.
 
     p.font-paragraph.indent-6
-      | Enfin, dans un futur incertain où les utilisateurs seront nombreux, une app pour mobile sera déployée.
+      | Enfin, dans un futur incertain où les utilisateurs seront nombreux, une app pour mobile sera déployée. Dans ce même futur on pourra même envisager l'impression d'un flyer mensuel.
 
 section#contribuer
   h3.text-lg.mb-2.pl-10 Comment contribuer ?
 
   div.bg-white.flex.flex-col.gap-4.p-4.md:rounded-lg
     p.font-paragraph.indent-6
-      | Voici 3 moyens de donner un coup de main, n'hésitez pas !
+      | Il y a au moins quatre moyens de nous donner un coup de main&nbsp;!
     ul.list-disc.font-paragraph.pl-6
       li: p
-        | Proposez les événements dont vous avez connaissance ou dont vous faites partie : passez par le formulaire de la page "
+        = link_to "Nous envoyer un message", contact_path, class: "font-bold"
+        |< pour nous faire part de votre avis, d'un bug ou toute autre chose pertinente,
+      li: p
         = link_to "Proposer un concert", new_event_path, class: "font-bold"
-        |".
+        |< dont vous avez connaissance ou dont vous faites partie,
       li: p
-        |> Vous proposer en tant que membre de l'équipe pour vérifier et valider les événements proposés par les autres utilisateurs :
-        = link_to "Envoyez-nous un message", contact_path, class: "font-bold"
-        |.
+        = link_to "Vous proposer en tant que membre de l'équipe", contact_path, class: "font-bold"
+        |< pour ajouter des concerts, ou vérifier et valider ceux proposés par les autres utilisateurs,
       li: p
-        |> Contribuez au développement du projet si vous savez coder : Rendez-vous sur
+        |> Contribuer sur
         = link_to "GitHub", "https://github.com/ocgg/barometre-rails", class: "font-bold"
-        |.
+        |< si vous savez coder.
