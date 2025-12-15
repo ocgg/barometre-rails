@@ -32,7 +32,7 @@ html
               = render "shared/search_bar", form:
               = render "shared/location_filter", form:
 
-            div.relative.z-10.whitespace-nowrap.mx-1.h-10.pointer-events-auto.touch-none[
+            div.w-90.m-auto.relative.z-10.whitespace-nowrap.h-10.pointer-events-auto.touch-none[
               data-controller="datefilter"
               data-datefilter-initial-start-value="#{params[:start]}"
               data-action="click@window->datefilter#handleFocusOut"
