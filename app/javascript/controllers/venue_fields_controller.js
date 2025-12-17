@@ -30,7 +30,8 @@ export default class extends Controller {
   }
 
   setVenue(id) {
-    const url = `/api/venues/${id}`;
+    const basePath = document.head.querySelector('meta[name="base-path"]').content;
+    const url = `${basePath}/api/venues/${id}`;
     const opts = { headers: { "Accept": "application/json" } };
     fetch(url, opts)
       .then(response => response.json())
