@@ -105,7 +105,8 @@ export default class extends Controller {
   }
 
   fetchVenues() {
-    const url = `/api/venues?q=${this.nameTarget.value}&limit=5`;
+    const basePath = document.head.querySelector('meta[name="base-path"]').content;
+    const url = `${basePath}/api/venues?q=${this.nameTarget.value}&limit=5`;
     const opts = { headers: { "Accept": "application/json" } };
     fetch(url, opts)
       .then(response => response.json())
