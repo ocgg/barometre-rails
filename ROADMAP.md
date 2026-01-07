@@ -6,16 +6,23 @@
 
 ## ROADMAP
 
-- Adapter les tests pour la Bretagne (actuellement conçus pour 44 uniquement)
-
-- Geoloc: message (modale) si user pas dans en Bretagne/Loire-Atlantique
-
 - Divers ajustements UX
   - affichage mobile
   - datepicker plus petit
   - (beta): lien visible pour signaler un bug
 
+- Finalisation, SEO, réseaux sociaux
+  - NOM + NOM DE DOMAINE
+  - favicon
+  - bannière médias
+  - metatags og, twitter etc.
+  - manifest PWA
+
 ## TODO
+
+- Geoloc: message (modale) si user pas dans en Bretagne/Loire-Atlantique
+
+- Adapter les tests pour la Bretagne (actuellement conçus pour 44 uniquement)
 
 - events#new: datepicker:
   - ouvrir le mois courant
