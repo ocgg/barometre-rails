@@ -20,6 +20,8 @@
 
 ## TODO
 
+- Rédiger doc API
+
 - Geoloc: message (modale) si user pas dans en Bretagne/Loire-Atlantique
 
 - Adapter les tests pour la Bretagne (actuellement conçus pour 44 uniquement)
