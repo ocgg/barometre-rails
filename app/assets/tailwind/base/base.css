@@ -11,7 +11,7 @@
 
   @supports selector(::-webkit-scrollbar) {
     html {
-      width: 100vw;
+      width: 100%;
       scrollbar-width: thin;
     }
   }
