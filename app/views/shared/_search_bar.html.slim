@@ -10,13 +10,9 @@ div.group.flex.gap-1.border-3.rounded-lg.border-blue.bg-light.pointer-events-aut
     data: {search_target: "input", action: "keydown.enter->search#submit"}
 
   /clear input btn
-  svg[
-    class="cursor-pointer hover:fill-yellow"
-    class="hidden peer-not-placeholder-shown:block h-5 fill-blue-faded self-center"
-    data-action="click->search#clearInput"
-    viewBox="0 0 512 512"
-  ]
-    path d="M256 48a208 208 0 1 1 0 416 208 208 0 1 1 0-416zm0 464A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM175 175c-9.4 9.4-9.4 24.6 0 33.9l47 47-47 47c-9.4 9.4-9.4 24.6 0 33.9s24.6 9.4 33.9 0l47-47 47 47c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-47-47 47-47c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-47 47-47-47c-9.4-9.4-24.6-9.4-33.9 0z"
+  = inline_svg_tag "cross_round.svg",
+    class: "cursor-pointer hover:fill-yellow hidden peer-not-placeholder-shown:block h-5 fill-blue-faded self-center",
+    data: {action: "click->search#clearInput"}
 
   /magnifying glass btn
   button[
@@ -24,4 +20,4 @@ div.group.flex.gap-1.border-3.rounded-lg.border-blue.bg-light.pointer-events-aut
     class="pl-3 pr-2.5 border-none rounded-none bg-blue"
     class="group-hover:bg-yellow group-focus-within:bg-yellow"
   ]
-    svg class="h-5 fill-light" viewBox="0 0 512 512": path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z"
+    = inline_svg_tag "search.svg", class: "h-5 fill-light"
