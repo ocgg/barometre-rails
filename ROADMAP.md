@@ -20,6 +20,8 @@
 
 ## TODO
 
+- Refonte HTML/CSS de events#index (cards)
+
 - Rédiger doc API
 
 - Geoloc: message (modale) si user pas dans en Bretagne/Loire-Atlantique
@@ -48,12 +50,12 @@
   - fuzzy search
 
 - Jobs:
-  - geocode & mailer: si erreur, attendre quelques secondes et recommencer
+  - geocode & mailer: si erreur, attendre quelques secondes (ou remettre un job en queue) et recommencer
   - Job nettoyage de DB
 
 - datepicker:
   - jours à notifier/griser/...
-  - prévisualiser la range au hover
+  - prévisualiser la range au hover, si range est actif
 
 - Pages admin:
   - front pour sessions#new
@@ -73,7 +75,6 @@
   - faire une show avec des infos optionnelles (photo, rich text, liens)
 
 - CSS/Tailwind:
-  - `<i>` à la place des svg
   - thème sombre
 
 - datepicker:
@@ -91,5 +92,5 @@
   - option concert chez l'habitant
   - dans ce cas: option pour supprimer le lieu de la DB après l'événement
 
-- Refaire tout l'UI, le plus simple et modulaire possible (Vue/React? ViewComponent?)
+- Refaire tout l'UI, le plus simple et modulaire possible (Vue/React? ViewComponent? Phlex?)
 - Config facile pour adapter à d'autres départements (un config/barometre.yml)
