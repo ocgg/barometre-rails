@@ -1,0 +1,13 @@
+section.px-4.text-center.md:text-left
+  div.flex.flex-col.justify-center.items-center.gap-4.md:flex-row.md:gap-8
+    = inline_svg_tag "warning.svg", class: "h-6 fill-blue md:h-9"
+
+    div
+      h3.text-xl.text-blue.mb-2
+        | Ce site est en bêta-test&nbsp;!
+
+      p.font-paragraph
+        | Il est possible que vous rencontriez des bugs.
+        br
+        |> Votre aide et vos retours sont les bienvenus&nbsp;:
+        = link_to "cliquez ici pour en savoir plus", about_path(anchor: "contribuer")
