@@ -12,7 +12,7 @@ html
     div.bg-blue
       header.flex.justify-between.items-center.max-w-5xl.m-auto class="md:px-[2%]"
 
-        div.m-auto
+        = link_to root_path, class: "block m-auto" do
           h1.text-yellow.text-4xl.w-full.text-center.w-fit.md:text-left
             | BAROMÈTRE
           p.text-light.text-sm
