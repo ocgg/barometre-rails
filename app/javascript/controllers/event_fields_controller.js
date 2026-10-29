@@ -41,8 +41,8 @@ export default class extends Controller {
     this.datepickerBtnTarget.classList.toggle("!bg-white", bool);
     this.datepickerBtnTarget.classList.toggle("!text-blue", bool);
     this.datepickerBtnTarget.classList.toggle("z-100", bool);
-    this.iconsContainerTarget.classList.toggle("md:flex-col", !bool);
     this.svgTarget.classList.toggle("fill-blue", bool);
+    this.svgTarget.classList.toggle("fill-light", !bool);
     this.datepickerContainerTarget.classList.toggle("hidden", !bool);
     if (!bool) this.updateDatepickerShadowSize();
   }
