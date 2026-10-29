@@ -35,6 +35,6 @@ div.relative.z-20.whitespace-nowrap.h-9.pointer-events-auto.touch-none[
         disabled: !params[:radius],
         data: { locationfilter_target: "radiusInput",
           action: "input->locationfilter#onRadiusInput pointerup->locationfilter#onPointerUp" },
-        in: 2..30, step: 2
+        in: 2..100, step: 2
       a.text-center.text-blue-faded.text-sm.hover:text-yellow data-action="click->locationfilter#requestLocation"
         | Mettre à jour ma position
