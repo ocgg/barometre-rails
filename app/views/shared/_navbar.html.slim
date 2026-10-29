@@ -7,21 +7,21 @@ nav.flex.justify-between[
     - if current_user.admin?
       li
         = link_to unverified_path, class: "block", title: "(admin) Concerts & lieux à vérifier"
-          = inline_svg_tag "list_lock.svg", class: "h-10 #{navbar_btn_color('unverified')}"
+          = inline_svg_tag "list_lock.svg", class: "h-10 #{nav_link_class_for('unverified')}"
     li
       = link_to new_event_path, class: "block", title: "Proposer un concert"
-        = inline_svg_tag "calendar_plus.svg", class: "h-10 #{navbar_btn_color('new')}"
+        = inline_svg_tag "calendar_plus.svg", class: "h-10 #{nav_link_class_for('new')}"
     li
       = link_to root_path, class: "block", title: "Vue liste"
-        = inline_svg_tag "calendar.svg", class: "h-8 #{navbar_btn_color('index')}"
+        = inline_svg_tag "calendar.svg", class: "h-8 #{nav_link_class_for('index')}"
     li
       = link_to map_path, class: "block", title: "Vue carte"
-        = inline_svg_tag "map_with_marker.svg", class: "h-8 #{navbar_btn_color('map')}"
+        = inline_svg_tag "map_with_marker.svg", class: "h-8 #{nav_link_class_for('map')}"
 
   div.relative.md:pr-4 data-navbar-target="main"
     div title="Menu"
       = inline_svg_tag "burger_menu.svg",
-        class: "h-10 #{navbar_btn_color('menu')} cursor-pointer fill-(--light-bg)",
+        class: "h-10 #{nav_link_class_for('menu')} cursor-pointer fill-(--light-bg)",
         tabindex: 0,
         data: {action: "click->navbar#toggle keydown.enter->navbar#toggle",
                navbar_target: "icon"}

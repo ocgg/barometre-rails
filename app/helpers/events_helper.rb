@@ -17,7 +17,7 @@ module EventsHelper
     l(date, format:)
   end
 
-  def navbar_btn_color(action)
+  def nav_link_class_for(action)
     if params[:action] == action
       "fill-yellow"
     elsif action == "new" && params[:action] == "create"
