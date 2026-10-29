@@ -23,9 +23,9 @@ nav.flex.justify-between[
       = inline_svg_tag "burger_menu.svg",
         class: "h-10 #{navbar_btn_color('menu')} cursor-pointer fill-(--light-bg)",
         tabindex: 0,
-        data: {action: "click->navbar#toggle keydown.enter->navbar#toggle", navbar_target: "icon"}
+        data: {action: "click->navbar#toggle keydown.enter->navbar#toggle",
+               navbar_target: "icon"}
 
-    /dropdown menu
     ul.z-1000[
       data-navbar-target="dropdown"
       class="hidden fixed bottom-18 right-0 w-full flex-col-reverse gap-2 items-center p-2 bg-white text-xl md:flex-col md:items-end md:absolute md:min-w-3xs md:rounded-b-xl md:top-14 md:bottom-auto"
